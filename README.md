@@ -1,6 +1,7 @@
 # Gamification
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.3.
+The main goal of this project is to create user-friendly dashboard for tracking company employees' awards and achievments. 
 
 ## Development server
 

@@ -1,0 +1,59 @@
+<mat-sidenav-container class="sidenav-container" [hasBackdrop]="false">
+  <!-- [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" -->
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="false"
+    [mode]="'over'"
+    [opened]="false"
+  >
+    <span class="logo-span">GMFCTN!</span>
+
+    <button
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      class="close-sidenav-button"
+      (click)="drawer.close()"
+    >
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+
+    <img [src]="avatarSource" class="avatar" />
+
+    <div class="user-name">{{ userName }}</div>
+
+    <button mat-button class="log-out-button">log out</button>
+
+    <div class="user-achivments-info">
+      <div class="user-achivments-elements">
+        <p class="user-achivments-title">
+          Total:
+        </p>
+        <p class="user-achivments-text">{{ totalBadgesCount }} Badges</p>
+      </div>
+
+      <div class="user-achivments-elements">
+        <p class="user-achivments-title">
+          EXP:
+        </p>
+        <p class="user-achivments-text">{{ xpCount }} XP</p>
+      </div>
+    </div>
+
+    <a
+      class="link"
+      *ngFor="let item of menuItems"
+      [routerLink]="item.link"
+      routerLinkActive="link-active"
+    >
+      {{ item.name }}
+    </a>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-header (openSidenavEmitter)="drawer.toggle()"></app-header>
+
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
