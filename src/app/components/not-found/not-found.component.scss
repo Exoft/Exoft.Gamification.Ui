@@ -1,0 +1,14 @@
+@import "./../../../assets/scss/theme-colors.scss";
+
+div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    color: $textColor;
+    font-size: 100px;
+  }
+}

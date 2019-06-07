@@ -9,9 +9,15 @@ import { AngularMaterialsModule } from './shared/modules/angular-materials.modul
 import { AppComponent } from './app.component';
 import { MainnavComponent } from './components/mainnav/mainnav.component';
 import { HeaderComponent } from './components/header/header.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, MainnavComponent, HeaderComponent],
+  declarations: [
+    AppComponent,
+    MainnavComponent,
+    HeaderComponent,
+    NotFoundComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

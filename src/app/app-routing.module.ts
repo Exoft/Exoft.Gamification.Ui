@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,7 @@ const routes: Routes = [
     loadChildren: './modules/dashboard/dashboard.module#DashboardModule'
   },
   {
-    path: 'authorization',
+    path: 'signin',
     loadChildren: './modules/auth/auth.module#AuthModule'
   },
   {
@@ -32,8 +33,12 @@ const routes: Routes = [
     loadChildren: './modules/top-chart/top-chart.module#TopChartModule'
   },
   {
+    path: 'page-not-found',
+    component: NotFoundComponent
+  },
+  {
     path: '**',
-    redirectTo: 'dashboard'
+    redirectTo: '/page-not-found'
   }
 ];
 

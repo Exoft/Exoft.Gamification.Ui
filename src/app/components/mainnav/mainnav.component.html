@@ -1,5 +1,4 @@
 <mat-sidenav-container class="sidenav-container" [hasBackdrop]="false">
-  <!-- [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" -->
   <mat-sidenav
     #drawer
     class="sidenav"
@@ -52,7 +51,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <app-header (openSidenavEmitter)="drawer.toggle()"></app-header>
+    <app-header (openSidenavEmitter)="drawer.toggle()" *ngIf="isHeaderShown"></app-header>
 
     <ng-content></ng-content>
   </mat-sidenav-content>
