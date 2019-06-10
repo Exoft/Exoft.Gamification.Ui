@@ -1,0 +1,22 @@
+<mat-card class="card">
+  <div class="flex-container">
+    <mat-card-title>PERSONAL ACHIEVEMENTS</mat-card-title>
+    <button mat-button class="request-button"> <span class="mat-button-wrapper">Request</span></button>
+  </div>
+
+  <div class="maindiv">
+    <div class="user" *ngFor="let item of pageData">
+      <div>
+        <img src={{item.img}}>
+      </div>
+      <div class="txt-name">
+        {{item.name}}
+        <div class="txt-date">
+            {{item.date}}
+     </div>
+      </div>
+      
+    </div>
+  </div>
+
+</mat-card>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
@@ -11,7 +11,8 @@ import { MatTabsModule } from '@angular/material/tabs';
         MatSidenavModule,
         MatIconModule,
         MatListModule,
-        MatTabsModule
+        MatTabsModule,
+        MatCardModule
     ]
 })
 export class AngularMaterialsModule { }

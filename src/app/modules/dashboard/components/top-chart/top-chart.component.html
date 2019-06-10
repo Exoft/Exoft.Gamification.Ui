@@ -1,0 +1,37 @@
+<mat-card class="card">
+    <mat-card-title>TOP CHART</mat-card-title>
+ 
+
+  <div class="flex-container">
+
+    <div class="users-data-container">
+
+      <div class="list-header">
+        <div>Name</div>
+
+        <div>Total XP</div>
+
+      </div>
+
+      <div class="user">
+
+        <div>
+          <div class="user" *ngFor="let item of pageData">
+            <div>
+              <img src={{item.img}}>
+            </div>
+            <div class="txt">
+              {{item.name}}
+            </div>
+            <div class="txt">
+              {{item.xp}}XP
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="canvas">
+      <canvas id="barChart"></canvas>
+    </div>
+  </div>
+</mat-card>
