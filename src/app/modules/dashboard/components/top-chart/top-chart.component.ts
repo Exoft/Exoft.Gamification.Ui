@@ -8,14 +8,9 @@ import { Chart } from 'chart.js';
 })
 export class TopChartComponent implements OnInit {
 
- 
-
   public pageData: any = [];
-
   public title = 'Gamification';
   public BarChart = [];
-  public xpPoints = [];
-
 
   ngOnInit() {
 
@@ -37,16 +32,16 @@ export class TopChartComponent implements OnInit {
   public dataSort() {
     return this.pageData.sort(this.compare).reverse();
   }
-  private compare( a, b ) {
-    if ( a.xp < b.xp){
+  private compare(a, b) {
+    if (a.xp < b.xp) {
       return -1;
     }
-    if ( a.xp > b.xp ){
+    if (a.xp > b.xp) {
       return 1;
     }
     return 0;
   }
-  
+
 
   private setupChart(pageData: any) {
     this.BarChart = new Chart('barChart', {
@@ -62,7 +57,6 @@ export class TopChartComponent implements OnInit {
             '#DB871A',
             '#37E9E4',
             '#E71A1A'],
-
           borderWidth: 0
         }]
       },
@@ -71,13 +65,11 @@ export class TopChartComponent implements OnInit {
           display: false
         },
         title: {
-
           display: true
-
         },
         scales: {
           yAxes: [{
-            barThickness: 20,
+            barThickness: 10,
             gridLines: {
               display: false
             },
@@ -87,15 +79,8 @@ export class TopChartComponent implements OnInit {
             }
           }],
           xAxes: [{
-            labels: {
-              display: false
-            },
-            gridLines: {
-              display: false
-            },
-            ticks: {
-              beginAtZero: true
-            }
+            beginAtZero: true,
+           display: false
           }]
         }
       }

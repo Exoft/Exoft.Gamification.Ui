@@ -1,11 +1,20 @@
 <div class="dashboard-container">
     <div class="main-container">
-        <app-welcome></app-welcome>
-    <div class="flex-container">
+        <div class="welcome-container">
+            <app-welcome></app-welcome>
+        </div>
+        <div class="flex-container-upper">
             <app-personal-achievements></app-personal-achievements>
             <app-thank-you></app-thank-you>
-        <app-top-chart></app-top-chart>         
+            <app-top-chart></app-top-chart>
+        </div>
+        <div class="flex-container-lower">
+                <app-badges></app-badges>
+                <app-challenges></app-challenges>
+        </div>
     </div>
+    <div class="exoft-achievements">
+        <app-exoft-achievements></app-exoft-achievements>
     </div>
- <app-exoft-achievements></app-exoft-achievements>  
+
 </div>

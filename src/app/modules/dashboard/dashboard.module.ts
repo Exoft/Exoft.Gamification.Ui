@@ -9,6 +9,8 @@ import {ThankYouComponent} from './components/thank-you/thank-you.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { PersonalAchievementsComponent } from './components/personal-achievements/personal-achievements.component';
 import { ExoftAchievementsComponent } from './components/exoft-achievements/exoft-achievements.component';
+import { BadgesComponent } from './components/badges/badges.component';
+import { ChallengesComponent } from './components/challenges/challenges.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -16,7 +18,9 @@ import { ExoftAchievementsComponent } from './components/exoft-achievements/exof
     ThankYouComponent,
     WelcomeComponent,
     PersonalAchievementsComponent,
-    ExoftAchievementsComponent
+    ExoftAchievementsComponent,
+    BadgesComponent,
+    ChallengesComponent
   ],
   imports: [
     CommonModule,

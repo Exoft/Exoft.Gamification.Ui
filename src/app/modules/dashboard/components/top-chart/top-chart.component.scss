@@ -24,9 +24,14 @@
                 flex-direction: inherit;
                 padding-right: 20px;
 
-                .txt {
+                .user-txt {
                     align-items: center;
                     margin: 5px 30px 0 0;
+                }
+
+                .xp-txt {
+                    align-items: center;
+                    margin: 5px 0 0 0;
                 }
             }
 
@@ -34,7 +39,8 @@
                 width: 30px;
                 height: 30px;
                 border-radius: 3px;
-                margin-right: 10px;
+                margin: 6px 10px 0 0;
+
             }
 
             .list-header {
@@ -52,11 +58,11 @@
     .canvas {
         height: 100%;
         width: 60%;
-        margin-top: 24px;
+        margin-bottom: 4px;
     }
 
     canvas {
-        height: 289px !important;
+        height: 342px !important;
     }
 
 }

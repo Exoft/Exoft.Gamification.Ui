@@ -6,16 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./personal-achievements.component.scss']
 })
 export class PersonalAchievementsComponent implements OnInit {
-
-  
-
   public pageData: any = [];
-
   ngOnInit() {
-    for (let index = 0; index < 4; index++) {
+    for (let index = 0; index < 3; index++) {
       this.pageData.push(this.userInfo());
     }
-    
   }
 
   private userInfo() {
@@ -25,6 +20,6 @@ export class PersonalAchievementsComponent implements OnInit {
       date: new Date().toUTCString()
     }
   }
-  }
+}
 
 

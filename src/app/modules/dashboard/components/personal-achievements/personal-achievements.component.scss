@@ -1,28 +1,16 @@
 .card {
     background-color: #3A3E46;
     color: #FFFFFF;
-    width: 370px;
-    height: 375px;
-    margin-left: 30px;
+    
+   height: 100%;
+    margin: 0 0 0 30px;
 
     .flex-container {
         display: flex;
         flex-direction: row;
     }
 
-    .request-button {
-        background-color: #68B70C;
-        margin-left: 19px;
-        height: 25px;
-        text-align: center;
-        border-radius: 1px;
-
-        .mat-button-wrapper {
-            height: 25px;
-            display: flex;
-            align-items: center
-        }
-    }
+    
 
     mat-card-title {
         font-size: 18px;
