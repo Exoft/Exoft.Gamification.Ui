@@ -1,0 +1,47 @@
+<div class="profile-settings-page-container">
+  <div class="profile-settings-container">
+    <div class="title-button-container">
+      <button type="button" mat-icon-button class="go-back-button">
+        <mat-icon aria-label="Go back icon">arrow_back</mat-icon>
+      </button>
+
+      <p>
+        Profile settings
+      </p>
+    </div>
+
+    <div class="profile-setting-fields-container">
+      <form class="profile-settings-form">
+        <img [src]="avatarSource" class="avatar" />
+
+        <div class="profile-settings-fields">
+          <mat-form-field class="input-field">
+            <input matInput placeholder="USERNAME" />
+          </mat-form-field>
+
+          <div class="name-input-container">
+            <mat-form-field class="input-field">
+              <input matInput placeholder="FIRST NAME" />
+            </mat-form-field>
+
+            <mat-form-field class="input-field">
+              <input matInput placeholder="LAST NAME" />
+            </mat-form-field>
+          </div>
+
+          <mat-form-field class="input-field">
+            <input matInput placeholder="EMAIL ADDRESS" />
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <input matInput placeholder="STATUS" />
+          </mat-form-field>
+        </div>
+
+        <button mat-button type="submit" class="save-button">
+          SAVE CHANGES
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
