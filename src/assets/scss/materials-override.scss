@@ -99,3 +99,23 @@ a.mat-tab-link.ng-star-inserted {
     }
   }
 }
+.mat-stepper-vertical {
+  background-color: #3A3E46;
+}
+.mat-step-header {
+  background-color: #3A3E46;
+  border:0;
+  pointer-events: none;
+}
+.mat-step-text-label {
+  color: #68B70C;
+  font-size: 18px; 
+}
+.mat-stepper-vertical-line::before {
+  border-left-color: #68B70C;
+}
+
+.mat-vertical-stepper-content {
+  height: 100% !important;
+  visibility: visible !important;
+}

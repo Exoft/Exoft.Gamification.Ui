@@ -5,7 +5,9 @@ import {
   MatButtonModule,
   MatSidenavModule,
   MatIconModule,
-  MatListModule
+  MatListModule,
+  MatCardModule,
+  MatStepperModule
 } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
@@ -19,7 +21,8 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatListModule,
     MatTabsModule,
-    MatInputModule
+    MatCardModule,
+    MatStepperModule
   ]
 })
 export class AngularMaterialsModule {}
