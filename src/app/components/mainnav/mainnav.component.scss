@@ -1,3 +1,5 @@
+@import "./../../../assets/scss/theme-colors.scss";
+
 .sidenav-container {
   height: 100%;
 
@@ -5,7 +7,7 @@
     padding: 11px;
 
     .logo-span {
-      color: #ffffff;
+      color: $textColor;
       font-size: 18px;
       padding: 8px;
       font-weight: 500;
@@ -23,7 +25,7 @@
       width: 166px;
       height: 166px;
       object-fit: cover;
-      border: 1px solid #ffffff;
+      border: 1px solid $textColor;
       margin-top: 77px;
       align-self: center;
     }
@@ -34,13 +36,13 @@
       font-size: 30px;
       font-weight: 400;
       margin-top: 9px;
-      color: #ffffff;
+      color: $textColor;
     }
 
     .log-out-button {
       height: 22px;
-      background-color: #68b70c;
-      color: #ffffff;
+      background-color: $mainColor;
+      color: $textColor;
       font-size: 15px;
       font-family: Roboto;
       display: flex;
@@ -64,14 +66,14 @@
         align-self: center;
 
         .user-achivments-title{
-          color: #68b70c;
+          color: $mainColor;
           font-size: 20px;
           margin: 0px;
           margin-right: 5px;
         }
 
         .user-achivments-text{
-          color: #ffffff;
+          color: $textColor;
           font-size: 20px;
           margin: 0px;
           font-weight: 300;
@@ -80,7 +82,7 @@
     }
 
     .link{
-      color: #ffffff;
+      color: $textColor;
 
       text-decoration: none;
       font-size: 29px;
@@ -89,8 +91,8 @@
       font-weight: 300;
     }
     .link-active{
-      border-bottom: 10px solid #68b70c;
-      color: #68b70c;
+      border-bottom: 10px solid $mainColor;
+      color: $mainColor;
     }
   }
 }

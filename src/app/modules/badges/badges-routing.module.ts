@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { BadgesComponent } from './badges.component';
 
 const routes: Routes = [{
