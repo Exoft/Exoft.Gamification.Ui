@@ -2,17 +2,15 @@
   <mat-card-title>TOP CHART</mat-card-title>
 
   <div class="flex-container">
-    <div class="users-data-container">
+    <div class="users-data-wrapper">
       <div class="list-header">
         <div>Name</div>
-
         <div>Total XP</div>
       </div>
-
       <div class="user">
         <div>
-          <div class="user" *ngFor="let item of pageData">
-            <div>
+          <div class="user-info" *ngFor="let item of pageData">
+            <div class="user-img">
               <img src={{item.img}}>
             </div>
 

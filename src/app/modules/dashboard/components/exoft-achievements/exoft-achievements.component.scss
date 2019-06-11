@@ -5,8 +5,14 @@
   height: 375px;
   margin-left: 30px;
 
-  .flex-container {
+  .header-wrapper {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .request-button {
+      background-color: #68B70C;
+      border-radius: 1px;
+    }
   }
 
   mat-card-title {
