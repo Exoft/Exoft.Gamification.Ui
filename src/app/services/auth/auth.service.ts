@@ -19,7 +19,7 @@ export class AuthService {
     );
   }
 
-  isAuthenticated(): boolean {
+  public isAuthenticated(): boolean {
     const token = localStorage.getItem('accessToken');
     return token !== null && token !== undefined;
   }

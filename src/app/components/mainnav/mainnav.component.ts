@@ -38,8 +38,8 @@ export class MainnavComponent implements OnInit {
     });
   }
 
-  onLogOut() {
-    localStorage.clear();
+  public onLogOut() {
+    localStorage.removeItem('accessToken');
     this.drawer.close();
     this.router.navigate(['/signin']);
   }

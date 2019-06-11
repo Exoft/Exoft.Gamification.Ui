@@ -13,7 +13,7 @@ export class HeaderComponent {
 
   @Output() openSidenavEmitter = new EventEmitter();
 
-  openSidenav() {
+  public openSidenav() {
     this.openSidenavEmitter.emit(null);
   }
 }
