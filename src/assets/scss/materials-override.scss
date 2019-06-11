@@ -1,3 +1,5 @@
+@import "./theme-colors.scss";
+
 .mat-toolbar.mat-primary {
   background-color: #3a3e46;
 }
@@ -53,7 +55,7 @@ a.mat-tab-link.ng-star-inserted {
 
 .mat-tab-label,
 .mat-tab-link {
-  color: #ffffff;
+  color: $textColor;
   font-size: 20px;
   font-family: Roboto;
 }
@@ -64,5 +66,36 @@ a.mat-tab-link.ng-star-inserted {
 }
 
 .mat-icon-button {
-  color: #ffffff;
+  color: $textColor;
+}
+
+//override material input
+.mat-form-field {
+  color: $textColor;
+  margin-top: 40px;
+
+  .mat-form-field-label {
+    color: $textColor;
+    .ng-star-inserted{
+      font-size: 13px;
+    }
+  }
+  .mat-input-element {
+    caret-color: $textColor;
+    font-size: 27px;
+    font-weight: 300;
+  }
+  .mat-form-field-underline {
+    background-color: $textColor;
+  }
+
+  &.mat-focused {
+    .mat-form-field-label {
+      color: $textColor;
+      font-weight: 300;
+    }
+    .mat-form-field-ripple {
+      background-color: $textColor;
+    }
+  }
 }

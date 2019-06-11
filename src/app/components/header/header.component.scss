@@ -1,3 +1,5 @@
+@import "./../../../assets/scss/theme-colors.scss";
+
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -10,7 +12,7 @@
     }
 
     .logo-span {
-      color: #ffffff;
+      color: $textColor;
       font-size: 18px;
       font-family: Roboto;
       align-self: center;
@@ -33,7 +35,7 @@
       height: 40px;
       border-radius: 50%;
       object-fit: cover;
-      border: 1px solid #ffffff;
+      border: 1px solid $textColor;
     }
 
     .user-name {
