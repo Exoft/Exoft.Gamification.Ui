@@ -4,14 +4,17 @@
     <button mat-button class="request-button"> Add</button>
   </div>
 
-  <div class="maindiv">
-    <div>
-      <div class="txt-name">
-        name
-        <div class="txt-date">
-          date
-        </div>
-      </div>
+  <div class="achievment-content-wrapper">
+    <div class="timeline-wrapper">
+  
+    <mat-vertical-stepper linear multiple="true">
+        <mat-step label={{item.name}} *ngFor="let item of pageData">
+          <div>
+            <p>{{item.achievement}}</p>
+          </div>
+        </mat-step>
+        
+      </mat-vertical-stepper>
     </div>
   </div>
 </mat-card>

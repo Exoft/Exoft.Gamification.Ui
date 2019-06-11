@@ -7,10 +7,19 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ExoftAchievementsComponent implements OnInit {
 
-  constructor() {
-  }
-
+  public pageData : any =[];
   ngOnInit() {
+    for (let index = 0; index < 10; index++) {
+      this.pageData.push(this.userInfo());
+    }
   }
 
+  private userInfo() {
+    return {
+      img: '../../assets/images/star@2x.png',
+      name: `Name Surname ${Math.floor(Math.random() * 10)}`,     
+      time: `${Math.floor(Math.random() * 10)} mins ago`,
+      achievement: `Gained some achievement`
+    };
+  }
 }

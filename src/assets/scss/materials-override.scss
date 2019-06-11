@@ -66,3 +66,18 @@ a.mat-tab-link.ng-star-inserted {
 .mat-icon-button {
   color: #ffffff;
 }
+.mat-stepper-vertical {
+  background-color: #3A3E46;
+}
+.mat-step-header {
+  background-color: #3A3E46;
+  border:0;
+  position: none !important;
+}
+.mat-step-text-label {
+  color: #68B70C;
+  font-size: 18px; 
+}
+.mat-stepper-vertical-line::before {
+  border-left-color: #68B70C;
+}
