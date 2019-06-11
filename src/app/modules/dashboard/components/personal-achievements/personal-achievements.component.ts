@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-personal-achievements',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonalAchievementsComponent implements OnInit {
   public pageData: any = [];
+
   ngOnInit() {
     for (let index = 0; index < 3; index++) {
       this.pageData.push(this.userInfo());
@@ -18,7 +19,7 @@ export class PersonalAchievementsComponent implements OnInit {
       img: '../../assets/images/star@2x.png',
       name: `Achievement ${Math.floor(Math.random() * 10)}`,
       date: new Date().toUTCString()
-    }
+    };
   }
 }
 

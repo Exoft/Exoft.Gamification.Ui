@@ -1,20 +1,24 @@
 .card {
-    background-color: #3A3E46;
-    color: #FFFFFF;
-    width: 370px;
-    height: 375px;
-    margin-left: 30px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #3A3E46;
+  color: #FFFFFF;
+
+  .badges-count {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    padding: 60px 0 130px;
 
-    .badges-count {
-        h1 {
-            font-size: 90pt;
-            color: #68B70C;
-        }
-
-        text-align: center;
+    .count {
+      font-size: 100px;
+      color: #68B70C;
     }
 
+    .badges-info {
+      font-size: 18px;
+    }
+  }
 }

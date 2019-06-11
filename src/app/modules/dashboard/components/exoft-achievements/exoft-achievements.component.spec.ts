@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ExoftAchievementsComponent } from './exoft-achievements.component';
+import {ExoftAchievementsComponent} from './exoft-achievements.component';
 
 describe('ExoftAchievementsComponent', () => {
   let component: ExoftAchievementsComponent;
@@ -8,9 +8,9 @@ describe('ExoftAchievementsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExoftAchievementsComponent ]
+      declarations: [ExoftAchievementsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
