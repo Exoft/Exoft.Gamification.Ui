@@ -41,15 +41,25 @@
         flex-direction: column;
         align-items: center;
 
-        .avatar {
+        .avatar-container {
           border-radius: 50%;
           width: 126px;
           height: 126px;
-          object-fit: cover;
-          border: 3px solid $mainColor;
           margin-top: -50px;
-          margin-right: 50px;
+          margin-right: 61px;
           align-self: flex-end;
+          cursor: pointer;
+
+          .avatar {
+            border-radius: 50%;
+            width: 126px;
+            height: 126px;
+            object-fit: cover;
+            border: 3px solid $mainColor;
+          }
+        }
+        .image-input {
+          display: none;
         }
 
         .profile-settings-fields {
