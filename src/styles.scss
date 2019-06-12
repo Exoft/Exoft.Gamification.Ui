@@ -1,9 +1,9 @@
 @import "./assets/scss/materials-override.scss";
-
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto';
 }
 
 html,

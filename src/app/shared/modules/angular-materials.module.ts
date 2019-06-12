@@ -1,14 +1,16 @@
-import { NgModule } from '@angular/core';
-import { LayoutModule } from '@angular/cdk/layout';
+import {NgModule} from '@angular/core';
+import {LayoutModule} from '@angular/cdk/layout';
 import {
   MatToolbarModule,
   MatButtonModule,
   MatSidenavModule,
   MatIconModule,
-  MatListModule
+  MatListModule,
+  MatCardModule,
+  MatStepperModule
 } from '@angular/material';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatInputModule } from '@angular/material/input';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   exports: [
@@ -19,7 +21,10 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatListModule,
     MatTabsModule,
+    MatCardModule,
+    MatStepperModule,
     MatInputModule
   ]
 })
-export class AngularMaterialsModule {}
+export class AngularMaterialsModule {
+}

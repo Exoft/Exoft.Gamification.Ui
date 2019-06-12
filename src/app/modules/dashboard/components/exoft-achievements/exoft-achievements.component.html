@@ -1,0 +1,20 @@
+<mat-card class="card">
+  <div class="header-wrapper">
+    <mat-card-title>EXOFT ACHIEVEMENTS</mat-card-title>
+    <button mat-button class="request-button"> Add</button>
+  </div>
+
+  <div class="achievment-content-wrapper">
+    <div class="timeline-wrapper">
+
+      <mat-vertical-stepper>
+        <mat-step label={{item.name}} *ngFor="let item of pageData">
+          <div>
+            <p>{{item.achievement}}</p>
+          </div>
+        </mat-step>
+
+      </mat-vertical-stepper>
+    </div>
+  </div>
+</mat-card>
