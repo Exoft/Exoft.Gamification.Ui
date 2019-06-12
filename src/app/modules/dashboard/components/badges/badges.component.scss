@@ -18,7 +18,15 @@
     }
 
     .badges-info {
-      font-size: 18px;
-    }
+      font-size: 18px;    
+    }    
   }
+  .dot {
+    height: 4px;
+    width: 4px;
+    background-color: #68B70C;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: 3px;
+}
 }

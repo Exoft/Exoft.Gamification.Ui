@@ -1,19 +1,24 @@
 <mat-card class="card">
   <div class="header-wrapper">
     <mat-card-title>EXOFT ACHIEVEMENTS</mat-card-title>
+    <div class="achievements-count">48</div>
     <button mat-button class="request-button"> Add</button>
   </div>
-
   <div class="achievment-content-wrapper">
     <div class="timeline-wrapper">
-  
-    <mat-vertical-stepper linear multiple="true">
-        <mat-step label={{item.name}} *ngFor="let item of pageData">
+      <mat-vertical-stepper>
+        <mat-step  *ngFor="let item of pageData">
+            <ng-template matStepLabel>
+              <div class="achievement-label">
+              <div class="user-name">{{item.name}}</div>
+              <div class="posting-time">{{item.time}}</div>
+              </div>
+            </ng-template>
           <div>
             <p>{{item.achievement}}</p>
-          </div>
+            <div class="achievement-type">RECORDS</div>
+          </div>          
         </mat-step>
-        
       </mat-vertical-stepper>
     </div>
   </div>
