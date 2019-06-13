@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthGuard } from './services/auth/authguard.service';
+import { IsLoggedGuard } from './services/auth/isloggedguard.service';
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
   },
   {
     path: 'signin',
-    loadChildren: './modules/auth/auth.module#AuthModule'
+    loadChildren: './modules/auth/auth.module#AuthModule',
+    canActivate: [IsLoggedGuard]
   },
   {
     path: 'badges',
@@ -36,6 +38,11 @@ const routes: Routes = [
   {
     path: 'topchart',
     loadChildren: './modules/top-chart/top-chart.module#TopChartModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'profile-settings',
+    loadChildren: './modules/profile-settings/profile-settings.module#ProfileSettingsModule',
     canActivate: [AuthGuard]
   },
   {
