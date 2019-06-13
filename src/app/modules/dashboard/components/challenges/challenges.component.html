@@ -3,13 +3,41 @@
       <mat-card-title>CHALLENGES</mat-card-title>      
       <button mat-button class="request-button"> Show more</button>
     </div>
-    <mat-list>
-        <mat-list-item> 
-          <div>atatata</div>
-          <div>ehehehe</div>
-          Pepper </mat-list-item>
-        <mat-list-item> Salt </mat-list-item>
-        <mat-list-item> Paprika </mat-list-item>
-       </mat-list>
+    <div class="achievement-content-wrapper">
+        <div class="timeline-wrapper">
+          <mat-vertical-stepper>
+            <mat-step class="achievements" >
+                <ng-template class="achievement-step-label" matStepLabel>
+                  <mat-icon>
+                      <div class="dot"></div>
+                  </mat-icon>
+                          <div class="achievement-label">
+                  <div class="user-name">Name</div>
+                  <div class="posting-time">Time</div>
+                  </div>
+                </ng-template>
+              <div>
+                <p>Achievement</p>
+                <div class="achievement-type">RECORDS</div>
+              </div>          
+            </mat-step>
+            <mat-step class="achievements" >
+                <ng-template class="achievement-step-label" matStepLabel>
+                  <mat-icon>
+                    <div class="dot"></div>
+                  </mat-icon>
+                          <div class="achievement-label">
+                  <div class="user-name">Name</div>
+                  <div class="posting-time">Time</div>
+                  </div>
+                </ng-template>
+              <div>
+                <p>Achievement</p>
+                <div class="achievement-type">RECORDS</div>
+              </div>          
+            </mat-step>
+          </mat-vertical-stepper>
+        </div>
+      </div>
 </mat-card>
   

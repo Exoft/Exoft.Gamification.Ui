@@ -13,13 +13,7 @@ export class ExoftAchievementsComponent implements OnInit {
     for (let index = 0; index < 10; index++) {
       this.pageData.push(this.userInfo());
     }
-
-    setTimeout(() => {
-
-      this.setUserImage()
-    }, 1000)
   }
-
   private userInfo() {
     return {
       img: 'https://img2.akspic.ru/image/83780-klyuv-vorobinye_pticy-staryj_mir_ivolga-zyablik-hishhnaya_ptica-1920x1080.jpg?attachment=1',
@@ -28,14 +22,4 @@ export class ExoftAchievementsComponent implements OnInit {
       achievement: `Gained some achievement`
     };
   }
-
-  setUserImage() {
-    const x = document.getElementsByClassName('mat-step-icon') as HTMLCollection;
-    Array.from(x).forEach((el: any, i) => {
-      el.style.backgroundImage = `url(${this.pageData[i].img})`;
-    })
-
-  }
-
 }
-

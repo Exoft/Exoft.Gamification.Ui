@@ -4,20 +4,23 @@
     <div class="achievements-count">48</div>
     <button mat-button class="request-button"> Add</button>
   </div>
-  <div class="achievment-content-wrapper">
+  <div class="achievement-content-wrapper">
     <div class="timeline-wrapper">
       <mat-vertical-stepper>
-        <mat-step  *ngFor="let item of pageData">
-            <ng-template matStepLabel>
-              <div class="achievement-label">
+        <mat-step class="achievements" *ngFor="let item of pageData">
+          <ng-template class="achievement-step-label" matStepLabel>
+            <mat-icon>
+              <img src="{{item.img}}">
+            </mat-icon>
+            <div class="achievement-label">
               <div class="user-name">{{item.name}}</div>
               <div class="posting-time">{{item.time}}</div>
-              </div>
-            </ng-template>
-          <div>
-            <p>{{item.achievement}}</p>
+            </div>
+          </ng-template>
+          <div class="achievement-type-content-wrapper">
+            <p class="achievement-type-text">{{item.achievement}}</p>
             <div class="achievement-type">RECORDS</div>
-          </div>          
+          </div>
         </mat-step>
       </mat-vertical-stepper>
     </div>

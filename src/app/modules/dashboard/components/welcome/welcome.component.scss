@@ -1,16 +1,16 @@
 .welcome-wrapper {
-  display: flex;
-  flex-direction: column;
-  color: #FFFFFF;
-  background-color: #68B70C;
+    display: flex;
+    flex-direction: column;
+    color: #FFFFFF;
+    background-color: #68B70C;
 
-  .header-text {
-    font-size: 50px;
-    padding: 30px 60px;
+    .header-text {
+        font-size: 50px;
+        padding: 30px 60px;
 
-    .subheader-text {
-      font-size: 20px;
-      padding: 10px 0 0;
+        .subheader-text {
+            font-size: 20px;
+            padding: 10px 0 0;
+        }
     }
-  }
 }

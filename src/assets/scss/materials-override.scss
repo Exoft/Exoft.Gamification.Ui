@@ -99,7 +99,20 @@ a.mat-tab-link.ng-star-inserted {
         }
     }
 }
-
+.achievement-content-wrapper {
+    .mat-step-icon {
+        border: 2px solid $mainColor;
+        background-size: cover;
+        height: 36px;
+        width: 36px;
+        display: none;              
+        }   
+    .mat-icon {
+        width: 36px;
+        height: 36px;
+        margin-right: 20px;
+    }
+}
 .mat-stepper-vertical {
     background-color: $secondaryColor;
 
@@ -108,21 +121,15 @@ a.mat-tab-link.ng-star-inserted {
         border: 0;
         pointer-events: none;
 
-        .mat-step-icon {
-            border: 2px solid $mainColor;
-            background-size: cover;
-            height: 36px;
-            width: 36px;
-
-            .mat-step-icon-content {
-                display: none;
-            }
+        
+        .mat-step-label {
+            display: flex;
         }
     }
 
     .mat-step-text-label {
         color: $mainColor;
-        font-size: 18px;
+        font-size: 18px;        
     }
 
     .mat-stepper-vertical-line::before {
@@ -134,4 +141,12 @@ a.mat-tab-link.ng-star-inserted {
         height: 100% !important;
         visibility: visible !important;
     }
+    .mat-step-icon {
+        border: 2px solid $mainColor;
+        background-size: cover;
+        height: 36px;
+        width: 36px;
+        display: none;              
+        }   
+    
 }

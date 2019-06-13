@@ -1,7 +1,8 @@
 .card {
     background-color: #3A3E46;
     color: #FFFFFF;
-width: 680px;
+    width: 680px;
+
     mat-card-title {
         font-size: 18px;
     }
@@ -21,29 +22,29 @@ width: 680px;
                 display: flex;
                 align-items: center;
                 width: 100%;
-                padding: 20px 40px 0 0;  
+                padding: 20px 40px 0 0;
+
                 .user-info {
                     display: flex;
                     align-items: center;
                     width: 100%;
-                    // padding: 0 0 30px 0;  
+
                     &:nth-child(even) {
                         height: 81px;
                     }
-                }                        
+                }
+
                 .user-img {
                     width: 30px;
                     height: 30px;
                 }
 
                 .user-txt {
-                   
-                  padding: 0 0 0 10px;
+                    padding: 0 0 0 10px;
                 }
 
                 .xp-txt {
                     padding: 0 0 0 48px;
-                    
                 }
             }
 
@@ -51,7 +52,6 @@ width: 680px;
                 width: 100%;
                 height: 100%;
                 margin: 0 10px 0 0;
-
             }
 
             .list-header {
@@ -60,7 +60,6 @@ width: 680px;
                 font-size: 18px;
                 color: #68B70C;
                 padding: 0 20px 5px 0;
-                
                 border-bottom: 1px solid #68B70C;
             }
         }
