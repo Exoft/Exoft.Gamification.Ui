@@ -1,0 +1,17 @@
+@import "./../../../../../assets/scss/theme-colors.scss";
+
+.full-list-of-achivements-container {
+  background-color: $secondaryColor;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  mat-card-title {
+    color: $textColor;
+    font-size: 30px;
+    letter-spacing: 5px;
+    font-weight: 300;
+  }
+}

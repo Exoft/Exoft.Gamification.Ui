@@ -1,0 +1,35 @@
+@import "./../../../../../assets/scss/theme-colors.scss";
+
+.user-container {
+  background-color: $secondaryColor;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $textColor;
+
+  .mat-button {
+    background-color: $mainColor;
+    font-size: 17px;
+    border-radius: 0;
+    padding: 5px 45px;
+    align-self: flex-end;
+  }
+  .avatar {
+    border-radius: 50%;
+    width: 230px;
+    height: 230px;
+    object-fit: cover;
+    border: 3px solid $mainColor;
+  }
+
+  .username{
+    padding-top: 17px;
+    font-size: 40px;
+  }
+
+  .status{
+    font-size: 20px;
+  }
+}

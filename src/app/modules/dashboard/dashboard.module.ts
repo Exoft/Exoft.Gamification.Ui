@@ -27,6 +27,9 @@ import {ChallengesComponent} from './components/challenges/challenges.component'
     CommonModule,
     DashboardRoutingModule,
     AngularMaterialsModule
+  ],
+  exports: [
+    ThankYouComponent
   ]
 })
 export class DashboardModule {

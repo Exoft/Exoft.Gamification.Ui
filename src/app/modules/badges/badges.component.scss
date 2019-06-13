@@ -1,0 +1,53 @@
+.badges-page-container {
+  height: calc(100% - 60px);
+  display: flex;
+
+  .achivements-container {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+
+    .last-and-total-achivements-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 55%;
+
+      app-total-achivements-and-exp {
+        width: 45%;
+        height: 80%;
+      }
+
+      app-last-achivements {
+        width: 45%;
+        height: 80%;
+      }
+    }
+
+    app-full-list-of-achivements {
+      align-self: center;
+      height: 40%;
+      width: 95%;
+    }
+  }
+
+  .user-and-thank-you-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 30%;
+
+    app-user {
+      height: 44%;
+      width: 88%;
+      margin-top:1%;
+    }
+
+    app-thank-you {
+      height: 40%;
+      width: 88%;
+      margin-top:1%;
+    }
+  }
+}
