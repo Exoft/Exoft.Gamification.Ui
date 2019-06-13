@@ -22,7 +22,7 @@
         [formGroup]="profileSettingsForm"
       >
         <label class="avatar-container" for="imageInput">
-          <img [src]="avatarSource" class="avatar" />
+          <img [src]="profileSettingsForm.get('avatar').value" class="avatar" />
         </label>
 
         <input
