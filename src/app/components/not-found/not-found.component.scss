@@ -1,14 +1,48 @@
 @import "./../../../assets/scss/theme-colors.scss";
 
-div {
-  width: 100%;
+.not-found-page-container {
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
-  p {
+  div {
+    display: flex;
+    flex: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 84px;
+    color: $mainColor;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 40px;
+
+    div {
+      padding-top:0px;
+      p {
+        font-size: 40px;
+      }
+
+      .error-number {
+        font-size: 160px;
+        padding-right: 8px;
+      }
+    }
+  }
+
+  button {
+    background-color: $mainColor;
+    border-radius: 35px;
     color: $textColor;
-    font-size: 100px;
+    font-size: 30px;
+    padding: 20px 140px;
+  }
+
+  img {
+    height: 352px;
+    width: 403px;
+    margin-top: 65px;
   }
 }
