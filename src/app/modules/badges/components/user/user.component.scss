@@ -4,9 +4,11 @@
   background-color: $secondaryColor;
   height: 100%;
   width: 100%;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   color: $textColor;
 
   .mat-button {
@@ -22,6 +24,7 @@
     height: 230px;
     object-fit: cover;
     border: 3px solid $mainColor;
+    margin-top: -20px;
   }
 
   .username{

@@ -5,7 +5,7 @@
   .achivements-container {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 65%;
 
     .last-and-total-achivements-container {
       display: flex;
@@ -36,17 +36,17 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    width: 30%;
+    width: 35%;
 
     app-user {
       height: 44%;
-      width: 88%;
+      width: 90%;
       margin-top:1%;
     }
 
     app-thank-you {
       height: 40%;
-      width: 88%;
+      width: 90%;
       margin-top:1%;
     }
   }
