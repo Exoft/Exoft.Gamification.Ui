@@ -150,3 +150,14 @@ a.mat-tab-link.ng-star-inserted {
         }   
     
 }
+.mat-card-title {
+    font-size: 14px;
+    font-weight: normal;
+}
+app-thank-you {
+    .mat-card-title {
+        font-size: 14px;
+        font-weight: normal;
+        margin-left: -33px;
+    }
+}

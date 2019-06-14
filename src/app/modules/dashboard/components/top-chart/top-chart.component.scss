@@ -1,11 +1,6 @@
 .card {
     background-color: #3A3E46;
     color: #FFFFFF;
-    width: 680px;
-
-    mat-card-title {
-        font-size: 18px;
-    }
 
     .flex-container {
         display: flex;
@@ -44,7 +39,7 @@
                 }
 
                 .xp-txt {
-                    padding: 0 0 0 48px;
+                    padding: 0 0 0 72px;
                 }
             }
 

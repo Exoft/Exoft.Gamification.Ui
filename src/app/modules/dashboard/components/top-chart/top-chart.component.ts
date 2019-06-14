@@ -26,7 +26,7 @@ export class TopChartComponent implements OnInit {
       img: 'https://www.lovethegarden.com/sites/default/files/content/articles/UK_wildbirds-01-robin.jpg',
       name: `Name Surname ${Math.floor(Math.random() * 10)}`,
       xp: Math.floor(Math.random() * 100)
-    }
+    };
   }
 
   public dataSort() {

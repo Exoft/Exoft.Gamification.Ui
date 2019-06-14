@@ -14,6 +14,18 @@
             app-thank-you {
                 padding: 0 30px;
             }
+
+            app-thank-you {
+                flex-grow: 1;
+            }
+
+            app-top-chart {
+                flex-grow: 2;
+            }
+
+            app-challenges {
+                flex-grow: 5;
+            }
         }
     }
 
