@@ -1,12 +1,14 @@
 .welcome-wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    padding-left: 26px;
+    height: 100%;
     color: #FFFFFF;
     background-color: #68B70C;
 
     .header-text {
         font-size: 50px;
-        padding: 30px 60px;
 
         .subheader-text {
             font-size: 20px;

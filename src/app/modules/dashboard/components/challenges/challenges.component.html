@@ -3,44 +3,56 @@
     <mat-card-title>CHALLENGES</mat-card-title>
     <button mat-button class="request-button"> Show more</button>
   </div>
+
   <div class="challenges-content-wrapper">
     <div class="timeline-wrapper">
+      
       <div class="line-wrapper">
-        <div class="line">
-          <hr noshade="true">
-        </div>
         <div class="dot"></div>
+        <div class="line">
+          <div class="line-itself"></div>
+        </div>
       </div>
+
       <div class="available-content-wrapper">
         <div class="challenges-label">Available</div>
+
         <div class="available-content">
-          <img class="available-challenge-img"
-            src="https://static1.squarespace.com/static/539e75d2e4b0a181d64eaf18/t/584dc50ff5e2310b3971e5b9/1481491745417/">
+          <div class="available-challenge-img">
+            <img
+              src="https://static1.squarespace.com/static/539e75d2e4b0a181d64eaf18/t/584dc50ff5e2310b3971e5b9/1481491745417/">
+          </div>
+
+          <div class="challenge-text-content">
+            <div class="challenge-name">57K bike</div>
+
+            <div class="challenge-progress">
+              <div class="percentage">93% of 57K complete </div>
+              <div class="time"> 05:20:00 Remaining</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
     <div class="timeline-wrapper">
       <div class="line-wrapper">
-        <div class="line">
-          <hr noshade="true">
-        </div>
         <div class="dot"></div>
+        <div class="line">
+          <div class="line-itself"> </div>
+        </div>
       </div>
+
       <div class="ended-content-wrapper">
         <div class="challenges-label">Ended</div>
+
         <div class="ended-challenges">
-          <!--це все зміню, буде виглядати по-людськи-->
           <div class="ended-row">
             <div class="ended-item" *ngFor="let item of pageData">
+              <div class="img-text">{{item.text}}</div>
               <img src="{{item.img}}">
             </div>
           </div>
-          <div class="ended-row">
-            <div class="ended-item" *ngFor="let item of pageData">
-              <img src="{{item.img}}">
-            </div>
-          </div>
-          <div class="row"></div>
         </div>
       </div>
     </div>

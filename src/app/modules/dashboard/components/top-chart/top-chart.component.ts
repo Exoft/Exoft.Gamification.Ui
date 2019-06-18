@@ -80,7 +80,7 @@ export class TopChartComponent implements OnInit {
           }],
           xAxes: [{
             beginAtZero: true,
-           display: false
+            display: false
           }]
         }
       }

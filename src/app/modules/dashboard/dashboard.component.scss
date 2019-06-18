@@ -1,35 +1,62 @@
 .dashboard-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 30px;
+    height: calc(100% - 60px);
+    overflow: hidden;
 
     .main-container {
         flex-direction: column;
         display: flex;
+        height: 100%;
+
+        .welcome-container {
+            height: 12%;
+            
+            app-welcome {
+                height: 100%;
+            }
+        }
 
         .flex-container-wrapper {
             display: flex;
             padding: 30px 0 0;
+            height: 44%;
 
             app-thank-you {
                 padding: 0 30px;
+                flex-grow: 1;
             }
 
-            app-thank-you {
-                flex-grow: 1;
+            app-personal-achievements {
+                height: 100%;
             }
 
             app-top-chart {
                 flex-grow: 2;
+                height: 100%;
+            }
+
+            app-badges {
+                height: 100%;
+                flex-grow: 1;
             }
 
             app-challenges {
-                flex-grow: 5;
+                height: 100%;
+                flex-grow: 3;
             }
+
+        }
+
+        .exoft-achievements {
+            height: 100%;
         }
     }
 
-    .exoft-achievements {
+    app-exoft-achievements {
+        height: 100%;
         display: flex;
     }
+
 }
