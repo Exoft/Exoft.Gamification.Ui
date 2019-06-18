@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-last-achivements',
   templateUrl: './last-achivements.component.html',
   styleUrls: ['./last-achivements.component.scss']
 })
-export class LastAchivementsComponent implements OnInit {
+export class LastAchivementsComponent {
   public achivementsList = [
     {
       achivement: 'Taxi driver',
@@ -33,9 +33,4 @@ export class LastAchivementsComponent implements OnInit {
       date: '27 June, 8:43 AM'
     }
   ];
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

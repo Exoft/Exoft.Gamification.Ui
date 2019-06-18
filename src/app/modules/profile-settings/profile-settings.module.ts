@@ -15,4 +15,4 @@ import { ProfileSettingsComponent } from './profile-settings.component';
     ReactiveFormsModule
   ]
 })
-export class ProfileSettingsModule { }
+export class ProfileSettingsModule {}

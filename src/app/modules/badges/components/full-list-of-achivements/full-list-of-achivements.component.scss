@@ -1,4 +1,4 @@
-@import "./../../../../../assets/scss/theme-colors.scss";
+@import './../../../../../assets/scss/theme-colors.scss';
 
 .full-list-of-achivements-container {
   background-color: $secondaryColor;
@@ -10,7 +10,7 @@
   align-items: center;
   overflow: auto;
 
-  mat-card-title {
+  .mat-card-title {
     color: $textColor;
     font-size: 30px;
     letter-spacing: 5px;
@@ -48,8 +48,7 @@
   }
 }
 
-
-/*SCROLL BAR STYLE*/
+/* SCROLL BAR STYLE */
 
 ::-webkit-scrollbar {
   width: 10px;

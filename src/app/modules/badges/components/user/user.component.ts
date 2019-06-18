@@ -1,23 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit {
-  public avatarSource =
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPxOAXqa96ewc_EUYvIjO6oefUTlGg1qo_AMJv7qQQlhP3vns2IA';
-  public userName = "Taras Shevchenko";
-  public status = "I love Alpacas!";
+export class UserComponent implements OnInit, OnDestroy {
+  private unsubscribe$: Subject<void> = new Subject();
 
-  constructor(private router: Router) { }
+  public avatarSource: string;
+  public userName: string;
+  public status: string;
 
-  ngOnInit() {
+  constructor(private router: Router, private userService: UserService) {}
+
+  public ngOnInit() {
+    this.subscribeToUserDataChange();
   }
 
-  onOpenProfileSettings() {
+  public ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  private subscribeToUserDataChange() {
+    this.userService
+      .getUser()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(res => {
+        this.avatarSource = res.userInfo.avatar;
+        this.userName = res.userInfo.firstName + ' ' + res.userInfo.lastName;
+        this.status = res.userInfo.status;
+      });
+  }
+
+  public onOpenProfileSettings() {
     this.router.navigate(['/profile-settings']);
   }
 }

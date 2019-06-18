@@ -1,14 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
 import { Location } from '@angular/common';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-profile-settings',
   templateUrl: './profile-settings.component.html',
   styleUrls: ['./profile-settings.component.scss']
 })
-export class ProfileSettingsComponent implements OnInit {
+export class ProfileSettingsComponent implements OnInit, OnDestroy {
+  private unsubscribe$: Subject<void> = new Subject();
+
   public profileSettingsForm = new FormGroup({
     userName: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
@@ -21,27 +26,42 @@ export class ProfileSettingsComponent implements OnInit {
     avatar: new FormControl('')
   });
 
+  public avatarUrl: string;
+
   constructor(private userService: UserService, private location: Location) {}
 
   public ngOnInit() {
-    this.userService.getUserInfo('1').subscribe(res => {
-      const {
-        userName,
-        firstName,
-        lastName,
-        emailAddress,
-        status,
-        avatar
-      } = res.body;
-      this.profileSettingsForm.setValue({
-        userName,
-        firstName,
-        lastName,
-        emailAddress,
-        status,
-        avatar
+    this.subscribeToUserDataChange();
+  }
+
+  public ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  public subscribeToUserDataChange() {
+    this.userService
+      .getUser()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(res => {
+        const {
+          userName,
+          firstName,
+          lastName,
+          emailAddress,
+          status,
+          avatar
+        } = res.userInfo;
+        this.profileSettingsForm.setValue({
+          userName,
+          firstName,
+          lastName,
+          emailAddress,
+          status,
+          avatar
+        });
+        this.avatarUrl = avatar;
       });
-    });
   }
 
   public onSelectFile(event: any) {
@@ -50,9 +70,8 @@ export class ProfileSettingsComponent implements OnInit {
       fileReader.readAsDataURL(event.target.files[0]);
 
       fileReader.onload = (imageLoading: Event) => {
-        this.profileSettingsForm
-          .get('avatar')
-          .setValue(fileReader.result.toString());
+        this.profileSettingsForm.get('avatar').setValue(event.target.files[0]);
+        this.avatarUrl = fileReader.result.toString();
       };
     }
   }

@@ -21,14 +21,15 @@ export class AuthComponent {
       const { userName, password } = this.signinForm.value;
       const formData = { userName, password };
 
-      this.authService.signIn(formData)
-      .subscribe(res => {
+      this.authService.signIn(formData).subscribe(
+        res => {
           localStorage.setItem('accessToken', res.body.accessToken);
           this.router.navigate(['/dashboard']);
         },
         error => {
           //
-        });
+        }
+      );
     }
   }
 }

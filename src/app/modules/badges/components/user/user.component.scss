@@ -1,4 +1,4 @@
-@import "./../../../../../assets/scss/theme-colors.scss";
+@import './../../../../../assets/scss/theme-colors.scss';
 
 .user-container {
   background-color: $secondaryColor;
@@ -27,12 +27,12 @@
     margin-top: -20px;
   }
 
-  .username{
+  .username {
     padding-top: 17px;
     font-size: 40px;
   }
 
-  .status{
+  .status {
     font-size: 20px;
   }
 }

@@ -1,4 +1,4 @@
-@import "./../../../../../assets/scss/theme-colors.scss";
+@import './../../../../../assets/scss/theme-colors.scss';
 
 .last-achivements-container {
   background-color: $secondaryColor;
@@ -17,7 +17,7 @@
     justify-content: space-between;
     width: 100%;
 
-    mat-card-title {
+    .mat-card-title {
       font-size: 20px;
       font-weight: 300;
       margin-bottom: 18px;
@@ -63,15 +63,15 @@
     }
 
     .achivements-xp {
-      flex:1;
+      flex: 1;
       color: #fcb415;
       font-size: 12px;
-      display:flex;
+      display: flex;
       height: 100%;
       align-items: center;
 
-      .circle{
-        width:10px;
+      .circle {
+        width: 10px;
         height: 10px;
         background-color: #fcb415;
         border-radius: 50%;
