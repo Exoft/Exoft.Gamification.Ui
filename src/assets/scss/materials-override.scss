@@ -1,4 +1,4 @@
-@import "../scss/theme-colors.scss";
+@import "./theme-colors.scss";
 
 .mat-toolbar.mat-primary {
     background-color: #3a3e46;
@@ -55,9 +55,9 @@ a.mat-tab-link.ng-star-inserted {
 
 .mat-tab-label,
 .mat-tab-link {
-    color: $textColor;
-    font-size: 20px;
-    font-family: Roboto;
+  color: $textColor;
+  font-size: 20px;
+  font-family: Roboto;
 }
 
 .mat-sidenav {
@@ -66,7 +66,50 @@ a.mat-tab-link.ng-star-inserted {
 }
 
 .mat-icon-button {
+  color: $textColor;
+}
+
+//override material input
+.mat-form-field {
+  color: $textColor;
+  margin-top: 40px;
+
+  .mat-form-field-label {
     color: $textColor;
+    .ng-star-inserted{
+      font-size: 13px;
+    }
+  }
+  .mat-input-element {
+    caret-color: $textColor;
+    font-size: 27px;
+    font-weight: 300;
+  }
+  .mat-form-field-underline {
+    background-color: $textColor;
+  }
+
+  &.mat-focused {
+    .mat-form-field-label {
+      color: $textColor;
+      font-weight: 300;
+    }
+    .mat-form-field-ripple {
+      background-color: $textColor;
+    }
+  }
+}
+.mat-stepper-vertical {
+  background-color: #3A3E46;
+}
+.mat-step-header {
+  background-color: #3A3E46;
+  border:0;
+  pointer-events: none;
+}
+.mat-step-text-label {
+  color: #68B70C;
+  font-size: 18px; 
 }
 
 //override material input
@@ -160,4 +203,9 @@ app-thank-you {
         font-weight: normal;
         margin-left: -33px;
     }
+}
+
+.mat-vertical-stepper-content {
+  height: 100% !important;
+  visibility: visible !important;
 }

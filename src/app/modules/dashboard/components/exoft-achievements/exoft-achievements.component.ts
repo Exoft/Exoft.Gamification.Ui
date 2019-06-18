@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { setUserImage } from '../../../../helpers/user-avatar-styling';
 @Component({
   selector: 'app-exoft-achievements',
   templateUrl: './exoft-achievements.component.html',

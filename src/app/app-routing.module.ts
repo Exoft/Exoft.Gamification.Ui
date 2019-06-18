@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AuthGuard } from './services/auth/authguard.service';
+import { IsLoggedGuard } from './services/auth/isloggedguard.service';
 
 const routes: Routes = [
   {
@@ -10,27 +12,38 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: './modules/dashboard/dashboard.module#DashboardModule'
+    loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
+    canActivate: [AuthGuard]
   },
   {
     path: 'signin',
-    loadChildren: './modules/auth/auth.module#AuthModule'
+    loadChildren: './modules/auth/auth.module#AuthModule',
+    canActivate: [IsLoggedGuard]
   },
   {
     path: 'badges',
-    loadChildren: './modules/badges/badges.module#BadgesModule'
+    loadChildren: './modules/badges/badges.module#BadgesModule',
+    canActivate: [AuthGuard]
   },
   {
     path: 'information',
-    loadChildren: './modules/information/information.module#InformationModule'
+    loadChildren: './modules/information/information.module#InformationModule',
+    canActivate: [AuthGuard]
   },
   {
     path: 'challenges',
-    loadChildren: './modules/challenges/challenges.module#ChallengesModule'
+    loadChildren: './modules/challenges/challenges.module#ChallengesModule',
+    canActivate: [AuthGuard]
   },
   {
     path: 'topchart',
-    loadChildren: './modules/top-chart/top-chart.module#TopChartModule'
+    loadChildren: './modules/top-chart/top-chart.module#TopChartModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'profile-settings',
+    loadChildren: './modules/profile-settings/profile-settings.module#ProfileSettingsModule',
+    canActivate: [AuthGuard]
   },
   {
     path: 'page-not-found',

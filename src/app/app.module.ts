@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialsModule } from './shared/modules/angular-materials.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 // Components
@@ -23,7 +24,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AngularMaterialsModule
+    AngularMaterialsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
