@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-exoft-achievements',
   templateUrl: './exoft-achievements.component.html',
@@ -7,18 +6,18 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ExoftAchievementsComponent implements OnInit {
 
-  public pageData : any =[];
+  public pageData: any = [];
+
   ngOnInit() {
     for (let index = 0; index < 10; index++) {
       this.pageData.push(this.userInfo());
     }
   }
-
   private userInfo() {
     return {
-      img: '../../assets/images/star@2x.png',
-      name: `Name Surname ${Math.floor(Math.random() * 10)}`,     
-      time: `${Math.floor(Math.random() * 10)} mins ago`,
+      img: 'https://img2.akspic.ru/image/83780-klyuv-vorobinye_pticy-staryj_mir_ivolga-zyablik-hishhnaya_ptica-1920x1080.jpg?attachment=1',
+      name: `Name Surname ${Math.floor(Math.random() * 10)}`,
+      time: `${Math.floor(Math.random() * 10)} min. ago`,
       achievement: `Gained some achievement`
     };
   }

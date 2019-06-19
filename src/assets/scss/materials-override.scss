@@ -1,56 +1,56 @@
 @import "./theme-colors.scss";
 
 .mat-toolbar.mat-primary {
-  background-color: #3a3e46;
+    background-color: #3a3e46;
 }
 
 .mat-drawer-container {
-  background-color: #2c2c2c;
+    background-color: #2c2c2c;
 }
 
 .mat-toolbar.mat-toolbar.mat-primary.mat-toolbar-single-row {
-  height: 60px;
+    height: 60px;
 }
 
 .mat-ink-bar.mat-ink-bar {
-  height: 7px;
-  top: 0;
+    height: 7px;
+    top: 0;
 }
 
 .mat-tab-group.mat-primary .mat-ink-bar,
 .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-  background-color: #68b70c;
+    background-color: #68b70c;
 }
 
 nav.mat-tab-nav-bar.mat-primary {
-  margin-top: -12px;
+    margin-top: -12px;
 }
 
 .mat-tab-link {
-  font-weight: 500;
+    font-weight: 500;
 }
 
 a.mat-tab-link.mat-tab-label-active.ng-star-inserted {
-  color: #68b70c;
+    color: #68b70c;
 }
 
 a.mat-tab-link.ng-star-inserted {
-  opacity: 1;
+    opacity: 1;
 }
 
 .mat-drawer-inner-container {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 a.mat-tab-link.ng-star-inserted {
-  font-weight: 300;
-  padding-top: 11px;
+    font-weight: 300;
+    padding-top: 11px;
 }
 
 .mat-tab-header,
 .mat-tab-nav-bar {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 .mat-tab-label,
@@ -61,8 +61,8 @@ a.mat-tab-link.ng-star-inserted {
 }
 
 .mat-sidenav {
-  width: 378px;
-  background-color: #3a3e46;
+    width: 378px;
+    background-color: #3a3e46;
 }
 
 .mat-icon-button {
@@ -111,8 +111,117 @@ a.mat-tab-link.ng-star-inserted {
   color: #68B70C;
   font-size: 18px; 
 }
-.mat-stepper-vertical-line::before {
-  border-left-color: #68B70C;
+
+//override material input
+.mat-form-field {
+    color: $textColor;
+    margin-top: 40px;
+
+    .mat-form-field-label {
+        color: $textColor;
+    }
+
+    .mat-input-element {
+        caret-color: $textColor;
+        font-size: 27px;
+        font-weight: 300;
+    }
+
+    .mat-form-field-underline {
+        background-color: $textColor;
+    }
+
+    &.mat-focused {
+        .mat-form-field-label {
+            color: $textColor;
+            font-weight: 300;
+        }
+
+        .mat-form-field-ripple {
+            background-color: $textColor;
+        }
+    }
+}
+
+.achievement-content-wrapper {
+    .mat-step-icon {
+        border: 2px solid $mainColor;
+        background-size: cover;
+        height: 36px;
+        width: 36px;
+        display: none;
+    }
+
+    .mat-icon {
+        width: 36px;
+        height: 36px;
+        margin-right: 20px;
+    }
+}
+
+.mat-stepper-vertical {
+    background-color: $secondaryColor;
+
+    .mat-step-header {
+        background-color: $secondaryColor;
+        border: 0;
+        pointer-events: none;
+
+        .mat-step-label {
+            display: flex;
+        }
+    }
+
+    .mat-step-text-label {
+        color: $mainColor;
+        font-size: 18px;
+    }
+
+    .mat-stepper-vertical-line::before {
+        border-left-color: $mainColor;
+        margin: 5px 0 0 6px;
+    }
+
+    .mat-vertical-stepper-content {
+        height: 100% !important;
+        visibility: visible !important;
+    }
+
+    .mat-step-icon {
+        border: 2px solid $mainColor;
+        background-size: cover;
+        height: 36px;
+        width: 36px;
+        display: none;
+    }
+
+}
+
+.mat-card-title {
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0;
+}
+
+app-exoft-achievements {
+    .mat-card-title {
+        font-size: 14px;
+        font-weight: normal;
+        margin: 0;
+    }
+}
+
+app-thank-you {
+    .mat-card-title {
+        font-size: 14px;
+        font-weight: normal;
+        margin-left: -33px;
+    }
+}
+
+.mat-vertical-stepper-content {
+  height: 100% !important;
+  visibility: visible !important;
 }
 
 .mat-vertical-stepper-content {
