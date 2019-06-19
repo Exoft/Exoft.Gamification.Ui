@@ -56,19 +56,19 @@
                 padding-left: 20px;
 
                 .available-challenge-img {
-                    width: 214px;
+                    // width: 214px;
                     height: 100px;
 
                     img {
                         height: 100%;
-                        width: 100%;
+                        // width: 100%;
                     }
                 }
 
                 .available-content {
                     display: flex;
                     justify-content: space-between;
-                    padding-top: 10px;
+                    padding: 10px 0 0 0;
 
                     .challenge-text-content {
                         display: flex;
@@ -89,7 +89,7 @@
                             .percentage {
                                 color: #68B70C;
                                 font-size: 14px;
-                                padding-bottom: 19px;
+                                padding: 0 0 19px 0;
                             }
 
                             .time {
@@ -107,13 +107,13 @@
         }
 
         .ended-content-wrapper {
-            padding-left: 20px;
+            padding: 0 0 0 20px;
             overflow: auto;
 
             .ended-challenges {
                 display: flex;
                 flex-direction: column;
-                padding-top: 10px;
+                padding: 10px 0 0 0;
                 overflow: auto;
                 height: 66%;
 
@@ -130,7 +130,7 @@
                         img {
                             width: 100px;
                             height: 100px;
-                            margin-right: 5px;
+                            margin:0 5px 5px 0;
                         }
 
                         .img-text {
