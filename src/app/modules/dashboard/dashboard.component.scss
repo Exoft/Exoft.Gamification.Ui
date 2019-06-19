@@ -11,7 +11,7 @@
 
         .welcome-container {
             height: 12%;
-            
+
             app-welcome {
                 height: 100%;
             }
@@ -27,34 +27,22 @@
                 flex-grow: 1;
             }
 
-            app-personal-achievements {
-                // height: 100%;
-            }
-
             app-top-chart {
                 flex-grow: 2;
-                // height: 100%;
             }
 
             app-badges {
-                // height: 100%;
                 flex-grow: 1;
             }
 
             app-challenges {
-                // height: 100%;
                 flex-grow: 3;
             }
 
         }
-
-        .exoft-achievements {
-            // height: 100%;
-        }
     }
 
     app-exoft-achievements {
-        // height: 100%;
         display: flex;
     }
 
