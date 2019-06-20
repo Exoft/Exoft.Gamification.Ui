@@ -15,7 +15,7 @@
           <div class="user-info" *ngFor="let item of pageData">
 
             <div class="user-img">
-              <img src={{item.img}}>
+              <img src={{item.img}} (click)="openOtherUser()"> 
             </div>
             
             <div class="user-txt">{{item.name}}</div>

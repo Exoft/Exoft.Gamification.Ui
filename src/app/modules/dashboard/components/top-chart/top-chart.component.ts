@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
+import { MatDialog } from '@angular/material';
+import { OtherUserProfileComponent } from '../other-user-profile/other-user-profile.component';
 
 @Component({
   selector: 'app-top-chart',
@@ -7,7 +9,7 @@ import { Chart } from 'chart.js';
   styleUrls: ['./top-chart.component.scss']
 })
 export class TopChartComponent implements OnInit {
-
+  constructor(public dialog: MatDialog) { }
   public pageData: any = [];
   public title = 'Gamification';
   public BarChart = [];
@@ -87,7 +89,11 @@ export class TopChartComponent implements OnInit {
     });
   }
 
-
+  openOtherUser(): void {
+    this.dialog.open(OtherUserProfileComponent, {
+      width: '1800px'
+    });
+  }
 }
 
 

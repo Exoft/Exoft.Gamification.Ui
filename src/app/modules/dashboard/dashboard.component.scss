@@ -3,6 +3,7 @@
     justify-content: space-around;
     padding: 30px;
     height: calc(100% - 60px);
+    font-weight: 300;
 
     .main-container {
         flex-direction: column;
@@ -38,12 +39,11 @@
             app-challenges {
                 flex-grow: 3;
             }
-
         }
     }
 
     app-exoft-achievements {
         display: flex;
+        height: 100%;
     }
-
 }
