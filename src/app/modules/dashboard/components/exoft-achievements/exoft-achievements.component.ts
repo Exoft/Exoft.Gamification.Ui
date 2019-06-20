@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { OtherUserProfileComponent } from '../other-user-profile/other-user-profile.component';
+
 @Component({
   selector: 'app-exoft-achievements',
   templateUrl: './exoft-achievements.component.html',
   styleUrls: ['./exoft-achievements.component.scss']
 })
+
 export class ExoftAchievementsComponent implements OnInit {
 
   public pageData: any = [];

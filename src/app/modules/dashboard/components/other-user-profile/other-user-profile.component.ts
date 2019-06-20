@@ -34,5 +34,3 @@ export class OtherUserProfileComponent implements OnInit {
       this.dialog.closeAll();
     }
 }
-
-
