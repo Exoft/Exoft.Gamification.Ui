@@ -55,9 +55,9 @@ a.mat-tab-link.ng-star-inserted {
 
 .mat-tab-label,
 .mat-tab-link {
-  color: $textColor;
-  font-size: 20px;
-  font-family: Roboto;
+    color: $textColor;
+    font-size: 20px;
+    font-family: Roboto;
 }
 
 .mat-sidenav {
@@ -66,50 +66,57 @@ a.mat-tab-link.ng-star-inserted {
 }
 
 .mat-icon-button {
-  color: $textColor;
+    color: $textColor;
 }
 
 //override material input
 .mat-form-field {
-  color: $textColor;
-  margin-top: 40px;
-
-  .mat-form-field-label {
     color: $textColor;
-    .ng-star-inserted{
-      font-size: 13px;
-    }
-  }
-  .mat-input-element {
-    caret-color: $textColor;
-    font-size: 27px;
-    font-weight: 300;
-  }
-  .mat-form-field-underline {
-    background-color: $textColor;
-  }
+    margin-top: 40px;
 
-  &.mat-focused {
     .mat-form-field-label {
-      color: $textColor;
-      font-weight: 300;
+        color: $textColor;
+
+        .ng-star-inserted {
+            font-size: 13px;
+        }
     }
-    .mat-form-field-ripple {
-      background-color: $textColor;
+
+    .mat-input-element {
+        caret-color: $textColor;
+        font-size: 27px;
+        font-weight: 300;
     }
-  }
+
+    .mat-form-field-underline {
+        background-color: $textColor;
+    }
+
+    &.mat-focused {
+        .mat-form-field-label {
+            color: $textColor;
+            font-weight: 300;
+        }
+
+        .mat-form-field-ripple {
+            background-color: $textColor;
+        }
+    }
 }
+
 .mat-stepper-vertical {
-  background-color: #3A3E46;
+    background-color: #3A3E46;
 }
+
 .mat-step-header {
-  background-color: #3A3E46;
-  border:0;
-  pointer-events: none;
+    background-color: #3A3E46;
+    border: 0;
+    pointer-events: none;
 }
+
 .mat-step-text-label {
-  color: #68B70C;
-  font-size: 18px; 
+    color: #68B70C;
+    font-size: 18px;
 }
 
 //override material input
@@ -220,11 +227,24 @@ app-thank-you {
 }
 
 .mat-vertical-stepper-content {
-  height: 100% !important;
-  visibility: visible !important;
+    height: 100% !important;
+    visibility: visible !important;
 }
 
 .mat-vertical-stepper-content {
-  height: 100% !important;
-  visibility: visible !important;
+    height: 100% !important;
+    visibility: visible !important;
+}
+
+.mat-dialog-container {
+    padding: 0 !important;
+    display: block;
+    border-radius: 4px;
+    overflow: visible !important;
+    outline: 0;
+    max-width: 1800px !important;
+    height: 100%;
+    width: 100% !important;
+    min-height: inherit;
+    max-height: inherit;
 }
