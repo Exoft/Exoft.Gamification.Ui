@@ -39,6 +39,6 @@ export class UserService {
   }
 
   public updateUserInfo(formData: any, userId: any): Observable<any> {
-    return this.http.put(environment.apiUrl + 'api/users' + userId, formData);
+    return this.http.put(environment.apiUrl + '/api/users/' + userId, formData);
   }
 }

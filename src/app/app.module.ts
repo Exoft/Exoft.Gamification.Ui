@@ -4,8 +4,10 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialsModule } from './shared/modules/angular-materials.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+// Interceptor
+import { Interceptor } from './services/auth/interceptor';
 
 // Components
 import { AppComponent } from './app.component';
@@ -27,7 +29,13 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     AngularMaterialsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

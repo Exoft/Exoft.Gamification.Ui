@@ -19,17 +19,17 @@ export class LastAchivementsComponent {
     },
     {
       achivement: 'Taxi driver',
-      expPoints: 50,
+      expPoints: 150,
       date: 'Yesterday, 9:45 PM'
     },
     {
       achivement: 'Taxi driver',
-      expPoints: 50,
+      expPoints: 1150,
       date: '27 June, 8:43 AM'
     },
     {
       achivement: 'Taxi driver',
-      expPoints: 50,
+      expPoints: 650,
       date: '27 June, 8:43 AM'
     }
   ];

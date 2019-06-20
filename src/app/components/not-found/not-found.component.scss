@@ -18,7 +18,7 @@
     font-weight: 500;
     letter-spacing: 1px;
     font-size: 40px;
-
+    flex-grow: 2;
     div {
       padding-top: 0px;
       p {
@@ -37,12 +37,75 @@
     border-radius: 35px;
     color: $textColor;
     font-size: 30px;
-    padding: 20px 140px;
+    padding: 15px;
+   width: 100%;
   }
 
   img {
-    height: 352px;
-    width: 403px;
-    margin-top: 65px;
+    width: 25%;
+    flex-grow: 1;
+    object-fit: contain;
+    object-position: bottom;
+  }
+}
+
+@media (max-width: 1440px) {
+  .not-found-page-container {
+    div {
+      padding-top: 50px;
+      font-size: 30px;
+      flex-grow: 2;
+      div {
+        padding-top: 2%;
+
+        p {
+          font-size: 30px;
+        }
+
+        .error-number {
+          font-size: 110px;
+        }
+      }
+    }
+
+    button {
+      font-size: 20px;
+      padding: 0px;
+      width: 90%;
+    }
+
+    img {
+      flex-grow: 1;
+      width: 25%;
+      object-fit: contain;
+      object-position: bottom;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .not-found-page-container {
+    div {
+      font-size: 20px;
+      div {
+        padding-top: 0px;
+
+        p {
+          font-size: 20px;
+        }
+
+        .error-number {
+          font-size: 100px;
+        }
+      }
+    }
+
+    button {
+      font-size: 15px;
+    }
+
+    img {
+      width: 50%;
+    }
   }
 }

@@ -11,6 +11,7 @@
   overflow: auto;
 
   .mat-card-title {
+    text-align: center;
     color: $textColor;
     font-size: 30px;
     letter-spacing: 5px;
@@ -42,6 +43,74 @@
           width: 60px;
           margin-left: 10%;
           margin-right: 10%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1920px) {
+  .full-list-of-achivements-container {
+    .mat-card-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .achivements-table {
+      font-size: 18px;
+      border-spacing: 15px;
+
+      tr {
+        margin-top: 15px;
+
+        .achivement-cell {
+          img {
+            height: 45px;
+            width: 45px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1440px) {
+  .full-list-of-achivements-container {
+    padding: 15px;
+
+    .mat-card-title {
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .achivements-table {
+      font-size: 15px;
+      border-spacing: 10px;
+
+      tr {
+        margin-top: 10px;
+
+        .achivement-cell {
+          img {
+            height: 30px;
+            width: 30px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .full-list-of-achivements-container {
+    .achivements-table {
+      tr {
+        .achivement-cell {
+          img {
+            height: 30px;
+            width: 30px;
+            margin: 0px 10% 0px 0px;
+          }
         }
       }
     }

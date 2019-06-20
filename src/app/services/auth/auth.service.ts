@@ -10,17 +10,14 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   public signIn(loginData: any): Observable<any> {
-    // return this.http.post(
-    //   `${environment.apiUrl}api/Auth/authenticate`,
-    //   loginData
-    // );
+    // return this.http.post(environment.apiUrl + '/api/authenticate', loginData);
     return of(
-      new HttpResponse({ status: 200, body: { accessToken: 'fake-token' } })
+      new HttpResponse({ status: 200, body: { token: 'fake-token' } })
     );
   }
 
   public isAuthenticated(): boolean {
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem('token');
     return token !== null && token !== undefined;
   }
 }

@@ -86,7 +86,7 @@ export class MainnavComponent implements OnInit, OnDestroy {
   }
 
   public onLogOut() {
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem('token');
     this.drawer.close();
     this.router.navigate(['/signin']);
   }

@@ -103,3 +103,24 @@
   height: 100% !important;
   visibility: visible !important;
 }
+
+@media (max-width: 1440px) {
+  .mat-drawer-container {
+    .mat-toolbar-single-row {
+      .mat-primary {
+        .mat-tab-link {
+          font-size: 15px;
+          min-width: 90px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .mat-drawer-container {
+    .mat-sidenav {
+      width: 275px;
+    }
+  }
+}
