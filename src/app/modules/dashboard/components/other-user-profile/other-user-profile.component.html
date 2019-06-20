@@ -1,0 +1,45 @@
+<div class="card-container">
+  <mat-card class="card">
+    <div class="main-container">
+
+      <div class="other-user-container">
+
+        <img [src]="avatarSource" class="avatar" />
+        <div class="user-name">{{ userName }}</div>
+
+        <div class="user-achivments-info">
+
+          <div class="user-achivments-elements">
+            <p class="user-achivments-title">Total:</p>
+            <p class="user-achivments-text">{{ totalBadgesCount }} Badges</p>
+          </div>
+
+          <div class="user-achivments-elements">
+            <p class="user-achivments-title">EXP:</p>
+            <p class="user-achivments-text">{{ xpCount }} XP</p>
+          </div>
+
+          <div class="user-achivments-elements">
+            <p class="user-achivments-status">{{status}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="achievement-container">
+        <div class="achievement-list">
+          <div class="achievement-item" *ngFor="let item of pageData; let i=index">
+            <img src="{{item.img}}">
+            <div class="img-text">{{item.text}}</div>
+            <div class="counter" *ngIf="item.count>1">{{item.count}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="close-button" (click)="closeOtherUser()">
+        <i class="material-icons">close</i>
+      </div>
+    </div>
+  </mat-card>
+
+  <button mat-button class="request-button"> SAY THANKS</button>
+</div>

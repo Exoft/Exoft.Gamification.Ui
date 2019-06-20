@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
+import { MatDialog } from '@angular/material';
+import { OtherUserProfileComponent } from '../other-user-profile/other-user-profile.component';
 
 @Component({
   selector: 'app-top-chart',
@@ -7,7 +9,7 @@ import { Chart } from 'chart.js';
   styleUrls: ['./top-chart.component.scss']
 })
 export class TopChartComponent implements OnInit {
-
+  constructor(public dialog: MatDialog) { }
   public pageData: any = [];
   public title = 'Gamification';
   public BarChart = [];
@@ -26,7 +28,7 @@ export class TopChartComponent implements OnInit {
       img: 'https://www.lovethegarden.com/sites/default/files/content/articles/UK_wildbirds-01-robin.jpg',
       name: `Name Surname ${Math.floor(Math.random() * 10)}`,
       xp: Math.floor(Math.random() * 100)
-    }
+    };
   }
 
   public dataSort() {
@@ -80,14 +82,18 @@ export class TopChartComponent implements OnInit {
           }],
           xAxes: [{
             beginAtZero: true,
-           display: false
+            display: false
           }]
         }
       }
     });
   }
 
-
+  openOtherUser(): void {
+    this.dialog.open(OtherUserProfileComponent, {
+      width: '1800px'
+    });
+  }
 }
 
 

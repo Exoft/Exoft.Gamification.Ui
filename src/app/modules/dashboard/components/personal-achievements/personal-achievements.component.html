@@ -1,11 +1,11 @@
 <mat-card class="card">
   <div class="header-wrapper">
     <mat-card-title>PERSONAL ACHIEVEMENTS</mat-card-title>
-
     <button mat-button class="request-button">Request</button>
   </div>
 
   <div class="achivement-wrapper">
+
     <div class="achivement" *ngFor="let item of pageData">
       <div class="achivement-image">
         <img src={{item.img}}>
@@ -13,10 +13,7 @@
 
       <div class="achivement-title">
         <div>{{item.name}}</div>
-
-        <div class="achivement-date">
-          {{item.date}}
-        </div>
+        <div class="achivement-date">{{item.date}}</div>
       </div>
     </div>
   </div>

@@ -7,7 +7,8 @@ import {
   MatIconModule,
   MatListModule,
   MatCardModule,
-  MatStepperModule
+  MatStepperModule,
+  MatDialogModule
 } from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatInputModule} from '@angular/material/input';
@@ -23,7 +24,8 @@ import {MatInputModule} from '@angular/material/input';
     MatTabsModule,
     MatCardModule,
     MatStepperModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule
   ]
 })
 export class AngularMaterialsModule {
