@@ -22,7 +22,9 @@
 
     <div class="user-name">{{ userName }}</div>
 
-    <button mat-button class="log-out-button" (click)="onLogOut()">log out</button>
+    <button mat-button class="log-out-button" (click)="onLogOut()">
+      log out
+    </button>
 
     <div class="user-achivments-info">
       <div class="user-achivments-elements">
@@ -53,7 +55,12 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <app-header (openSidenavEmitter)="drawer.toggle()" *ngIf="isHeaderShown"></app-header>
+    <app-header
+      (openSidenavEmitter)="drawer.toggle()"
+      [avatarSource]="avatarSource"
+      [userName]="userName"
+      *ngIf="isHeaderShown"
+    ></app-header>
 
     <ng-content></ng-content>
   </mat-sidenav-content>

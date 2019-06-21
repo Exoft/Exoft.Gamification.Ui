@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
+
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -21,14 +22,15 @@ export class AuthComponent {
       const { userName, password } = this.signinForm.value;
       const formData = { userName, password };
 
-      this.authService.signIn(formData)
-      .subscribe(res => {
-          localStorage.setItem('accessToken', res.body.accessToken);
+      this.authService.signIn(formData).subscribe(
+        res => {
+          localStorage.setItem('token', res.token);
           this.router.navigate(['/dashboard']);
         },
         error => {
           //
-        });
+        }
+      );
     }
   }
 }

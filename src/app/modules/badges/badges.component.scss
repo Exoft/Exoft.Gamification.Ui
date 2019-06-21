@@ -1,0 +1,107 @@
+.badges-page-container {
+  height: calc(100% - 60px);
+  display: flex;
+
+  .achivements-container {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+
+    .last-and-total-achivements-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 55%;
+
+      .total-achivements-and-exp {
+        width: 45%;
+        height: 80%;
+      }
+
+      .last-achivements {
+        width: 45%;
+        height: 80%;
+      }
+    }
+
+    .full-list-of-achivements {
+      align-self: center;
+      height: 40%;
+      width: 95%;
+    }
+  }
+
+  .user-and-thank-you-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 35%;
+
+    .user {
+      height: 44%;
+      width: 90%;
+      margin-top: 1%;
+    }
+
+    .thank-you {
+      height: 40%;
+      width: 90%;
+      margin-top: 1%;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .badges-page-container {
+    height: auto;
+    flex-direction: column;
+
+    .achivements-container {
+      flex-direction: column;
+      width: 100%;
+
+      .last-and-total-achivements-container {
+        flex-direction: column;
+        height: auto;
+
+        .total-achivements-and-exp {
+          width: 100%;
+          height: auto;
+          padding: 10px 5px 10px 5px;
+        }
+
+        .last-achivements {
+          width: 100%;
+          height: auto;
+          padding: 20px 5px 10px 5px;
+        }
+      }
+
+      .full-list-of-achivements {
+        height: 300px;
+        width: 100%;
+        padding: 10px 5px 10px 5px;
+      }
+    }
+
+    .user-and-thank-you-container {
+      width: 100%;
+      height: auto;
+
+      .user {
+        height: auto;
+        width: 100%;
+        padding: 10px 5px 10px 5px;
+        margin: 0%;
+      }
+
+      .thank-you {
+        height: auto;
+        width: 100%;
+        padding: 10px 5px 10px 5px;
+        margin: 0%;
+      }
+    }
+  }
+}

@@ -32,6 +32,9 @@ import { OtherUserProfileComponent } from './components/other-user-profile/other
     CommonModule,
     DashboardRoutingModule,
     AngularMaterialsModule
+  ],
+  exports: [
+    ThankYouComponent
   ]
 })
 export class DashboardModule {

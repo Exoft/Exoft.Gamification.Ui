@@ -15,5 +15,4 @@ import { AuthComponent } from './auth.component';
     ReactiveFormsModule
   ]
 })
-
 export class AuthModule {}

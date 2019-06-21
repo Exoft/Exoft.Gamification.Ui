@@ -1,4 +1,4 @@
-@import "./../../../assets/scss/theme-colors.scss";
+@import './../../../assets/scss/theme-colors.scss';
 
 .sidenav-container {
   height: 100%;
@@ -54,25 +54,25 @@
       margin-top: 3px;
     }
 
-    .user-achivments-info{
+    .user-achivments-info {
       margin: 10px 0px 15px 0px;
       display: flex;
       flex-direction: column;
       align-self: center;
 
-      .user-achivments-elements{
+      .user-achivments-elements {
         display: flex;
         flex-direction: row;
         align-self: center;
 
-        .user-achivments-title{
+        .user-achivments-title {
           color: $mainColor;
           font-size: 20px;
           margin: 0px;
           margin-right: 5px;
         }
 
-        .user-achivments-text{
+        .user-achivments-text {
           color: $textColor;
           font-size: 20px;
           margin: 0px;
@@ -81,7 +81,7 @@
       }
     }
 
-    .link{
+    .link {
       color: $textColor;
 
       text-decoration: none;
@@ -90,22 +90,48 @@
       padding-bottom: 6px;
       font-weight: 300;
     }
-    .link-active{
+    .link-active {
       border-bottom: 10px solid $mainColor;
       color: $mainColor;
     }
   }
 }
 
+@media (max-width: 991px) {
+  .sidenav-container {
+    .sidenav {
+      .avatar {
+        width: 140px;
+        height: 140px;
+        margin-top: 30px;
+      }
 
+      .user-name {
+        font-size: 25px;
+      }
 
+      .log-out-button {
+        padding: 10px;
+      }
 
+      .user-achivments-info {
+        .user-achivments-elements {
+          .user-achivments-title {
+            font-size: 15px;
+          }
 
+          .user-achivments-text {
+            font-size: 15px;
+          }
+        }
+      }
 
-
-
-
-
-
-
-
+      .link {
+        font-size: 25px;
+      }
+      .link-active {
+        border-bottom: 7px solid $mainColor;
+      }
+    }
+  }
+}
