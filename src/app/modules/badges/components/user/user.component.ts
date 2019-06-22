@@ -30,12 +30,12 @@ export class UserComponent implements OnInit, OnDestroy {
 
   private subscribeToUserDataChange() {
     this.userService
-      .getUser()
+      .getUserData()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(res => {
-        this.avatarSource = res.userInfo.avatar;
-        this.userName = res.userInfo.firstName + ' ' + res.userInfo.lastName;
-        this.status = res.userInfo.status;
+        this.avatarSource = res.avatar;
+        this.userName = res.firstName + ' ' + res.lastName;
+        this.status = res.status;
       });
   }
 

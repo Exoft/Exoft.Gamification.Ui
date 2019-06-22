@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { MatDrawer } from '@angular/material';
 
 import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-mainnav',
@@ -22,6 +23,7 @@ export class MainnavComponent implements OnInit, OnDestroy {
   public userName: string;
   public totalBadgesCount = 30;
   public xpCount = 1334;
+  public userData: any;
 
   constructor(private router: Router, private userService: UserService) {}
 
@@ -42,11 +44,11 @@ export class MainnavComponent implements OnInit, OnDestroy {
 
   private subscribeToUserDataChange() {
     this.userService
-      .getUser()
+      .getUserData()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(res => {
-        this.avatarSource = res.userInfo.avatar;
-        this.userName = res.userInfo.firstName + ' ' + res.userInfo.lastName;
+        this.avatarSource = res.avatar;
+        this.userName = res.firstName + ' ' + res.lastName;
       });
   }
 
@@ -65,23 +67,11 @@ export class MainnavComponent implements OnInit, OnDestroy {
   }
 
   public getUser() {
-    this.userService.getUserInfo('1').subscribe(res => {
-      const {
-        avatar,
-        userName,
-        firstName,
-        lastName,
-        emailAddress,
-        status
-      } = res.body;
-      this.userService.setUser({
-        avatar,
-        userName,
-        firstName,
-        lastName,
-        emailAddress,
-        status
-      });
+    this.userService.getUserInfo().subscribe(res => {
+      this.userData = { ...res };
+      this.userData.avatar =
+      environment.apiUrl + '/api/files/' + this.userData.avatarId;
+      this.userService.setUserData(this.userData);
     });
   }
 

@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-auth',
@@ -14,8 +16,9 @@ export class AuthComponent {
     userName: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
+  public userData: any;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private userService: UserService) {}
 
   public onSignIn() {
     if (this.signinForm.valid) {
@@ -26,6 +29,13 @@ export class AuthComponent {
         res => {
           localStorage.setItem('token', res.token);
           this.router.navigate(['/dashboard']);
+
+          this.userService.getUserInfo().subscribe(userInfoResponse => {
+            this.userData = { ...userInfoResponse };
+            this.userData.avatar =
+            environment.apiUrl + '/api/files/' + this.userData.avatarId;
+            this.userService.setUserData(this.userData);
+          });
         },
         error => {
           //

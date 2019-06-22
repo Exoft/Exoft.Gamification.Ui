@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile-settings',
@@ -18,7 +19,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
     userName: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
-    emailAddress: new FormControl(
+    email: new FormControl(
       '',
       Validators.compose([Validators.required, Validators.email])
     ),
@@ -27,6 +28,9 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
   });
 
   public avatarUrl: string;
+  public avatarId: string;
+  public userData: any;
+  public timeStamp = Date.now();
 
   constructor(private userService: UserService, private location: Location) {}
 
@@ -41,26 +45,30 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
 
   public subscribeToUserDataChange() {
     this.userService
-      .getUser()
+      .getUserData()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(res => {
-        const {
-          userName,
-          firstName,
-          lastName,
-          emailAddress,
-          status,
-          avatar
-        } = res.userInfo;
-        this.profileSettingsForm.setValue({
-          userName,
-          firstName,
-          lastName,
-          emailAddress,
-          status,
-          avatar
-        });
-        this.avatarUrl = avatar;
+        if ( Object.entries(res).length !== 0) {
+          const {
+            userName,
+            firstName,
+            lastName,
+            email,
+            status,
+            avatar,
+            avatarId
+          } = res;
+          this.profileSettingsForm.setValue({
+            userName,
+            firstName,
+            lastName,
+            email,
+            status,
+            avatar
+          });
+          this.avatarUrl = avatar;
+          this.avatarId = avatarId;
+        }
       });
   }
 
@@ -78,32 +86,34 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
 
   public onSaveChanges() {
     if (this.profileSettingsForm.valid) {
-      const {
-        userName,
-        firstName,
-        lastName,
-        emailAddress,
-        status,
-        avatar
-      } = this.profileSettingsForm.value;
-      const formData = {
-        avatar,
-        userName,
-        firstName,
-        lastName,
-        emailAddress,
-        status
-      };
-
-      this.userService.updateUserInfo(formData, '1').subscribe(
+      const formModel = this.createFormData(this.profileSettingsForm);
+      this.userService.updateUserInfo(formModel).subscribe(
         res => {
-          //
+          this.timeStamp = Date.now();
+          this.userData = { ...res };
+          this.userData.avatar =
+            environment.apiUrl +
+            '/api/files/' +
+            this.userData.avatarId +
+            '/?timeStamp=' +
+            this.timeStamp;
+          this.userService.setUserData(this.userData);
         },
         error => {
           //
         }
       );
     }
+  }
+
+  createFormData(form: FormGroup): FormData {
+    const formData = new FormData();
+
+    for (const field of Object.keys(form.controls)) {
+      formData.append(field, form.get(field).value);
+    }
+
+    return formData;
   }
 
   public onGoBack() {

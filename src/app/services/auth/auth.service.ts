@@ -10,10 +10,10 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   public signIn(loginData: any): Observable<any> {
-    // return this.http.post(environment.apiUrl + '/api/authenticate', loginData);
-    return of(
-      new HttpResponse({ status: 200, body: { token: 'fake-token' } })
-    );
+    return this.http.post(environment.apiUrl + '/api/authenticate', loginData);
+    // return of(
+    //   new HttpResponse({ status: 200, body: { token: 'fake-token' } })
+    // );
   }
 
   public isAuthenticated(): boolean {
