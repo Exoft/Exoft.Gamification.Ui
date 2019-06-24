@@ -2,29 +2,29 @@
   height: calc(100% - 60px);
   display: flex;
 
-  .achivements-container {
+  .achievements-container {
     display: flex;
     flex-direction: column;
     width: 65%;
 
-    .last-and-total-achivements-container {
+    .last-and-total-achievements-container {
       display: flex;
       justify-content: space-around;
       align-items: center;
       height: 55%;
 
-      .total-achivements-and-exp {
+      .total-achievements-and-exp {
         width: 45%;
         height: 80%;
       }
 
-      .last-achivements {
+      .last-achievements {
         width: 45%;
         height: 80%;
       }
     }
 
-    .full-list-of-achivements {
+    .full-list-of-achievements {
       align-self: center;
       height: 40%;
       width: 95%;
@@ -57,28 +57,28 @@
     height: auto;
     flex-direction: column;
 
-    .achivements-container {
+    .achievements-container {
       flex-direction: column;
       width: 100%;
 
-      .last-and-total-achivements-container {
+      .last-and-total-achievements-container {
         flex-direction: column;
         height: auto;
 
-        .total-achivements-and-exp {
+        .total-achievements-and-exp {
           width: 100%;
           height: auto;
           padding: 10px 5px 10px 5px;
         }
 
-        .last-achivements {
+        .last-achievements {
           width: 100%;
           height: auto;
           padding: 20px 5px 10px 5px;
         }
       }
 
-      .full-list-of-achivements {
+      .full-list-of-achievements {
         height: 300px;
         width: 100%;
         padding: 10px 5px 10px 5px;

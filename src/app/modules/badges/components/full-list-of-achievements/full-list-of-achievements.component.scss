@@ -1,6 +1,6 @@
 @import './../../../../../assets/scss/theme-colors.scss';
 
-.full-list-of-achivements-container {
+.full-list-of-achievements-container {
   background-color: $secondaryColor;
   height: 100%;
   width: 100%;
@@ -19,7 +19,7 @@
     margin-bottom: 18px;
   }
 
-  .achivements-table {
+  .achievements-table {
     width: 100%;
     color: $textColor;
     text-align: center;
@@ -33,7 +33,7 @@
         font-weight: 300;
       }
 
-      .achivement-cell {
+      .achievement-cell {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -50,20 +50,20 @@
 }
 
 @media (max-width: 1920px) {
-  .full-list-of-achivements-container {
+  .full-list-of-achievements-container {
     .mat-card-title {
       font-size: 20px;
       margin-bottom: 10px;
     }
 
-    .achivements-table {
+    .achievements-table {
       font-size: 18px;
       border-spacing: 15px;
 
       tr {
         margin-top: 15px;
 
-        .achivement-cell {
+        .achievement-cell {
           img {
             height: 45px;
             width: 45px;
@@ -75,7 +75,7 @@
 }
 
 @media (max-width: 1440px) {
-  .full-list-of-achivements-container {
+  .full-list-of-achievements-container {
     padding: 15px;
 
     .mat-card-title {
@@ -83,14 +83,14 @@
       margin-bottom: 10px;
     }
 
-    .achivements-table {
+    .achievements-table {
       font-size: 15px;
       border-spacing: 10px;
 
       tr {
         margin-top: 10px;
 
-        .achivement-cell {
+        .achievement-cell {
           img {
             height: 30px;
             width: 30px;
@@ -102,10 +102,10 @@
 }
 
 @media (max-width: 991px) {
-  .full-list-of-achivements-container {
-    .achivements-table {
+  .full-list-of-achievements-container {
+    .achievements-table {
       tr {
-        .achivement-cell {
+        .achievement-cell {
           img {
             height: 30px;
             width: 30px;

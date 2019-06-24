@@ -1,0 +1,25 @@
+<mat-card class="full-list-of-achievements-container">
+  <mat-card-title>FULL LIST OF ACHIEVEMENTS</mat-card-title>
+
+  <table class="achievements-table">
+    <tr>
+      <th>Achievement</th>
+
+      <th>EXP points</th>
+
+      <th>Date</th>
+    </tr>
+
+    <tr *ngFor="let item of achievementsList">
+      <td class="achievement-cell">
+        <img src="./../../../../../assets/images/star@2x.png" />
+
+        <p>{{ item.name }}</p>
+      </td>
+
+      <td>+ {{ item.xp }} XP</td>
+
+      <td>{{ item.addedTime | customDate}}</td>
+    </tr>
+  </table>
+</mat-card>

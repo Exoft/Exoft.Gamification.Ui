@@ -1,6 +1,6 @@
 @import './../../../../../assets/scss/theme-colors.scss';
 
-.total-achivements-container {
+.total-achievements-container {
   background-color: $secondaryColor;
   height: 100%;
   width: 100%;
@@ -57,7 +57,7 @@
 }
 
 @media (max-width: 1920px) {
-  .total-achivements-container {
+  .total-achievements-container {
     justify-content: space-between;
     .mat-card-title {
       font-size: 20px;
@@ -96,7 +96,7 @@
 }
 
 @media (max-width: 1440px) {
-  .total-achivements-container {
+  .total-achievements-container {
     padding: 15px;
     .mat-card-title {
       font-size: 15px;

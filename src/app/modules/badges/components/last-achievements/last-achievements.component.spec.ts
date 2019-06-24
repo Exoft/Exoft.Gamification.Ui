@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LastAchivementsComponent } from './last-achivements.component';
+import { LastAchievementsComponent } from './last-achievements.component';
 
-describe('LastAchivementsComponent', () => {
-  let component: LastAchivementsComponent;
-  let fixture: ComponentFixture<LastAchivementsComponent>;
+describe('LastAchievementsComponent', () => {
+  let component: LastAchievementsComponent;
+  let fixture: ComponentFixture<LastAchievementsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LastAchivementsComponent ]
+      declarations: [ LastAchievementsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LastAchivementsComponent);
+    fixture = TestBed.createComponent(LastAchievementsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -21,8 +21,8 @@ export class MainnavComponent implements OnInit, OnDestroy {
   public isHeaderShown = true;
   public avatarSource: string;
   public userName: string;
+  public xpCount: number;
   public totalBadgesCount = 30;
-  public xpCount = 1334;
   public userData: any;
 
   constructor(private router: Router, private userService: UserService) {}
@@ -49,6 +49,7 @@ export class MainnavComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         this.avatarSource = res.avatar;
         this.userName = res.firstName + ' ' + res.lastName;
+        this.xpCount = res.xp;
       });
   }
 
@@ -70,7 +71,7 @@ export class MainnavComponent implements OnInit, OnDestroy {
     this.userService.getUserInfo().subscribe(res => {
       this.userData = { ...res };
       this.userData.avatar =
-      environment.apiUrl + '/api/files/' + this.userData.avatarId;
+        environment.apiUrl + '/api/files/' + this.userData.avatarId;
       this.userService.setUserData(this.userData);
     });
   }
