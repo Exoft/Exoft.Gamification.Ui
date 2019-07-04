@@ -1,140 +1,211 @@
 @import "./../../../../../assets/scss/theme-colors.scss";
 
 .card-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  .card {
+    background-color: $secondaryColor;
+    color: $textColor;
+    width: 100%;
+
+    .main-container {
+      display: flex;
+      justify-content: space-between;
+
+      .other-user-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 24px 200px 80px 91px;
+
+        .avatar {
+          border-radius: 50%;
+          width: 360px;
+          height: 360px;
+          object-fit: cover;
+          border: 2px solid $mainColor;
+          align-self: center;
+        }
+
+        .user-name {
+          align-self: center;
+          font-family: Roboto;
+          font-size: 40px;
+          font-weight: 400;
+          margin-top: 9px;
+          color: $textColor;
+          font-weight: 300;
+        }
+
+        .user-achivments-info {
+          margin: 10px 0px 15px 0px;
+          display: flex;
+          flex-direction: column;
+          align-self: center;
+
+          .user-achivments-elements {
+            display: flex;
+            flex-direction: row;
+            align-self: center;
+
+            .user-achivments-status {
+              font-style: italic;
+              font-size: 27px;
+              padding: 5px 0 0 0;
+            }
+
+            .user-achivments-title {
+              color: $mainColor;
+              font-size: 30px;
+              margin: 0px;
+              margin-right: 5px;
+            }
+
+            .user-achivments-text {
+              color: $textColor;
+              font-size: 30px;
+              margin: 0px;
+              font-weight: 300;
+            }
+          }
+        }
+      }
+
+      .achievement-container {
+        .achievement-list {
+          display: flex;
+          flex-wrap: wrap;
+
+          .achievement-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 93px 0 0;
+
+            img {
+              width: 118px;
+              height: 118px;
+              margin: 0 5px 5px 0;
+            }
+
+            .img-text {
+              font-size: 24px;
+              padding: 34px 0 5px;
+              font-weight: 300;
+            }
+
+            .counter {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background-color: $mainColor;
+              border-radius: 50%;
+              position: absolute;
+              height: 38px;
+              width: 38px;
+              border: 2px solid $textColor;
+              margin: 88px 31px;
+            }
+          }
+        }
+      }
+
+      .close-button {
+        color: $mainColor;
+        padding-right: 10px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+
+        .material-icons {
+          font-size: 50px;
+        }
+      }
+    }
+  }
+
+  .request-button {
+    background-color: $mainColor;
+    border-radius: 1px;
+    width: 100%;
+    color: $textColor;
+    font-size: 40px;
+    height: 81px;
+    border-radius: 0 0 17px 17px;
+    font-weight: 300;
+  }
+}
+
+@media (max-width: 991px) {
+  .card-container {
+    padding: 20px 0;
 
     .card {
-        background-color: $secondaryColor;
-        color: $textColor;
-        width: 1800px;
+      .main-container {
+        flex-wrap: wrap;
+        justify-content: space-around;
 
-        .main-container {
-            display: flex;
-            justify-content: space-between;
-
-            .other-user-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding: 24px 200px 80px 91px;
-
-                .avatar {
-                    border-radius: 50%;
-                    width: 360px;
-                    height: 360px;
-                    object-fit: cover;
-                    border: 2px solid $mainColor;
-                    align-self: center;
-                }
-
-                .user-name {
-                    align-self: center;
-                    font-family: Roboto;
-                    font-size: 40px;
-                    font-weight: 400;
-                    margin-top: 9px;
-                    color: $textColor;
-                }
-
-                .user-achivments-info {
-                    margin: 10px 0px 15px 0px;
-                    display: flex;
-                    flex-direction: column;
-                    align-self: center;
-
-                    .user-achivments-elements {
-                        display: flex;
-                        flex-direction: row;
-                        align-self: center;
-
-                        .user-achivments-status {
-                            font-style: italic;
-                            font-size: 27px;
-                            padding: 5px 0 0 0;
-                        }
-
-                        .user-achivments-title {
-                            color: $mainColor;
-                            font-size: 30px;
-                            margin: 0px;
-                            margin-right: 5px;
-                        }
-
-                        .user-achivments-text {
-                            color: #FFFFFF;
-                            font-size: 30px;
-                            margin: 0px;
-                            font-weight: 300;
-                        }
-                    }
-                }
-            }
-
-            .achievement-container {
-                .achievement-list {
-                    display: flex;
-                    flex-wrap: wrap;
-
-                    .achievement-item {
-                        position: relative;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        padding: 50px 93px 0 0;
-
-                        img {
-                            width: 118px;
-                            height: 118px;
-                            margin: 0 5px 5px 0;
-                        }
-
-                        .img-text {
-                            font-size: 24px;
-                            padding: 34px 0 5px;
-                            font-weight: 300;
-                        }
-
-                        .counter {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            background-color: $mainColor;
-                            border-radius: 50%;
-                            position: absolute;
-                            height: 38px;
-                            width: 38px;
-                            border: 2px solid $textColor;
-                            margin: 88px 31px;
-                        }
-                    }
-                }
-            }
-
-            .close-button {
-                color: $mainColor;
-                padding-right: 10px;
-                position: absolute;
-                top: 20px;
-                right: 20px;
-
-                .material-icons {
-                    font-size: 50px;
-                }
-            }
+        .close-button {
+          padding-right: 0;
+          top: 5px;
+          right: 0px;
         }
+
+        .other-user-container {
+          padding: 0;
+
+          .user-achivments-info {
+            .user-achivments-elements {
+              .user-achivments-status {
+                font-size: 22px;
+              }
+
+              .user-achivments-title {
+                font-size: 22px;
+              }
+
+              .user-achivments-text {
+                font-size: 22px;
+              }
+            }
+          }
+
+          .user-name {
+            font-size: 30px;
+          }
+
+          .avatar {
+            width: 190px;
+            height: 190px;
+          }
+        }
+
+        .achievement-container {
+          .achievement-list {
+            .achievement-item {
+              padding: 0 15px;
+
+              .img-text {
+                font-size: 20px;
+              }
+
+              img {
+                width: 90px;
+                height: 90px;
+              }
+            }
+          }
+        }
+      }
     }
 
     .request-button {
-        background-color: $mainColor;
-        border-radius: 1px;
-        width: 1800px;
-        color: $textColor;
-        font-size: 40px;
-        height: 81px;
-        border-radius: 0 0 17px 17px;
+      font-size: 30px;
     }
+  }
 }

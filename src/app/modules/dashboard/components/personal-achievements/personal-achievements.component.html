@@ -8,12 +8,12 @@
 
     <div class="achivement" *ngFor="let item of pageData">
       <div class="achivement-image">
-        <img src={{item.img}}>
+         <img [src]=IconId(item.IconId)> 
       </div>
 
       <div class="achivement-title">
         <div>{{item.name}}</div>
-        <div class="achivement-date">{{item.date}}</div>
+        <div class="achivement-date">{{item.addedTime}}</div>
       </div>
     </div>
   </div>

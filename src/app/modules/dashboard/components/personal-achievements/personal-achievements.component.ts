@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RequestService } from 'src/app/services/dashboardequest.service';
 
 @Component({
   selector: 'app-personal-achievements',
@@ -7,19 +8,22 @@ import {Component, OnInit} from '@angular/core';
 })
 export class PersonalAchievementsComponent implements OnInit {
   public pageData: any = [];
+  public response: any = [];
+
+  constructor(private requestService: RequestService) { }
 
   ngOnInit() {
-    for (let index = 0; index < 3; index++) {
-      this.pageData.push(this.userInfo());
-    }
+    this.loadData();
   }
 
-  private userInfo() {
-    return {
-      img: '../../assets/images/star@2x.png',
-      name: `Achievement ${Math.floor(Math.random() * 10)}`,
-      date: new Date().toUTCString()
-    };
+  private loadData() {
+    this.requestService.getAchievementsInfo(1, 3).subscribe(response =>
+      this.pageData = response.data
+    );
+  }
+
+  public IconId(iconId: any) {
+    return 'http://localhost:5000/api/files/' + iconId;
   }
 }
 

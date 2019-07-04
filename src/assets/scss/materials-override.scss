@@ -1,5 +1,6 @@
 @import './theme-colors.scss';
 
+
 .mat-drawer-container {
   background-color: $backgroundColor;
 
@@ -55,143 +56,131 @@
   margin-top: 40px;
 
   .mat-form-field-label {
-      color: $textColor;
+    color: $textColor;
   }
 
   .mat-input-element {
-      caret-color: $textColor;
-      font-size: 27px;
-      font-weight: 300;
+    caret-color: $textColor;
+    font-size: 27px;
+    font-weight: 300;
   }
 
   .mat-form-field-underline {
-      background-color: $textColor;
+    background-color: $textColor;
   }
 
   &.mat-focused {
-      .mat-form-field-label {
-          color: $textColor;
-          font-weight: 300;
-      }
+    .mat-form-field-label {
+      color: $textColor;
+      font-weight: 300;
+    }
 
-      .mat-form-field-ripple {
-          background-color: $textColor;
-      }
+    .mat-form-field-ripple {
+      background-color: $textColor;
+    }
+  }
+}
+
+.mat-step-text-label {
+  color: #68B70C;
+  font-size: 18px;
+}
+
+.achievement-content-wrapper {
+  .mat-step-icon {
+    border: 2px solid $mainColor;
+    background-size: cover;
+    height: 36px;
+    width: 36px;
+    display: none;
+  }
+
+  .mat-icon {
+    width: 36px;
+    height: 36px;
+    margin-right: 20px;
   }
 }
 
 .mat-stepper-vertical {
-    background-color: #3A3E46;
-}
+  background-color: $secondaryColor;
+  width: max-content;
 
-.mat-step-header {
-    background-color: #3A3E46;
+  .mat-step-header {
+    background-color: $secondaryColor;
     border: 0;
     pointer-events: none;
-}
 
-.mat-step-text-label {
-    color: #68B70C;
+    .mat-step-label {
+      display: flex;
+    }
+  }
+
+  .mat-step-text-label {
+    color: $mainColor;
     font-size: 18px;
-}
+  }
 
-.achievement-content-wrapper {
-    .mat-step-icon {
-        border: 2px solid $mainColor;
-        background-size: cover;
-        height: 36px;
-        width: 36px;
-        display: none;
-    }
+  .mat-stepper-vertical-line::before {
+    border-left-color: $mainColor;
+    margin: 5px 0 0 6px;
+  }
 
-    .mat-icon {
-        width: 36px;
-        height: 36px;
-        margin-right: 20px;
-    }
-}
+  .mat-vertical-stepper-content {
+    height: 100% !important;
+    visibility: visible !important;
+  }
 
-.mat-stepper-vertical {
-    background-color: $secondaryColor;
-
-    .mat-step-header {
-        background-color: $secondaryColor;
-        border: 0;
-        pointer-events: none;
-
-        .mat-step-label {
-            display: flex;
-        }
-    }
-
-    .mat-step-text-label {
-        color: $mainColor;
-        font-size: 18px;
-    }
-
-    .mat-stepper-vertical-line::before {
-        border-left-color: $mainColor;
-        margin: 5px 0 0 6px;
-    }
-
-    .mat-vertical-stepper-content {
-        height: 100% !important;
-        visibility: visible !important;
-    }
-
-    .mat-step-icon {
-        border: 2px solid $mainColor;
-        background-size: cover;
-        height: 36px;
-        width: 36px;
-        display: none;
-    }
+  .mat-step-icon {
+    border: 2px solid $mainColor;
+    background-size: cover;
+    height: 36px;
+    width: 36px;
+    display: none;
+  }
 
 }
 
 .mat-card-title {
-    font-size: 14px;
-    font-weight: normal;
-    margin: 0;
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0;
 }
 
-app-exoft-achievements {
-    .mat-card-title {
-        font-size: 14px;
-        font-weight: normal;
-        margin: 0;
-    }
+app-personal-achievements {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 app-thank-you {
-    .mat-card-title {
-        font-size: 14px;
-        font-weight: normal;
-        margin-left: -33px;
-    }
+  .mat-card-title {
+    margin-left: -33px;
+  }
 }
 
 .mat-vertical-stepper-content {
-    height: 100% !important;
-    visibility: visible !important;
+  height: 100% !important;
+  visibility: visible !important;
 }
 
 .mat-vertical-stepper-content {
-    height: 100% !important;
-    visibility: visible !important;
+  height: 100% !important;
+  visibility: visible !important;
 }
 
 .mat-dialog-container {
-    padding: 0 !important;
-    display: block;
-    border-radius: 4px;
-    overflow: visible !important;
-    outline: 0;
-    max-width: 1800px !important;
-    height: 100%;
-    width: 100% !important;
-    min-height: inherit;
-    max-height: inherit;
+  padding: 0 !important;
+  display: block;
+  border-radius: 4px;
+  overflow: visible !important;
+  outline: 0;
+  max-width: 1800px !important;
+  height: 100%;
+  width: 100% !important;
+  min-height: inherit;
+  max-height: inherit;
+  background-color: transparent;
 }
 
 @media (max-width: 1440px) {

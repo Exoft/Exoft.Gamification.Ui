@@ -4,8 +4,8 @@
 
       <div class="other-user-container">
 
-        <img [src]="avatarSource" class="avatar" />
-        <div class="user-name">{{ userName }}</div>
+        <img [src]=getAvatarId(avatarId) class="avatar" />
+        <div class="user-name">{{pageData.firstName}} {{pageData.lastName}}</div>
 
         <div class="user-achivments-info">
 
@@ -16,21 +16,21 @@
 
           <div class="user-achivments-elements">
             <p class="user-achivments-title">EXP:</p>
-            <p class="user-achivments-text">{{ xpCount }} XP</p>
+            <p class="user-achivments-text">{{pageData.xp}} XP</p>
           </div>
 
           <div class="user-achivments-elements">
-            <p class="user-achivments-status">{{status}}</p>
+            <p class="user-achivments-status">"{{pageData.status}}"</p>
           </div>
         </div>
       </div>
 
       <div class="achievement-container">
         <div class="achievement-list">
-          <div class="achievement-item" *ngFor="let item of pageData; let i=index">
-            <img src="{{item.img}}">
-            <div class="img-text">{{item.text}}</div>
-            <div class="counter" *ngIf="item.count>1">{{item.count}}</div>
+          <div class="achievement-item" *ngFor="let item of achievementsData">
+            <img src="./../../../../../assets/images/star.png">
+            <div class="img-text">{{item.name}}</div>
+            <!-- <div class="counter" *ngIf="item.count>1">{{item.count}}</div> -->
           </div>
         </div>
       </div>

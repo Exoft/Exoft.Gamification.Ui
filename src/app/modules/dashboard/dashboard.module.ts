@@ -23,6 +23,7 @@ import { OtherUserProfileComponent } from './components/other-user-profile/other
     ExoftAchievementsComponent,
     BadgesComponent,
     ChallengesComponent,
+    OtherUserProfileComponent,
     OtherUserProfileComponent
   ],
   entryComponents: [

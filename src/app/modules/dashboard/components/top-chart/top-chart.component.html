@@ -11,22 +11,32 @@
       </div>
 
       <div class="user">
-        <div>
-          <div class="user-info" *ngFor="let item of pageData">
 
+        <div class="user-info" *ngFor="let item of pageData; let first = first; let i=index">
+          <div class="user-info-container">
             <div class="user-img">
-              <img src={{item.img}} (click)="openOtherUser()">
+              <img
+                src="https://img2.akspic.ru/image/83780-klyuv-vorobinye_pticy-staryj_mir_ivolga-zyablik-hishhnaya_ptica-1920x1080.jpg?attachment=1"
+                (click)="openUserDetails(item.id)">
             </div>
 
-            <div class="user-txt" (click)="openOtherUser()"> {{item.name}}</div>
-            <div class="xp-txt">{{item.xp}}XP</div>
+            <div class="info">
+              <div class="user-txt" (click)="openUserDetails(item.id)"> {{item.firstName}} {{item.lastName}}</div>
+              <div class="xp-txt">{{item.xp}}XP</div>
+            </div>
+          </div>
+
+          <div class="bar">
+            <div class="bar-{{i}}" [style.width.%]="getXpValue(item.xp)"></div>
+            <!-- <mat-progress-bar mode="determinate" class="bar-{{i}}" value="{{item.xp}}"></mat-progress-bar> -->
           </div>
         </div>
+
       </div>
     </div>
 
-    <div class="canvas">
+    <!-- <div class="canvas">
       <canvas id="barChart"></canvas>
-    </div>
+    </div> -->
   </div>
 </mat-card>

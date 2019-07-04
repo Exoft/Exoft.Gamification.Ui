@@ -1,18 +1,33 @@
 .welcome-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 26px;
-    height: 100%;
-    color: #FFFFFF;
-    background-color: #68B70C;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 26px;
+  color: #FFFFFF;
+  background-color: #68B70C;
 
-    .header-text {
-        font-size: 50px;
+  .header-text {
+    font-size: 50px;
 
-        .subheader-text {
-            font-size: 20px;
-            padding: 10px 0 0;
-        }
+    .subheader-text {
+      font-size: 20px;
+      padding: 10px 0 0;
+    }
+  }
+}
+@media (max-width: 1920px){
+  .welcome-wrapper {
+    padding: 10px 26px;
+  }
+}
+@media (max-width: 1440px)
+{
+  .welcome-wrapper{
+    padding: 0px 26px 2px 26px;
+  }
+}
+@media (max-width: 991px) {
+    .welcome-wrapper {
+        padding: 10px 26px;
     }
 }

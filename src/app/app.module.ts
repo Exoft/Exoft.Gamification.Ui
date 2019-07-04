@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 import { MainnavComponent } from './components/mainnav/mainnav.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { OtherUserProfileComponent } from './modules/dashboard/components/other-user-profile/other-user-profile.component';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialsModule,
-    HttpClientModule
+    HttpClientModule,
+    DashboardModule
   ],
   providers: [
     {
@@ -36,6 +39,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
       multi: true
     }
   ],
+  entryComponents: [OtherUserProfileComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
