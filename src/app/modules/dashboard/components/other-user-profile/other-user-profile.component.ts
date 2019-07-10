@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { RequestService } from 'src/app/services/dashboardequest.service';
+import { getFirstLetters } from '../../../../utils/letterAvatar';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-other-user-profile',
@@ -8,29 +11,47 @@ import { MatDialog } from '@angular/material';
 })
 export class OtherUserProfileComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
-  public avatarSource =
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPxOAXqa96ewc_EUYvIjO6oefUTlGg1qo_AMJv7qQQlhP3vns2IA';
-  public userName = 'Taras Shevchenko';
+  constructor(public dialog: MatDialog, private requestService: RequestService,
+    @Inject(MAT_DIALOG_DATA) public userId: any, private dialogService: DialogService) { }
+
   public totalBadgesCount = 30;
-  public xpCount = 1334;
-  public status = '"I love alpacas!"';
-  public pageData: any = [];
-  private userInfo() {
-    return {
-      img: '../../assets/images/star@2x.png',
-      text: '5K Swim',
-      count: Math.floor(Math.random() * 10)
-    };
-  }
+
+  public pageData;
+  public response;
+  public achievementsData: any = [];
+  public letterAvatar = getFirstLetters;
 
   ngOnInit() {
-    for (let index = 0; index < 10; index++) {
-      this.pageData.push(this.userInfo());
-    }
+    this.loadCurrentUser();
+    this.loadAchievements();
+  }
+  public get currentUserId() {
+    return this.userId;
   }
 
-    closeOtherUser(): void {
-      this.dialog.closeAll();
-    }
+  closeOtherUser(): void {
+    this.dialog.closeAll();
+  }
+
+  private loadCurrentUser() {
+    this.requestService.getCurrentUserById(this.currentUserId).subscribe(response =>
+      this.pageData = response);
+  }
+
+  private loadAchievements() {
+    this.requestService.getCurrentUserAchievements(this.currentUserId).subscribe(response =>
+      this.achievementsData = response.data);
+  }
+
+  public getAvatarId(avatarId: any) {
+    return 'http://localhost:5000/api/files/' + avatarId;
+  }
+
+  public openForm() {
+    this.dialogService.openThankingForm();
+  }
+
 }
+
+
+

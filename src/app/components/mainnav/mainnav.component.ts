@@ -7,6 +7,8 @@ import { MatDrawer } from '@angular/material';
 
 import { UserService } from 'src/app/services/user.service';
 import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { getFirstLetters } from '../../utils/letterAvatar';
 
 @Component({
   selector: 'app-mainnav',
@@ -24,8 +26,11 @@ export class MainnavComponent implements OnInit, OnDestroy {
   public xpCount: number;
   public totalBadgesCount = 30;
   public userData: any;
+  public firstName: any;
+  public lastName: any;
+  public letterAvatar = getFirstLetters;
 
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(private router: Router, private userService: UserService, private authService: AuthService) { }
 
   public ngOnInit() {
     this.getUser();
@@ -47,10 +52,16 @@ export class MainnavComponent implements OnInit, OnDestroy {
       .getUserData()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(res => {
-        this.avatarSource = res.avatar;
+        this.avatarSource = res.avatarId;
+        this.firstName = res.firstName;
+        this.lastName = res.lastName;
         this.userName = res.firstName + ' ' + res.lastName;
         this.xpCount = res.xp;
       });
+  }
+  public logOut() {
+    this.drawer.close();
+    return this.authService.onLogOut();
   }
 
   private subscribeToRouteChange() {
@@ -75,10 +86,8 @@ export class MainnavComponent implements OnInit, OnDestroy {
       this.userService.setUserData(this.userData);
     });
   }
-
-  public onLogOut() {
-    localStorage.removeItem('token');
-    this.drawer.close();
-    this.router.navigate(['/signin']);
+  public AvatarId(avatarId: any) {
+    return 'http://localhost:5000/api/files/' + avatarId;
   }
+
 }

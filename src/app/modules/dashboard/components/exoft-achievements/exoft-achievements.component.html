@@ -1,31 +1,35 @@
 <mat-card class="card">
   <div class="header-wrapper">
-    <mat-card-title>EXOFT ACHIEVEMENTS</mat-card-title>
-
-    <div class="achievements-count">48</div>
-    <button mat-button class="request-button"> Add</button>
+    <mat-card-title>EXOFT ACHIEVEMENTS
+      <div class="achievements-count">{{calculateEvents(pageData)}}</div>
+    </mat-card-title>
   </div>
 
   <div class="achievement-content-wrapper">
     <div class="timeline-wrapper">
 
       <mat-vertical-stepper>
-        <mat-step class="achievements" *ngFor="let item of pageData" (click)="openOtherUser()">
-          <ng-template class="achievement-step-label" matStepLabel >
+        <mat-step class="achievements" *ngFor="let item of pageData">
+          <ng-template class="achievement-step-label" matStepLabel>
             <mat-icon>
-              <img src="{{item.img}}">
+              <div class="avatar" *ngIf="!item.avatarId else avatarExists">
+                <p>{{letterAvatar(item.firstName, item.lastName)}}</p>
+              </div>
             </mat-icon>
 
             <div class="achievement-label">
-              <div class="user-name" >{{item.name}}</div>
-              <div class="posting-time">{{item.time}}</div>
+              <div class="user-name">{{item.firstName}} {{item.lastName}}</div>
+              <div class="posting-time">{{item.createdTime | customDate}}</div>
             </div>
           </ng-template>
-          
+
           <div class="achievement-type-content-wrapper">
-            <p class="achievement-type-text">{{item.achievement}}</p>
-            <div class="achievement-type">RECORDS</div>
+            <div class="achievement-type-text">{{item.description}}</div>
+            <div class="achievement-type">{{item.type}}</div>
           </div>
+          <ng-template #avatarExists>
+            <img class="user-image" [src]="AvatarId(item.avatarId)">
+          </ng-template>
         </mat-step>
 
       </mat-vertical-stepper>

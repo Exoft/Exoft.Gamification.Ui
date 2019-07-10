@@ -1,6 +1,14 @@
 <mat-card class="user-container">
   <button mat-button (click)="onOpenProfileSettings()">Edit</button>
-  <img class="avatar" [src]="avatarSource" />
+  <div class="avatar-container" *ngIf="avatarSource===null else avatarExists">
+    <div class="avatar-text">
+      <p>{{letterAvatar()}}</p>
+    </div>
+  </div>
+      <ng-template #avatarExists>
+        <img [src]="AvatarId(avatarSource)" class="avatar" />
+      </ng-template>
+
   <div class="username">{{ userName }}</div>
   <div class="status">My status: {{ status }}</div>
 </mat-card>

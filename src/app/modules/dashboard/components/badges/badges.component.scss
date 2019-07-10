@@ -1,36 +1,42 @@
 .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #3A3E46;
+  color: #FFFFFF;
+  height: 100%;
+
+  .badges-count {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    background-color: #3A3E46;
-    color: #FFFFFF;
-    height: 100%;
+    align-items: center;
 
-    .badges-count {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .badges-text {
-            font-size: 18px;
-        }
-
-        .count {
-            font-size: 100px;
-            color: #68B70C;
-        }
-
-        .badges-info {
-            font-size: 18px;
-        }
+    .badges-text {
+      font-size: 18px;
     }
 
-    .dot {
-        height: 4px;
-        width: 4px;
-        background-color: #68B70C;
-        border-radius: 50%;
-        display: inline-block;
-        margin-bottom: 3px;
+    .count {
+      font-size: 100px;
+      color: #68B70C;
     }
+
+    .badges-info {
+      font-size: 18px;
+    }
+  }
+
+  .dot {
+    height: 4px;
+    width: 4px;
+    background-color: #68B70C;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: 3px;
+  }
+}
+
+@media (max-width: 991px) {
+  .badges-count {
+    padding-bottom: 33px;
+  }
 }

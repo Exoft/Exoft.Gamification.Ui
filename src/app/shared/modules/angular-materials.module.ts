@@ -8,10 +8,12 @@ import {
   MatListModule,
   MatCardModule,
   MatStepperModule,
-  MatDialogModule
+  MatDialogModule,
+  MatProgressBarModule
 } from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   exports: [
@@ -25,7 +27,9 @@ import {MatInputModule} from '@angular/material/input';
     MatCardModule,
     MatStepperModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressBarModule,
+    MatSelectModule
   ]
 })
 export class AngularMaterialsModule {

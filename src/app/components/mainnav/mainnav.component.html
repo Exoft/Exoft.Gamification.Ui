@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container" [hasBackdrop]="false">
-  <mat-sidenav
+  <mat-sidenav 
     #drawer
     class="sidenav"
     fixedInViewport="false"
@@ -17,12 +17,16 @@
     >
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
-
-    <img [src]="avatarSource" class="avatar" />
-
+    <div *ngIf="avatarSource===null else avatarExists">
+      <div class="avatar-text">
+          <p>{{letterAvatar(firstName, lastName)}}</p>
+        </div>
+      </div>
+     
+      
     <div class="user-name">{{ userName }}</div>
 
-    <button mat-button class="log-out-button" (click)="onLogOut()">
+    <button mat-button class="log-out-button" (click)="logOut()">
       log out
     </button>
 
@@ -65,3 +69,6 @@
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
+<ng-template #avatarExists>
+    <img [src]="AvatarId(avatarSource)" class="avatar" />
+  </ng-template>

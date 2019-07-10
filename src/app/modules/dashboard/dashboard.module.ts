@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { TopChartComponent } from './components/top-chart/top-chart.component';
@@ -12,6 +11,10 @@ import { ExoftAchievementsComponent } from './components/exoft-achievements/exof
 import { BadgesComponent } from './components/badges/badges.component';
 import { ChallengesComponent } from './components/challenges/challenges.component';
 import { OtherUserProfileComponent } from './components/other-user-profile/other-user-profile.component';
+import {SharedModule} from '../../shared/shared.module';
+import { GratitudeComponent } from './components/gratitude/gratitude.component';
+import { RequestAchievementComponent } from './components/request-achievement/request-achievement.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,9 @@ import { OtherUserProfileComponent } from './components/other-user-profile/other
     ExoftAchievementsComponent,
     BadgesComponent,
     ChallengesComponent,
-    OtherUserProfileComponent
+    OtherUserProfileComponent,
+    GratitudeComponent,
+    RequestAchievementComponent
   ],
   entryComponents: [
     OtherUserProfileComponent
@@ -31,7 +36,9 @@ import { OtherUserProfileComponent } from './components/other-user-profile/other
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    AngularMaterialsModule
+    AngularMaterialsModule,
+    SharedModule,
+    ReactiveFormsModule
   ],
   exports: [
     ThankYouComponent

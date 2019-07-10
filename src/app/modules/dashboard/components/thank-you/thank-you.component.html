@@ -10,15 +10,23 @@
     <div class="image-subtext">
       Thank you for your awesome help on my project
     </div>
-    
-    <div class="user">
-      <div>
-        <img class="user-image"
-          src="https://www.lovethegarden.com/sites/default/files/content/articles/UK_wildbirds-01-robin.jpg">
+
+    <div class="user" >
+
+      <div class="user-image-text" *ngIf="!pageData.avatarId && pageData.firstName; else avatarExists">
+        <p>{{letterAvatar(pageData.firstName, pageData.lastName)}}</p>
       </div>
+
       <div class="user-name">
-        Name Surname
+        <div class="first-name">{{pageData.firstName}}</div>
+        <div class="first-name">{{pageData.lastName}}</div>
       </div>
     </div>
   </div>
 </mat-card>
+
+<ng-template #avatarExists>
+  <div class="user-image-container">
+    <img class="user-image" [src]="AvatarId(pageData.avatarId)">
+  </div>
+</ng-template>

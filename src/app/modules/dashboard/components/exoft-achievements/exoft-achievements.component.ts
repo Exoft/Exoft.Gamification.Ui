@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { OtherUserProfileComponent } from '../other-user-profile/other-user-profile.component';
+import { RequestService } from 'src/app/services/dashboardequest.service';
+import { getFirstLetters } from '../../../../utils/letterAvatar';
 
 @Component({
   selector: 'app-exoft-achievements',
@@ -11,25 +12,25 @@ import { OtherUserProfileComponent } from '../other-user-profile/other-user-prof
 export class ExoftAchievementsComponent implements OnInit {
 
   public pageData: any = [];
-  constructor(public dialog: MatDialog) { }
+  public letterAvatar = getFirstLetters;
+  public numberOfEvents = this.calculateEvents(this.pageData);
+  constructor(public dialog: MatDialog, private requestService: RequestService) { }
 
   ngOnInit() {
-    for (let index = 0; index < 10; index++) {
-      this.pageData.push(this.userInfo());
-    }
-  }
-  private userInfo() {
-    return {
-      img: 'https://img2.akspic.ru/image/83780-klyuv-vorobinye_pticy-staryj_mir_ivolga-zyablik-hishhnaya_ptica-1920x1080.jpg?attachment=1',
-      name: `Name Surname ${Math.floor(Math.random() * 10)}`,
-      time: `${Math.floor(Math.random() * 10)} min. ago`,
-      achievement: `Gained some achievement`
-    };
+    this.loadData();
   }
 
-  openOtherUser(): void {
-     this.dialog.open(OtherUserProfileComponent, {
-       width: '1800px'
-     });
+  private loadData() {
+    this.requestService.getEvents().subscribe(response => {
+      this.pageData = response.data;
+    });
   }
+  public AvatarId(avatarId: any) {
+    return 'http://localhost:5000/api/files/' + avatarId;
+  }
+
+  public calculateEvents(arr: any) {
+    return arr.length;
+  }
+
 }

@@ -32,7 +32,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
   public userData: any;
   public timeStamp = Date.now();
 
-  constructor(private userService: UserService, private location: Location) {}
+  constructor(private userService: UserService, private location: Location) { }
 
   public ngOnInit() {
     this.subscribeToUserDataChange();
@@ -48,7 +48,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
       .getUserData()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(res => {
-        if ( Object.entries(res).length !== 0) {
+        if (Object.entries(res).length !== 0) {
           const {
             userName,
             firstName,
@@ -119,4 +119,5 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
   public onGoBack() {
     this.location.back();
   }
+
 }

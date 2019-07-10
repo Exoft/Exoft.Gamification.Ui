@@ -1,49 +1,129 @@
 .dashboard-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 30px;
+  height: calc(100% - 60px);
+  font-weight: 300;
+
+  .main-container {
+    flex-direction: column;
     display: flex;
-    justify-content: space-around;
-    padding: 30px;
-    height: calc(100% - 60px);
-    font-weight: 300;
+    height: 100%;
+
+    .welcome-container {
+      app-welcome {
+        height: 100%;
+      }
+    }
+
+    .flex-container-wrapper {
+      display: flex;
+      padding: 15px 0 0;
+      height: 44%;
+
+      .thank-you-pers-achievement-wrapper {
+        display: flex;
+      }
+
+      app-thank-you {
+        padding: 0 15px;
+        flex-grow: 1;
+      }
+
+      app-top-chart {
+        flex-grow: 2;
+      }
+
+      app-badges {
+        flex-grow: 1;
+      }
+
+    }
+  }
+
+  app-exoft-achievements {
+    display: flex;
+    height: 100%;
+  }
+}
+
+@media (max-width: 1920px) {
+  .dashboard-container {
+    .exoft-achievements {
+      padding-left: 15px;
+    }
+  }
+}
+
+@media (max-width: 1440px) {
+  .dashboard-container {
+    justify-content: start;
+    padding: 20px;
 
     .main-container {
+      .flex-container-wrapper {
+        padding: 15px 0 0;
+
+        app-thank-you {
+          padding: 0 15px;
+        }
+      }
+    }
+  }
+
+  .exoft-achievements {
+    padding-bottom: 10px;
+    padding-left: 15px;
+  }
+}
+
+@media (max-width: 991px) {
+  .dashboard-container {
+    flex-direction: column;
+    overflow: hidden;
+    height: auto;
+    padding: 0;
+    align-items: center;
+
+    .main-container {
+      overflow: auto;
+      width: 95%;
+
+      .welcome-container {
+        padding-top: 10px;
+      }
+
+      .flex-container-wrapper {
         flex-direction: column;
-        display: flex;
-        height: 100%;
+        padding: 0;
 
-        .welcome-container {
-            height: 12%;
-
-            app-welcome {
-                height: 100%;
-            }
+        .thank-you-pers-achievement-wrapper {
+          flex-direction: column;
         }
 
-        .flex-container-wrapper {
-            display: flex;
-            padding: 30px 0 0;
-            height: 44%;
-
-            app-thank-you {
-                padding: 0 30px;
-                flex-grow: 1;
-            }
-
-            app-top-chart {
-                flex-grow: 2;
-            }
-
-            app-badges {
-                flex-grow: 1;
-            }
-
-            app-challenges {
-                flex-grow: 3;
-            }
+        app-personal-achievements {
+          padding: 10px 0 10px 0;
         }
+
+        app-thank-you {
+          padding: 0 0 10px 0;
+        }
+
+        app-top-chart {
+          padding: 0 0 10px 0;
+        }
+
+        app-challenges {
+          padding: 10px 0 10px 0;
+        }
+      }
     }
 
-    app-exoft-achievements {
-        display: flex;
-        height: 100%;
+    .exoft-achievements {
+      width: auto;
+      padding: 0 10px;
+      display: flex;
+      justify-content: center;
     }
+  }
 }

@@ -20,14 +20,19 @@
       align-self: flex-end;
     }
 
-    .avatar {
+    .avatar-text {
       border-radius: 50%;
       width: 166px;
       height: 166px;
+      margin: 77px 0 10px 90px;
       object-fit: cover;
       border: 1px solid $textColor;
-      margin-top: 77px;
-      align-self: center;
+      font-size: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #576271;
+      color: $mainColor;
     }
 
     .user-name {
@@ -90,6 +95,7 @@
       padding-bottom: 6px;
       font-weight: 300;
     }
+
     .link-active {
       border-bottom: 10px solid $mainColor;
       color: $mainColor;
@@ -100,38 +106,56 @@
 @media (max-width: 991px) {
   .sidenav-container {
     .sidenav {
-      .avatar {
+      
+      .avatar-text {
         width: 140px;
         height: 140px;
         margin-top: 30px;
+        font-size: 85px;
+        margin: 35px 0 10px 56px;
       }
-
+      
       .user-name {
         font-size: 25px;
       }
-
+      
       .log-out-button {
         padding: 10px;
       }
-
+      
       .user-achivments-info {
         .user-achivments-elements {
           .user-achivments-title {
             font-size: 15px;
           }
-
+          
           .user-achivments-text {
             font-size: 15px;
           }
         }
       }
-
+      
       .link {
         font-size: 25px;
       }
+      
       .link-active {
         border-bottom: 7px solid $mainColor;
       }
     }
   }
+      .avatar {
+        width: 140px;
+        height: 140px;
+        margin-top: 30px;
+      }
+}
+.avatar {
+  border-radius: 50%;
+  width: 166px;
+  height: 166px;
+  object-fit: cover;
+  border: 1px solid $textColor;
+  margin: 77px 0 10px 0;
+  align-self: center;
 }

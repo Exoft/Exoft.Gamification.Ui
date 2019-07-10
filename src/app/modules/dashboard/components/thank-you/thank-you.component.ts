@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RequestService } from 'src/app/services/dashboardequest.service';
+import {getFirstLetters} from '../../../../utils/letterAvatar';
 
 @Component({
   selector: 'app-thank-you',
@@ -6,14 +8,24 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./thank-you.component.scss']
 })
 export class ThankYouComponent implements OnInit {
+  public pageData: any = [];
+  public response: any = [];
+  public letterAvatar = getFirstLetters;
 
-  public test: any = {
-    img: 'https://www.lovethegarden.com/sites/default/files/content/articles/UK_wildbirds-01-robin.jpg',
-    name: `test ${Math.floor(Math.random() * 10)}`,
-    xp: Math.floor(Math.random() * 10)
-  };
+  constructor(private requestService: RequestService) { }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  private loadData() {
+    this.requestService.getUserInfo().subscribe(response =>
+      this.pageData = response
+    );
+  }
+
+  public AvatarId(avatarId: any) {
+    return 'http://localhost:5000/api/files/' + avatarId;
   }
 
 }

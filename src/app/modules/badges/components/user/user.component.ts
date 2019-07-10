@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { UserService } from 'src/app/services/user.service';
+import { getFirstLettersWithSplit } from '../../../../utils/letterAvatar';
 
 @Component({
   selector: 'app-user',
@@ -16,8 +17,9 @@ export class UserComponent implements OnInit, OnDestroy {
   public avatarSource: string;
   public userName: string;
   public status: string;
+  public letterAvatar = getFirstLettersWithSplit;
 
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(private router: Router, private userService: UserService) { }
 
   public ngOnInit() {
     this.subscribeToUserDataChange();
@@ -33,7 +35,7 @@ export class UserComponent implements OnInit, OnDestroy {
       .getUserData()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(res => {
-        this.avatarSource = res.avatar;
+        this.avatarSource = res.avatarId;
         this.userName = res.firstName + ' ' + res.lastName;
         this.status = res.status;
       });
@@ -41,5 +43,8 @@ export class UserComponent implements OnInit, OnDestroy {
 
   public onOpenProfileSettings() {
     this.router.navigate(['/profile-settings']);
+  }
+  public AvatarId(avatarId: any) {
+    return 'http://localhost:5000/api/files/' + avatarId;
   }
 }

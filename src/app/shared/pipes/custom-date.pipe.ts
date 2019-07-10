@@ -6,12 +6,17 @@ export class CustomDatePipe implements PipeTransform {
   transform(inputDate: any) {
     const date = moment(inputDate);
     const daysDiff = moment().diff(date, 'days');
-    if (daysDiff === 0) {
-      return `Today, ${date.zone("+06:00").format('hh:mm A')}`;
+    const minutesDiff = moment().diff(date, 'minutes') - 180;
+    const hoursDiff = Math.round(minutesDiff / 60);
+    if (daysDiff === 0 && minutesDiff < 60) {
+      //return `Today, ${date.zone("+06:00").format('hh:mm A')}`;
+      return `${minutesDiff} mins ago`;
+    } else if (daysDiff === 0 && minutesDiff >= 60) {
+      return `${hoursDiff} hours ago`;
     } else if (daysDiff === 1) {
-      return `Yesterday, ${date.zone("+06:00").format('hh:mm A')}`;
+      return `Yesterday`;
     } else if (daysDiff < 6) {
-      return `${daysDiff} days ago, ${date.zone("+06:00").format('hh:mm A')}`;
+      return `${daysDiff} days ago`;
     }
     return `${date.format('MMM d, YYYY')}`;
   }

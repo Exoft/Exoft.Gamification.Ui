@@ -11,22 +11,31 @@
       </div>
 
       <div class="user">
-        <div>
-          <div class="user-info" *ngFor="let item of pageData">
-
-            <div class="user-img">
-              <img src={{item.img}} (click)="openOtherUser()">
+        
+        <div class="user-info" *ngFor="let item of pageData; let first = first; let i=index">
+          <div class="user-info-container" >
+            <div class="user-img-text" (click)="openUserDetails(item.id)" *ngIf="item.avatarId===null else avatarExists">
+              <p>{{letterAvatar(item.firstName, item.lastName)}}</p>
             </div>
-
-            <div class="user-txt" (click)="openOtherUser()"> {{item.name}}</div>
-            <div class="xp-txt">{{item.xp}}XP</div>
+            <ng-template #avatarExists>
+              <div class="user-img">
+                <img [src]="AvatarId(item.avatarId)" (click)="openUserDetails(item.id)">
+              </div>
+            </ng-template>
+            
+            <div class="info">
+              <div class="user-txt" (click)="openUserDetails(item.id)"> {{item.firstName}} {{item.lastName}}</div>
+              <div class="xp-txt">{{item.xp}}XP</div>
+            </div>
+          </div>
+          
+          <div class="bar">
+            <div class="bar-{{i}}" [style.width.%]="getXpValue(item.xp)"></div>
           </div>
         </div>
+        
       </div>
     </div>
-
-    <div class="canvas">
-      <canvas id="barChart"></canvas>
-    </div>
+    
   </div>
 </mat-card>

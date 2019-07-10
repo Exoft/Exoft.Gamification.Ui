@@ -1,0 +1,31 @@
+<mat-card class="card">
+  <div class="card-container">
+    <div class="content-container">
+
+      <div class="label">Please, leave a message and your achievement will be assigned soon</div>
+<form [formGroup]="requestAchievementForm">
+
+  <mat-form-field class="select-form">
+    <mat-label>Achievement</mat-label>
+    <mat-select formControlName="name">
+      <mat-option *ngFor="let item of pageData" [value]="item.id">
+        {{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="input-form">
+    <textarea matInput placeholder="Your message" formControlName="message"></textarea>
+  </mat-form-field>
+
+  <div class="button">
+    <button mat-button type="submit" (click)="onSubmitRequest(requestAchievementForm)" class="submit-button" >Send</button>
+  </div>
+</form>
+    </div>
+
+    <div class="close-button" (click)="closeForm()">
+      <i class="material-icons">close</i>
+    </div>
+  </div>
+</mat-card>

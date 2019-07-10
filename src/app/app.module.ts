@@ -14,6 +14,10 @@ import { AppComponent } from './app.component';
 import { MainnavComponent } from './components/mainnav/mainnav.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { OtherUserProfileComponent } from './modules/dashboard/components/other-user-profile/other-user-profile.component';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { GratitudeComponent } from './modules/dashboard/components/gratitude/gratitude.component';
+import { RequestAchievementComponent } from './modules/dashboard/components/request-achievement/request-achievement.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialsModule,
-    HttpClientModule
+    HttpClientModule,
+    DashboardModule
   ],
   providers: [
     {
@@ -36,6 +41,10 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
       multi: true
     }
   ],
+  entryComponents: [OtherUserProfileComponent,
+  GratitudeComponent,
+  RequestAchievementComponent
+],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
