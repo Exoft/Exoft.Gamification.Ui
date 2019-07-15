@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { menuItems } from '../../utils/constants';
-import { getFirstLetters, getFirstLettersWithSplit } from '../../utils/letterAvatar';
+import { getFirstLettersWithSplit } from '../../utils/letterAvatar';
 
 @Component({
   selector: 'app-header',
@@ -22,5 +22,4 @@ export class HeaderComponent {
   public AvatarId(avatarId: any) {
     return 'http://localhost:5000/api/files/' + avatarId;
   }
-
 }

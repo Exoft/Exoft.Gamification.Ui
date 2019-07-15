@@ -18,5 +18,9 @@ export const menuItems = [
   {
     name: 'Top Chart',
     link: '/topchart'
+  },
+  {
+    name: 'Admin Page',
+    link: '/admin'
   }
 ];

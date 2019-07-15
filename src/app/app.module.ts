@@ -18,21 +18,25 @@ import { OtherUserProfileComponent } from './modules/dashboard/components/other-
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { GratitudeComponent } from './modules/dashboard/components/gratitude/gratitude.component';
 import { RequestAchievementComponent } from './modules/dashboard/components/request-achievement/request-achievement.component';
+import { AdminPageModule } from './modules/admin-page/admin-page.module';
+import { AddUserComponent } from './modules/admin-page/components/add-user/add-user.component';
+import { EditUserComponent } from './modules/admin-page/components/edit-user/edit-user.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     MainnavComponent,
     HeaderComponent,
-    NotFoundComponent
-  ],
+    NotFoundComponent  ],
    imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialsModule,
     HttpClientModule,
-    DashboardModule
+    DashboardModule,
+    AdminPageModule
   ],
   providers: [
     {
@@ -43,7 +47,9 @@ import { RequestAchievementComponent } from './modules/dashboard/components/requ
   ],
   entryComponents: [OtherUserProfileComponent,
   GratitudeComponent,
-  RequestAchievementComponent
+  RequestAchievementComponent,
+  AddUserComponent,
+  EditUserComponent
 ],
   bootstrap: [AppComponent]
 })

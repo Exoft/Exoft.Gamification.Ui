@@ -29,6 +29,7 @@ export class MainnavComponent implements OnInit, OnDestroy {
   public firstName: any;
   public lastName: any;
   public letterAvatar = getFirstLetters;
+  public userRoles: any = [];
 
   constructor(private router: Router, private userService: UserService, private authService: AuthService) { }
 
@@ -57,6 +58,7 @@ export class MainnavComponent implements OnInit, OnDestroy {
         this.lastName = res.lastName;
         this.userName = res.firstName + ' ' + res.lastName;
         this.xpCount = res.xp;
+        this.userRoles = res.roles;
       });
   }
   public logOut() {
@@ -90,4 +92,9 @@ export class MainnavComponent implements OnInit, OnDestroy {
     return 'http://localhost:5000/api/files/' + avatarId;
   }
 
+  public isAdmin(): boolean {
+    if (this.userRoles.includes('admin')) {
+      return true;
+    }
+  }
 }

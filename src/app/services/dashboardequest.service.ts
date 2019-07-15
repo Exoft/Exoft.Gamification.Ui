@@ -24,7 +24,7 @@ export class RequestService {
   }
 
   public getAllUsers(): Observable<any> {
-    return this.httpClient.get(`${this.apiUrl}/api/users`);
+    return this.httpClient.get(`${this.apiUrl}/api/users/with-short-info`);
   }
 
   public getCurrentUser(): Observable<any> {
@@ -53,4 +53,5 @@ export class RequestService {
   public getAvatar(avatarId: any) {
     return environment.apiUrl + '/api/files/' + avatarId;
   }
+
 }

@@ -13,24 +13,6 @@
     .mat-primary {
       margin-top: -12px;
       border-bottom: none;
-
-      .mat-tab-link {
-        font-weight: 300;
-        font-size: 20px;
-        color: $textColor;
-        opacity: 1;
-        padding-top: 11px;
-      }
-
-      .mat-tab-label-active {
-        color: $mainColor;
-      }
-
-      .mat-ink-bar.mat-ink-bar {
-        background-color: $mainColor;
-        height: 7px;
-        top: 0;
-      }
     }
   }
 
@@ -48,7 +30,27 @@
       color: $textColor;
     }
   }
+
+  .mat-tab-link {
+    font-weight: 300;
+    font-size: 20px;
+    color: $textColor;
+    opacity: 1;
+    padding-top: 11px;
+  }
+
+  .mat-tab-label-active {
+    color: $mainColor;
+  }
+
+
+  .mat-ink-bar.mat-ink-bar {
+    background-color: $mainColor;
+    height: 7px;
+    top: 0;
+  }
 }
+
 
 //override material input
 .mat-form-field {
@@ -80,6 +82,8 @@
     }
   }
 }
+
+// stepper override
 
 .mat-step-text-label {
   color: #68B70C;
@@ -191,6 +195,8 @@ app-thank-you {
   background-color: transparent;
 }
 
+//select override
+
 .mat-select {
   color: $mainColor;
 
@@ -234,4 +240,26 @@ app-thank-you {
       width: 275px;
     }
   }
+}
+
+//mat-table override
+.mat-tab-label-content {
+  color: $textColor;
+}
+
+.mat-table {
+  .mat-header-cell {
+    padding: 0 20px;
+    color: $textColor;
+  }
+
+  .mat-cell {
+    padding: 0 20px;
+    color: $textColor;
+  }
+
+  .mat-tab-label {
+    color: $textColor;
+  }
+
 }

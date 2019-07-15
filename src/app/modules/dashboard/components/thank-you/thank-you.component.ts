@@ -25,7 +25,7 @@ export class ThankYouComponent implements OnInit {
   }
 
   public AvatarId(avatarId: any) {
-    return 'http://localhost:5000/api/files/' + avatarId;
+    this.requestService.getAvatar(avatarId);
   }
 
 }

@@ -20,13 +20,15 @@ export class RequestAchievementComponent implements OnInit {
   ngOnInit() {
     this.loadData();
     this.requestAchievementForm = new FormGroup({
-      'name': new FormControl('1 year', Validators.required),
+      'achievementId': new FormControl(null, Validators.required),
       'message': new FormControl(null)
     });
   }
 
- public onSubmitRequest(formData: FormGroup) {
-    this.requestService.requestAchievement(formData.value);
+  public onSubmitRequest(formData: FormGroup) {
+    this.requestService.requestAchievement(formData.value).subscribe(
+    );
+    this.dialog.closeAll();
   }
 
   private loadData() {

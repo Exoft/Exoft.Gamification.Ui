@@ -1,0 +1,38 @@
+<div class="profile-setting-fields-container">
+  <form class="profile-settings-form" (ngSubmit)="onSaveChanges()"
+  [formGroup]="profileSettingsForm">
+    <label class="avatar-container" for="imageInput">
+      <img [src]="avatarUrl" class="avatar" />
+    </label>
+
+    <input class="image-input" id="imageInput" type="file" (change)="onSelectFile($event)" />
+
+    <div class="profile-settings-fields">
+      <mat-form-field class="input-field">
+        <input matInput placeholder="USERNAME" formControlName="userName" />
+      </mat-form-field>
+
+      <div class="name-input-container">
+        <mat-form-field class="input-field">
+          <input matInput placeholder="FIRST NAME" formControlName="firstName" />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <input matInput placeholder="LAST NAME" formControlName="lastName" />
+        </mat-form-field>
+      </div>
+
+      <mat-form-field class="input-field">
+        <input matInput placeholder="EMAIL ADDRESS" formControlName="email" />
+      </mat-form-field>
+
+      <mat-form-field class="input-field">
+        <input matInput placeholder="STATUS" formControlName="status" />
+      </mat-form-field>
+    </div>
+
+    <button mat-button type="submit" class="save-button">
+      SAVE CHANGES
+    </button>
+  </form>
+</div>

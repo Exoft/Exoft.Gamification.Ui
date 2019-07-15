@@ -7,7 +7,7 @@
 
   <mat-form-field class="select-form">
     <mat-label>Achievement</mat-label>
-    <mat-select formControlName="name">
+    <mat-select formControlName="achievementId">
       <mat-option *ngFor="let item of pageData" [value]="item.id">
         {{item.name}}
       </mat-option>
@@ -19,7 +19,7 @@
   </mat-form-field>
 
   <div class="button">
-    <button mat-button type="submit" (click)="onSubmitRequest(requestAchievementForm)" class="submit-button" >Send</button>
+    <button mat-button type="submit" (click)="onSubmitRequest(requestAchievementForm)"  [disabled]="requestAchievementForm.invalid"  class="submit-button" >Send</button>
   </div>
 </form>
     </div>

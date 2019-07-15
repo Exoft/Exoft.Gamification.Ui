@@ -41,6 +41,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'admin',
+    loadChildren: './modules/admin-page/admin-page.module#AdminPageModule',
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'profile-settings',
     loadChildren: './modules/profile-settings/profile-settings.module#ProfileSettingsModule',
     canActivate: [AuthGuard]
