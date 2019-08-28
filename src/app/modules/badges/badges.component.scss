@@ -1,4 +1,35 @@
 .badges-page-container {
+  display: grid;
+  height: 100% !important;
+  grid-template-areas: 'last-achievements total-achievements user' 'full-list full-list thanks';
+  grid-gap: 30px;
+  padding: 20px;
+  grid-template-rows: 42% 42%;
+  grid-template-columns: 32% 32% 32%;
+}
+
+.last-achievements {
+  grid-area: last-achievements;
+}
+
+.total-achievements-and-exp {
+  grid-area: total-achievements;
+}
+
+.full-list-of-achievements {
+  grid-area: full-list;
+}
+
+.user {
+  grid-area: user;
+}
+
+.thank-you {
+  grid-area: thanks;
+}
+
+/*
+.badges-page-container {
   height: calc(100% - 60px);
   display: flex;
 
@@ -105,3 +136,4 @@
     }
   }
 }
+*/
