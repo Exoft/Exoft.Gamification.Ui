@@ -12,28 +12,33 @@ $barColors: '0'#1398E6,
   .flex-container {
     display: flex;
     justify-content: space-between;
+    height: 90%;
 
     .users-data-wrapper {
       display: flex;
       flex-direction: column;
       width: 100%;
-      padding: 22px 0 0 0;
+      padding: 10px 0 0 0;
+      justify-content: space-around;
       font-size: 12px;
 
       .user {
         display: flex;
         align-items: center;
         flex-direction: column;
+        justify-content: space-around;
         width: 100%;
-        padding: 20px 40px 0 0;
+        height: 100%;
+        padding: 10px 40px 0 0;
 
         .user-info {
-          display: flex;
+          display: grid;
+          grid-template-columns: 35% 15% 50%;
           align-items: center;
           width: 100%;
 
           &:nth-child(even) {
-            height: 81px;
+           // height: 81px;
           }
 
           .bar {
@@ -46,24 +51,23 @@ $barColors: '0'#1398E6,
             align-items: center;
             width: 70%;
             justify-content: flex-start;
+            .user-txt {
+              padding: 0 0 0 20px;
+            }
+
+            .xp-txt {
+              padding-right: 30px;
+            }
 
             .info {
               display: flex;
               justify-content: space-between;
               width: 100%;
-
-              .user-txt {
-                padding: 0 0 0 10px;
-              }
-
-              .xp-txt {
-                padding-right: 30px;
-              }
             }
 
             .user-img-text {
-              width: 30px;
-              height: 30px;
+              min-width: 25px;
+              min-height: 25px;
               color: #68B70C;
               background-color: #576271;
               display: flex;

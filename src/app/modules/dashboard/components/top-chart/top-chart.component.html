@@ -11,7 +11,7 @@
       </div>
 
       <div class="user">
-        
+
         <div class="user-info" *ngFor="let item of pageData; let first = first; let i=index">
           <div class="user-info-container" >
             <div class="user-img-text" (click)="openUserDetails(item.id)" *ngIf="item.avatarId===null else avatarExists">
@@ -22,20 +22,19 @@
                 <img [src]="AvatarId(item.avatarId)" (click)="openUserDetails(item.id)">
               </div>
             </ng-template>
-            
-            <div class="info">
-              <div class="user-txt" (click)="openUserDetails(item.id)"> {{item.firstName}} {{item.lastName}}</div>
-              <div class="xp-txt">{{item.xp}}XP</div>
-            </div>
+            <div class="user-txt" (click)="openUserDetails(item.id)"> {{item.firstName}} {{item.lastName}}</div>
           </div>
-          
+          <div class="info">
+            <div class="xp-txt">{{item.xp}}XP</div>
+          </div>
+
           <div class="bar">
             <div class="bar-{{i}}" [style.width.%]="getXpValue(item.xp)"></div>
           </div>
         </div>
-        
+
       </div>
     </div>
-    
+
   </div>
 </mat-card>

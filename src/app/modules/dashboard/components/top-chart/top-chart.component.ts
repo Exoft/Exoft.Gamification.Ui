@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { RequestService } from 'src/app/services/dashboardequest.service';
-import { DialogService } from 'src/app/services/dialog.service';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material';
+import {RequestService} from 'src/app/services/dashboardequest.service';
+import {DialogService} from 'src/app/services/dialog.service';
 import {getFirstLetters} from '../../../../utils/letterAvatar';
 
 @Component({
@@ -11,8 +11,10 @@ import {getFirstLetters} from '../../../../utils/letterAvatar';
 })
 export class TopChartComponent implements OnInit {
   constructor(public dialog: MatDialog,
-    private requestService: RequestService,
-    private dialogService: DialogService) { }
+              private requestService: RequestService,
+              private dialogService: DialogService) {
+  }
+
   public pageData: any = [];
   public title = 'Gamification';
   public BarChart = [];
@@ -20,6 +22,7 @@ export class TopChartComponent implements OnInit {
   public maxXp: number;
   public xpValue: number;
   public letterAvatar = getFirstLetters;
+
   ngOnInit() {
     this.loadData();
 
@@ -27,7 +30,8 @@ export class TopChartComponent implements OnInit {
 
   private loadData() {
     this.requestService.getAllUsers().subscribe(response => {
-      this.pageData = response.data;
+      // Take top five users
+      this.pageData = response.data.sort((a, b) => b.xp - a.xp).slice(0, 5)
       this.getMaxXp(this.pageData[0].xp);
     });
   }
