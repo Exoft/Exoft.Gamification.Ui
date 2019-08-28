@@ -20,22 +20,21 @@
   }
   .avatar {
     border-radius: 50%;
-    width: 230px;
-    height: 230px;
+
     object-fit: cover;
     border: 3px solid $mainColor;
     margin-top: -20px;
   }
   .avatar-text {
     border-radius: 50%;
-    width: 230px;
-    height: 230px;
+    min-width: 150px;
+    min-height: 150px;
     object-fit: cover;
     border: 3px solid $mainColor;
     margin-top: -20px;
-    color: $mainColor; 
+    color: $mainColor;
     background-color:#576271;
-    font-size: 140px;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,7 +42,7 @@
 
   .username {
     padding-top: 17px;
-    font-size: 40px;
+
   }
 
   .status {
