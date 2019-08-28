@@ -1,4 +1,49 @@
 .dashboard-container {
+  display: grid;
+  height: 100% !important;
+  grid-template-areas: 'header header header header right ' 'personal thanks chart chart right' 'badges chalenge chalenge chalenge right';
+  grid-gap: 10px;
+  padding: 20px;
+  grid-template-rows: 10% 40% 40%;
+  grid-template-columns: 20% 20% 20% 17% 20%;
+}
+
+.app-welcome {
+  grid-area: header;
+}
+
+.app-personal-achievements {
+  grid-area: personal;
+}
+
+.app-thank-you {
+  grid-area: thanks;
+}
+
+.app-badges {
+  grid-area: badges;
+}
+
+.app-top-charts {
+  grid-area: chart;
+}
+
+.app-challenges {
+  grid-area: chalenge;
+}
+
+.app-exoft-achievements {
+  grid-area: right;
+}
+
+@media (max-width: 425px) {
+  .dashboard-container {
+    grid-template-areas: 'header' 'personal' 'badges' 'chalenge' 'thanks' 'chart' 'right';
+    grid-template-columns: 97%;
+  }
+}
+
+/*.dashboard-container {
   display: flex;
   justify-content: space-around;
   padding: 30px;
@@ -126,4 +171,4 @@
       justify-content: center;
     }
   }
-}
+}*/
