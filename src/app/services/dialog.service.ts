@@ -15,7 +15,8 @@ export class DialogService {
 
   public openInfoModal(userId: any) {
     this.dialog.open(OtherUserProfileComponent, {
-      width: '1000px',
+      width: '680px',
+      height: '680px',
       data: userId
     });
   }

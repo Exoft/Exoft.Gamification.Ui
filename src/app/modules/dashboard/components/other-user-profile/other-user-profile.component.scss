@@ -6,29 +6,35 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  height: 100%;
 
   .card {
     background-color: $secondaryColor;
     color: $textColor;
     width: 100%;
+    height: 90%;
 
     .main-container {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
+      flex-direction: column;
+      height: 100%;
 
       .other-user-container {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 24px 200px 80px 91px;
+        height: 100%;
+        justify-content: space-evenly;
 
 
         .avatar-text {
-          width: 360px;
-          height: 360px;
+
           color: $mainColor;
           background-color: #576271;
-          font-size: 185px;
+          height: 250px;
+          width: 250px;
+          font-size: 100px;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -39,15 +45,13 @@
         .user-name {
           align-self: center;
           font-family: Roboto;
-          font-size: 40px;
-          font-weight: 400;
-          margin-top: 9px;
+          font-size: 30px;
           color: $textColor;
-          font-weight: 300;
+
         }
 
         .user-achivments-info {
-          margin: 10px 0px 15px 0px;
+
           display: flex;
           flex-direction: column;
           align-self: center;
@@ -59,7 +63,7 @@
 
             .user-achivments-status {
               font-style: italic;
-              font-size: 27px;
+
               padding: 5px 0 0 0;
             }
 
@@ -93,9 +97,8 @@
             padding: 30px 93px 0 0;
 
             img {
-              width: 118px;
-              height: 118px;
-              margin: 0 5px 5px 0;
+
+
             }
 
             .img-text {
@@ -137,11 +140,10 @@
 
   .request-button {
     background-color: $mainColor;
-    border-radius: 1px;
     width: 100%;
     color: $textColor;
     font-size: 40px;
-    height: 81px;
+    height: 10%;
     border-radius: 0 0 17px 17px;
     font-weight: 300;
   }
