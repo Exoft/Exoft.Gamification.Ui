@@ -2,8 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, BehaviorSubject} from 'rxjs';
 
-import {environment} from '../../environments/environment';
-import {observableToBeFn} from "rxjs/internal/testing/TestScheduler";
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -34,4 +33,7 @@ export class UserService {
     return this.http.put(environment.apiUrl + '/api/users/current-user', formData);
   }
 
+  public updateUserInfoById(userId: string, userInfo: any): Observable<any> {
+    return this.http.put(environment.apiUrl + `/api/users/${userId}`, userInfo);
+  }
 }
