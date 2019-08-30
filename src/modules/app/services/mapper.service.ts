@@ -12,6 +12,7 @@ export class MapperService {
 
   getUser(user: User): FormGroup {
     const form = this.formBuilder.group({
+      id: new FormControl(''),
       firstName: new FormControl(''),
       lastName: new FormControl(''),
       userName: new FormControl(''),

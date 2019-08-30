@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getCurrentUserInfo().subscribe((u: User) => {
-      if (!u.roles.includes('Admin')) {
+      if (!u.roles.includes('Admin' as never)) {
         this.menuItems.pop();
       }
     });

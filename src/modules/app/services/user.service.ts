@@ -36,4 +36,8 @@ export class UserService {
   public updateUserInfoById(userId: string, userInfo: any): Observable<any> {
     return this.http.put(environment.apiUrl + `/api/users/${userId}`, userInfo);
   }
+
+  public deleteUserById(userId: string): Observable<any> {
+    return this.http.delete(environment.apiUrl + `/api/users/${userId}`);
+  }
 }
