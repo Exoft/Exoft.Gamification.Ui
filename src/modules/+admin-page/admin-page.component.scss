@@ -1,0 +1,54 @@
+@import '../../assets/scss/theme-colors';
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+
+  .card {
+    background-color: $secondaryColor;
+    color: $textColor;
+
+    .link {
+      color: $textColor;
+
+      .user-table {
+        background-color: $secondaryColor;
+
+        .delete {
+          margin-left: 10px;
+          background-color: #68B70C;
+          border-radius: 1px;
+          margin-left: 10px;
+        }
+
+        .update {
+          background-color: #68B70C;
+          border-radius: 1px;
+          margin-left: 10px;
+        }
+
+        #add-container {
+          padding: 0 24px 0 37px !important;
+        }
+
+        .add {
+          background-color: #68B70C;
+          border-radius: 1px;
+          margin-left: 68px;
+        }
+
+        td {
+          font-weight: 300;
+        }
+
+        th {
+          font-size: 17px;
+          width: 20vw;
+        }
+
+      }
+    }
+
+  }
+}

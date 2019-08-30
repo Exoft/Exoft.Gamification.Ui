@@ -45,7 +45,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-src/app/helpers/user-avatar-styling.ts
+src/modules/app/helpers/user-avatar-styling.ts
 .vs/slnx.sqlite
 .vs/VSWorkspaceState.json
 .vs/ProjectSettings.json

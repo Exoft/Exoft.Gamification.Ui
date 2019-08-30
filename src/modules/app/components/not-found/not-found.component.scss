@@ -1,0 +1,111 @@
+@import '../../../../assets/scss/theme-colors';
+
+.not-found-page-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+    flex: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 84px;
+    color: $mainColor;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 40px;
+    flex-grow: 2;
+    div {
+      padding-top: 0px;
+      p {
+        font-size: 40px;
+      }
+
+      .error-number {
+        font-size: 160px;
+        padding-right: 8px;
+      }
+    }
+  }
+
+  button {
+    background-color: $mainColor;
+    border-radius: 35px;
+    color: $textColor;
+    font-size: 30px;
+    padding: 15px;
+   width: 100%;
+  }
+
+  img {
+    width: 25%;
+    flex-grow: 1;
+    object-fit: contain;
+    object-position: bottom;
+  }
+}
+
+@media (max-width: 1440px) {
+  .not-found-page-container {
+    div {
+      padding-top: 50px;
+      font-size: 30px;
+      flex-grow: 2;
+      div {
+        padding-top: 2%;
+
+        p {
+          font-size: 30px;
+        }
+
+        .error-number {
+          font-size: 110px;
+        }
+      }
+    }
+
+    button {
+      font-size: 20px;
+      padding: 0px;
+      width: 90%;
+    }
+
+    img {
+      flex-grow: 1;
+      width: 25%;
+      object-fit: contain;
+      object-position: bottom;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .not-found-page-container {
+    div {
+      font-size: 20px;
+      div {
+        padding-top: 0px;
+
+        p {
+          font-size: 20px;
+        }
+
+        .error-number {
+          font-size: 100px;
+        }
+      }
+    }
+
+    button {
+      font-size: 15px;
+    }
+
+    img {
+      width: 50%;
+    }
+  }
+}

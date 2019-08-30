@@ -1,0 +1,106 @@
+@import '../../../../assets/scss/theme-colors';
+
+.user-container {
+  background-color: $secondaryColor;
+  height: 100%;
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color: $textColor;
+
+  .mat-button {
+    background-color: $mainColor;
+    font-size: 17px;
+    border-radius: 0;
+    padding: 5px 45px;
+    align-self: flex-end;
+  }
+  .avatar {
+    border-radius: 50%;
+
+    object-fit: cover;
+    border: 3px solid $mainColor;
+    margin-top: -20px;
+  }
+  .avatar-text {
+    border-radius: 50%;
+    min-width: 150px;
+    min-height: 150px;
+    object-fit: cover;
+    border: 3px solid $mainColor;
+    margin-top: -20px;
+    color: $mainColor;
+    background-color:#576271;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .username {
+    padding-top: 17px;
+
+  }
+
+  .status {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 1920px) {
+  .user-container {
+    .mat-button {
+      font-size: 15px;
+      padding: 0px 35px;
+    }
+    .avatar {
+      width: 170px;
+      height: 170px;
+    }
+
+    .username {
+      padding-top: 0px;
+      font-size: 30px;
+    }
+
+    .status {
+      font-size: 15px;
+    }
+  }
+}
+
+@media (max-width: 1440px) {
+  .user-container {
+    padding: 15px;
+    .mat-button {
+      font-size: 15px;
+      padding: 0px 35px;
+    }
+    .avatar {
+      width: 130px;
+      height: 130px;
+      margin-top: -15px;
+    }
+
+    .username {
+      padding-top: 0px;
+      font-size: 20px;
+    }
+
+    .status {
+      font-size: 12px;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .user-container {
+    .mat-button {
+      font-size: 15px;
+      padding: 0px 30px;
+    }
+  }
+}

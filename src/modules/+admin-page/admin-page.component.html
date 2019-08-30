@@ -1,0 +1,75 @@
+<div class="main-container">
+  <mat-card class="card">
+
+    <mat-tab-group class="link">
+      <mat-tab label="Users">
+
+        <table mat-table [dataSource]="dataSourceUser" class="user-table">
+
+          <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef> First name </th>
+            <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef> Last name </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="xp">
+            <th mat-header-cell *matHeaderCellDef> XP </th>
+            <td mat-cell *matCellDef="let element"> {{element.xp}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef id="add-container">
+              <button mat-button class="add" (click)="openAddUserWindow()">Add</button>
+            </th>
+
+            <td mat-cell *matCellDef="let user; let i=index;">
+              <button mat-button class="update"  (click)="openEditUserWindow(user)">Edit</button>
+              <button mat-button class="delete">Delete</button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsUser"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsUser;"></tr>
+        </table>
+
+      </mat-tab>
+      <mat-tab label="Achievements">
+          <table mat-table [dataSource]="dataSourceAchievements" class="user-table">
+
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let achievement"> {{achievement.name}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef> Description </th>
+                <td mat-cell *matCellDef="let achievement"> {{achievement.description}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="xp">
+                <th mat-header-cell *matHeaderCellDef> XP </th>
+                <td mat-cell *matCellDef="let achievement"> {{achievement.xp}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef id="add-container">
+                  <button mat-button class="add">Add</button>
+                </th>
+
+                <td mat-cell *matCellDef="let row; let i=index;">
+                  <button mat-button class="update">Edit</button>
+                  <button mat-button class="delete">Delete</button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsAchievements"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumnsAchievements;"></tr>
+            </table>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

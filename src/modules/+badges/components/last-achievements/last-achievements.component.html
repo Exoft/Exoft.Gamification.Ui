@@ -1,0 +1,27 @@
+<mat-card class="last-achievements-container">
+  <div class="title-request-button-container">
+    <mat-card-title>LAST ACHIEVEMENTS</mat-card-title>
+
+    <button mat-button>Request</button>
+  </div>
+
+  <div class="achievements-container">
+    <div class="achievement-container" *ngFor="let item of achievementsList">
+      <div class="achievement-image-name-date-container">
+        <img src="../../../../assets/images/star@2x.png" class="achievement-image" />
+
+        <div class="achievement-name-date-container">
+          <p class="achievement-name">{{ item.name }}</p>
+
+          <p class="achievement-date">{{ item.addedTime | customDate }}</p>
+        </div>
+      </div>
+
+      <div class="achievements-xp">
+        <div class="circle"></div>
+
+        <p>+ {{ item.xp }} xp</p>
+      </div>
+    </div>
+  </div>
+</mat-card>
