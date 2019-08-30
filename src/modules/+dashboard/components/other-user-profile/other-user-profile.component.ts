@@ -1,8 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
-import { RequestService } from 'src/modules/app/services/dashboardequest.service';
-import { getFirstLetters } from '../../../app/utils/letterAvatar';
-import { DialogService } from 'src/modules/app/services/dialog.service';
+import {Component, OnInit, Inject} from '@angular/core';
+import {MatDialog, MAT_DIALOG_DATA} from '@angular/material';
+import {RequestService} from 'src/modules/app/services/dashboardequest.service';
+import {getFirstLetters} from '../../../app/utils/letterAvatar';
+import {DialogService} from 'src/modules/app/services/dialog.service';
 
 @Component({
   selector: 'app-other-user-profile',
@@ -12,7 +12,8 @@ import { DialogService } from 'src/modules/app/services/dialog.service';
 export class OtherUserProfileComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private requestService: RequestService,
-    @Inject(MAT_DIALOG_DATA) public userId: any, private dialogService: DialogService) { }
+              @Inject(MAT_DIALOG_DATA) public userId: any) {
+  }
 
   public totalBadgesCount = 30;
 
@@ -25,6 +26,7 @@ export class OtherUserProfileComponent implements OnInit {
     this.loadCurrentUser();
     this.loadAchievements();
   }
+
   public get currentUserId() {
     return this.userId;
   }
@@ -48,7 +50,7 @@ export class OtherUserProfileComponent implements OnInit {
   }
 
   public openForm() {
-    this.dialogService.openThankingForm();
+    // this.dialogService.openThankingForm();
   }
 
 }

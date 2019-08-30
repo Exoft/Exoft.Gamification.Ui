@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {RequestService} from 'src/modules/app/services/dashboardequest.service';
-import {MatTableDataSource} from '@angular/material';
+import {MatDialog, MatTableDataSource} from '@angular/material';
 import {DialogService} from 'src/modules/app/services/dialog.service';
+import {EditUserComponent} from "./components/edit-user/edit-user.component";
 
 
 @Component({
@@ -14,7 +15,7 @@ export class AdminPageComponent implements OnInit {
   public achievementsData: any = [];
   public userId: any = this.userData.userId;
 
-  constructor(private requestService: RequestService, private dialogService: DialogService) {
+  constructor(private requestService: RequestService, private dialogService: DialogService, private dialog: MatDialog) {
   }
 
   displayedColumnsUser: string[] = ['firstName', 'lastName', 'xp', 'actions'];
@@ -42,8 +43,12 @@ export class AdminPageComponent implements OnInit {
   }
 
   public openEditUserWindow(user: any) {
-  debugger;
-    this.dialogService.openEditUserForm();
+    this.dialog.open(EditUserComponent, {
+      width: '600px',
+      data: {
+        userId: user.id
+      }
+    });
   }
 
   public openAddUserWindow() {
