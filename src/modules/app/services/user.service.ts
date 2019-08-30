@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, BehaviorSubject} from 'rxjs';
 
 import {environment} from '../../../environments/environment';
+import {User} from "../models/user";
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,10 @@ export class UserService {
 
   public updateUserInfoById(userId: string, userInfo: any): Observable<any> {
     return this.http.put(environment.apiUrl + `/api/users/${userId}`, userInfo);
+  }
+
+  public createUser(user: User): Observable<User> {
+    return this.http.post<User>(environment.apiUrl + `/api/users`, user);
   }
 
   public deleteUserById(userId: string): Observable<any> {

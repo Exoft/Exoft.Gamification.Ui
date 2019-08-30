@@ -7,6 +7,7 @@ import {AdminPageRoutingModule} from './admin-page-routing.module';
 import {AdminPageComponent} from './admin-page.component';
 import {AddUserComponent} from './components/add-user/add-user.component';
 import {EditUserComponent} from './components/edit-user/edit-user.component';
+import {passwordEqualityValidator} from "./functions/add-user-validators";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import {EditUserComponent} from './components/edit-user/edit-user.component';
   ],
   entryComponents: [
     AddUserComponent,
-    EditUserComponent
+    EditUserComponent,
   ],
 })
 export class AdminPageModule {

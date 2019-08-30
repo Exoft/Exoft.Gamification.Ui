@@ -4,8 +4,9 @@ import {MatDialog, MatTableDataSource} from '@angular/material';
 import {DialogService} from 'src/modules/app/services/dialog.service';
 import {EditUserComponent} from './components/edit-user/edit-user.component';
 import {UserService} from '../app/services/user.service';
-import {FormGroup} from "@angular/forms";
-import {MapperService} from "../app/services/mapper.service";
+import {FormGroup} from '@angular/forms';
+import {MapperService} from '../app/services/mapper.service';
+import {AddUserComponent} from "./components/add-user/add-user.component";
 
 
 @Component({
@@ -63,7 +64,10 @@ export class AdminPageComponent implements OnInit {
   }
 
   public openAddUserWindow() {
-    this.dialogService.openAddUserForm();
+    this.dialog.open(AddUserComponent, {
+      width: '600px'
+    });
+  //  this.dialogService.openAddUserForm();
   }
 
   public onUserDelete(user: any) {

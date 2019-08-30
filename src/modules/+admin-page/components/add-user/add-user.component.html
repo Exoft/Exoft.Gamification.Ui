@@ -1,38 +1,63 @@
-    <div class="profile-setting-fields-container">
-      <form class="profile-settings-form" (ngSubmit)="onSaveChanges()"
-      [formGroup]="editUserForm">
-        <label class="avatar-container" for="imageInput">
-          <img [src]="avatarUrl" class="avatar" />
-        </label>
+<div class="profile-setting-fields-container">
+  <form class="profile-settings-form" (ngSubmit)="onSaveChanges()"
+        [formGroup]="editUserForm">
+    <label class="avatar-container" for="imageInput">
+      <img [src]="avatarUrl" class="avatar"/>
+    </label>
 
-        <input class="image-input" id="imageInput" type="file" (change)="onSelectFile($event)" />
+    <input class="image-input" id="imageInput" type="file" (change)="onSelectFile($event)"/>
 
-        <div class="profile-settings-fields">
-          <mat-form-field class="input-field">
-            <input matInput placeholder="USERNAME" formControlName="userName" />
-          </mat-form-field>
+    <div class="profile-settings-fields">
+      <mat-form-field class="input-field">
+        <input matInput placeholder="USERNAME" formControlName="userName"/>
+      </mat-form-field>
+      <mat-error *ngIf="editUserForm.get('userName').invalid && editUserForm.get('userName').touched">
+        Field is required
+      </mat-error>
 
-          <div class="name-input-container">
-            <mat-form-field class="input-field">
-              <input matInput placeholder="FIRST NAME" formControlName="firstName" />
-            </mat-form-field>
 
-            <mat-form-field class="input-field">
-              <input matInput placeholder="LAST NAME" formControlName="lastName" />
-            </mat-form-field>
-          </div>
+      <mat-form-field class="input-field">
+        <input matInput placeholder="FIRST NAME" formControlName="firstName"/>
+      </mat-form-field>
+      <mat-error *ngIf="editUserForm.get('firstName').invalid && editUserForm.get('firstName').touched">
+        Field is required
+      </mat-error>
 
-          <mat-form-field class="input-field">
-            <input matInput placeholder="EMAIL ADDRESS" formControlName="email" />
-          </mat-form-field>
+      <mat-form-field class="input-field">
+        <input matInput placeholder="LAST NAME" formControlName="lastName"/>
+      </mat-form-field>
+      <mat-error *ngIf="editUserForm.get('lastName').invalid && editUserForm.get('lastName').touched">
+        Field is required
+      </mat-error>
 
-          <mat-form-field class="input-field">
-            <input matInput placeholder="STATUS" formControlName="status" />
-          </mat-form-field>
-        </div>
+      <mat-form-field class="input-field">
+        <input matInput placeholder="EMAIL ADDRESS" formControlName="email"/>
+      </mat-form-field>
+      <mat-error *ngIf="editUserForm.get('email').invalid && editUserForm.get('email').touched">
+        Please, enter valid email
+      </mat-error>
 
-        <button mat-button type="submit" class="save-button">
-          SAVE CHANGES
-        </button>
-      </form>
+      <mat-form-field class="input-field">
+        <input matInput placeholder="PASSWORD" type="password" formControlName="password"/>
+      </mat-form-field>
+      <mat-error *ngIf="editUserForm.get('password').invalid && editUserForm.get('password').touched">
+        Password must contain capital latter, digit and to be at least 8 signs long
+      </mat-error>
+
+      <mat-form-field class="input-field">
+        <input matInput placeholder="CONFIRM PASSWORD" type="password" formControlName="confirmPassword"/>
+      </mat-form-field>
+      <mat-error *ngIf="editUserForm.get('confirmPassword').invalid && editUserForm.get('confirmPassword').touched">
+        Passwords must be equal
+      </mat-error>
+
+      <mat-form-field class="input-field">
+        <input matInput placeholder="STATUS" formControlName="status"/>
+      </mat-form-field>
     </div>
+
+    <button mat-button type="submit" class="save-button">
+      SAVE CHANGES
+    </button>
+  </form>
+</div>

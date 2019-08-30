@@ -1,11 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { UserService } from 'src/modules/app/services/user.service';
-import { environment } from 'src/environments/environment';
-import { takeUntil } from 'rxjs/operators';
-import { RequestService } from 'src/modules/app/services/dashboardequest.service';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {MatDialog} from '@angular/material';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Subject} from 'rxjs';
+import {UserService} from 'src/modules/app/services/user.service';
+import {RequestService} from 'src/modules/app/services/dashboardequest.service';
+import {passwordContainValidity, passwordEqualityValidator} from '../../functions/add-user-validators';
 
 @Component({
   selector: 'app-add-user',
@@ -19,22 +18,35 @@ export class AddUserComponent implements OnInit, OnDestroy {
   public userData: any;
   public timeStamp = Date.now();
 
-  public editUserForm = new FormGroup({
+  public editUserForm = this.formBuilder.group({
     userName: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
+    role: new FormControl('User'),
     email: new FormControl(
       '',
       Validators.compose([Validators.required, Validators.email])
     ),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+      passwordContainValidity
+    ]),
+    confirmPassword: new FormControl('', Validators.required),
     status: new FormControl(''),
-    avatar: new FormControl('')
+    avatar: new FormControl(''),
+  }, {
+    validator: passwordEqualityValidator
   });
 
 
-  constructor(public dialog: MatDialog, private userService: UserService, private requestService: RequestService) { }
+  constructor(public dialog: MatDialog,
+              private userService: UserService,
+              private requestService: RequestService,
+              private formBuilder: FormBuilder) {
+  }
+
   ngOnInit() {
-     // this.subscribeToUserDataChange();
   }
 
   public ngOnDestroy() {
@@ -53,57 +65,33 @@ export class AddUserComponent implements OnInit, OnDestroy {
       };
     }
   }
-  // public subscribeToUserDataChange() {
-  //   this.requestService
-  //     .getCurrentUserById()
-  //     .pipe(takeUntil(this.unsubscribe$))
-  //     .subscribe(res => {
-  //       if (Object.entries(res).length !== 0) {
-  //         const {
-  //           userName,
-  //           firstName,
-  //           lastName,
-  //           email,
-  //           status,
-  //           avatar,
-  //           avatarId
-  //         } = res;
-  //         this.editUserForm.setValue({
-  //           userName,
-  //           firstName,
-  //           lastName,
-  //           email,
-  //           status,
-  //           avatar
-  //         });
-  //         this.avatarUrl = avatar;
-  //         this.avatarId = avatarId;
-  //       }
-  //     });
-  // }
-
-
 
   public onSaveChanges() {
+  debugger;
     if (this.editUserForm.valid) {
-      const formModel = this.createFormData(this.editUserForm);
-      this.userService.updateUserInfo(formModel).subscribe(
-        res => {
-          this.timeStamp = Date.now();
-          this.userData = { ...res };
-          this.userData.avatar =
-            environment.apiUrl +
-            '/api/files/' +
-            this.userData.avatarId +
-            '/?timeStamp=' +
-            this.timeStamp;
-          this.userService.setUserData(this.userData);
-        },
-        error => {
-          //
-        }
-      );
+      this.userService.createUser(this.editUserForm.value).subscribe(u => {
+
+      });
     }
+    /*  if (this.editUserForm.valid) {
+        const formModel = this.createFormData(this.editUserForm);
+        this.userService.updateUserInfo(formModel).subscribe(
+          res => {
+            this.timeStamp = Date.now();
+            this.userData = { ...res };
+            this.userData.avatar =
+              environment.apiUrl +
+              '/api/files/' +
+              this.userData.avatarId +
+              '/?timeStamp=' +
+              this.timeStamp;
+            this.userService.setUserData(this.userData);
+          },
+          error => {
+            //
+          }
+        );
+      }*/
   }
 
   createFormData(form: FormGroup): FormData {
