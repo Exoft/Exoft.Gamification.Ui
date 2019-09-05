@@ -12,7 +12,6 @@ export function passwordEqualityValidator(addUserFormGroup: FormGroup) {
 }
 
 export function passwordContainValidity(passwordFormControl: FormControl) {
-  debugger;
   if (!(passwordFormControl.value as string).match(/(^[0-Z]*$)/g)) {
     passwordFormControl.setErrors({inValidContent: true});
   } else {

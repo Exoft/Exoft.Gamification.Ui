@@ -7,6 +7,8 @@ import {UserService} from '../app/services/user.service';
 import {FormGroup} from '@angular/forms';
 import {MapperService} from '../app/services/mapper.service';
 import {AddUserComponent} from "./components/add-user/add-user.component";
+import {AddAchievementComponent} from "./components/add-achievement/add-achievement.component";
+import {debug} from "util";
 
 
 @Component({
@@ -67,13 +69,31 @@ export class AdminPageComponent implements OnInit {
     this.dialog.open(AddUserComponent, {
       width: '600px'
     });
-  //  this.dialogService.openAddUserForm();
+    //  this.dialogService.openAddUserForm();
   }
 
   public onUserDelete(user: any) {
     this.userService.deleteUserById(user.id).subscribe(u => {
       this.dataSourceUser = new MatTableDataSource(this.dataSourceUser.data.filter(x => x !== user));
     });
+  }
+
+  public onOpenAddAchievement() {
+    const dialogRef = this.dialog.open(AddAchievementComponent, {
+      width: '600px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.achievementsData.push(result);
+      this.dataSourceAchievements = new MatTableDataSource(this.achievementsData);
+    });
+  }
+
+  public onOpenEditAchievement() {
+
+  }
+
+  public onAchievementDelete() {
+
   }
 
   private initCurrentUser() {

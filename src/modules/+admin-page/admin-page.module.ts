@@ -8,12 +8,16 @@ import {AdminPageComponent} from './admin-page.component';
 import {AddUserComponent} from './components/add-user/add-user.component';
 import {EditUserComponent} from './components/edit-user/edit-user.component';
 import {passwordEqualityValidator} from "./functions/add-user-validators";
+import { AddAchievementComponent } from './components/add-achievement/add-achievement.component';
+import { EditAchievementComponent } from './components/edit-achievement/edit-achievement.component';
 
 @NgModule({
   declarations: [
     AdminPageComponent,
     AddUserComponent,
-    EditUserComponent
+    EditUserComponent,
+    AddAchievementComponent,
+    EditAchievementComponent
   ],
   imports: [
     CommonModule,
@@ -25,6 +29,8 @@ import {passwordEqualityValidator} from "./functions/add-user-validators";
   entryComponents: [
     AddUserComponent,
     EditUserComponent,
+    AddAchievementComponent,
+    EditAchievementComponent
   ],
 })
 export class AdminPageModule {
