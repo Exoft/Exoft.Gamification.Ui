@@ -26,7 +26,15 @@ export class AchievementsService {
     );
   }
 
-  addNewAchievement(achievement: Achievement): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/api/achievements`, achievement);
+  addNewAchievement(achievement: Achievement): Observable<Achievement> {
+    return this.http.post<Achievement>(`${environment.apiUrl}/api/achievements`, achievement);
+  }
+
+  updateAchievementById(achievementId: string, achievement: Achievement): Observable<Achievement> {
+    return this.http.put<Achievement>(`${environment.apiUrl}/api/achievements/${achievementId}`, achievement);
+  }
+
+  deleteAchievementById(achievementId: string): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/api/achievements/${achievementId}`);
   }
 }

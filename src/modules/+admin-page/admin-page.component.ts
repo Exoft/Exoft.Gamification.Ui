@@ -6,10 +6,11 @@ import {EditUserComponent} from './components/edit-user/edit-user.component';
 import {UserService} from '../app/services/user.service';
 import {FormGroup} from '@angular/forms';
 import {MapperService} from '../app/services/mapper.service';
-import {AddUserComponent} from "./components/add-user/add-user.component";
-import {AddAchievementComponent} from "./components/add-achievement/add-achievement.component";
-import {debug} from "util";
-
+import {AddUserComponent} from './components/add-user/add-user.component';
+import {AddAchievementComponent} from './components/add-achievement/add-achievement.component';
+import {Achievement} from '../app/models/achievement';
+import {EditAchievementComponent} from './components/edit-achievement/edit-achievement.component';
+import {AchievementsService} from '../app/services/achievements.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -28,13 +29,14 @@ export class AdminPageComponent implements OnInit {
               private userService: UserService,
               private dialogService: DialogService,
               private mapperService: MapperService,
+              private achievementService: AchievementsService,
               private dialog: MatDialog) {
   }
 
   displayedColumnsUser: string[] = ['firstName', 'lastName', 'xp', 'actions'];
   displayedColumnsAchievements: string[] = ['name', 'description', 'xp', 'actions'];
   dataSourceUser = new MatTableDataSource();
-  dataSourceAchievements = new MatTableDataSource();
+  dataSourceAchievements = new MatTableDataSource<Achievement>();
 
   ngOnInit() {
     this.loadUserData();
@@ -88,12 +90,30 @@ export class AdminPageComponent implements OnInit {
     });
   }
 
-  public onOpenEditAchievement() {
-
+  public onOpenEditAchievement(achievement: Achievement) {
+    const dialogRef = this.dialog.open(EditAchievementComponent, {
+      width: '600px',
+      data: {
+        achievement
+      }
+    });
+    dialogRef.afterClosed().subscribe((result: Achievement) => {
+      const achievementToUpdate = this.dataSourceAchievements.data.find(x => x.id === result.id);
+      achievementToUpdate.name = result.name;
+      achievementToUpdate.icon = result.icon;
+      achievementToUpdate.description = result.description;
+      achievementToUpdate.xp = result.xp;
+      this.dataSourceAchievements.data[
+        this.dataSourceAchievements.data.indexOf(
+          this.dataSourceAchievements.data.find(x => x.id === result.id))] = achievementToUpdate;
+      this.dataSourceAchievements = new MatTableDataSource(this.dataSourceAchievements.data);
+    });
   }
 
-  public onAchievementDelete() {
-
+  public onAchievementDelete(achievement: Achievement) {
+    this.achievementService.deleteAchievementById(achievement.id).subscribe(res=>{
+      this.dataSourceAchievements = new MatTableDataSource(this.dataSourceAchievements.data.filter(x => x !== achievement));
+    });
   }
 
   private initCurrentUser() {
