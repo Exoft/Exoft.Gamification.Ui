@@ -15,11 +15,17 @@
       .user-table {
         background-color: $secondaryColor;
 
+        .admin-page-actions{
+          display: flex;
+        }
         .delete {
           margin-left: 10px;
           background-color: #68B70C;
           border-radius: 1px;
           margin-left: 10px;
+        }
+        .invisible{
+          visibility: hidden;
         }
 
         .update {

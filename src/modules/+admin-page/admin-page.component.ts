@@ -11,6 +11,8 @@ import {AddAchievementComponent} from './components/add-achievement/add-achievem
 import {Achievement} from '../app/models/achievement';
 import {EditAchievementComponent} from './components/edit-achievement/edit-achievement.component';
 import {AchievementsService} from '../app/services/achievements.service';
+import {User} from '../app/models/user';
+import {AssignAchievementsComponent} from './components/assign-achievements/assign-achievements.component';
 
 @Component({
   selector: 'app-admin-page',
@@ -74,7 +76,7 @@ export class AdminPageComponent implements OnInit {
     //  this.dialogService.openAddUserForm();
   }
 
-  public onUserDelete(user: any) {
+  public onUserDelete(user: User) {
     this.userService.deleteUserById(user.id).subscribe(u => {
       this.dataSourceUser = new MatTableDataSource(this.dataSourceUser.data.filter(x => x !== user));
     });
@@ -111,10 +113,20 @@ export class AdminPageComponent implements OnInit {
   }
 
   public onAchievementDelete(achievement: Achievement) {
-    this.achievementService.deleteAchievementById(achievement.id).subscribe(res=>{
+    this.achievementService.deleteAchievementById(achievement.id).subscribe(res => {
       this.dataSourceAchievements = new MatTableDataSource(this.dataSourceAchievements.data.filter(x => x !== achievement));
     });
   }
+
+  openAssignAchievementWindow(user: User) {
+    this.dialog.open(AssignAchievementsComponent, {
+      width: '600px',
+      data: {
+        userId: user.id
+      }
+    });
+  }
+
 
   private initCurrentUser() {
     this.userService.getCurrentUserInfo().subscribe(u => {

@@ -9,14 +9,17 @@ import {
   MatCardModule,
   MatStepperModule,
   MatDialogModule,
-  MatProgressBarModule
+  MatProgressBarModule, MatCheckboxModule
 } from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
 
+
 @NgModule({
+  imports:[
+  ],
   exports: [
     LayoutModule,
     MatToolbarModule,
@@ -30,8 +33,9 @@ import {MatTableModule} from '@angular/material/table';
     MatInputModule,
     MatDialogModule,
     MatProgressBarModule,
-    MatSelectModule, 
-    MatTableModule
+    MatSelectModule,
+    MatTableModule,
+    MatCheckboxModule
   ]
 })
 export class AngularMaterialsModule {

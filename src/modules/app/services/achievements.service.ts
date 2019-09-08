@@ -27,7 +27,7 @@ export class AchievementsService {
   }
 
   addNewAchievement(achievement: Achievement): Observable<Achievement> {
-    return this.http.post<Achievement>(`${environment.apiUrl}/api/achievements`, achievement);
+    return this.http.post<Achievement>(`${environment.apiUrl}/api/achievement`, achievement);
   }
 
   updateAchievementById(achievementId: string, achievement: Achievement): Observable<Achievement> {
@@ -36,5 +36,17 @@ export class AchievementsService {
 
   deleteAchievementById(achievementId: string): Observable<any> {
     return this.http.delete(`${environment.apiUrl}/api/achievements/${achievementId}`);
+  }
+
+  getAllAchievements(): Observable<any> {
+    return this.http.get<Array<Achievement>>(`${environment.apiUrl}/api/achievements`);
+  }
+
+  getAchievementsByUserId(userId: string): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/api/users/${userId}/achievements`);
+  }
+
+  addOrUpdateUserAchievements(userId: string, achievements: Achievement[]): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/api/users/${userId}/achievements`, achievements);
   }
 }
