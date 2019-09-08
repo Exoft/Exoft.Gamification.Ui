@@ -31,7 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RequestAchievementComponent
   ],
   entryComponents: [
-    OtherUserProfileComponent
+    OtherUserProfileComponent,
+    RequestAchievementComponent,
   ],
   imports: [
     CommonModule,

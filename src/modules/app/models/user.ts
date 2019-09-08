@@ -2,7 +2,7 @@ export interface User {
   id: string;
   firstName: string;
   lastName: string;
-  UserName: string;
+  userName: string;
   status: string;
   xp: string;
   roles: [];

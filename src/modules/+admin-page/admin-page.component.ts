@@ -13,6 +13,8 @@ import {EditAchievementComponent} from './components/edit-achievement/edit-achie
 import {AchievementsService} from '../app/services/achievements.service';
 import {User} from '../app/models/user';
 import {AssignAchievementsComponent} from './components/assign-achievements/assign-achievements.component';
+import {AchievementRequest} from "../app/models/achievement-request";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-admin-page',
@@ -37,13 +39,16 @@ export class AdminPageComponent implements OnInit {
 
   displayedColumnsUser: string[] = ['firstName', 'lastName', 'xp', 'actions'];
   displayedColumnsAchievements: string[] = ['name', 'description', 'xp', 'actions'];
+  displayedColumnsAchievementsRequests: string[] = ['userName', 'achievement', 'comment', 'actions'];
   dataSourceUser = new MatTableDataSource();
   dataSourceAchievements = new MatTableDataSource<Achievement>();
+  dataSourceAchievementRequest = new MatTableDataSource();
 
   ngOnInit() {
     this.loadUserData();
     this.loadAchievementsData();
     this.initCurrentUser();
+    this.loadAchievementRequests();
   }
 
   private loadUserData() {
@@ -60,6 +65,21 @@ export class AdminPageComponent implements OnInit {
     });
   }
 
+  private loadAchievementRequests() {
+    this.requestService.getAllAchievementRequests().pipe(map((data: AchievementRequest[]) => {
+      return data.map((achievementRequest: AchievementRequest) => {
+        return {
+          id: achievementRequest.id,
+          userName: achievementRequest.user.userName,
+          achievement: achievementRequest.achievement.name,
+          comment: achievementRequest.message
+        };
+      });
+    })).subscribe((res) => {
+      this.dataSourceAchievementRequest = new MatTableDataSource(res);
+    });
+  }
+
   public openEditUserWindow(user: any) {
     this.dialog.open(EditUserComponent, {
       width: '600px',
@@ -73,7 +93,6 @@ export class AdminPageComponent implements OnInit {
     this.dialog.open(AddUserComponent, {
       width: '600px'
     });
-    //  this.dialogService.openAddUserForm();
   }
 
   public onUserDelete(user: User) {
@@ -127,6 +146,19 @@ export class AdminPageComponent implements OnInit {
     });
   }
 
+  onRequestDecision(achievementTableRequest: any, isApproved: boolean) {
+    if (isApproved) {
+      this.requestService.approveAchievementRequest(achievementTableRequest.id).subscribe(res => {
+        this.dataSourceAchievementRequest = new MatTableDataSource(this.dataSourceAchievementRequest.data.
+        filter(x => x !== achievementTableRequest));
+      });
+    } else {
+      this.requestService.declineAchievementRequest(achievementTableRequest.id).subscribe(res => {
+        this.dataSourceAchievementRequest = new MatTableDataSource(this.dataSourceAchievementRequest.data.
+        filter(x => x !== achievementTableRequest));
+      });
+    }
+  }
 
   private initCurrentUser() {
     this.userService.getCurrentUserInfo().subscribe(u => {

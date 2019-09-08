@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
+import {AchievementRequest} from "../models/achievement-request";
 
 @Injectable({
   providedIn: 'root',
@@ -48,8 +49,20 @@ export class RequestService {
     return this.httpClient.post(environment.apiUrl + '/api/request-achievement', formData);
   }
 
+  public getAllAchievementRequests(): Observable<AchievementRequest[]> {
+    return this.httpClient.get<AchievementRequest[]>(environment.apiUrl + '/api/request-achievement');
+  }
+
   public getAvatar(avatarId: any) {
     return environment.apiUrl + '/api/files/' + avatarId;
+  }
+
+  public approveAchievementRequest(achievementRequestId: string): Observable<any> {
+    return this.httpClient.post<any>(environment.apiUrl + `/api/request-achievement/${achievementRequestId}`, {});
+  }
+
+  public declineAchievementRequest(achievementRequestId: string): Observable<any> {
+    return this.httpClient.delete(environment.apiUrl + `/api/request-achievement/${achievementRequestId}`);
   }
 
 }
