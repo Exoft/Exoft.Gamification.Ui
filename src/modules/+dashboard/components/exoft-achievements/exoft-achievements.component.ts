@@ -11,6 +11,7 @@ import { getFirstLetters } from '../../../app/utils/letterAvatar';
 
 export class ExoftAchievementsComponent implements OnInit {
 
+  public wrongAvatarId = '00000000-0000-0000-0000-000000000000';
   public pageData: any = [];
   public letterAvatar = getFirstLetters;
   public numberOfEvents = this.calculateEvents(this.pageData);

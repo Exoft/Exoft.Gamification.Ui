@@ -53,6 +53,18 @@
           align-self: flex-end;
           cursor: pointer;
 
+          .no-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid $mainColor;
+            text-align: center;
+            line-height: 90px;
+            color: $mainColor;
+            font-size: 35px;
+            background-color: #3a3e46;
+          }
+
           .avatar {
             border-radius: 50%;
             width: 126px;

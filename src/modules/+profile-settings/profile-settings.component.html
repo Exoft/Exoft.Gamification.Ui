@@ -22,7 +22,8 @@
         [formGroup]="profileSettingsForm"
       >
         <label class="avatar-container" for="imageInput">
-          <img [src]="avatarUrl" class="avatar" />
+          <img *ngIf="avatarUrl !== wrongImgUrl" [src]="avatarUrl" class="avatar" />
+          <div *ngIf="avatarUrl === wrongImgUrl" class="no-avatar">YV</div>
         </label>
 
         <input
@@ -33,7 +34,7 @@
         />
 
         <div class="profile-settings-fields">
-          
+
           <div class="name-input-container">
             <mat-form-field class="input-field">
               <input

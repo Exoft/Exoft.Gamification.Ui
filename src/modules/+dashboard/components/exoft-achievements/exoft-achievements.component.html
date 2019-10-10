@@ -12,7 +12,7 @@
         <mat-step class="achievements" *ngFor="let item of pageData">
           <ng-template class="achievement-step-label" matStepLabel>
             <mat-icon>
-              <div class="avatar" *ngIf="item.avatarId === null else avatarExists">
+              <div class="avatar" *ngIf="item.avatarId === null || wrongAvatarId else avatarExists">
                 <p>{{letterAvatar(item.firstName, item.lastName)}}</p>
               </div>
             </mat-icon>
