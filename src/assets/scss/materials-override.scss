@@ -18,12 +18,13 @@
 
   //override material sidenav
   .mat-sidenav {
-    width: 378px;
+    width: 35vmin;
     background-color: $secondaryColor;
 
     .mat-drawer-inner-container {
       display: flex;
       flex-direction: column;
+      align-items: center;
     }
 
     .mat-icon-button {
@@ -31,26 +32,37 @@
     }
   }
 
-  .mat-tab-link {
-    font-weight: 300;
-    font-size: 20px;
-    color: $textColor;
-    opacity: 1;
-    padding-top: 11px;
-  }
+  // header override
+  .menu-header-container {
+    .mat-tab-nav-bar {
+      margin: 0;
 
-  .mat-tab-label-active {
-    color: $mainColor;
-  }
+      .mat-tab-links {
+        height: 100%;
+
+        .mat-tab-link {
+          height: 100%;
+          font-weight: 100;
+          font-size: 2vmin;
+          color: $textColor;
+          opacity: 1;
+          padding: 0 2vmin;
+        }
+
+        .mat-tab-label-active {
+          color: $mainColor;
+        }
 
 
-  .mat-ink-bar.mat-ink-bar {
-    background-color: $mainColor;
-    height: 7px;
-    top: 0;
+        .mat-ink-bar.mat-ink-bar {
+          background-color: $mainColor;
+          height: 0.5vmin;
+          top: 0;
+        }
+      }
+    }
   }
 }
-
 
 //override material input
 .mat-form-field {
@@ -119,6 +131,7 @@
 
 .mat-stepper-vertical-line::before {
   border-left: 0.1vmin solid #68B70C;
+  border-left-width: 0.1vmin !important;
 }
 
 
@@ -208,7 +221,8 @@
 
 
 //buttons override
-app-personal-achievements, app-challenges {
+app-personal-achievements,
+app-challenges {
   .request-button {
     display: flex;
     height: 3vmin;

@@ -4,15 +4,13 @@
   height: 100%;
 
   .sidenav {
-    padding: 11px;
+    padding: 1vmin;
 
     .logo-span {
       color: $textColor;
-      font-size: 18px;
-      padding: 8px;
+      font-size: 2vmin;
+      padding: 1vmin;
       font-weight: 500;
-      font-family: Roboto;
-      align-self: center;
       position: absolute;
     }
 
@@ -20,14 +18,24 @@
       align-self: flex-end;
     }
 
+    .avatar {
+      border-radius: 50%;
+      width: 20vmin;
+      height: 20vmin;
+      object-fit: cover;
+      border: 0.1vmin solid $textColor;
+      margin: 7vmin 0 1vmin 0;
+      align-self: center;
+    }
+
     .avatar-text {
       border-radius: 50%;
-      width: 166px;
-      height: 166px;
-      margin: 77px 0 10px 90px;
+      width: 20vmin;
+      height: 20vmin;
+      margin: 7vmin 0 1vmin 0;
       object-fit: cover;
-      border: 1px solid $textColor;
-      font-size: 100px;
+      border: 0.1vmin solid $textColor;
+      font-size: 10vmin;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -150,12 +158,4 @@
         margin-top: 30px;
       }
 }
-.avatar {
-  border-radius: 50%;
-  width: 166px;
-  height: 166px;
-  object-fit: cover;
-  border: 1px solid $textColor;
-  margin: 77px 0 10px 0;
-  align-self: center;
-}
+

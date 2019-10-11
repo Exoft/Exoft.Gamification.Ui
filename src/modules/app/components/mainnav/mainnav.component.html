@@ -1,29 +1,18 @@
 <mat-sidenav-container class="sidenav-container" [hasBackdrop]="false">
-  <mat-sidenav 
-    #drawer
-    class="sidenav"
-    fixedInViewport="false"
-    [mode]="'over'"
-    [opened]="false"
-  >
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="false" [mode]="'over'" [opened]="false">
     <span class="logo-span">GMFCTN!</span>
 
-    <button
-      type="button"
-      aria-label="Toggle sidenav"
-      mat-icon-button
-      class="close-sidenav-button"
-      (click)="drawer.close()"
-    >
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button class="close-sidenav-button"
+      (click)="drawer.close()">
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
+
     <div *ngIf="avatarSource===null else avatarExists">
       <div class="avatar-text">
-          <p>{{letterAvatar(firstName, lastName)}}</p>
-        </div>
+        <p>{{letterAvatar(firstName, lastName)}}</p>
       </div>
-     
-      
+    </div>
+
     <div class="user-name">{{ userName }}</div>
 
     <button mat-button class="log-out-button" (click)="logOut()">
@@ -32,44 +21,30 @@
 
     <div class="user-achivments-info">
       <div class="user-achivments-elements">
-        <p class="user-achivments-title">
-          Total:
-        </p>
+        <p class="user-achivments-title"> Total: </p>
 
         <p class="user-achivments-text">{{ totalBadgesCount }} Badges</p>
       </div>
 
       <div class="user-achivments-elements">
-        <p class="user-achivments-title">
-          EXP:
-        </p>
+        <p class="user-achivments-title"> EXP: </p>
 
         <p class="user-achivments-text">{{ xpCount }} XP</p>
       </div>
     </div>
 
-    <a
-      class="link"
-      *ngFor="let item of menuItems"
-      [routerLink]="item.link"
-      routerLinkActive="link-active"
-    >
+    <a class="link" *ngFor="let item of menuItems" [routerLink]="item.link" routerLinkActive="link-active">
       {{ item.name }}
     </a>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <app-header
-      (openSidenavEmitter)="drawer.toggle()"
-      [avatarSource]="avatarSource"
-      [userName]="userName"
-      *ngIf="isHeaderShown"
-    ></app-header>
-
+    <app-header (openSidenavEmitter)="drawer.toggle()" [avatarSource]="avatarSource" [userName]="userName"
+      *ngIf="isHeaderShown"></app-header>
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
-<ng-template #avatarExists>
-    <img [src]="AvatarId(avatarSource)" class="avatar" />
-  </ng-template>
 
+<ng-template #avatarExists>
+  <img [src]="AvatarId(avatarSource)" class="avatar" />
+</ng-template>

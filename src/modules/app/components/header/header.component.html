@@ -1,7 +1,7 @@
 <mat-toolbar color="primary" class="header-container">
   <div class="button-logo-container">
-    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="openSidenav()">
-      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    <button class="open-sidenav-button" mat-icon-button (click)="openSidenav()">
+      <mat-icon>menu</mat-icon>
     </button>
 
     <span class="logo-span">GMFCTN!</span>
@@ -10,21 +10,24 @@
   <div class="menu-header-container">
     <nav mat-tab-nav-bar>
       <a mat-tab-link *ngFor="let item of menuItems" [routerLink]="item.link" routerLinkActive #rla="routerLinkActive"
-         [active]="rla.isActive" [routerLinkActiveOptions]="{ exact: true }">
+        [active]="rla.isActive" [routerLinkActiveOptions]="{ exact: true }">
         {{ item.name }}
       </a>
     </nav>
   </div>
 
   <div class="user-info-container">
-    <div *ngIf="!avatarSource else avatarExists">
+    <!-- <div *ngIf="!avatarSource else avatarExists"> -->
+      <div>
       <div class="avatar-text">
         <p>{{letterAvatar()}}</p>
       </div>
     </div>
+
     <ng-template #avatarExists>
-      <img [src]="AvatarId(avatarSource)" class="avatar"/>
+      <img [src]="AvatarId(avatarSource)" class="avatar" />
     </ng-template>
+
     <div class="user-name">{{ userName }}</div>
   </div>
 </mat-toolbar>
