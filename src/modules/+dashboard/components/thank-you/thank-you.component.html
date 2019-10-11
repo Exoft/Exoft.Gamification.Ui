@@ -1,32 +1,24 @@
-<mat-card class="card">
-  <mat-card-title>THANK YOU</mat-card-title>
+<mat-card class="component-wrapper">
+  <mat-card-title class="component-title">THANK YOU</mat-card-title>
 
   <div class="card-content-wrapper">
-
-    <div class="star-img">
-      <img src="../../assets/images/star@2x.png">
-    </div>
+    <img class="star-img" src="../../assets/images/star@2x.png">
 
     <div class="image-subtext">
       Thank you for your awesome help on my project
     </div>
 
-    <div class="user" >
-
+    <div class="user">
       <div class="user-image-text" *ngIf="!pageData.avatarId && pageData.firstName; else avatarExists">
         <p>{{letterAvatar(pageData.firstName, pageData.lastName)}}</p>
       </div>
 
-      <div class="user-name">
-        <div class="first-name">{{pageData.firstName}}</div>
-        <div class="first-name">{{pageData.lastName}}</div>
-      </div>
+      <div class="user-name">{{pageData.firstName}} {{pageData.lastName}}</div>
     </div>
   </div>
 </mat-card>
 
 <ng-template #avatarExists>
-  <div class="user-image-container">
-    <img class="user-image" [src]="AvatarId(pageData.avatarId)">
-  </div>
+  <!-- <img class="user-image" [src]="AvatarId(pageData.avatarId)"> -->
+  <img class="avatar" src="../../assets/images/star@2x.png">
 </ng-template>

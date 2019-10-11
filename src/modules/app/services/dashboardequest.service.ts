@@ -16,8 +16,9 @@ export class RequestService {
   }
 
   public getAchievementsInfo(currentPage: any, pageSize: any): Observable<any> {
-    const params = new HttpParams();
-    params.set('pageSize', pageSize).set('currentPage', currentPage);
+    let params = new HttpParams();
+    params = params.set('pageSize', pageSize);
+    params = params.set('currentPage', currentPage);
     return this.httpClient.get(`${this.apiUrl}/api/users/current-user/achievements`, {params});
   }
 

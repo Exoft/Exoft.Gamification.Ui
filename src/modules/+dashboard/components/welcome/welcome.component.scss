@@ -1,33 +1,21 @@
 .welcome-wrapper {
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 26px;
-  color: #FFFFFF;
+  align-items: center;
   background-color: #68B70C;
+  padding: 2vmin 4vmin;
 
   .header-text {
-    font-size: 17px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: #FFFFFF;
+    font-size: 4vmin;
+    font-weight: 100;
 
     .subheader-text {
-      font-size: 15px;
-      padding: 10px 0 0;
+      font-size: 2vmin;
     }
   }
-}
-@media (max-width: 1920px){
-  .welcome-wrapper {
-    padding: 10px 26px;
-  }
-}
-@media (max-width: 1440px)
-{
-  .welcome-wrapper{
-    padding: 0px 26px 2px 26px;
-  }
-}
-@media (max-width: 991px) {
-    .welcome-wrapper {
-        padding: 10px 26px;
-    }
 }

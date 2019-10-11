@@ -1,10 +1,17 @@
-.card {
+.component-container {
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: #3A3E46;
   color: #FFFFFF;
-  height: 100%;
+  padding: 2vmin;
+
+  .component-title {
+    margin: 0;
+    font-size: 1.5vmin;
+  }
 
   .badges-count {
     display: flex;
@@ -12,31 +19,34 @@
     align-items: center;
 
     .badges-text {
-      font-size: 18px;
+      font-size: 2vmin;
+      font-weight: 100;
     }
 
     .count {
-      font-size: 100px;
+      font-size: 10vmin;
       color: #68B70C;
     }
+  }
 
-    .badges-info {
-      font-size: 18px;
+  .badges-info {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 1.3vmin;
+    font-weight: 100;
+
+    .statistic-info {
+      display: flex;
+      align-items: center;
+
+      .dot {
+        height: 0.5vmin;
+        width: 0.5vmin;
+        background-color: #68B70C;
+        border-radius: 50%;
+        margin: 0 1vmin;
+      }
     }
-  }
-
-  .dot {
-    height: 4px;
-    width: 4px;
-    background-color: #68B70C;
-    border-radius: 50%;
-    display: inline-block;
-    margin-bottom: 3px;
-  }
-}
-
-@media (max-width: 991px) {
-  .badges-count {
-    padding-bottom: 33px;
   }
 }

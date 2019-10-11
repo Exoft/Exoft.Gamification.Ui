@@ -84,103 +84,45 @@
 }
 
 // stepper override
-
-.mat-step-text-label {
-  color: #68B70C;
-  font-size: 18px;
-}
-
-.achievement-content-wrapper {
-  .mat-step-icon {
-    border: 2px solid $mainColor;
-    background-size: cover;
-    height: 36px;
-    width: 36px;
-    display: none;
-  }
-
-  .mat-icon {
-    width: 36px;
-    height: 36px;
-    margin-right: 20px;
-    color: #68B70C;
-    background-color: #576271;
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    border: 2px solid #68B70C;
-  }
-}
-
 .mat-stepper-vertical {
-  background-color: $secondaryColor;
-  width: max-content;
-
-  .mat-step-header {
-    background-color: $secondaryColor;
-    border: 0;
+  .mat-vertical-stepper-header {
+    padding: 0;
+    height: 4vmin;
     pointer-events: none;
+
+    .mat-step-icon {
+      display: none;
+    }
 
     .mat-step-label {
       display: flex;
+      flex: 1;
+      align-items: center;
+      z-index: 1;
     }
   }
 
-  .mat-step-text-label {
-    color: $mainColor;
-    font-size: 18px;
-  }
+  .mat-vertical-content-container {
+    margin-left: 1.5vmin;
 
-  .mat-stepper-vertical-line::before {
-    border-left-color: $mainColor;
-    margin: 5px 0 0 6px;
+
+    .mat-vertical-content {
+      padding: 0 1vmin 1vmin 2vmin;
+    }
   }
 
   .mat-vertical-stepper-content {
     height: 100% !important;
     visibility: visible !important;
   }
-
-  .mat-step-icon {
-    border: 2px solid $mainColor;
-    background-size: cover;
-    height: 36px;
-    width: 36px;
-    display: none;
-  }
-
 }
 
-.mat-card-title {
-  font-size: 14px;
-  font-weight: normal;
-  margin: 0;
+.mat-stepper-vertical-line::before {
+  border-left: 0.1vmin solid #68B70C;
 }
 
-app-personal-achievements {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
 
-app-thank-you {
-  .mat-card-title {
-    margin-left: -33px;
-  }
-}
-
-.mat-vertical-stepper-content {
-  height: 100% !important;
-  visibility: visible !important;
-}
-
-.mat-vertical-stepper-content {
-  height: 100% !important;
-  visibility: visible !important;
-}
-
+//dialog styles
 .mat-dialog-container {
   padding: 0 !important;
   display: block;
@@ -262,4 +204,18 @@ app-thank-you {
     color: $textColor;
   }
 
+}
+
+
+//buttons override
+app-personal-achievements, app-challenges {
+  .request-button {
+    display: flex;
+    height: 3vmin;
+    min-width: unset;
+
+    .mat-button-wrapper {
+      line-height: normal;
+    }
+  }
 }

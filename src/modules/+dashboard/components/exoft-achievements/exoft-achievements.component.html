@@ -1,38 +1,36 @@
-<mat-card class="card">
-  <div class="header-wrapper">
-    <mat-card-title>EXOFT ACHIEVEMENTS
-      <div class="achievements-count">{{calculateEvents(pageData)}}</div>
-    </mat-card-title>
-  </div>
+<mat-card class="component-wrapper">
+  <mat-card-title class="component-title">
+    <div>EXOFT ACHIEVEMENTS</div>
 
-  <div class="achievement-content-wrapper">
-    <div class="timeline-wrapper">
+    <div class="achievements-count">{{calculateEvents(pageData)}}</div>
+  </mat-card-title>
 
-      <mat-vertical-stepper>
-        <mat-step class="achievements" *ngFor="let item of pageData">
-          <ng-template class="achievement-step-label" matStepLabel>
-            <mat-icon>
-              <div class="avatar" *ngIf="item.avatarId === null else avatarExists">
-                <p>{{letterAvatar(item.firstName, item.lastName)}}</p>
-              </div>
-            </mat-icon>
-
-            <div class="achievement-label">
-              <div class="user-name">{{item.firstName}} {{item.lastName}}</div>
-              <div class="posting-time">{{item.createdTime | customDate}}</div>
-            </div>
-          </ng-template>
-
-          <div class="achievement-type-content-wrapper">
-            <div class="achievement-type-text">{{item.description}}</div>
-            <div class="achievement-type">{{item.type}}</div>
+  <mat-vertical-stepper class="achievement-content-wrapper">
+    <mat-step class="achievements" *ngFor="let item of pageData">
+      <ng-template matStepLabel>
+        <div>
+          <div class="avatar" *ngIf="item.avatarId === null else avatarExists">
+            <p>{{letterAvatar(item.firstName, item.lastName)}}</p>
           </div>
-          <ng-template #avatarExists>
-            <img class="user-image" [src]="AvatarId(item.avatarId)">
-          </ng-template>
-        </mat-step>
 
-      </mat-vertical-stepper>
-    </div>
-  </div>
+          <ng-template #avatarExists>
+            <!-- <img class="user-image" [src]="AvatarId(item.avatarId)"> -->
+            <img class="user-image" src="assets/images/star.png">
+          </ng-template>
+        </div>
+
+        <div class="achievement-label">
+          <div class="user-name">{{item.firstName}} {{item.lastName}}</div>
+
+          <div class="posting-time">{{item.createdTime | customDate}}</div>
+        </div>
+      </ng-template>
+
+      <div class="achievement-type-content-wrapper">
+        <div class="achievement-type-text">{{item.description}}</div>
+
+        <div class="achievement-type">{{item.type}}</div>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
 </mat-card>

@@ -1,40 +1,34 @@
-<mat-card class="card">
-  <mat-card-title>TOP CHART</mat-card-title>
+<mat-card class="component-wrapper">
+  <mat-card-title class="component-title">TOP CHART</mat-card-title>
 
-  <div class="flex-container">
+  <div class="users-data-wrapper">
+    <div class="list-header">
+      <div>Name</div>
 
-    <div class="users-data-wrapper">
-
-      <div class="list-header">
-        <div>Name</div>
-        <div>Total XP</div>
-      </div>
-
-      <div class="user">
-
-        <div class="user-info" *ngFor="let item of pageData; let first = first; let i=index">
-          <div class="user-info-container" >
-            <div class="user-img-text" (click)="openUserDetails(item.id)" *ngIf="item.avatarId===null else avatarExists">
-              <p>{{letterAvatar(item.firstName, item.lastName)}}</p>
-            </div>
-            <ng-template #avatarExists>
-              <div class="user-img">
-                <img [src]="AvatarId(item.avatarId)" (click)="openUserDetails(item.id)">
-              </div>
-            </ng-template>
-            <div class="user-txt" (click)="openUserDetails(item.id)"> {{item.firstName}} {{item.lastName}}</div>
-          </div>
-          <div class="info">
-            <div class="xp-txt">{{item.xp}}XP</div>
-          </div>
-
-          <div class="bar">
-            <div class="bar-{{i}}" [style.width.%]="getXpValue(item.xp)"></div>
-          </div>
-        </div>
-
-      </div>
+      <div>Total XP</div>
     </div>
 
+    <div class="user">
+      <div class="user-info" *ngFor="let item of pageData; let first = first; let i=index">
+        <div class="user-info-container">
+          <div class="user-img-text" (click)="openUserDetails(item.id)" *ngIf="item.avatarId===null else avatarExists">
+            {{letterAvatar(item.firstName, item.lastName)}}
+          </div>
+
+          <ng-template #avatarExists>
+            <!-- <img [src]="AvatarId(item.avatarId)" (click)="openUserDetails(item.id)"> -->
+            <img class="avatar" src="assets/images/star.png">
+          </ng-template>
+
+          <div class="user-txt" (click)="openUserDetails(item.id)"> {{item.firstName}} {{item.lastName}}</div>
+        </div>
+
+        <div class="points-count">{{item.xp}}XP</div>
+
+        <div class="bar">
+          <div class="bar-{{i}}" [style.width.%]="getXpValue(item.xp)"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </mat-card>

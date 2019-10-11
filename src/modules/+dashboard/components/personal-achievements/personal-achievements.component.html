@@ -1,19 +1,25 @@
-<mat-card class="card">
+<mat-card class="component-wrapper">
   <div class="header-wrapper">
-    <mat-card-title>PERSONAL ACHIEVEMENTS</mat-card-title>
+    <mat-card-title class="component-title">PERSONAL ACHIEVEMENTS</mat-card-title>
+
     <button mat-button class="request-button" (click)="openForm()">Request</button>
   </div>
 
   <div class="achivement-wrapper">
-
     <div class="achivement" *ngFor="let item of pageData">
-      <div class="achivement-image">
-         <img [src]=IconId(item.iconId)> 
-      </div>
+      <!-- <img [src]=IconId(item.iconId)>  -->
+      <img class="achivement-image" src="assets/images/star.png">
 
       <div class="achivement-title">
         <div>{{item.name}}</div>
-        <div class="achivement-date">{{item.addedTime}}</div>
+
+        <div class="achivement-date">{{item.addedTime | customDate}}</div>
+      </div>
+
+      <div class="achivement-xp-container">
+        <div class="circle"></div>
+
+        <div class="xp">+ {{item.xp}} xp</div>
       </div>
     </div>
   </div>

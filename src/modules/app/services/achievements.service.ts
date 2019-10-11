@@ -27,7 +27,7 @@ export class AchievementsService {
   }
 
   addNewAchievement(achievement: Achievement): Observable<Achievement> {
-    return this.http.post<Achievement>(`${environment.apiUrl}/api/achievement`, achievement);
+    return this.http.post<Achievement>(`${environment.apiUrl}/api/achievements`, achievement);
   }
 
   updateAchievementById(achievementId: string, achievement: Achievement): Observable<Achievement> {

@@ -1,174 +1,61 @@
 .dashboard-container {
-  display: grid;
-  height: 100% !important;
-  grid-template-areas: 'header header header header right ' 'personal thanks chart chart right' 'badges chalenge chalenge chalenge right';
-  grid-gap: 10px;
-  padding: 20px;
-  grid-template-rows: 10% 40% 40%;
-  grid-template-columns: 20% 20% 20% 17% 20%;
-}
-
-.app-welcome {
-  grid-area: header;
-}
-
-.app-personal-achievements {
-  grid-area: personal;
-}
-
-.app-thank-you {
-  grid-area: thanks;
-}
-
-.app-badges {
-  grid-area: badges;
-}
-
-.app-top-charts {
-  grid-area: chart;
-}
-
-.app-challenges {
-  grid-area: chalenge;
-}
-
-.app-exoft-achievements {
-  grid-area: right;
-}
-
-@media (max-width: 425px) {
-  .dashboard-container {
-    grid-template-areas: 'header' 'personal' 'badges' 'chalenge' 'thanks' 'chart' 'right';
-    grid-template-columns: 97%;
-  }
-}
-
-/*.+dashboard-container {
-  display: flex;
-  justify-content: space-around;
-  padding: 30px;
   height: calc(100% - 60px);
-  font-weight: 300;
+  width: 100%;
+  display: flex;
+  padding: 2vmin;
 
-  .main-container {
-    flex-direction: column;
-    display: flex;
+  .components-container {
     height: 100%;
-
-    .welcome-container {
-      app-welcome {
-        height: 100%;
-      }
-    }
-
-    .flex-container-wrapper {
-      display: flex;
-      padding: 15px 0 0;
-      height: 44%;
-
-      .thank-you-pers-achievement-wrapper {
-        display: flex;
-      }
-
-      app-thank-you {
-        padding: 0 15px;
-        flex-grow: 1;
-      }
-
-      app-+top-chart {
-        flex-grow: 2;
-      }
-
-      app-+badges {
-        flex-grow: 1;
-      }
-
-    }
-  }
-
-  app-exoft-achievements {
+    width: 80%;
     display: flex;
-    height: 100%;
-  }
-}
-
-@media (max-width: 1920px) {
-  .+dashboard-container {
-    .exoft-achievements {
-      padding-left: 15px;
-    }
-  }
-}
-
-@media (max-width: 1440px) {
-  .+dashboard-container {
-    justify-content: start;
-    padding: 20px;
-
-    .main-container {
-      .flex-container-wrapper {
-        padding: 15px 0 0;
-
-        app-thank-you {
-          padding: 0 15px;
-        }
-      }
-    }
-  }
-
-  .exoft-achievements {
-    padding-bottom: 10px;
-    padding-left: 15px;
-  }
-}
-
-@media (max-width: 991px) {
-  .+dashboard-container {
     flex-direction: column;
-    overflow: hidden;
-    height: auto;
-    padding: 0;
-    align-items: center;
+    justify-content: space-between;
+    padding: 0 2vmin 0 0;
 
-    .main-container {
-      overflow: auto;
-      width: 95%;
+    .app-welcome {
+      height: 15%;
+      width: 100%;
+    }
 
-      .welcome-container {
-        padding-top: 10px;
+    .personal-achivements-thank-you-chart-container {
+      height: 40%;
+      display: flex;
+      justify-content: space-between;
+
+      .app-personal-achievements {
+        width: 25%;
+        padding: 0 1vmin 0 0;
       }
 
-      .flex-container-wrapper {
-        flex-direction: column;
-        padding: 0;
+      .app-thank-you {
+        width: 25%;
+        padding: 0 1vmin 0 1vmin;
+      }
 
-        .thank-you-pers-achievement-wrapper {
-          flex-direction: column;
-        }
-
-        app-personal-achievements {
-          padding: 10px 0 10px 0;
-        }
-
-        app-thank-you {
-          padding: 0 0 10px 0;
-        }
-
-        app-+top-chart {
-          padding: 0 0 10px 0;
-        }
-
-        app-+challenges {
-          padding: 10px 0 10px 0;
-        }
+      .app-top-charts {
+        width: 50%;
+        padding: 0 0 0 1vmin;
       }
     }
 
-    .exoft-achievements {
-      width: auto;
-      padding: 0 10px;
+    .badges-challlenges-container {
+      height: 40%;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
+
+      .app-badges {
+        width: 25%;
+        padding: 0 1vmin 0 0;
+      }
+
+      .app-challenges {
+        width: 75%;
+        padding: 0 0 0 1vmin;
+      }
     }
   }
-}*/
+
+  .app-exoft-achievements {
+    width: 20%;
+  }
+}

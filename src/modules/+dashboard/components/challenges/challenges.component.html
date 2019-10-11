@@ -1,14 +1,15 @@
-<mat-card class="card">
+<mat-card class="component-wrapper">
   <div class="header-wrapper">
-    <mat-card-title>CHALLENGES</mat-card-title>
+    <mat-card-title class="component-title">CHALLENGES</mat-card-title>
+
     <button mat-button class="request-button"> Show more</button>
   </div>
 
   <div class="challenges-content-wrapper">
     <div class="timeline-wrapper">
-      
       <div class="line-wrapper">
         <div class="dot"></div>
+
         <div class="line">
           <div class="line-itself"></div>
         </div>
@@ -18,16 +19,14 @@
         <div class="challenges-label">Available</div>
 
         <div class="available-content">
-          <div class="available-challenge-img">
-            <img
-              src="https://static1.squarespace.com/static/539e75d2e4b0a181d64eaf18/t/584dc50ff5e2310b3971e5b9/1481491745417/">
-          </div>
+          <img class="available-challenge-img" src="assets/images/chalenges-temp.jpg">
 
           <div class="challenge-text-content">
             <div class="challenge-name">57K bike</div>
 
             <div class="challenge-progress">
               <div class="percentage">93% of 57K complete </div>
+
               <div class="time"> 05:20:00 Remaining</div>
             </div>
           </div>
@@ -38,8 +37,9 @@
     <div class="timeline-wrapper">
       <div class="line-wrapper">
         <div class="dot"></div>
+
         <div class="line">
-          <div class="line-itself-ended"> </div>
+          <div class="line-itself"> </div>
         </div>
       </div>
 
@@ -50,6 +50,7 @@
           <div class="ended-row">
             <div class="ended-item" *ngFor="let item of pageData">
               <div class="img-text">{{item.text}}</div>
+
               <img src="{{item.img}}">
             </div>
           </div>
