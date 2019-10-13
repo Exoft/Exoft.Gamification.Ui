@@ -16,6 +16,13 @@
 
     .close-sidenav-button {
       align-self: flex-end;
+      width: 2vmin;
+      margin: 0 1.5vmin 0 0;
+
+      .material-icons {
+        font-size: 2vmin;
+        width: 2vmin;
+      }
     }
 
     .avatar {
@@ -44,118 +51,62 @@
     }
 
     .user-name {
-      align-self: center;
-      font-family: Roboto;
-      font-size: 30px;
+      font-size: 3vmin;
       font-weight: 400;
-      margin-top: 9px;
+      margin-top: 1vmin;
       color: $textColor;
     }
 
     .log-out-button {
-      height: 22px;
+      height: 2vmin;
       background-color: $mainColor;
       color: $textColor;
-      font-size: 15px;
-      font-family: Roboto;
+      font-size: 1.5vmin;
       display: flex;
-      align-self: center;
       justify-items: center;
       align-items: center;
       border-radius: 0;
       line-height: 0;
-      margin-top: 3px;
+      margin-top: 0.5vmin;
+      padding: 0 2vmin;
     }
 
     .user-achivments-info {
-      margin: 10px 0 15px 0;
+      margin: 1vmin 0 1.5vmin 0;
       display: flex;
       flex-direction: column;
-      align-self: center;
+      align-items: center;
 
       .user-achivments-elements {
         display: flex;
-        flex-direction: row;
-        align-self: center;
 
         .user-achivments-title {
           color: $mainColor;
-          font-size: 20px;
-          margin: 0px;
-          margin-right: 5px;
+          font-size: 2vmin;
+          margin: 0  0.5vmin 0 0;
         }
 
         .user-achivments-text {
           color: $textColor;
-          font-size: 20px;
-          margin: 0px;
+          font-size: 2vmin;
           font-weight: 300;
+          margin: 0;
         }
       }
     }
 
     .link {
       color: $textColor;
-
       text-decoration: none;
-      font-size: 29px;
-      align-self: center;
-      padding-bottom: 6px;
+      font-size: 3vmin;
+      margin-bottom: 1vmin;
       font-weight: 300;
     }
 
     .link-active {
-      border-bottom: 10px solid $mainColor;
+      border-bottom: 0.5vmin solid $mainColor;
       color: $mainColor;
     }
   }
-}
-
-@media (max-width: 991px) {
-  .sidenav-container {
-    .sidenav {
-
-      .avatar-text {
-        width: 140px;
-        height: 140px;
-        margin-top: 30px;
-        font-size: 85px;
-        margin: 35px 0 10px 56px;
-      }
-
-      .user-name {
-        font-size: 25px;
-      }
-
-      .log-out-button {
-        padding: 10px;
-      }
-
-      .user-achivments-info {
-        .user-achivments-elements {
-          .user-achivments-title {
-            font-size: 15px;
-          }
-
-          .user-achivments-text {
-            font-size: 15px;
-          }
-        }
-      }
-
-      .link {
-        font-size: 25px;
-      }
-
-      .link-active {
-        border-bottom: 7px solid $mainColor;
-      }
-    }
-  }
-      .avatar {
-        width: 140px;
-        height: 140px;
-        margin-top: 30px;
-      }
 }
 

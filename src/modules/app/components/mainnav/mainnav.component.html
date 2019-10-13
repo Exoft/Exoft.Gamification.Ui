@@ -2,9 +2,9 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport="false" [mode]="'over'" [opened]="false">
     <span class="logo-span">GMFCTN!</span>
 
-    <button type="button" aria-label="Toggle sidenav" mat-icon-button class="close-sidenav-button"
+    <button mat-icon-button class="close-sidenav-button"
       (click)="drawer.close()">
-      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      <mat-icon >menu</mat-icon>
     </button>
 
     <div *ngIf="avatarSource===null else avatarExists">
@@ -15,9 +15,7 @@
 
     <div class="user-name">{{ userName }}</div>
 
-    <button mat-button class="log-out-button" (click)="logOut()">
-      log out
-    </button>
+    <button mat-button class="log-out-button" (click)="logOut()">log out</button>
 
     <div class="user-achivments-info">
       <div class="user-achivments-elements">
