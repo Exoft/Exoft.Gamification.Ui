@@ -1,116 +1,52 @@
 @import '../../../../assets/scss/theme-colors';
 
-.full-list-of-achievements-container {
-  background-color: $secondaryColor;
+.component-container {
   height: 100%;
   width: 100%;
-  padding: 30px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  background-color: #3A3E46;
+  color: #FFFFFF;
+  padding: 2vmin;
   overflow: auto;
 
-  .mat-card-title {
+  .component-title {
     text-align: center;
-    color: $textColor;
-    font-size: 30px;
-    letter-spacing: 5px;
-    font-weight: 300;
-    margin-bottom: 18px;
+    color: #FFFFFF;
+    margin-bottom: 2vmin;
+    font-size: 2.5vmin;
+    font-weight: 100;
+    letter-spacing: 0.3vmin;
+    word-spacing: 0.5vmin;
   }
 
   .achievements-table {
     width: 100%;
     color: $textColor;
     text-align: center;
-    font-size: 27px;
-    border-spacing: 20px;
+    font-size: 1.5vmin;
+    border-spacing: 2vmin;
 
     tr {
-      margin-top: 20px;
+      margin-top: 2vmin;
 
       th {
         font-weight: 300;
+        font-size: 2vmin;
+
+        &.achievement-header{
+          text-align: left;
+        }
       }
 
       .achievement-cell {
         display: flex;
-        flex-direction: row;
         align-items: center;
 
         img {
-          height: 60px;
-          width: 60px;
-          margin-left: 10%;
-          margin-right: 10%;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 1920px) {
-  .full-list-of-achievements-container {
-    .mat-card-title {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    .achievements-table {
-      font-size: 18px;
-      border-spacing: 15px;
-
-      tr {
-        margin-top: 15px;
-
-        .achievement-cell {
-          img {
-            height: 45px;
-            width: 45px;
-          }
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 1440px) {
-  .full-list-of-achievements-container {
-    padding: 15px;
-
-    .mat-card-title {
-      font-size: 15px;
-      margin-bottom: 10px;
-    }
-
-    .achievements-table {
-      font-size: 15px;
-      border-spacing: 10px;
-
-      tr {
-        margin-top: 10px;
-
-        .achievement-cell {
-          img {
-            height: 30px;
-            width: 30px;
-          }
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 991px) {
-  .full-list-of-achievements-container {
-    .achievements-table {
-      tr {
-        .achievement-cell {
-          img {
-            height: 30px;
-            width: 30px;
-            margin: 0px 10% 0px 0px;
-          }
+          height: 6vmin;
+          width: 6vmin;
+          margin: 0 2vmin 0 0;
         }
       }
     }

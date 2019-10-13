@@ -1,19 +1,18 @@
 @import '../../../../assets/scss/theme-colors';
 
-.total-achievements-container {
-  background-color: $secondaryColor;
+.component-container {
   height: 100%;
   width: 100%;
-  padding: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  color: $textColor;
+  background-color: #3A3E46;
+  color: #FFFFFF;
+  padding: 2vmin;
 
-  .mat-card-title {
-    font-size: 20px;
-    font-weight: 300;
+  .component-title{
+    margin: 0;
+    font-size: 1.5vmin;
   }
 
   .experience-container {
@@ -22,13 +21,12 @@
     align-items: center;
 
     p {
-      font-size: 30px;
-      margin-top: -20px;
+      font-size: 3vmin;
     }
 
     .experience-count {
       color: $mainColor;
-      font-size: 150px;
+      font-size: 15vmin;
     }
   }
 
@@ -38,13 +36,12 @@
     align-items: center;
 
     p {
-      font-size: 18px;
-      margin-top: -5px;
+      font-size: 2vmin;
     }
 
     .badges-count {
       color: $mainColor;
-      font-size: 50px;
+      font-size: 5vmin;
     }
   }
 
@@ -52,84 +49,6 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 1920px) {
-  .total-achievements-container {
-    justify-content: space-between;
-    .mat-card-title {
-      font-size: 20px;
-      margin-bottom: 15px;
-    }
-
-    .experience-container {
-      margin-bottom: 10px;
-
-      p {
-        font-size: 25px;
-        margin-top: -5px;
-      }
-
-      .experience-count {
-        font-size: 70px;
-      }
-    }
-
-    .badges-container {
-      p {
-        font-size: 20px;
-        margin-top: 0;
-      }
-
-      .badges-count {
-        font-size: 40px;
-      }
-    }
-
-    .additional-info {
-      padding-top: 10px;
-      font-size: 12px;
-    }
-  }
-}
-
-@media (max-width: 1440px) {
-  .total-achievements-container {
-    padding: 15px;
-    .mat-card-title {
-      font-size: 15px;
-      margin-bottom: 15px;
-    }
-
-    .experience-container {
-      margin-bottom: 10px;
-
-      p {
-        font-size: 25px;
-        margin-top: -5px;
-      }
-
-      .experience-count {
-        font-size: 60px;
-      }
-    }
-
-    .badges-container {
-      p {
-        font-size: 15px;
-        margin-top: 0px;
-      }
-
-      .badges-count {
-        font-size: 35px;
-      }
-    }
-
-    .additional-info {
-      padding-top: 10px;
-      font-size: 9px;
-    }
+    font-size: 1.3vmin;
   }
 }

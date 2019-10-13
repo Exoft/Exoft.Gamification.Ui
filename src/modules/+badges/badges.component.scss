@@ -1,139 +1,40 @@
-.badges-page-container {
-  display: grid;
-  height: 100% !important;
-  grid-template-areas: 'last-achievements total-achievements user' 'full-list full-list thanks';
-  grid-gap: 30px;
-  padding: 20px;
-  grid-template-rows: 42% 42%;
-  grid-template-columns: 32% 32% 32%;
-}
-
-.last-achievements {
-  grid-area: last-achievements;
-}
-
-.total-achievements-and-exp {
-  grid-area: total-achievements;
-}
-
-.full-list-of-achievements {
-  grid-area: full-list;
-}
-
-.user {
-  grid-area: user;
-}
-
-.thank-you {
-  grid-area: thanks;
-}
-
-/*
-.+badges-page-container {
-  height: calc(100% - 60px);
+.badges-page-container{
+  height: calc(100% - 6vmin);
+  width: 100%;
   display: flex;
+  padding: 2vmin;
+  display: flex;
+  flex-direction: column;
 
-  .achievements-container {
+  .badges-page-row{
+    height: 50%;
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    width: 65%;
 
-    .last-and-total-achievements-container {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      height: 55%;
-
-      .total-achievements-and-exp {
-        width: 45%;
-        height: 80%;
-      }
-
-      .last-achievements {
-        width: 45%;
-        height: 80%;
-      }
+    .last-achievements, .user, .thank-you {
+      width: 33%;
     }
 
-    .full-list-of-achievements {
-      align-self: center;
-      height: 40%;
-      width: 95%;
+    .full-list-of-achievements{
+      width: 67%;
+      padding: 1vmin 1vmin 0 0;
     }
-  }
 
-  .user-and-thank-you-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 35%;
+    .last-achievements {
+      padding: 0 1vmin 1vmin 0;
+    }
+
+    .total-achievements-and-exp {
+      width: 34%;
+      padding: 0 1vmin 1vmin 1vmin;
+    }
 
     .user {
-      height: 44%;
-      width: 90%;
-      margin-top: 1%;
+      padding: 0 0 1vmin 1vmin;
     }
 
-    .thank-you {
-      height: 40%;
-      width: 90%;
-      margin-top: 1%;
+    .thank-you{
+      padding: 1vmin 0 0 1vmin;
     }
   }
 }
-
-@media (max-width: 991px) {
-  .+badges-page-container {
-    height: auto;
-    flex-direction: column;
-
-    .achievements-container {
-      flex-direction: column;
-      width: 100%;
-
-      .last-and-total-achievements-container {
-        flex-direction: column;
-        height: auto;
-
-        .total-achievements-and-exp {
-          width: 100%;
-          height: auto;
-          padding: 10px 5px 10px 5px;
-        }
-
-        .last-achievements {
-          width: 100%;
-          height: auto;
-          padding: 20px 5px 10px 5px;
-        }
-      }
-
-      .full-list-of-achievements {
-        height: 300px;
-        width: 100%;
-        padding: 10px 5px 10px 5px;
-      }
-    }
-
-    .user-and-thank-you-container {
-      width: 100%;
-      height: auto;
-
-      .user {
-        height: auto;
-        width: 100%;
-        padding: 10px 5px 10px 5px;
-        margin: 0%;
-      }
-
-      .thank-you {
-        height: auto;
-        width: 100%;
-        padding: 10px 5px 10px 5px;
-        margin: 0%;
-      }
-    }
-  }
-}
-*/

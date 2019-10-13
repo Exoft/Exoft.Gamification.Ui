@@ -222,8 +222,10 @@
 
 //buttons override
 app-personal-achievements,
-app-challenges {
-  .request-button {
+app-challenges,
+app-last-achievements,
+app-user {
+  .request-button, .edit-user-button {
     display: flex;
     height: 3vmin;
     min-width: unset;
