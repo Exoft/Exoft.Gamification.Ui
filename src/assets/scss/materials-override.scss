@@ -67,7 +67,7 @@
 //override material input
 .mat-form-field {
   color: $textColor;
-  margin-top: 40px;
+  margin-top: 2vmin;
 
   .mat-form-field-label {
     color: $textColor;
@@ -75,8 +75,8 @@
 
   .mat-input-element {
     caret-color: $textColor;
-    font-size: 27px;
-    font-weight: 300;
+    font-size: 2.5vmin;
+    font-weight: 100;
   }
 
   .mat-form-field-underline {
@@ -225,7 +225,9 @@ app-personal-achievements,
 app-challenges,
 app-last-achievements,
 app-user {
-  .request-button, .edit-user-button {
+
+  .request-button,
+  .edit-user-button {
     display: flex;
     height: 3vmin;
     min-width: unset;
