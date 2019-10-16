@@ -1,6 +1,5 @@
 @import './theme-colors.scss';
 
-
 .mat-drawer-container {
   background-color: $backgroundColor;
 
@@ -43,12 +42,12 @@
           color: $textColor;
           opacity: 1;
           padding: 0 2vmin;
+          min-width: 90px;
         }
 
         .mat-tab-label-active {
           color: $mainColor;
         }
-
 
         .mat-ink-bar.mat-ink-bar {
           background-color: $mainColor;
@@ -113,7 +112,6 @@
   .mat-vertical-content-container {
     margin-left: 1.5vmin;
 
-
     .mat-vertical-content {
       padding: 0 1vmin 1vmin 2vmin;
     }
@@ -147,7 +145,6 @@
 }
 
 //select override
-
 .mat-select {
   color: $mainColor;
 
@@ -172,26 +169,6 @@
   }
 }
 
-@media (max-width: 1440px) {
-  .mat-drawer-container {
-    .mat-toolbar-single-row {
-      .mat-primary {
-        .mat-tab-link {
-          font-size: 15px;
-          min-width: 90px;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 991px) {
-  .mat-drawer-container {
-    .mat-sidenav {
-      width: 275px;
-    }
-  }
-}
 
 //mat-table override
 .mat-tab-label-content {
@@ -212,9 +189,7 @@
   .mat-tab-label {
     color: $textColor;
   }
-
 }
-
 
 //buttons override
 app-personal-achievements,

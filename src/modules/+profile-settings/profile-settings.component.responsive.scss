@@ -1,0 +1,52 @@
+@media (max-width: 767px),
+(orientation: portrait) {
+  .profile-settings-page-container {
+    min-height: calc(100% - 12vmin);
+
+    .profile-settings-container {
+      width: 75%;
+
+      .title-button-container {
+
+        .go-back-button {
+          font-size: 8vmin;
+          height: 8vmin;
+          width: 8vmin;
+        }
+
+        .title {
+          font-size: 5vmin;
+        }
+      }
+
+      .profile-settings-form {
+        .avatar-container {
+          width: 20vmin;
+          height: 20vmin;
+          top: -10vmin;
+
+          .avatar {
+            width: 20vmin;
+            height: 20vmin;
+            border: 0.2vmin solid $mainColor;
+          }
+        }
+
+        .profile-settings-fields {
+          margin: 0 0 15vmin;
+
+          .input-field {
+            font-size: 3vmin;
+
+          }
+        }
+
+        .save-button {
+          border-radius: 0 0 3vmin 3vmin;
+          font-size: 4vmin;
+          padding: 1.5vmin;
+        }
+      }
+    }
+  }
+}
