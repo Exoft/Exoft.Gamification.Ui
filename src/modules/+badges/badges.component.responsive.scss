@@ -1,0 +1,31 @@
+@media (max-width: 767px),
+(orientation: portrait) {
+  .badges-page-container {
+    height: auto;
+    flex-direction: column;
+    padding: 4vmin;
+
+    .badges-page-row {
+      height: auto;
+      flex-direction: column-reverse;
+
+      .last-achievements,
+      .user,
+      .thank-you,
+      .total-achievements-and-exp,
+      .full-list-of-achievements {
+        width: 100%;
+        padding: 2vmin 0;
+
+      }
+
+      .user {
+        padding: 0 0 2vmin 0;
+      }
+
+      .full-list-of-achievements {
+        padding: 2vmin 0 0 0;
+      }
+    }
+  }
+}
