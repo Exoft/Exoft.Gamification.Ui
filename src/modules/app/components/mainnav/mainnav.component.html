@@ -1,11 +1,10 @@
 <mat-sidenav-container class="sidenav-container" [hasBackdrop]="false">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="false" [mode]="'over'" [opened]="false">
-    <span class="logo-span">GMFCTN!</span>
+    <div class="logo-button-container">
+      <span class="logo-span">GMFCTN!</span>
 
-    <button mat-icon-button class="close-sidenav-button"
-      (click)="drawer.close()">
-      <mat-icon >menu</mat-icon>
-    </button>
+      <mat-icon class="close-sidenav-button" (click)="drawer.close()">menu</mat-icon>
+    </div>
 
     <div *ngIf="avatarSource===null else avatarExists">
       <div class="avatar-text">

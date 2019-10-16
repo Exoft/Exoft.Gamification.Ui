@@ -1,4 +1,6 @@
-@media (max-width: 767px), (orientation: portrait) {
+@media (max-width: 767px),
+(orientation: portrait) {
+
   //buttons styles
   app-personal-achievements,
   app-challenges,
@@ -15,20 +17,27 @@
   .mat-stepper-vertical {
     .mat-vertical-stepper-header {
       height: 8vmin;
-      }
-  
+    }
+
     .mat-vertical-content-container {
       margin-left: 3vmin;
-  
-  
+
+
       .mat-vertical-content {
         padding: 0 2vmin 2vmin 4vmin;
       }
     }
   }
-  
+
   .mat-stepper-vertical-line::before {
     border-left: 0.3vmin solid #68B70C;
     border-left-width: 0.3vmin !important;
+  }
+
+  //sidenav styles
+  .mat-drawer-container {
+    .mat-sidenav {
+      width: 70%;
+    }
   }
 }

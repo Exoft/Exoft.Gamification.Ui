@@ -1,0 +1,29 @@
+@media (max-width: 767px),
+(orientation: portrait) {
+
+  .header-container {
+    height: 12vmin;
+    padding: 0 4vmin;
+
+    .button-logo-container {
+      .open-sidenav-button {
+        font-size: 4vmin;
+        width: 4vmin;
+        height: 4vmin;
+        margin: 0 3vmin 0 0;
+      }
+
+      .logo-span {
+        font-size: 4vmin;
+      }
+    }
+
+    .menu-header-container {
+      display: none;
+    }
+
+    .user-info-container {
+      display: none;
+    }
+  }
+}

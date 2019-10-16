@@ -5,23 +5,30 @@
 
   .sidenav {
     padding: 1vmin;
+    color: $textColor;
 
-    .logo-span {
-      color: $textColor;
-      font-size: 2vmin;
-      padding: 1vmin;
-      font-weight: 500;
-      position: absolute;
-    }
+    .logo-button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      width: 100%;
+      position: relative;
 
-    .close-sidenav-button {
-      align-self: flex-end;
-      width: 2vmin;
-      margin: 0 1.5vmin 0 0;
+      .logo-span {
+        align-self: center;
+        font-size: 2vmin;
+        padding: 1vmin;
+        font-weight: 500;
+        position: absolute;
+      }
 
-      .material-icons {
+      .close-sidenav-button {
+        margin: 1vmin;
         font-size: 2vmin;
         width: 2vmin;
+        height: 2vmin;
+        cursor: pointer;
       }
     }
 
@@ -58,17 +65,13 @@
     }
 
     .log-out-button {
-      height: 2vmin;
       background-color: $mainColor;
       color: $textColor;
       font-size: 1.5vmin;
-      display: flex;
-      justify-items: center;
-      align-items: center;
-      border-radius: 0;
-      line-height: 0;
+      line-height: 2.5vmin;
       margin-top: 0.5vmin;
       padding: 0 2vmin;
+      border-radius: 0;
     }
 
     .user-achivments-info {
@@ -83,7 +86,7 @@
         .user-achivments-title {
           color: $mainColor;
           font-size: 2vmin;
-          margin: 0  0.5vmin 0 0;
+          margin: 0 0.5vmin 0 0;
         }
 
         .user-achivments-text {
@@ -110,3 +113,4 @@
   }
 }
 
+@import './mainnav.component.responsive.scss';
