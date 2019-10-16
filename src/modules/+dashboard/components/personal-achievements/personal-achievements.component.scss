@@ -66,7 +66,7 @@
           width: 1.3vmin;
           height: 1.3vmin;
           background-color: #FCB415;
-          border-radius: 5vmin;
+          border-radius: 50%;
           margin: 0 0.5vmin 0 0;
         }
 
@@ -78,3 +78,6 @@
     }
   }
 }
+
+
+@import './personal-acnievemnets.component.responsive.scss';

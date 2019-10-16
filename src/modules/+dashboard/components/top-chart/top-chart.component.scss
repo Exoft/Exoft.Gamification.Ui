@@ -75,6 +75,10 @@ $barColors: '0'#1398E6,
             margin: 0 1vmin 0 0;
             cursor: pointer;
           }
+
+          .user-txt{
+            width: min-content;
+          }
         }
 
         .points-count {
@@ -100,3 +104,5 @@ $barColors: '0'#1398E6,
     }
   }
 }
+
+@import './top-chart.component.responsive.scss';

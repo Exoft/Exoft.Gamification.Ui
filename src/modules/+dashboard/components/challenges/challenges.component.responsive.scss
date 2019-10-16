@@ -1,0 +1,82 @@
+@media (max-width: 767px), (orientation: portrait) {
+  .component-wrapper {
+    padding: 4vmin;
+
+    .header-wrapper {
+      .component-title {
+        font-size: 4vmin;
+      }
+
+      .request-button {
+        padding: 0 3vmin;
+        font-size: 4vmin;
+      }
+    }
+
+    .challenges-content-wrapper {
+      .timeline-wrapper {
+        .line-wrapper {
+          .dot {
+            height: 3vmin;
+            width: 3vmin;
+          }
+
+          .line {
+            .line-itself {
+              background-color: #68B70C;
+              width: 0.3vmin;
+            }
+          }
+        }
+
+        .available-content-wrapper {
+          .challenges-label {
+            font-size: 3vmin;
+          }
+
+          .available-content {
+            .available-challenge-img {
+              height: 20vmin;
+              width: 30vmin;
+            }
+
+            .challenge-text-content {
+              padding: 0 0 0 4vmin;
+
+              .challenge-name {
+                font-size: 3vmin;
+              }
+
+              .challenge-progress {
+                font-size: 3vmin;
+              }
+            }
+          }
+        }
+      }
+
+      .ended-content-wrapper {
+        .challenges-label {
+          font-size: 3vmin;
+        }
+
+        .ended-challenges {
+          .ended-row {
+            .ended-item {
+              img {
+                width: 18vmin;
+                height: 18vmin;
+                margin: 0 1vmin 1vmin 0;
+              }
+
+              .img-text {
+                padding: 0 0 1vmin;
+                font-size: 3vmin;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

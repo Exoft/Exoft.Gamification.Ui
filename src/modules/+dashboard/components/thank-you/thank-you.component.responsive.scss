@@ -1,0 +1,45 @@
+@media (max-width: 767px), (orientation: portrait) {
+  .component-wrapper {
+    padding: 4vmin;
+
+    .component-title {
+      margin: 0;
+      font-size: 4vmin;
+    }
+
+    .card-content-wrapper {
+      height: auto;
+
+      .star-img {
+        height: 20vmin;
+        margin: 2vmin 0;
+      }
+
+      .image-subtext {
+        font-size: 4vmin;
+        margin: 2vmin 0;
+      }
+
+      .user {
+        .user-image-text {
+          height: 6vmin;
+          width: 6vmin;
+          border: 0.3vmin solid #FFFFFF;
+          font-size: 3vmin;
+          margin: 0 3vmin 0 0;
+        }
+
+        .avatar {
+          height: 6vmin;
+          width: 6vmin;
+          margin: 0 3vmin 0 0;
+          border: 0.3vmin solid #68B70C;
+        }
+
+        .user-name {
+          font-size: 3vmin;
+        }
+      }
+    }
+  }
+}
