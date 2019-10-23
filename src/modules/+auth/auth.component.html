@@ -15,7 +15,7 @@
           />
         </mat-form-field>
 
-        <a>FORGOT PASSWORD?</a>
+        <a (click)="onForgotPassword()">FORGOT PASSWORD?</a>
       </div>
 
       <button
@@ -23,6 +23,7 @@
         type="submit"
         class="sign-in-button"
         [disabled]="signinForm.invalid"
+        [ngStyle]="{'opacity': signinForm.invalid ? '0.6' : '1'}"
       >
         SIGN IN
       </button>

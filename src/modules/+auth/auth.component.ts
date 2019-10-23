@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
-import {AuthService} from 'src/modules/app/services/auth/auth.service';
-import {UserService} from 'src/modules/app/services/user.service';
-import {environment} from 'src/environments/environment';
+import { AuthService } from 'src/modules/app/services/auth/auth.service';
+import { UserService } from 'src/modules/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-auth',
@@ -21,7 +22,8 @@ export class AuthComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private userService: UserService) {
+    private userService: UserService,
+    private snackBar: MatSnackBar) {
   }
 
   public onSignIn() {
@@ -48,8 +50,19 @@ export class AuthComponent {
           this.userService.setUserData(this.userData);
         },
         error => {
+          this.openSnackBar('Sorry but your email or password are incorrect, please try again', 'Notification');
         }
       );
     }
+  }
+
+  public openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 10000,
+    });
+  }
+
+  onForgotPassword() {
+    this.router.navigate(['/signin/forgot-password']);
   }
 }
