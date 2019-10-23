@@ -1,51 +1,43 @@
-import {Injectable} from '@angular/core';
-import {MatDialog} from '@angular/material';
-import {OtherUserProfileComponent} from '../../+dashboard/components/other-user-profile/other-user-profile.component';
-import {GratitudeComponent} from '../../+dashboard/components/gratitude/gratitude.component';
-import {RequestAchievementComponent} from '../../+dashboard/components/request-achievement/request-achievement.component';
-import {AddUserComponent} from '../../+admin-page/components/add-user/add-user.component';
-import {EditUserComponent} from '../../+admin-page/components/edit-user/edit-user.component';
+import { Injectable } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { OtherUserProfileComponent } from '../components/other-user-profile/other-user-profile.component';
+import { GratitudeComponent } from '../components/gratitude/gratitude.component';
+import { RequestAchievementComponent } from '../components/request-achievement/request-achievement.component';
+import { AddUserComponent } from '../../+admin-page/components/add-user/add-user.component';
+import { EditUserComponent } from '../../+admin-page/components/edit-user/edit-user.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
-
-  constructor(public dialog: MatDialog) {
-  }
+  constructor(public dialog: MatDialog) {}
 
   public openInfoModal(userId: any) {
-    this.dialog.open(OtherUserProfileComponent, {
-      width: '680px',
-      height: '680px',
-      data: userId
-    });
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.panelClass = 'other-user-dialog';
+    dialogConfig.data = userId;
+
+    this.dialog.open(OtherUserProfileComponent, dialogConfig);
   }
 
   public openRequestForm() {
-    this.dialog.open(RequestAchievementComponent, {
-      width: '500px'
-    });
-  }
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.panelClass = 'request-dialog';
 
-  public openThankingForm() {
-    this.dialog.open(GratitudeComponent, {
-      width: '600px'
-    });
+    this.dialog.open(RequestAchievementComponent, dialogConfig);
   }
 
   public openEditUserForm() {
-    this.dialog.open(EditUserComponent, {
-      width: '600px'
-    });
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.panelClass = 'edit-user-dialog';
+
+    this.dialog.open(EditUserComponent, dialogConfig);
   }
 
   public openAddUserForm() {
-    this.dialog.open(AddUserComponent, {
-      width: '600px'
-    });
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.panelClass = 'add-user-dialog';
+
+    this.dialog.open(AddUserComponent, dialogConfig);
   }
-
 }
-
-

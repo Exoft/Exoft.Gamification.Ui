@@ -3,7 +3,7 @@ import { RequestService } from 'src/modules/app/services/dashboardequest.service
 import { MatDialog } from '@angular/material';
 import { DialogService } from 'src/modules/app/services/dialog.service';
 import { AssignAchievementsComponent } from '../../../+admin-page/components/assign-achievements/assign-achievements.component';
-import { RequestAchievementComponent } from '../request-achievement/request-achievement.component';
+import { RequestAchievementComponent } from '../../../app/components/request-achievement/request-achievement.component';
 
 @Component({
   selector: 'app-personal-achievements',
@@ -35,9 +35,6 @@ export class PersonalAchievementsComponent implements OnInit {
   }
 
   public openForm() {
-    this.dialog.open(RequestAchievementComponent, {
-      width: '600px',
-      data: {}
-    });
+    this.dialogService.openRequestForm();
   }
 }

@@ -128,22 +128,6 @@
   border-left-width: 0.1vmin !important;
 }
 
-
-//dialog styles
-.mat-dialog-container {
-  padding: 0 !important;
-  display: block;
-  border-radius: 4px;
-  overflow: visible !important;
-  outline: 0;
-  max-width: 1800px !important;
-  height: 100%;
-  width: 100% !important;
-  min-height: inherit;
-  max-height: inherit;
-  background-color: transparent;
-}
-
 //select override
 .mat-select {
   color: $mainColor;
