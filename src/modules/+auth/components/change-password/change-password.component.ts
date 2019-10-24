@@ -33,7 +33,7 @@ export class ChangePasswordComponent implements OnInit {
       this.openSnackBar('Now try to sign in with your new password', 'Notification');
       setTimeout(() => {
         this.router.navigate(['/signin']);
-      }, 10000);
+      }, 5000);
     },
       error => {
         const errorPswArray = error.error.Password;
@@ -44,7 +44,7 @@ export class ChangePasswordComponent implements OnInit {
 
   public openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 10000,
+      duration: 5000,
     });
   }
 }
