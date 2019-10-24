@@ -1,18 +1,20 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   HttpInterceptor,
   HttpRequest,
   HttpHandler,
   HttpEvent
 } from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
-import {catchError} from 'rxjs/operators';
-import {AuthService} from './auth.service';
-import {Router} from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { AuthService  } from './auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService,
+              private router: Router,
+              private activeRoute: ActivatedRoute) {
     // console.log(userToken);
   }
 
@@ -36,6 +38,9 @@ export class Interceptor implements HttpInterceptor {
       }
     })).pipe(
       catchError((error: any) => {
+        if (this.activeRoute.snapshot.queryParams.secretString) {
+          return throwError(error);
+        }
         if (error.status === 401) {
           this.authService.onLogOut();
         }

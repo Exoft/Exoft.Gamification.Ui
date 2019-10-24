@@ -15,6 +15,7 @@ import { environment } from 'src/environments/environment';
 export class ProfileSettingsComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();
 
+  public wrongImgUrl = 'http://localhost:5000/api/files/null';
   public profileSettingsForm = new FormGroup({
     userName: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),

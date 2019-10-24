@@ -41,4 +41,12 @@ export class AuthService {
     });
   }
 
+  public sendForgotPasLink(forgotPasData: object) {
+    return this.http.post(environment.apiUrl + '/api/authenticate/forgot-password', forgotPasData);
+  }
+
+  public changePassword(changePasData: object) {
+    return this.http.post(environment.apiUrl + '/api/authenticate/reset-password', changePasData);
+  }
+
 }
