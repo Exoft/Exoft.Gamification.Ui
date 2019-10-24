@@ -54,9 +54,17 @@
       height: 70vh;
       width: 75vw;
 
-      .mat-button-wrapper{
+      .mat-button-wrapper {
         line-height: 2.5vh;
       }
+    }
+  }
+
+  .thank-you-dialog {
+    width: 75vw;
+
+    .mat-button-wrapper {
+      line-height: 2.5vh;
     }
   }
 }

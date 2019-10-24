@@ -56,6 +56,7 @@ export class OtherUserProfileComponent implements OnInit {
   public openThankYouForm() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.panelClass = 'thank-you-dialog';
+    dialogConfig.data = this.userId;
 
     this.dialog.open(GratitudeComponent, dialogConfig);
   }

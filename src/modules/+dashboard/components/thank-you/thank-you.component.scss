@@ -49,10 +49,11 @@
 
       .avatar {
         height: 3vmin;
+        width: 3vmin;
         margin: 0 1vmin 0 0;
         border: 0.1vmin solid #68B70C;
         border-radius: 50%;
-        object-fit: contain;
+        object-fit: cover;
       }
 
       .user-name {
@@ -60,6 +61,15 @@
         color: #68B70C;
       }
     }
+  }
+
+  .no-thank-you-text {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3vmin;
+    text-align: center;
   }
 }
 

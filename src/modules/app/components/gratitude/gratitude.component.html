@@ -1,21 +1,15 @@
 <mat-card class="card">
-  <div class="card-container">
-    <div class="content-container">
+  <div class="content-container">
+    <div class="title">Leave the comment</div>
 
-      <div class="label">Leave the comment</div>
-      
-      <mat-form-field class="form">
-        <textarea matInput></textarea>
-      </mat-form-field>
+    <mat-form-field class="message-field">
+      <textarea matInput [formControl]="message" matTextareaAutosize matAutosizeMinRows=2
+        matAutosizeMaxRows=5></textarea>
+    </mat-form-field>
 
-
-      <div class="button">
-        <button mat-button class="submit-button">Thanks!</button>
-      </div>
-    </div>
-
-    <div class="close-button" (click)="closeForm()">
-      <i class="material-icons">close</i>
-    </div>
   </div>
+
+  <button mat-button class="submit-button" (click)="sendMessage()" [disabled]="!message.valid">Thanks!</button>
+
+  <mat-icon class="close-button" (click)="closeForm()">close</mat-icon>
 </mat-card>
