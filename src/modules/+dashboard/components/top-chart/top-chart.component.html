@@ -16,8 +16,7 @@
           </div>
 
           <ng-template #avatarExists>
-            <!-- <img [src]="AvatarId(item.avatarId)" (click)="openUserDetails(item.id)"> -->
-            <img class="avatar" src="assets/images/star.png">
+            <img [src]="AvatarId(item.avatarId)"  class="avatar"  (click)="openUserDetails(item.id)">
           </ng-template>
 
           <div class="user-txt" (click)="openUserDetails(item.id)"> {{item.firstName}} {{item.lastName}}</div>

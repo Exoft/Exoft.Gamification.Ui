@@ -61,15 +61,17 @@ $barColors: '0'#1398E6,
             height: 3vmin;
             width: 3vmin;
             border-radius: 50%;
-            border: 0.1vmin solid #68B70C;
+            border: 0.1vmin solid #FFFFFF;
             margin: 0 1vmin 0 0;
             cursor: pointer;
+            color: #68B70C;
+            background-color: #566271;
           }
 
           .avatar {
             height: 3vmin;
             width: 3vmin;
-            object-fit: contain;
+            object-fit: cover;
             border-radius: 50%;
             border: 0.1vmin solid #68B70C;
             margin: 0 1vmin 0 0;

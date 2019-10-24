@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
-import {RequestService} from 'src/modules/app/services/dashboardequest.service';
-import {DialogService} from 'src/modules/app/services/dialog.service';
-import {getFirstLetters} from '../../../app/utils/letterAvatar';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { RequestService } from 'src/modules/app/services/dashboardequest.service';
+import { DialogService } from 'src/modules/app/services/dialog.service';
+import { getFirstLetters } from '../../../app/utils/letterAvatar';
 
 @Component({
   selector: 'app-top-chart',
@@ -10,10 +10,11 @@ import {getFirstLetters} from '../../../app/utils/letterAvatar';
   styleUrls: ['./top-chart.component.scss']
 })
 export class TopChartComponent implements OnInit {
-  constructor(public dialog: MatDialog,
-              private requestService: RequestService,
-              private dialogService: DialogService) {
-  }
+  constructor(
+    public dialog: MatDialog,
+    private requestService: RequestService,
+    private dialogService: DialogService
+  ) {}
 
   public pageData: any = [];
   public title = 'Gamification';
@@ -25,13 +26,12 @@ export class TopChartComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-
   }
 
   private loadData() {
     this.requestService.getAllUsers().subscribe(response => {
       // Take top five users
-      this.pageData = response.data.sort((a, b) => b.xp - a.xp).slice(0, 5)
+      this.pageData = response.data.sort((a, b) => b.xp - a.xp).slice(0, 5);
       this.getMaxXp(this.pageData[0].xp);
     });
   }
@@ -49,8 +49,6 @@ export class TopChartComponent implements OnInit {
   }
 
   public AvatarId(avatarId: any) {
-    // return 'http://localhost:5000/api/files/' + avatarId;
-    this.requestService.getAvatar(avatarId);
+    return this.requestService.getAvatar(avatarId);
   }
-
 }
