@@ -17,23 +17,6 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-// dialogs styles
-.cdk-overlay-pane {
-  .mat-dialog-container {
-    padding: 0;
-    border-radius: 2vmin;
-    background-color: transparent;
-  }
-}
-
-.other-user-dialog {
-  .mat-dialog-container {
-    width: 115vmin;
-    height: 50vmin;
-  }
-}
-
-
 // scroll bar style
 ::-webkit-scrollbar {
   width: 0.5vmin;

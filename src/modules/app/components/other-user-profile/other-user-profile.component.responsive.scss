@@ -1,0 +1,65 @@
+@media (max-width: 767px),
+(orientation: portrait) {
+  .card {
+    .main-container {
+      flex-direction: column;
+      padding: 2vh;
+
+      .other-user-container {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        height: 15vh;
+
+        .avatar-text {
+          height: 12vh;
+          width: 12vh;
+          font-size: 6vh;
+        }
+
+        .avatar {
+          height: 12vh;
+          width: 12vh;
+        }
+
+        .user-name {
+          font-size: 4vmin;
+        }
+
+        .user-achivments-info {
+          font-size: 3vmin;
+        }
+      }
+
+      .achievement-container {
+        width: 100%;
+        height: 45vh;
+
+        .achievement-item {
+          padding: 2vmin;
+          height: 20%;
+          width: 50%;
+
+          .image-text {
+            font-size: 3vmin;
+          }
+        }
+      }
+    }
+
+    .request-button {
+      font-size: 2.5vh;
+      height: 5vh;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .close-button {
+      top: 2vmin;
+      right: 3vmin;
+      font-size: 4vmin;
+    }
+  }
+}

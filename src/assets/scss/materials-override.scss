@@ -193,5 +193,22 @@ app-user {
   }
 }
 
+// dialogs styles
+.cdk-overlay-pane {
+  .mat-dialog-container {
+    padding: 0;
+    border-radius: 2vmin;
+    background-color: transparent;
+  }
+}
+
+.other-user-dialog {
+  .mat-dialog-container {
+    width: 115vmin;
+    height: 50vmin;
+  }
+}
+
+
 
 @import './material-override.responsive.scss';

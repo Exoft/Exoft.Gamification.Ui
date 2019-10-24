@@ -9,23 +9,25 @@
           <img [src]="getAvatarId(pageData.avatarId)" class="avatar" />
         </ng-template>
 
-        <div class="user-name">{{pageData.firstName}} {{pageData.lastName}}</div>
+        <div class="user-info-container">
+          <div class="user-name">{{pageData.firstName}} {{pageData.lastName}}</div>
 
-        <div class="user-achivments-info">
-          <div class="user-achivments-elements">
-            <p class="user-achivments-title">Total:</p>
+          <div class="user-achivments-info">
+            <div class="user-achivments-elements">
+              <p class="user-achivments-title">Total:</p>
 
-            <p> {{ totalBadgesCount }} Badges</p>
-          </div>
+              <p> {{ totalBadgesCount }} Badges</p>
+            </div>
 
-          <div class="user-achivments-elements">
-            <p class="user-achivments-title">EXP:</p>
+            <div class="user-achivments-elements">
+              <p class="user-achivments-title">EXP:</p>
 
-            <p> {{pageData.xp}} XP</p>
-          </div>
+              <p> {{pageData.xp}} XP</p>
+            </div>
 
-          <div class="user-achivments-elements" *ngIf="pageData.status">
-            <p class="user-achivments-status">"{{pageData.status}}"</p>
+            <div class="user-achivments-elements" *ngIf="pageData.status">
+              <p class="user-achivments-status">"{{pageData.status}}"</p>
+            </div>
           </div>
         </div>
       </div>
@@ -38,7 +40,7 @@
         </div>
       </div>
     </div>
-    
+
     <button mat-button class="request-button" (click)="openThankYouForm()"> SAY THANKS</button>
 
     <mat-icon class="close-button" (click)="closeOtherUser()">close</mat-icon>
