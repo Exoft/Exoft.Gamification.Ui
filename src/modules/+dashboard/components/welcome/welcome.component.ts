@@ -24,6 +24,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
+
   private loadData(): void {
     this.userService
       .getUserData()

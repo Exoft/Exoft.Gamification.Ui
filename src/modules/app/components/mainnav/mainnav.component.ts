@@ -19,7 +19,7 @@ export class MainnavComponent implements OnInit, OnDestroy {
   @ViewChild('drawer') public drawer: MatDrawer;
   private unsubscribe$: Subject<void> = new Subject();
 
-  public menuItems = menuItems;
+  public menuItems = Array.from(menuItems);
   public isHeaderShown = true;
   public avatarSource: string;
   public userName: string;
@@ -59,6 +59,11 @@ export class MainnavComponent implements OnInit, OnDestroy {
         this.userName = res.firstName + ' ' + res.lastName;
         this.xpCount = res.xp;
         this.userRoles = res.roles;
+
+        this.menuItems = Array.from(menuItems);
+        if (res.roles && !res.roles.includes('Admin')) {
+          this.menuItems.pop();
+        }
       });
   }
   public logOut() {

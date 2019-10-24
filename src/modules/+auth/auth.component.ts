@@ -23,16 +23,25 @@ export class AuthComponent {
     private authService: AuthService,
     private router: Router,
     private userService: UserService,
-    private snackBar: MatSnackBar) {
-  }
+    private snackBar: MatSnackBar
+  ) {}
 
   public onSignIn() {
     if (this.signinForm.valid) {
-      const {userName, password} = this.signinForm.value;
-      const formData = {userName, password};
+      const { userName, password } = this.signinForm.value;
+      const formData = { userName, password };
       this.authService.signIn(formData).subscribe(
         res => {
-          const {userName, lastName, firstName, email, xp, status, id} = res;
+          const {
+            userName,
+            lastName,
+            firstName,
+            email,
+            xp,
+            status,
+            id,
+            roles
+          } = res;
           this.userData = {
             userName,
             lastName,
@@ -41,7 +50,8 @@ export class AuthComponent {
             xp,
             id,
             status,
-            avatar: environment.apiUrl + '/api/files/' + res.avatarId
+            avatar: environment.apiUrl + '/api/files/' + res.avatarId,
+            roles
           };
           localStorage.setItem('token', res.token);
           localStorage.setItem('refreshToken', res.refreshToken);
@@ -50,7 +60,10 @@ export class AuthComponent {
           this.userService.setUserData(this.userData);
         },
         error => {
-          this.openSnackBar('Sorry but your email or password are incorrect, please try again', 'Notification');
+          this.openSnackBar(
+            'Sorry but your email or password are incorrect, please try again',
+            'Notification'
+          );
         }
       );
     }
@@ -58,7 +71,7 @@ export class AuthComponent {
 
   public openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 10000,
+      duration: 10000
     });
   }
 
