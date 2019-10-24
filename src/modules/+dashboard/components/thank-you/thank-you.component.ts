@@ -19,9 +19,7 @@ export class ThankYouComponent implements OnInit {
   }
 
   private loadData() {
-    this.requestService.getUserInfo().subscribe(response =>
-      this.pageData = response
-    );
+    
   }
 
   public AvatarId(avatarId: any) {
