@@ -15,17 +15,26 @@
   </div>
 
   <div class="user-info-container">
-    <!-- <div *ngIf="!avatarSource else avatarExists"> -->
-    <div>
+    <div *ngIf="!avatarSource else avatarExists">
       <div class="avatar-text">
         <p>{{letterAvatar()}}</p>
       </div>
     </div>
 
     <ng-template #avatarExists>
-      <img [src]="AvatarId(avatarSource)" class="avatar" />
+      <img [src]="getAvatarLink(avatarSource)" class="avatar" />
     </ng-template>
-
+    
     <div class="user-name">{{ userName }}</div>
+    
+    <mat-icon class="open-menu-button" [matMenuTriggerFor]="userMenu">arrow_drop_down</mat-icon>
+
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item [routerLink]="'/profile-settings'">Edit profile</button>
+
+      <mat-divider></mat-divider>
+
+      <button mat-menu-item (click)="logOut()">Log out</button>
+    </mat-menu>
   </div>
 </mat-toolbar>

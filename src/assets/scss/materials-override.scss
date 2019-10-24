@@ -96,8 +96,10 @@
     padding: 0;
     height: 4vmin;
     cursor: default;
-    
-    &:hover, .cdk-program-focused, .cdk-focused{
+
+    &:hover,
+    .cdk-program-focused,
+    .cdk-focused {
       background-color: transparent;
     }
 
@@ -208,6 +210,24 @@ app-user {
     padding: 0;
     border-radius: 2vmin;
     background-color: transparent;
+  }
+
+  // user menu styles
+  .mat-menu-panel {
+    background-color: transparent;
+
+    .mat-menu-content {
+      padding: 0;
+      background-color: #4f565f;
+
+      .mat-menu-item {
+        color: #ffffff;
+        font-size: 1.5vmin;
+        height: 5vmin;
+        line-height: 1.5vmin;
+        padding: 0 2vmin;
+      }
+    }
   }
 }
 

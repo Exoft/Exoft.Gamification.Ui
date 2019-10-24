@@ -4,6 +4,8 @@ import {getFirstLettersWithSplit} from '../../utils/letterAvatar';
 import {OnInit} from '@angular/core/src/metadata/lifecycle_hooks';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/user';
+import { AuthService } from '../../services/auth/auth.service';
+import { RequestService } from '../../services/dashboardequest.service';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +21,7 @@ export class HeaderComponent implements OnInit {
   public menuItems = menuItems;
   public letterAvatar = getFirstLettersWithSplit;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private authService: AuthService, private requestService: RequestService) {
 
   }
 
@@ -35,8 +37,11 @@ export class HeaderComponent implements OnInit {
     this.openSidenavEmitter.emit(null);
   }
 
-  public AvatarId(avatarId: any): string {
-    return 'http://localhost:5000/api/files/' + avatarId;
+  public getAvatarLink(avatarId: any): string {
+    return this.requestService.getAvatar(avatarId);
   }
 
+  public logOut(): void {
+    this.authService.onLogOut();
+  }
 }
