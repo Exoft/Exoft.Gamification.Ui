@@ -15,17 +15,17 @@
           />
         </mat-form-field>
 
-        <a (click)="onForgotPassword()">FORGOT PASSWORD?</a>
+        <a class="text-uppercase" (click)="onForgotPassword()">forgot password ?</a>
       </div>
 
       <button
         mat-button
         type="submit"
-        class="sign-in-button"
+        class="sign-in-button text-uppercase"
         [disabled]="signinForm.invalid"
         [ngStyle]="{'opacity': signinForm.invalid ? '0.6' : '1'}"
       >
-        SIGN IN
+        sign in
       </button>
     </form>
   </div>

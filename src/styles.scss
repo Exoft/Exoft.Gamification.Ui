@@ -15,6 +15,10 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+
+  .text-uppercase {
+    text-transform: uppercase;
+  }
 }
 
 // scroll bar style

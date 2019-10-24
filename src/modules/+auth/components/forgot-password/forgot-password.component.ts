@@ -51,4 +51,8 @@ export class ForgotPasswordComponent implements OnInit {
       duration: 10000,
     });
   }
+
+  public onSignInClick(): void {
+    this.router.navigate(['/signin']);
+  }
 }

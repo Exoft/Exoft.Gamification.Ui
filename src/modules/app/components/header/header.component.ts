@@ -24,18 +24,18 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getCurrentUserInfo().subscribe((u: User) => {
-      if (!u.roles.includes('Admin' as never)) {
-        this.menuItems.pop();
-      }
-    });
+    // this.userService.getCurrentUserInfo().subscribe((u: User) => {
+    //   if (!u.roles.includes('Admin' as never)) {
+    //     this.menuItems.pop();
+    //   }
+    // });
   }
 
   public openSidenav() {
     this.openSidenavEmitter.emit(null);
   }
 
-  public AvatarId(avatarId: any) {
+  public AvatarId(avatarId: any): string {
     return 'http://localhost:5000/api/files/' + avatarId;
   }
 
