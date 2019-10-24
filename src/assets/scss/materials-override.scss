@@ -95,7 +95,11 @@
   .mat-vertical-stepper-header {
     padding: 0;
     height: 4vmin;
-    pointer-events: none;
+    cursor: default;
+    
+    &:hover, .cdk-program-focused, .cdk-focused{
+      background-color: transparent;
+    }
 
     .mat-step-icon {
       display: none;
@@ -106,6 +110,11 @@
       flex: 1;
       align-items: center;
       z-index: 1;
+      cursor: default;
+    }
+
+    .mat-step-header-ripple {
+      display: none;
     }
   }
 

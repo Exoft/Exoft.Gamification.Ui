@@ -38,22 +38,24 @@
       justify-content: center;
       height: 3vmin;
       width: 3vmin;
-      border: 0.1vmin solid #68B70C;
-      background-color: #3A3E46;
+      border: 0.1vmin solid #FFFFFF;
+      background-color: #566271;
       border-radius: 50%;
       font-size: 1.3vmin;
       margin: 0 1vmin 0 0;
-      color: #FFFFFF;
+      color: #68B70C;
+      cursor: pointer;
     }
 
     .user-image {
       height: 3vmin;
       width: 3vmin;
-      object-fit: contain;
+      object-fit: cover;
       border: 0.1vmin solid #68B70C;
       border-radius: 50%;
       margin: 0 1vmin 0 0;
-      background-color: #3A3E46;
+      background-color: #566271;
+      cursor: pointer;
     }
 
     .achievement-label {

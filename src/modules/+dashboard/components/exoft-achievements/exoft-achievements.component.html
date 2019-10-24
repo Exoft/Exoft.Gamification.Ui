@@ -5,17 +5,16 @@
     <div class="achievements-count">{{calculateEvents(pageData)}}</div>
   </mat-card-title>
 
-  <mat-vertical-stepper class="achievement-content-wrapper">
+  <mat-vertical-stepper class="achievement-content-wrapper" [@.disabled]="true">
     <mat-step class="achievements" *ngFor="let item of pageData">
       <ng-template matStepLabel>
         <div>
-          <div class="avatar" *ngIf="item.avatarId === null else avatarExists">
+          <div class="avatar" *ngIf="item.avatarId === null else avatarExists" (click)="openOtherUserInfoDialog(item.userId)">
             <p>{{letterAvatar(item.firstName, item.lastName)}}</p>
           </div>
 
           <ng-template #avatarExists>
-            <!-- <img class="user-image" [src]="AvatarId(item.avatarId)"> -->
-            <img class="user-image" src="assets/images/star.png">
+            <img class="user-image" [src]="AvatarId(item.avatarId)" (click)="openOtherUserInfoDialog(item.userId)">
           </ng-template>
         </div>
 

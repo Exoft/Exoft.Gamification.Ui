@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { RequestService } from 'src/modules/app/services/dashboardequest.service';
 import { getFirstLetters } from '../../../app/utils/letterAvatar';
+import { DialogService } from 'src/modules/app/services/dialog.service';
 
 @Component({
   selector: 'app-exoft-achievements',
@@ -15,7 +16,7 @@ export class ExoftAchievementsComponent implements OnInit {
   public pageData: any = [];
   public letterAvatar = getFirstLetters;
   public numberOfEvents = this.calculateEvents(this.pageData);
-  constructor(public dialog: MatDialog, private requestService: RequestService) { }
+  constructor(private requestService: RequestService, private dialogService: DialogService) { }
 
   ngOnInit() {
     this.loadData();
@@ -27,11 +28,14 @@ export class ExoftAchievementsComponent implements OnInit {
     });
   }
   public AvatarId(avatarId: any) {
-    return 'http://localhost:5000/api/files/' + avatarId;
+    return this.requestService.getAvatar(avatarId);
   }
 
   public calculateEvents(arr: any) {
     return arr.length;
   }
 
+  public openOtherUserInfoDialog(userId: string) {
+    this.dialogService.openInfoModal(userId);
+  }
 }
