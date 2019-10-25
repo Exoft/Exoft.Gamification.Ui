@@ -39,7 +39,7 @@ export class ForgotPasswordComponent implements OnInit {
       this.openSnackBar('Now check out your email and follow to the link in it.', 'Notification');
       setTimeout(() => {
         this.router.navigate(['/signin']);
-        }, 10000);
+        }, 3000);
     },
       error => {
         this.openSnackBar('This email doesn\'t exist', 'Notification');
@@ -48,7 +48,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   public openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 10000,
+      duration: 3000,
     });
   }
 

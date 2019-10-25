@@ -19,7 +19,7 @@ export class AuthService {
     return this.http.post(environment.apiUrl + '/api/authenticate', loginData);
   }
 
-  public onLogOut() {
+  public onLogOut(): void {
     this.router.navigate(['/signin']);
     localStorage.clear();
   }

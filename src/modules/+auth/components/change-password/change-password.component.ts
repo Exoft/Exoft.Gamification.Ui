@@ -13,8 +13,11 @@ import { AuthService } from '../../../app/services/auth/auth.service';
 export class ChangePasswordComponent implements OnInit {
 
   public changePasForm = new FormGroup({
-    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-  });
+    password: new FormControl('', [Validators.required,
+                                                           Validators.pattern('^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$')]),
+    confirmPassword: new FormControl('', [Validators.required,
+                                                                  Validators.pattern('^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$')]),
+  }, [this.checkPasswords]);
 
   constructor(private authService: AuthService,
               private activeRoute: ActivatedRoute,
@@ -22,6 +25,13 @@ export class ChangePasswordComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+  }
+
+  checkPasswords(group: FormGroup) { // here we have the 'passwords' group
+    const pass = group.get('password').value;
+    const confirmPass = group.get('confirmPassword').value;
+
+    return pass === confirmPass ? null : { notSame: true };
   }
 
   onResetPassword() {
@@ -33,7 +43,7 @@ export class ChangePasswordComponent implements OnInit {
       this.openSnackBar('Now try to sign in with your new password', 'Notification');
       setTimeout(() => {
         this.router.navigate(['/signin']);
-      }, 5000);
+      }, 3000);
     },
       error => {
         const errorPswArray = error.error.Password;
@@ -44,7 +54,7 @@ export class ChangePasswordComponent implements OnInit {
 
   public openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 5000,
+      duration: 3000,
     });
   }
 }

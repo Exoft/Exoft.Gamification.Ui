@@ -40,20 +40,33 @@
       position: relative;
 
       .avatar-container {
-        width: 15vmin;
-        height: 15vmin;
+        width: 20vmin;
+        height: 20vmin;
         position: absolute;
         align-self: flex-end;
-        top: -7.5vmin;
-        right: 5vmin;
-
+        top: -15vmin;
+        right: 2vmin;
 
         .avatar {
           width: 15vmin;
           height: 15vmin;
           object-fit: cover;
-          border: 0.1vmin solid $mainColor;
+          border: 0.3vmin solid $mainColor;
           border-radius: 50%;
+        }
+
+        .avatar-text {
+          border-radius: 50%;
+          width: 20vmin;
+          height: 20vmin;
+          object-fit: cover;
+          border: 0.1vmin solid $textColor;
+          font-size: 10vmin;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #576271;
+          color: $mainColor;
         }
       }
 

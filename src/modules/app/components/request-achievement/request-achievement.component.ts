@@ -9,19 +9,20 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
   styleUrls: ['./request-achievement.component.scss']
 })
 export class RequestAchievementComponent implements OnInit {
-  constructor(public dialog: MatDialog,
-    public requestService: RequestService,
-    private httpClient: HttpClient,
-    private formBuilder: FormBuilder) { }
+
   public pageData: any;
   public requestAchievementForm: FormGroup;
 
+  constructor(public dialog: MatDialog,
+              public requestService: RequestService,
+              private httpClient: HttpClient,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.loadData();
     this.requestAchievementForm = new FormGroup({
-      'achievementId': new FormControl(null, Validators.required),
-      'message': new FormControl(null)
+      achievementId: new FormControl(null, Validators.required),
+      message: new FormControl(null, Validators.required)
     });
   }
 

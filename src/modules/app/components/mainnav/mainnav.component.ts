@@ -8,8 +8,8 @@ import { MatDrawer } from '@angular/material';
 import { UserService } from 'src/modules/app/services/user.service';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/modules/app/services/auth/auth.service';
-import { getFirstLetters } from '../../utils/letterAvatar';
 import { RequestService } from '../../services/dashboardequest.service';
+import { getFirstLettersWithSplit } from '../../utils/letterAvatar';
 
 @Component({
   selector: 'app-mainnav',
@@ -29,7 +29,7 @@ export class MainnavComponent implements OnInit, OnDestroy {
   public userData: any;
   public firstName: any;
   public lastName: any;
-  public letterAvatar = getFirstLetters;
+  public letterAvatar = getFirstLettersWithSplit;
   public userRoles: any = [];
 
   constructor(
