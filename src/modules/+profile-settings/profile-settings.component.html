@@ -12,7 +12,7 @@
       </label>
 
       <ng-template #avatarExists>
-        <img [src]="avatarId" class="avatar" />
+        <img [src]="getAvatarId(avatarId)" class="avatar" />
       </ng-template>
 
       <input class="image-input" id="imageInput" type="file" (change)="onSelectFile($event)" />

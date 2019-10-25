@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { UserService } from 'src/modules/app/services/user.service';
 import { environment } from 'src/environments/environment';
 import { getFirstLettersWithSplit } from '../app/utils/letterAvatar';
+import { RequestService } from '../app/services/dashboardequest.service';
 
 @Component({
   selector: 'app-profile-settings',
@@ -36,7 +37,11 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
   public letterAvatar = getFirstLettersWithSplit;
   public userName: string;
 
-  constructor(private userService: UserService, private location: Location) { }
+  constructor(
+    private userService: UserService,
+    private location: Location,
+    private requestService: RequestService
+  ) {}
 
   public ngOnInit() {
     this.subscribeToUserDataChange();
@@ -69,7 +74,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
             lastName,
             email,
             status,
-            avatar
+            avatar: avatarId
           });
           this.avatarUrl = avatar;
           this.avatarId = avatarId;
@@ -125,4 +130,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
+  public getAvatarId(avatarId: any) {
+    return this.requestService.getAvatar(avatarId);
+  }
 }

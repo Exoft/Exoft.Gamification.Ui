@@ -40,7 +40,8 @@ export class AuthComponent {
             xp,
             status,
             id,
-            roles
+            roles,
+            avatarId
           } = res;
           this.userData = {
             userName,
@@ -50,7 +51,7 @@ export class AuthComponent {
             xp,
             id,
             status,
-            avatar: environment.apiUrl + '/api/files/' + res.avatarId,
+            avatarId,
             roles
           };
           localStorage.setItem('token', res.token);
