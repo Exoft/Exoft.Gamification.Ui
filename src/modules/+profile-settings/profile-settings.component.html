@@ -8,8 +8,12 @@
 
     <form class="profile-settings-form" (ngSubmit)="onSaveChanges()" [formGroup]="profileSettingsForm">
       <label class="avatar-container" for="imageInput">
-        <img [src]="avatarUrl" class="avatar" />
+        <span *ngIf="!avatarId else avatarExists" class="avatar-text">{{letterAvatar()}}</span>
       </label>
+
+      <ng-template #avatarExists>
+        <img [src]="avatarId" class="avatar" />
+      </ng-template>
 
       <input class="image-input" id="imageInput" type="file" (change)="onSelectFile($event)" />
 
@@ -33,7 +37,9 @@
         </mat-form-field>
       </div>
 
-      <button mat-button type="submit" class="save-button">
+      <button mat-button type="submit" class="save-button"
+              [ngStyle]="{'opacity': profileSettingsForm.invalid ? '0.6' : '1'}"
+              [disabled]="profileSettingsForm.invalid">
         SAVE CHANGES
       </button>
     </form>

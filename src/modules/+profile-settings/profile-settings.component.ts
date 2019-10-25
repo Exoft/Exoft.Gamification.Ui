@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { UserService } from 'src/modules/app/services/user.service';
 import { environment } from 'src/environments/environment';
+import { getFirstLettersWithSplit } from '../app/utils/letterAvatar';
 
 @Component({
   selector: 'app-profile-settings',
@@ -32,6 +33,8 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
   public avatarId: string;
   public userData: any;
   public timeStamp = Date.now();
+  public letterAvatar = getFirstLettersWithSplit;
+  public userName: string;
 
   constructor(private userService: UserService, private location: Location) { }
 
@@ -49,6 +52,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
       .getUserData()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(res => {
+        this.userName = res.firstName + ' ' + res.lastName;
         if (Object.entries(res).length !== 0) {
           const {
             userName,

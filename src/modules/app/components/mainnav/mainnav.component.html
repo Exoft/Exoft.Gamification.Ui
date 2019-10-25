@@ -6,9 +6,9 @@
       <mat-icon class="close-sidenav-button" (click)="drawer.close()">menu</mat-icon>
     </div>
 
-    <div *ngIf="avatarSource===null else avatarExists">
+    <div *ngIf="!avatarSource else avatarExists">
       <div class="avatar-text">
-        <p>{{letterAvatar(firstName, lastName)}}</p>
+        <p>{{letterAvatar()}}</p>
       </div>
     </div>
 
