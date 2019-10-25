@@ -6,11 +6,13 @@
       <p>{{letterAvatar()}}</p>
     </div>
   </div>
-  
+
   <ng-template #avatarExists>
     <img [src]="getAvatarId(avatarSource)" class="avatar" />
   </ng-template>
 
   <div class="username">{{ userName }}</div>
-  <div class="status">My status: {{ status }}</div>
+  <div class="status">
+    <p *ngIf="status">My status: {{ status }}</p>
+  </div>
 </mat-card>
