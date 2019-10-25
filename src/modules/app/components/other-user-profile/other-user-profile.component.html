@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <button mat-button class="request-button" (click)="openThankYouForm()"> SAY THANKS</button>
+    <button mat-button class="request-button" (click)="openThankYouForm()" [disabled]="!isThankYouButtonEnabled()"> SAY THANKS</button>
 
     <mat-icon class="close-button" (click)="closeOtherUser()">close</mat-icon>
   </mat-card>

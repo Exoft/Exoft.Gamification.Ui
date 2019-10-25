@@ -4,6 +4,7 @@ import { RequestService } from 'src/modules/app/services/dashboardequest.service
 import { getFirstLetters } from '../../utils/letterAvatar';
 import { DialogService } from 'src/modules/app/services/dialog.service';
 import { GratitudeComponent } from '../gratitude/gratitude.component';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-other-user-profile',
@@ -11,22 +12,27 @@ import { GratitudeComponent } from '../gratitude/gratitude.component';
   styleUrls: ['./other-user-profile.component.scss']
 })
 export class OtherUserProfileComponent implements OnInit {
-  constructor(
-    public dialog: MatDialog,
-    private requestService: RequestService,
-    @Inject(MAT_DIALOG_DATA) public userId: any
-  ) {}
-
   public totalBadgesCount = 30;
-
   public pageData;
   public response;
   public achievementsData: any = [];
   public letterAvatar = getFirstLetters;
+  private currentUserInfo;
+
+  constructor(
+    public dialog: MatDialog,
+    private requestService: RequestService,
+    @Inject(MAT_DIALOG_DATA) public userId: any,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
     this.loadCurrentUser();
     this.loadAchievements();
+
+    this.userService.getUserData().subscribe(res => {
+      this.currentUserInfo = res;
+    });
   }
 
   public get currentUserId() {
@@ -59,5 +65,13 @@ export class OtherUserProfileComponent implements OnInit {
     dialogConfig.data = this.userId;
 
     this.dialog.open(GratitudeComponent, dialogConfig);
+  }
+
+  public isThankYouButtonEnabled(): boolean {
+      if (this.currentUserInfo.id && this.userId === this.currentUserInfo.id) {
+        return false;
+      } else {
+        return true;
+      }
   }
 }
