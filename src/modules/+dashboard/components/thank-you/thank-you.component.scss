@@ -45,6 +45,8 @@
         font-size: 1.3vmin;
         margin: 0 1vmin 0 0;
         color: #68B70C;
+        background-color: #556271;
+        cursor: pointer;
       }
 
       .avatar {
@@ -54,6 +56,7 @@
         border: 0.1vmin solid #68B70C;
         border-radius: 50%;
         object-fit: cover;
+        cursor: pointer;
       }
 
       .user-name {

@@ -30,7 +30,6 @@ export class ThankYouComponent implements OnInit {
     return this.requestService.getAvatar(avatarId);
   }
 
-  // todo: bind method with user avatar
   public openUserProfile(): void {
     this.dialogService.openInfoModal(this.pageData.userId);
   }

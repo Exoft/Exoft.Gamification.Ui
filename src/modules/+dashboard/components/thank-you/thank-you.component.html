@@ -9,12 +9,12 @@
     </div>
 
     <div class="user">
-      <div class="user-image-text" *ngIf="!pageData.avatarId && pageData.firstName; else avatarExists">
+      <div class="user-image-text" *ngIf="!pageData.avatarId && pageData.firstName; else avatarExists" (click)="openUserProfile()">
         <p>{{letterAvatar(pageData.firstName, pageData.lastName)}}</p>
       </div>
       
       <ng-template #avatarExists>
-        <img class="avatar" [src]="getAvatarId(pageData.avatarId)">
+        <img class="avatar" [src]="getAvatarId(pageData.avatarId)" (click)="openUserProfile()">
       </ng-template>
 
       <div class="user-name">{{pageData.firstName}} {{pageData.lastName}}</div>
