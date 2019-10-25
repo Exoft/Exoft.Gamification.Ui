@@ -28,13 +28,13 @@
   .achivement-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 80%;
+    height: 90%;
 
     .achivement {
       display: flex;
-      height: 20%;
+      height: 25%;
       align-items: center;
+      padding: 2vmin 0 0 0;
 
       .achivement-image {
         height: 100%;
