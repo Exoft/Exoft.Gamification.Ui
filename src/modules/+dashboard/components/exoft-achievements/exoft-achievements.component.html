@@ -14,7 +14,7 @@
           </div>
 
           <ng-template #avatarExists>
-            <img class="user-image" [src]="AvatarId(item.avatarId)" (click)="openOtherUserInfoDialog(item.userId)">
+            <img class="user-image" [src]="getAvatarId(item.avatarId)" (click)="openOtherUserInfoDialog(item.userId)">
           </ng-template>
         </div>
 

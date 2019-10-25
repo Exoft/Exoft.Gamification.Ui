@@ -27,7 +27,7 @@ export class ExoftAchievementsComponent implements OnInit {
       this.pageData = response.data;
     });
   }
-  public AvatarId(avatarId: any) {
+  public getAvatarId(avatarId: any) {
     return this.requestService.getAvatar(avatarId);
   }
 

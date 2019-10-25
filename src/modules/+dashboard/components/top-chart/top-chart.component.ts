@@ -48,7 +48,7 @@ export class TopChartComponent implements OnInit {
     this.dialogService.openInfoModal(userId);
   }
 
-  public AvatarId(avatarId: any) {
+  public getAvatarId(avatarId: any) {
     return this.requestService.getAvatar(avatarId);
   }
 }

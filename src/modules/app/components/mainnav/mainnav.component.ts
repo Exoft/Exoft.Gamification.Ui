@@ -9,6 +9,7 @@ import { UserService } from 'src/modules/app/services/user.service';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/modules/app/services/auth/auth.service';
 import { getFirstLetters } from '../../utils/letterAvatar';
+import { RequestService } from '../../services/dashboardequest.service';
 
 @Component({
   selector: 'app-mainnav',
@@ -31,7 +32,12 @@ export class MainnavComponent implements OnInit, OnDestroy {
   public letterAvatar = getFirstLetters;
   public userRoles: any = [];
 
-  constructor(private router: Router, private userService: UserService, private authService: AuthService) { }
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private authService: AuthService,
+    private requestService: RequestService
+  ) {}
 
   public ngOnInit() {
     this.getUser();
@@ -93,8 +99,8 @@ export class MainnavComponent implements OnInit, OnDestroy {
       this.userService.setUserData(this.userData);
     });
   }
-  public AvatarId(avatarId: any) {
-    return 'http://localhost:5000/api/files/' + avatarId;
+  public getAvatarId(avatarId: any) {
+    return this.requestService.getAvatar(avatarId);
   }
 
   public isAdmin(): boolean {
