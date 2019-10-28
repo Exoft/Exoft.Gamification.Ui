@@ -1,7 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialog} from '@angular/material';
-import {UserService} from '../../../app/services/user.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { UserService } from '../../../app/services/user.service';
+import { RequestService } from 'src/modules/app/services/dashboardequest.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -17,26 +18,71 @@ export class EditUserComponent implements OnInit {
       '',
       Validators.compose([Validators.required, Validators.email])
     ),
-    roles: new FormArray([]),
+    role: new FormControl(''),
     status: new FormControl(''),
     avatar: new FormControl('')
   });
+  public avatarUrl: string;
 
-  constructor(public dialog: MatDialog,
-              @Inject(MAT_DIALOG_DATA) public data: any,
-              private userService: UserService
-  ) {
-  }
+  constructor(
+    public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private userService: UserService,
+    private requestService: RequestService
+  ) {}
 
   ngOnInit() {
-    this.userService.getUserInfoById(this.data.userId).subscribe(u => {
-      this.profileSettingsForm.patchValue(u);
+    this.userService.getUserInfoById(this.data.userId).subscribe(res => {
+      const {
+        avatarId,
+        email,
+        firstName,
+        lastName,
+        status,
+        userName,
+        roles
+      } = res;
+      this.avatarUrl = this.requestService.getAvatar(avatarId);
+
+      this.profileSettingsForm.setValue({
+        avatar: avatarId,
+        email,
+        firstName,
+        lastName,
+        status,
+        userName,
+        role: roles[0]
+      });
     });
   }
 
-  onSaveChanges() {
-    this.userService.updateUserInfoById(this.data.userId, this.profileSettingsForm.value).subscribe(u => {
-      this.dialog.closeAll();
-    });
+  public onSaveChanges(): void {
+    const formModel = this.createFormData(this.profileSettingsForm);
+    this.userService
+      .updateUserInfoById(this.data.userId, formModel)
+      .subscribe(u => {
+        this.dialog.closeAll();
+      });
+  }
+
+  public onSelectFile(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(event.target.files[0]);
+
+      fileReader.onload = (imageLoading: Event) => {
+        this.profileSettingsForm.get('avatar').setValue(event.target.files[0]);
+        this.avatarUrl = fileReader.result.toString();
+      };
+    }
+  }
+
+  public createFormData(form: FormGroup): FormData {
+    const formData = new FormData();
+    for (const field of Object.keys(form.controls)) {
+      formData.append(field, form.get(field).value);
+    }
+
+    return formData;
   }
 }
