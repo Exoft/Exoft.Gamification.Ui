@@ -40,8 +40,8 @@
       position: relative;
 
       .avatar-container {
-        width: 20vmin;
-        height: 20vmin;
+        width: 15vmin;
+        height: 15vmin;
         position: absolute;
         align-self: flex-end;
         top: -15vmin;
@@ -57,11 +57,11 @@
 
         .avatar-text {
           border-radius: 50%;
-          width: 20vmin;
-          height: 20vmin;
+          width: 15vmin;
+          height: 15vmin;
           object-fit: cover;
           border: 0.1vmin solid $textColor;
-          font-size: 10vmin;
+          font-size: 7vmin;
           display: flex;
           justify-content: center;
           align-items: center;
