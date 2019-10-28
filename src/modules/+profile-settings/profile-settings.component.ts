@@ -120,7 +120,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
     const formData = new FormData();
 
     for (const field of Object.keys(form.controls)) {
-      formData.append(field, form.get(field).value);
+      formData.append(field, form.get(field).value ? form.get(field).value : '');
     }
 
     return formData;
