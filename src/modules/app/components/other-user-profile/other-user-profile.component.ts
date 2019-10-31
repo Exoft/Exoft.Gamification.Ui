@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material';
+
 import { RequestService } from 'src/modules/app/services/dashboardequest.service';
-import { getFirstLetters } from '../../utils/letterAvatar';
-import { DialogService } from 'src/modules/app/services/dialog.service';
 import { GratitudeComponent } from '../gratitude/gratitude.component';
 import { UserService } from '../../services/user.service';
+import { getFirstLetters } from '../../utils/letterAvatar';
 
 @Component({
   selector: 'app-other-user-profile',
@@ -14,7 +14,6 @@ import { UserService } from '../../services/user.service';
 export class OtherUserProfileComponent implements OnInit {
   public totalBadgesCount = 30;
   public pageData;
-  public response;
   public achievementsData: any = [];
   public letterAvatar = getFirstLetters;
   private currentUserInfo;
@@ -26,7 +25,7 @@ export class OtherUserProfileComponent implements OnInit {
     private userService: UserService
   ) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.loadCurrentUser();
     this.loadAchievements();
 
@@ -35,7 +34,7 @@ export class OtherUserProfileComponent implements OnInit {
     });
   }
 
-  public get currentUserId() {
+  public get currentUserId(): number {
     return this.userId;
   }
 
@@ -43,23 +42,23 @@ export class OtherUserProfileComponent implements OnInit {
     this.dialog.closeAll();
   }
 
-  private loadCurrentUser() {
+  private loadCurrentUser(): void {
     this.requestService
       .getCurrentUserById(this.currentUserId)
       .subscribe(response => (this.pageData = response));
   }
 
-  private loadAchievements() {
+  private loadAchievements(): void {
     this.requestService
       .getCurrentUserAchievements(this.currentUserId)
       .subscribe(response => (this.achievementsData = response.data));
   }
 
-  public getAvatarId(avatarId: any) {
+  public getAvatarId(avatarId: any): string {
     return 'http://localhost:5000/api/files/' + avatarId;
   }
 
-  public openThankYouForm() {
+  public openThankYouForm(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.panelClass = 'thank-you-dialog';
     dialogConfig.data = this.userId;

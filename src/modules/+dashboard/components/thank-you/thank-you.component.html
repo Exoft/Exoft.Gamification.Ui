@@ -2,22 +2,22 @@
   <mat-card-title class="component-title">THANK YOU</mat-card-title>
 
   <div class="card-content-wrapper" *ngIf="pageData else noThankYouText">
-    <img class="star-img" src="../../assets/images/star@2x.png">
+    <img class="star-img" src="../../../../assets/images/star@2x.png">
 
     <div class="image-subtext">
-      {{pageData.text}}
+      {{ pageData.text }}
     </div>
 
     <div class="user">
-      <div class="user-image-text" *ngIf="!pageData.avatarId && pageData.firstName; else avatarExists" (click)="openUserProfile()">
-        <p>{{letterAvatar(pageData.firstName, pageData.lastName)}}</p>
+      <div class="user-image-text" *ngIf="!pageData.avatarId && pageData.firstName else avatarExists" (click)="openUserProfile()">
+        <p>{{ letterAvatar(pageData.firstName, pageData.lastName) }}</p>
       </div>
-      
+
       <ng-template #avatarExists>
         <img class="avatar" [src]="getAvatarId(pageData.avatarId)" (click)="openUserProfile()">
       </ng-template>
 
-      <div class="user-name">{{pageData.firstName}} {{pageData.lastName}}</div>
+      <div class="user-name">{{ pageData.firstName}} {{pageData.lastName }}</div>
     </div>
   </div>
 

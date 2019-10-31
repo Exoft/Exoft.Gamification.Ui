@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -10,7 +10,7 @@ import { AuthService } from '../../../app/services/auth/auth.service';
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss']
 })
-export class ChangePasswordComponent implements OnInit {
+export class ChangePasswordComponent {
 
   public changePasForm = new FormGroup({
     password: new FormControl('', [Validators.required,
@@ -24,17 +24,14 @@ export class ChangePasswordComponent implements OnInit {
               private snackBar: MatSnackBar,
               private router: Router) { }
 
-  ngOnInit() {
-  }
-
-  checkPasswords(group: FormGroup) { // here we have the 'passwords' group
+  public checkPasswords(group: FormGroup) { // here we have the 'passwords' group
     const pass = group.get('password').value;
     const confirmPass = group.get('confirmPassword').value;
 
     return pass === confirmPass ? null : { notSame: true };
   }
 
-  onResetPassword() {
+  public onResetPassword(): void {
     const changePasData = {
       password: this.changePasForm.value.password,
       secretString: this.activeRoute.snapshot.queryParams.secretString
@@ -52,7 +49,7 @@ export class ChangePasswordComponent implements OnInit {
       });
   }
 
-  public openSnackBar(message: string, action: string) {
+  public openSnackBar(message: string, action: string): void {
     this.snackBar.open(message, action, {
       duration: 3000,
     });

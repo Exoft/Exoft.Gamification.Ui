@@ -1,9 +1,9 @@
-import {Injectable, ViewChild} from '@angular/core';
-import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../environments/environment';
-import {Router} from '@angular/router';
-import {MatDrawer} from '@angular/material';
+import { Injectable, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { MatDrawer } from '@angular/material';
+import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

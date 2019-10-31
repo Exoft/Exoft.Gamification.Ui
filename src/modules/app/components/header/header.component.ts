@@ -1,12 +1,12 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit, OnDestroy } from '@angular/core';
 import { menuItems } from '../../utils/constants';
-import { getFirstLettersWithSplit } from '../../utils/letterAvatar';
-import { OnInit, OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { RequestService } from '../../services/dashboardequest.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { getFirstLettersWithSplit } from '../../utils/letterAvatar';
 
 @Component({
   selector: 'app-header',
@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private requestService: RequestService
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.userService
       .getUserData()
       .pipe(takeUntil(this.unsubscribe$))
@@ -41,12 +41,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-  public openSidenav() {
+  public openSidenav(): void {
     this.openSidenavEmitter.emit(null);
   }
 
@@ -56,5 +51,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public logOut(): void {
     this.authService.onLogOut();
+  }
+
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

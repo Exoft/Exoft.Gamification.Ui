@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UserService } from 'src/modules/app/services/user.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+import { UserService } from 'src/modules/app/services/user.service';
 
 @Component({
   selector: 'app-welcome',
@@ -10,19 +11,14 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();
+
   public pageData: any = [];
-  public response: any = [];
   public welcomeGreeting = this.getWelcomeGreeting();
 
   constructor(private userService: UserService) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.loadData();
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
   private loadData(): void {
@@ -37,17 +33,21 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   public getWelcomeGreeting(): string {
     const currentTime: Date = new Date();
     const currentTimeHours = currentTime.getHours();
-    let greeting: string;
     if (currentTimeHours >= 12 && currentTimeHours < 18) {
-      return (greeting = 'Good day');
+      return 'Good day';
     }
     if (currentTimeHours >= 18 && currentTimeHours < 24) {
-      return (greeting = 'Good evening');
+      return 'Good evening';
     }
     if (currentTimeHours >= 5 && currentTimeHours < 12) {
-      return (greeting = 'Good morning');
+      return 'Good morning';
     } else {
-      return (greeting = 'Good night');
+      return 'Good night';
     }
+  }
+
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

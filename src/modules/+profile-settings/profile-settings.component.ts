@@ -6,8 +6,8 @@ import { takeUntil } from 'rxjs/operators';
 
 import { UserService } from 'src/modules/app/services/user.service';
 import { environment } from 'src/environments/environment';
-import { getFirstLettersWithSplit } from '../app/utils/letterAvatar';
 import { RequestService } from '../app/services/dashboardequest.service';
+import { getFirstLettersWithSplit } from '../app/utils/letterAvatar';
 
 @Component({
   selector: 'app-profile-settings',
@@ -17,7 +17,6 @@ import { RequestService } from '../app/services/dashboardequest.service';
 export class ProfileSettingsComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();
 
-  public wrongImgUrl = 'http://localhost:5000/api/files/null';
   public profileSettingsForm = new FormGroup({
     userName: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
@@ -33,9 +32,9 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
   public avatarUrl: string;
   public avatarId: string;
   public userData: any;
+  public userName: string;
   public timeStamp = Date.now();
   public letterAvatar = getFirstLettersWithSplit;
-  public userName: string;
 
   constructor(
     private userService: UserService,
@@ -43,16 +42,11 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
     private requestService: RequestService
   ) {}
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.subscribeToUserDataChange();
   }
 
-  public ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-  public subscribeToUserDataChange() {
+  public subscribeToUserDataChange(): void {
     this.userService
       .getUserData()
       .pipe(takeUntil(this.unsubscribe$))
@@ -82,7 +76,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
       });
   }
 
-  public onSelectFile(event: any) {
+  public onSelectFile(event: any): void {
     if (event.target.files && event.target.files[0]) {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(event.target.files[0]);
@@ -94,7 +88,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onSaveChanges() {
+  public onSaveChanges(): void {
     if (this.profileSettingsForm.valid) {
       const formModel = this.createFormData(this.profileSettingsForm);
       this.userService.updateUserInfo(formModel).subscribe(
@@ -126,11 +120,16 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
     return formData;
   }
 
-  public onGoBack() {
+  public onGoBack(): void {
     this.location.back();
   }
 
-  public getAvatarId(avatarId: any) {
+  public getAvatarId(avatarId: any): string {
     return this.requestService.getAvatar(avatarId);
+  }
+
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

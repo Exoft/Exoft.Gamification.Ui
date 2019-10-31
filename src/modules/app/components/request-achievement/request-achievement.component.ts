@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 import { RequestService } from 'src/modules/app/services/dashboardequest.service';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+
 @Component({
   selector: 'app-request-achievement',
   templateUrl: './request-achievement.component.html',
@@ -13,12 +14,9 @@ export class RequestAchievementComponent implements OnInit {
   public pageData: any;
   public requestAchievementForm: FormGroup;
 
-  constructor(public dialog: MatDialog,
-              public requestService: RequestService,
-              private httpClient: HttpClient,
-              private formBuilder: FormBuilder) { }
+  constructor(public dialog: MatDialog, public requestService: RequestService) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.loadData();
     this.requestAchievementForm = new FormGroup({
       achievementId: new FormControl(null, Validators.required),
@@ -26,13 +24,13 @@ export class RequestAchievementComponent implements OnInit {
     });
   }
 
-  public onSubmitRequest(formData: FormGroup) {
+  public onSubmitRequest(formData: FormGroup): void {
     this.requestService.requestAchievement(formData.value).subscribe(
     );
     this.dialog.closeAll();
   }
 
-  private loadData() {
+  private loadData(): void {
     this.requestService.getAllAchievements().subscribe(response => {
       this.pageData = response.data;
     });
