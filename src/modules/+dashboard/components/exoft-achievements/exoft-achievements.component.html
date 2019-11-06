@@ -19,7 +19,7 @@
         </div>
 
         <div class="achievement-label">
-          <div class="user-name">{{item.firstName}} {{item.lastName}}</div>
+          <div class="user-name" (click)="openOtherUserInfoDialog(item.userId)">{{item.firstName}} {{item.lastName}}</div>
 
           <div class="posting-time">{{item.createdTime | customDate}}</div>
         </div>

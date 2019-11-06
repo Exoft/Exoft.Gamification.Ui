@@ -8,7 +8,7 @@
 
     <form class="profile-settings-form" (ngSubmit)="onSaveChanges()" [formGroup]="profileSettingsForm">
       <label class="avatar-container" for="imageInput">
-        <span *ngIf="!avatarId else avatarExists" class="avatar-text">{{letterAvatar()}}</span>
+        <span *ngIf="!avatarId else avatarExists" class="avatar-text">{{ letterAvatar() }}</span>
       </label>
 
       <ng-template #avatarExists>

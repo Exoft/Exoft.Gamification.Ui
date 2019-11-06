@@ -9,8 +9,7 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient, private router: Router) {
-  }
+  constructor(private http: HttpClient, private router: Router) {}
 
   private readonly apiUrl = environment.apiUrl;
   @ViewChild('drawer') public drawer: MatDrawer;

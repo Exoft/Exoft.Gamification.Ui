@@ -9,23 +9,23 @@
     </div>
 
     <div class="user">
-      <div class="user-info" *ngFor="let item of pageData; let first = first; let i=index">
+      <div class="user-info" *ngFor="let item of pageData; let i = index">
         <div class="user-info-container">
-          <div class="user-img-text" (click)="openUserDetails(item.id)" *ngIf="item.avatarId===null else avatarExists">
-            {{letterAvatar(item.firstName, item.lastName)}}
+          <div class="user-img-text" (click)="openUserDetails(item.id)" *ngIf="!item.avatarId else avatarExists">
+            {{ letterAvatar(item.firstName, item.lastName) }}
           </div>
 
           <ng-template #avatarExists>
             <img [src]="getAvatarId(item.avatarId)"  class="avatar"  (click)="openUserDetails(item.id)">
           </ng-template>
 
-          <div class="user-txt" (click)="openUserDetails(item.id)"> {{item.firstName}} {{item.lastName}}</div>
+          <div class="user-txt" (click)="openUserDetails(item.id)"> {{ item.firstName }} {{ item.lastName }}</div>
         </div>
 
-        <div class="points-count">{{item.xp}}XP</div>
+        <div class="points-count">{{ item.xp }}XP</div>
 
         <div class="bar">
-          <div class="bar-{{i}}" [style.width.%]="getXpValue(item.xp)"></div>
+          <div class="bar-{{ i }}" [style.width.%]="getXpValue(item.xp)"></div>
         </div>
       </div>
     </div>
