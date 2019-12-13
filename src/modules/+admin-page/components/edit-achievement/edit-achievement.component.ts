@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormGroup} from '@angular/forms';
 import {AchievementsService} from '../../../app/services/achievements.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {MapperService} from "../../../app/services/mapper.service";
+import {MapperService} from '../../../app/services/mapper.service';
 
 @Component({
   selector: 'app-edit-achievement',
@@ -39,9 +39,10 @@ export class EditAchievementComponent implements OnInit {
 
   onSaveChanges() {
     if (this.editAchievementFormGroup.valid) {
-      this.achievementService.updateAchievementById(this.editAchievementFormGroup.get('id').value, this.editAchievementFormGroup.value).subscribe(res => {
-        this.dialog.close(res);
-      });
+      this.achievementService.updateAchievementById(this.editAchievementFormGroup.get('id').value, this.editAchievementFormGroup.value)
+        .subscribe(res => {
+          this.dialog.close(res);
+        });
     }
   }
 }

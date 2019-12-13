@@ -9,7 +9,7 @@ export class CustomDatePipe implements PipeTransform {
     const minutesDiff = moment().diff(date, 'minutes') - 180;
     const hoursDiff = Math.round(minutesDiff / 60);
     if (daysDiff === 0 && minutesDiff < 60) {
-      //return `Today, ${date.zone("+06:00").format('hh:mm A')}`;
+      // return `Today, ${date.zone("+06:00").format('hh:mm A')}`;
       return `${minutesDiff} mins ago`;
     } else if (daysDiff === 0 && minutesDiff >= 60) {
       return `${hoursDiff} hours ago`;

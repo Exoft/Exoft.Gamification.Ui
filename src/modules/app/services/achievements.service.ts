@@ -2,8 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {Observable} from 'rxjs';
-import {observableToBeFn} from "rxjs/internal/testing/TestScheduler";
-import {Achievement} from "../models/achievement";
+import {Achievement} from '../models/achievement';
 
 @Injectable({
   providedIn: 'root'

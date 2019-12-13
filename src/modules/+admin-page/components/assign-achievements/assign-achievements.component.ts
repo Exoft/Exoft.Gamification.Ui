@@ -52,7 +52,10 @@ export class AssignAchievementsComponent implements OnInit {
   }
 
   onSaveChanges() {
-    this.achievementsService.addOrUpdateUserAchievements(this.data.userId, this.achievements.value.filter(x => x.isChosen).map(({id}) => id)).subscribe(res => {
-    });
+    this.achievementsService.addOrUpdateUserAchievements(this.data.userId, this.achievements.value
+      .filter(x => x.isChosen)
+      .map(({id}) => id))
+      .subscribe(res => {
+      });
   }
 }

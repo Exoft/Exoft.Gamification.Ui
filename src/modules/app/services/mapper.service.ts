@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {User} from '../models/user';
 import {Achievement} from '../models/achievement';
-import {AchievementRequest} from "../models/achievement-request";
+import {AchievementRequest} from '../models/achievement-request';
 
 @Injectable({
   providedIn: 'root'

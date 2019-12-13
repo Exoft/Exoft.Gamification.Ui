@@ -19,7 +19,8 @@
       <mat-form-field class="input-field">
         <input matInput placeholder="DESCRIPTION" formControlName="description"/>
       </mat-form-field>
-      <mat-error *ngIf="addAchievementFormGroup.get('description').invalid && addAchievementFormGroup.get('description').touched">
+      <mat-error
+        *ngIf="addAchievementFormGroup.get('description').invalid && addAchievementFormGroup.get('description').touched">
         Field is required
       </mat-error>
 

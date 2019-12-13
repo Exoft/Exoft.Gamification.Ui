@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {Component} from '@angular/core';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
-import { AuthService } from 'src/modules/app/services/auth/auth.service';
-import { UserService } from 'src/modules/app/services/user.service';
+import {AuthService} from 'src/modules/app/services/auth/auth.service';
+import {UserService} from 'src/modules/app/services/user.service';
 
 @Component({
   selector: 'app-auth',
@@ -24,15 +24,17 @@ export class AuthComponent {
     private router: Router,
     private userService: UserService,
     private snackBar: MatSnackBar
-  ) {}
+  ) {
+  }
 
   public onSignIn() {
     if (this.signinForm.valid) {
-      const { userName, password } = this.signinForm.value;
-      const formData = { userName, password };
+      const {userName, password} = this.signinForm.value;
+      const formData = {userName, password};
       this.authService.signIn(formData).subscribe(
         res => {
           const {
+            // tslint:disable-next-line:no-shadowed-variable
             userName,
             lastName,
             firstName,

@@ -13,8 +13,8 @@ import {EditAchievementComponent} from './components/edit-achievement/edit-achie
 import {AchievementsService} from '../app/services/achievements.service';
 import {User} from '../app/models/user';
 import {AssignAchievementsComponent} from './components/assign-achievements/assign-achievements.component';
-import {AchievementRequest} from "../app/models/achievement-request";
-import {map} from "rxjs/operators";
+import {AchievementRequest} from '../app/models/achievement-request';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-page',

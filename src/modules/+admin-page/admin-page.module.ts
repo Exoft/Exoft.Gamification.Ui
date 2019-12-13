@@ -7,10 +7,10 @@ import {AdminPageRoutingModule} from './admin-page-routing.module';
 import {AdminPageComponent} from './admin-page.component';
 import {AddUserComponent} from './components/add-user/add-user.component';
 import {EditUserComponent} from './components/edit-user/edit-user.component';
-import { AddAchievementComponent } from './components/add-achievement/add-achievement.component';
-import { EditAchievementComponent } from './components/edit-achievement/edit-achievement.component';
-import { AssignAchievementsComponent } from './components/assign-achievements/assign-achievements.component';
-import {ScrollingModule} from "@angular/cdk/scrolling";
+import {AddAchievementComponent} from './components/add-achievement/add-achievement.component';
+import {EditAchievementComponent} from './components/edit-achievement/edit-achievement.component';
+import {AssignAchievementsComponent} from './components/assign-achievements/assign-achievements.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
