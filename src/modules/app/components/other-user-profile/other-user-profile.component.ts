@@ -69,7 +69,7 @@ export class OtherUserProfileComponent implements OnInit {
   }
 
   public getAvatarId(avatarId: string): string {
-    return 'http://localhost:5000/api/files/' + avatarId;
+    return 'https://game-api.exoft.net/api/files/' + avatarId;
   }
 
   public openThankYouForm(): void {

@@ -12,7 +12,7 @@ import { AuthService } from '../../../app/services/auth/auth.service';
 })
 export class ForgotPasswordComponent {
 
-  private componentUrl = 'http://localhost:4200/signin/change-password';
+  private componentUrl = 'https://game.exoft.net/signin/change-password';
 
   public forgotPasForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
