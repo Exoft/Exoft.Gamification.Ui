@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestService } from 'src/modules/app/services/dashboardequest.service';
 import { MatDialog } from '@angular/material';
+
+import { RequestService } from 'src/modules/app/services/dashboardequest.service';
 import { DialogService } from 'src/modules/app/services/dialog.service';
-import { AssignAchievementsComponent } from '../../../+admin-page/components/assign-achievements/assign-achievements.component';
-import { RequestAchievementComponent } from '../../../app/components/request-achievement/request-achievement.component';
 
 @Component({
   selector: 'app-personal-achievements',
@@ -11,8 +10,8 @@ import { RequestAchievementComponent } from '../../../app/components/request-ach
   styleUrls: ['./personal-achievements.component.scss']
 })
 export class PersonalAchievementsComponent implements OnInit {
+
   public pageData: any = [];
-  public response: any = [];
 
   constructor(
     private requestService: RequestService,
@@ -20,21 +19,17 @@ export class PersonalAchievementsComponent implements OnInit {
     private dialogService: DialogService
   ) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.loadData();
   }
 
-  private loadData() {
+  public openForm(): void {
+    this.dialogService.openRequestForm();
+  }
+
+  private loadData(): void {
     this.requestService.getAchievementsInfo(1, 4).subscribe(response => {
       this.pageData = response.data;
     });
-  }
-
-  public IconId(iconId: any) {
-    return 'http://localhost:5000/api/files/' + iconId;
-  }
-
-  public openForm() {
-    this.dialogService.openRequestForm();
   }
 }

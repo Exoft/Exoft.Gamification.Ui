@@ -5,7 +5,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthService } from 'src/modules/app/services/auth/auth.service';
 import { UserService } from 'src/modules/app/services/user.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-auth',
@@ -13,6 +12,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent {
+
   public signinForm = new FormGroup({
     userName: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
@@ -70,13 +70,13 @@ export class AuthComponent {
     }
   }
 
-  public openSnackBar(message: string, action: string) {
+  public openSnackBar(message: string, action: string): void {
     this.snackBar.open(message, action, {
       duration: 10000
     });
   }
 
-  onForgotPassword() {
+  public onForgotPassword(): void {
     this.router.navigate(['/signin/forgot-password']);
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { AchievementsService } from 'src/modules/app/services/achievements.service';
 
 @Component({
@@ -11,11 +12,11 @@ export class FullListOfAchievementsComponent implements OnInit {
 
   constructor(private achievementsService: AchievementsService) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.getUserAchievements();
   }
 
-  getUserAchievements() {
+  public getUserAchievements(): void {
     this.achievementsService.getCurrentUserAchievements(1).subscribe(res => {
       this.achievementsList = res.data;
     });

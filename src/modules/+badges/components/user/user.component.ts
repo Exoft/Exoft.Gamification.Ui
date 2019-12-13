@@ -4,8 +4,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { UserService } from 'src/modules/app/services/user.service';
-import { getFirstLettersWithSplit } from '../../../app/utils/letterAvatar';
 import { RequestService } from 'src/modules/app/services/dashboardequest.service';
+import { getFirstLettersWithSplit } from '../../../app/utils/letterAvatar';
 
 @Component({
   selector: 'app-user',
@@ -20,18 +20,15 @@ export class UserComponent implements OnInit, OnDestroy {
   public status: string;
   public letterAvatar = getFirstLettersWithSplit;
 
-  constructor(private router: Router, private userService: UserService, private requestService: RequestService) { }
+  constructor(private router: Router,
+              private userService: UserService,
+              private requestService: RequestService) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.subscribeToUserDataChange();
   }
 
-  public ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-  private subscribeToUserDataChange() {
+  private subscribeToUserDataChange(): void {
     this.userService
       .getUserData()
       .pipe(takeUntil(this.unsubscribe$))
@@ -42,10 +39,15 @@ export class UserComponent implements OnInit, OnDestroy {
       });
   }
 
-  public onOpenProfileSettings() {
+  public onOpenProfileSettings(): void {
     this.router.navigate(['/profile-settings']);
   }
-  public getAvatarId(avatarId: any) {
+  public getAvatarId(avatarId: any): string {
     return this.requestService.getAvatar(avatarId);
+  }
+
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

@@ -1,8 +1,8 @@
-  <mat-card class="card">
+  <mat-card class="card" *ngIf="currentUser$ | async as pageData">
     <div class="main-container">
       <div class="other-user-container">
         <div class="avatar-text" *ngIf="!pageData.avatarId else avatarExists">
-          <p>{{letterAvatar(pageData.firstName, pageData.lastName)}}</p>
+          <p>{{ letterAvatar(pageData.firstName, pageData.lastName) }}</p>
         </div>
 
         <ng-template #avatarExists>
@@ -10,7 +10,7 @@
         </ng-template>
 
         <div class="user-info-container">
-          <div class="user-name">{{pageData.firstName}} {{pageData.lastName}}</div>
+          <div class="user-name">{{ pageData.firstName }} {{ pageData.lastName }}</div>
 
           <div class="user-achivments-info">
             <div class="user-achivments-elements">
@@ -22,21 +22,21 @@
             <div class="user-achivments-elements">
               <p class="user-achivments-title">EXP:</p>
 
-              <p> {{pageData.xp}} XP</p>
+              <p> {{ pageData.xp }} XP</p>
             </div>
 
             <div class="user-achivments-elements" *ngIf="pageData.status">
-              <p class="user-achivments-status">"{{pageData.status}}"</p>
+              <p class="user-achivments-status">"{{ pageData.status }}"</p>
             </div>
           </div>
         </div>
       </div>
 
       <div class="achievement-container">
-        <div class="achievement-item" *ngFor="let item of achievementsData">
+        <div class="achievement-item" *ngFor="let item of achievementsData.data">
           <img class="achievement-image" src="../../../../assets/images/star.png">
 
-          <div class="image-text">{{item.name}}</div>
+          <div class="image-text">{{ item.name }}</div>
         </div>
       </div>
     </div>

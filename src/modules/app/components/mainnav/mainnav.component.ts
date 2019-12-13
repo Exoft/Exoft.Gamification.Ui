@@ -6,9 +6,9 @@ import { takeUntil } from 'rxjs/operators';
 import { MatDrawer } from '@angular/material';
 
 import { UserService } from 'src/modules/app/services/user.service';
-import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/modules/app/services/auth/auth.service';
 import { RequestService } from '../../services/dashboardequest.service';
+import { environment } from 'src/environments/environment';
 import { getFirstLettersWithSplit } from '../../utils/letterAvatar';
 
 @Component({
@@ -18,6 +18,7 @@ import { getFirstLettersWithSplit } from '../../utils/letterAvatar';
 })
 export class MainnavComponent implements OnInit, OnDestroy {
   @ViewChild('drawer') public drawer: MatDrawer;
+
   private unsubscribe$: Subject<void> = new Subject();
 
   public menuItems = Array.from(menuItems);
@@ -39,22 +40,17 @@ export class MainnavComponent implements OnInit, OnDestroy {
     private requestService: RequestService
   ) {}
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.getUser();
     this.subscribeToEvents();
   }
 
-  public ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-  private subscribeToEvents() {
+  private subscribeToEvents(): void {
     this.subscribeToUserDataChange();
     this.subscribeToRouteChange();
   }
 
-  private subscribeToUserDataChange() {
+  private subscribeToUserDataChange(): void {
     this.userService
       .getUserData()
       .pipe(takeUntil(this.unsubscribe$))
@@ -72,12 +68,12 @@ export class MainnavComponent implements OnInit, OnDestroy {
         }
       });
   }
-  public logOut() {
+  public logOut(): void {
     this.drawer.close();
     return this.authService.onLogOut();
   }
 
-  private subscribeToRouteChange() {
+  private subscribeToRouteChange(): void {
     this.router.events.subscribe((e: any) => {
       if (
         e instanceof NavigationEnd &&
@@ -91,7 +87,7 @@ export class MainnavComponent implements OnInit, OnDestroy {
     });
   }
 
-  public getUser() {
+  public getUser(): void {
     this.userService.getCurrentUserInfo().subscribe(res => {
       this.userData = { ...res };
       this.userData.avatar =
@@ -99,13 +95,12 @@ export class MainnavComponent implements OnInit, OnDestroy {
       this.userService.setUserData(this.userData);
     });
   }
-  public getAvatarId(avatarId: any) {
+  public getAvatarId(avatarId: any): string {
     return this.requestService.getAvatar(avatarId);
   }
 
-  public isAdmin(): boolean {
-    if (this.userRoles.includes('admin')) {
-      return true;
-    }
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

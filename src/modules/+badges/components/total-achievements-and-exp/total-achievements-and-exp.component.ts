@@ -13,18 +13,13 @@ export class TotalAchievementsAndExpComponent implements OnInit, OnDestroy {
 
   public badgesCount = '50';
   public experienceCount: number;
-  public avarageCount = '21';
+  public averageCount = '21';
   public newBadgesCount = '5';
 
   constructor(private userService: UserService) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.subscribeToUserDataChange();
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
   private subscribeToUserDataChange() {
@@ -34,5 +29,10 @@ export class TotalAchievementsAndExpComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         this.experienceCount = res.xp;
       });
+  }
+
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

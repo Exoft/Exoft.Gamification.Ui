@@ -15,7 +15,7 @@ export class LastAchievementsComponent implements OnInit {
     private dialogService: DialogService
   ) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.getUserLastAchievements();
   }
 

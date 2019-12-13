@@ -1,6 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
+
 import { ThankYouService } from '../../services/thank-you.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { ThankYouService } from '../../services/thank-you.service';
   templateUrl: './gratitude.component.html',
   styleUrls: ['./gratitude.component.scss']
 })
-export class GratitudeComponent implements OnInit {
+export class GratitudeComponent {
   public message = new FormControl('', Validators.required);
 
   constructor(
@@ -16,8 +17,6 @@ export class GratitudeComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private userId: any,
     private thankYouService: ThankYouService
   ) {}
-
-  ngOnInit() {}
 
   public closeForm(): void {
     this.dialog.closeAll();

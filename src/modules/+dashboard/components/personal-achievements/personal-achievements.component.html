@@ -7,19 +7,18 @@
 
   <div class="achivement-wrapper">
     <div class="achivement" *ngFor="let item of pageData">
-      <!-- <img [src]=IconId(item.iconId)>  -->
       <img class="achivement-image" src="assets/images/star.png">
 
       <div class="achivement-title">
-        <div>{{item.name}}</div>
+        <div>{{ item.name }}</div>
 
-        <div class="achivement-date">{{item.addedTime | customDate}}</div>
+        <div class="achivement-date">{{ item.addedTime | customDate }}</div>
       </div>
 
       <div class="achivement-xp-container">
         <div class="circle"></div>
 
-        <div class="xp">+ {{item.xp}} xp</div>
+        <div class="xp">+ {{ item.xp }} xp</div>
       </div>
     </div>
   </div>

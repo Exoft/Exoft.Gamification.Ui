@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -10,9 +10,9 @@ import { AuthService } from '../../../app/services/auth/auth.service';
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent {
 
-  private componentUrl = 'http://localhost:4200/signin/change-password';
+  private componentUrl = 'https://game.exoft.net/signin/change-password';
 
   public forgotPasForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -22,10 +22,7 @@ export class ForgotPasswordComponent implements OnInit {
               private snackBar: MatSnackBar,
               private router: Router) { }
 
-  ngOnInit() {
-  }
-
-  onResetPassword() {
+  public onResetPassword(): void {
     if (this.forgotPasForm.invalid) {
       return;
     }
@@ -46,7 +43,7 @@ export class ForgotPasswordComponent implements OnInit {
       });
   }
 
-  public openSnackBar(message: string, action: string) {
+  public openSnackBar(message: string, action: string): void {
     this.snackBar.open(message, action, {
       duration: 3000,
     });
