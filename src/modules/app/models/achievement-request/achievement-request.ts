@@ -1,5 +1,5 @@
-import {User} from './user';
-import {Achievement} from './achievement';
+import {User} from '../user';
+import {Achievement} from '../achievement';
 
 export interface AchievementRequest {
   id: string;

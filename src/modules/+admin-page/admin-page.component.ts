@@ -13,8 +13,9 @@ import {EditAchievementComponent} from './components/edit-achievement/edit-achie
 import {AchievementsService} from '../app/services/achievements.service';
 import {User} from '../app/models/user';
 import {AssignAchievementsComponent} from './components/assign-achievements/assign-achievements.component';
-import {AchievementRequest} from '../app/models/achievement-request';
 import {map} from 'rxjs/operators';
+import { ReadAchievementRequest } from '../app/models/achievement-request/read-achievement-request';
+// import { constants } from 'os';
 
 @Component({
   selector: 'app-admin-page',
@@ -66,12 +67,14 @@ export class AdminPageComponent implements OnInit {
   }
 
   private loadAchievementRequests() {
-    this.requestService.getAllAchievementRequests().pipe(map((data: AchievementRequest[]) => {
-      return data.map((achievementRequest: AchievementRequest) => {
+    this.requestService.getAllAchievementRequests().pipe(map((data: ReadAchievementRequest[]) => {
+      return data.map((achievementRequest: ReadAchievementRequest) => {
         return {
           id: achievementRequest.id,
-          userName: achievementRequest.user.userName,
-          achievement: achievementRequest.achievement.name,
+          userId: achievementRequest.userId,
+          userName: achievementRequest.userName,
+          achievementId: achievementRequest.achievementId,
+          achievement: achievementRequest.achievementName,
           comment: achievementRequest.message
         };
       });
@@ -146,7 +149,7 @@ export class AdminPageComponent implements OnInit {
     });
   }
 
-  onRequestDecision(achievementTableRequest: any, isApproved: boolean) {
+  onRequestDecision(achievementTableRequest: ReadAchievementRequest, isApproved: boolean) {
     if (isApproved) {
       this.requestService.approveAchievementRequest(achievementTableRequest.id).subscribe(res => {
         this.dataSourceAchievementRequest = new MatTableDataSource(this.dataSourceAchievementRequest.data.
