@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {RequestService} from 'src/modules/app/services/dashboardequest.service';
 import {MatDialog, MatTableDataSource} from '@angular/material';
 import {DialogService} from 'src/modules/app/services/dialog.service';
@@ -13,8 +13,9 @@ import {EditAchievementComponent} from './components/edit-achievement/edit-achie
 import {AchievementsService} from '../app/services/achievements.service';
 import {User} from '../app/models/user';
 import {AssignAchievementsComponent} from './components/assign-achievements/assign-achievements.component';
-import {map} from 'rxjs/operators';
+import {map, takeUntil} from 'rxjs/operators';
 import { ReadAchievementRequest } from '../app/models/achievement-request/read-achievement-request';
+import { Subject } from 'rxjs';
 // import { constants } from 'os';
 
 @Component({
@@ -22,7 +23,9 @@ import { ReadAchievementRequest } from '../app/models/achievement-request/read-a
   templateUrl: './admin-page.component.html',
   styleUrls: ['./admin-page.component.scss']
 })
-export class AdminPageComponent implements OnInit {
+export class AdminPageComponent implements OnInit, OnDestroy {
+  private unsubscribe$: Subject<void> = new Subject();
+
   public userData: any = [];
   public achievementsData: any = [];
   public userId: any = this.userData.userId;
@@ -52,15 +55,24 @@ export class AdminPageComponent implements OnInit {
     this.loadAchievementRequests();
   }
 
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
   private loadUserData() {
-    this.requestService.getAllUsers().subscribe(response => {
+    this.requestService.getAllUsers()
+    .pipe(takeUntil(this.unsubscribe$))
+    .subscribe(response => {
       this.userData = response.data;
       this.dataSourceUser.data = this.userData;
     });
   }
 
   private loadAchievementsData() {
-    this.requestService.getAllAchievements().subscribe(response => {
+    this.requestService.getAllAchievements()
+    .pipe(takeUntil(this.unsubscribe$))
+    .subscribe(response => {
       this.achievementsData = response.data;
       this.dataSourceAchievements.data = this.achievementsData;
     });
@@ -78,7 +90,9 @@ export class AdminPageComponent implements OnInit {
           comment: achievementRequest.message
         };
       });
-    })).subscribe((res) => {
+    }))
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((res) => {
       this.dataSourceAchievementRequest = new MatTableDataSource(res);
     });
   }
@@ -99,7 +113,9 @@ export class AdminPageComponent implements OnInit {
   }
 
   public onUserDelete(user: User) {
-    this.userService.deleteUserById(user.id).subscribe(u => {
+    this.userService.deleteUserById(user.id)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(u => {
       this.dataSourceUser = new MatTableDataSource(this.dataSourceUser.data.filter(x => x !== user));
     });
   }
@@ -108,7 +124,9 @@ export class AdminPageComponent implements OnInit {
     const dialogRef = this.dialog.open(AddAchievementComponent, {
       width: '600px'
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(result => {
       this.achievementsData.push(result);
       this.dataSourceAchievements = new MatTableDataSource(this.achievementsData);
     });
@@ -121,7 +139,9 @@ export class AdminPageComponent implements OnInit {
         achievement
       }
     });
-    dialogRef.afterClosed().subscribe((result: Achievement) => {
+    dialogRef.afterClosed()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((result: Achievement) => {
       const achievementToUpdate = this.dataSourceAchievements.data.find(x => x.id === result.id);
       achievementToUpdate.name = result.name;
       achievementToUpdate.icon = result.icon;
@@ -151,12 +171,16 @@ export class AdminPageComponent implements OnInit {
 
   onRequestDecision(achievementTableRequest: ReadAchievementRequest, isApproved: boolean) {
     if (isApproved) {
-      this.requestService.approveAchievementRequest(achievementTableRequest.id).subscribe(res => {
+      this.requestService.approveAchievementRequest(achievementTableRequest.id)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(res => {
         this.dataSourceAchievementRequest = new MatTableDataSource(this.dataSourceAchievementRequest.data.
         filter(x => x !== achievementTableRequest));
       });
     } else {
-      this.requestService.declineAchievementRequest(achievementTableRequest.id).subscribe(res => {
+      this.requestService.declineAchievementRequest(achievementTableRequest.id)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(res => {
         this.dataSourceAchievementRequest = new MatTableDataSource(this.dataSourceAchievementRequest.data.
         filter(x => x !== achievementTableRequest));
       });
@@ -164,7 +188,9 @@ export class AdminPageComponent implements OnInit {
   }
 
   private initCurrentUser() {
-    this.userService.getCurrentUserInfo().subscribe(u => {
+    this.userService.getCurrentUserInfo()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(u => {
       this.currentUser = this.mapperService.getUser(u);
       this.isInfoLoaded = true;
     });
