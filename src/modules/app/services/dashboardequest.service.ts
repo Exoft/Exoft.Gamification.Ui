@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { AchievementRequest } from '../models/achievement-request';
+import { ReadAchievementRequest } from '../models/achievement-request/read-achievement-request';
 
 @Injectable({
   providedIn: 'root'
@@ -52,8 +52,8 @@ export class RequestService {
     );
   }
 
-  public getAllAchievementRequests(): Observable<AchievementRequest[]> {
-    return this.httpClient.get<AchievementRequest[]>(
+  public getAllAchievementRequests(): Observable<ReadAchievementRequest[]> {
+    return this.httpClient.get<ReadAchievementRequest[]>(
       environment.apiUrl + '/api/request-achievement'
     );
   }
