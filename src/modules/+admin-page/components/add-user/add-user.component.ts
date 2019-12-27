@@ -3,8 +3,8 @@ import {MatDialog} from '@angular/material';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {UserService} from 'src/modules/app/services/user.service';
-import {RequestService} from 'src/modules/app/services/dashboardequest.service';
 import {passwordContainValidity, passwordEqualityValidator} from '../../functions/add-user-validators';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-user',
@@ -42,7 +42,6 @@ export class AddUserComponent implements OnInit, OnDestroy {
 
   constructor(public dialog: MatDialog,
               private userService: UserService,
-              private requestService: RequestService,
               private formBuilder: FormBuilder) {
   }
 
@@ -68,8 +67,10 @@ export class AddUserComponent implements OnInit, OnDestroy {
 
   public onSaveChanges() {
     if (this.editUserForm.valid) {
-      this.userService.createUser(this.editUserForm.value).subscribe(u => {
-
+      this.userService.createUser(this.editUserForm.value)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(u => {
+          this.dialog.closeAll();
       });
     }
     /*  if (this.editUserForm.valid) {

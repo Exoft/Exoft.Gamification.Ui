@@ -1,8 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from 'ngx-strongly-typed-forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { UserService } from '../../../app/services/user.service';
-import { RequestService } from 'src/modules/app/services/dashboardequest.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { Validators } from '@angular/forms';
+import { UpdateUser } from 'src/modules/app/models/user/update-user';
 
 @Component({
   selector: 'app-edit-user',
@@ -10,79 +13,65 @@ import { RequestService } from 'src/modules/app/services/dashboardequest.service
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
-  public profileSettingsForm = new FormGroup({
-    userName: new FormControl('', Validators.required),
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    email: new FormControl(
-      '',
-      Validators.compose([Validators.required, Validators.email])
-    ),
-    role: new FormControl(''),
-    status: new FormControl(''),
-    avatar: new FormControl('')
-  });
+  private unsubscribe$: Subject<void> = new Subject();
+  public profileSettingsForm: FormGroup<UpdateUser>;
   public avatarUrl: string;
 
   constructor(
+    private readonly fb: FormBuilder,
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private userService: UserService,
-    private requestService: RequestService
-  ) {}
+    private userService: UserService
+  ) { }
 
   ngOnInit() {
-    this.userService.getUserInfoById(this.data.userId).subscribe(res => {
-      const {
-        avatarId,
-        email,
-        firstName,
-        lastName,
-        status,
-        userName,
-        roles
-      } = res;
-      this.avatarUrl = this.requestService.getAvatar(avatarId);
-
-      this.profileSettingsForm.setValue({
-        avatar: avatarId,
-        email,
-        firstName,
-        lastName,
-        status,
-        userName,
-        role: roles[0]
+    this.initializeForm();
+    this.userService.getUserInfoById(this.data.userId)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(res => {
+        this.profileSettingsForm.patchValue(res);
       });
-    });
+  }
+
+  public ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   public onSaveChanges(): void {
-    const formModel = this.createFormData(this.profileSettingsForm);
-    this.userService
-      .updateUserInfoById(this.data.userId, formModel)
-      .subscribe(u => {
-        this.dialog.closeAll();
-      });
-  }
-
-  public onSelectFile(event: any): void {
-    if (event.target.files && event.target.files[0]) {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(event.target.files[0]);
-
-      fileReader.onload = (imageLoading: Event) => {
-        this.profileSettingsForm.get('avatar').setValue(event.target.files[0]);
-        this.avatarUrl = fileReader.result.toString();
-      };
+    debugger;
+    if (this.profileSettingsForm.valid) {
+      this.userService.updateUserInfoById(this.data.userId, this.profileSettingsForm.value)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(() => {
+          this.dialog.closeAll();
+        });
     }
   }
 
-  public createFormData(form: FormGroup): FormData {
-    const formData = new FormData();
-    for (const field of Object.keys(form.controls)) {
-      formData.append(field, form.get(field).value);
-    }
+  // public onSelectFile(event: any): void {
+  //   if (event.target.files && event.target.files[0]) {
+  //     const fileReader = new FileReader();
+  //     fileReader.readAsDataURL(event.target.files[0]);
 
-    return formData;
+  //     fileReader.onload = (imageLoading: Event) => {
+  //       this.profileSettingsForm.get('avatar').setValue(event.target.files[0]);
+  //       this.avatarUrl = fileReader.result.toString();
+  //     };
+  //   }
+  // }
+
+  public initializeForm() {
+    this.profileSettingsForm = this.fb.group<UpdateUser>({
+      userName: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: [
+        '',
+        Validators.compose([Validators.required, Validators.email])
+      ],
+      roles: [[]],
+      status: ['']
+    });
   }
 }

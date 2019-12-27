@@ -1,7 +1,6 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
 import {RequestService} from 'src/modules/app/services/dashboardequest.service';
 import {MatDialog, MatTableDataSource} from '@angular/material';
-import {DialogService} from 'src/modules/app/services/dialog.service';
 import {EditUserComponent} from './components/edit-user/edit-user.component';
 import {UserService} from '../app/services/user.service';
 import {FormGroup} from '@angular/forms';
@@ -11,7 +10,7 @@ import {AddAchievementComponent} from './components/add-achievement/add-achievem
 import {Achievement} from '../app/models/achievement';
 import {EditAchievementComponent} from './components/edit-achievement/edit-achievement.component';
 import {AchievementsService} from '../app/services/achievements.service';
-import {User} from '../app/models/user';
+import {User} from '../app/models/user/user';
 import {AssignAchievementsComponent} from './components/assign-achievements/assign-achievements.component';
 import {map, takeUntil} from 'rxjs/operators';
 import { ReadAchievementRequest } from '../app/models/achievement-request/read-achievement-request';
@@ -35,10 +34,10 @@ export class AdminPageComponent implements OnInit, OnDestroy {
 
   constructor(private requestService: RequestService,
               private userService: UserService,
-              private dialogService: DialogService,
               private mapperService: MapperService,
               private achievementService: AchievementsService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private cdRef: ChangeDetectorRef) {
   }
 
   displayedColumnsUser: string[] = ['firstName', 'lastName', 'xp', 'actions'];
@@ -103,6 +102,11 @@ export class AdminPageComponent implements OnInit, OnDestroy {
       data: {
         userId: user.id
       }
+    });
+    this.dialog.afterAllClosed
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => {
+      this.loadUserData();
     });
   }
 

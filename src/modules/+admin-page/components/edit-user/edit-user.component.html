@@ -1,8 +1,8 @@
 <div class="profile-setting-fields-container">
   <form class="profile-settings-form" (ngSubmit)="onSaveChanges()" [formGroup]="profileSettingsForm">
-    <label class="avatar-container" for="imageInput">
+    <!-- <label class="avatar-container" for="imageInput">
       <img [src]="avatarUrl" class="avatar" />
-    </label>
+    </label> -->
 
     <input class="image-input" id="imageInput" type="file" (change)="onSelectFile($event)" />
 
