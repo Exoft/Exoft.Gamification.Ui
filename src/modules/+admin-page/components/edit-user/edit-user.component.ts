@@ -1,8 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { UserService } from '../../../app/services/user.service';
-import { RequestService } from 'src/modules/app/services/dashboardequest.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material';
+import {UserService} from '../../../app/services/user.service';
+import {RequestService} from 'src/modules/app/services/dashboardequest.service';
+
 
 @Component({
   selector: 'app-edit-user',
@@ -29,7 +30,8 @@ export class EditUserComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private userService: UserService,
     private requestService: RequestService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.userService.getUserInfoById(this.data.userId).subscribe(res => {

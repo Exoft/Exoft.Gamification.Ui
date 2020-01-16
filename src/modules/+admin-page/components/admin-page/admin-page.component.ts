@@ -2,21 +2,21 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {RequestService} from 'src/modules/app/services/dashboardequest.service';
 import {MatDialog, MatTableDataSource} from '@angular/material';
 import {DialogService} from 'src/modules/app/services/dialog.service';
-import {EditUserComponent} from './components/edit-user/edit-user.component';
-import {UserService} from '../app/services/user.service';
+import {EditUserComponent} from '../edit-user/edit-user.component';
+import {UserService} from '../../../app/services/user.service';
 import {FormGroup} from '@angular/forms';
-import {MapperService} from '../app/services/mapper.service';
-import {AddUserComponent} from './components/add-user/add-user.component';
-import {AddAchievementComponent} from './components/add-achievement/add-achievement.component';
-import {Achievement} from '../app/models/achievement';
-import {EditAchievementComponent} from './components/edit-achievement/edit-achievement.component';
-import {AchievementsService} from '../app/services/achievements.service';
-import {User} from '../app/models/user';
-import {AssignAchievementsComponent} from './components/assign-achievements/assign-achievements.component';
+import {MapperService} from '../../../app/services/mapper.service';
+import {AddUserComponent} from '../add-user/add-user.component';
+import {AddAchievementComponent} from '../add-achievement/add-achievement.component';
+import {Achievement} from '../../../app/models/achievement';
+import {EditAchievementComponent} from '../edit-achievement/edit-achievement.component';
+import {AchievementsService} from '../../../app/services/achievements.service';
+import {User} from '../../../app/models/user';
+import {AssignAchievementsComponent} from '../assign-achievements/assign-achievements.component';
 import {map, takeUntil} from 'rxjs/operators';
-import { ReadAchievementRequest } from '../app/models/achievement-request/read-achievement-request';
-import { Subject } from 'rxjs';
-// import { constants } from 'os';
+import {ReadAchievementRequest} from '../../../app/models/achievement-request/read-achievement-request';
+import {Subject} from 'rxjs';
+
 
 @Component({
   selector: 'app-admin-page',
@@ -62,20 +62,20 @@ export class AdminPageComponent implements OnInit, OnDestroy {
 
   private loadUserData() {
     this.requestService.getAllUsers()
-    .pipe(takeUntil(this.unsubscribe$))
-    .subscribe(response => {
-      this.userData = response.data;
-      this.dataSourceUser.data = this.userData;
-    });
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(response => {
+        this.userData = response.data;
+        this.dataSourceUser.data = this.userData;
+      });
   }
 
   private loadAchievementsData() {
     this.requestService.getAllAchievements()
-    .pipe(takeUntil(this.unsubscribe$))
-    .subscribe(response => {
-      this.achievementsData = response.data;
-      this.dataSourceAchievements.data = this.achievementsData;
-    });
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(response => {
+        this.achievementsData = response.data;
+        this.dataSourceAchievements.data = this.achievementsData;
+      });
   }
 
   private loadAchievementRequests() {
@@ -93,8 +93,8 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     }))
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((res) => {
-      this.dataSourceAchievementRequest = new MatTableDataSource(res);
-    });
+        this.dataSourceAchievementRequest = new MatTableDataSource(res);
+      });
   }
 
   public openEditUserWindow(user: any) {
@@ -116,8 +116,8 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     this.userService.deleteUserById(user.id)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(u => {
-      this.dataSourceUser = new MatTableDataSource(this.dataSourceUser.data.filter(x => x !== user));
-    });
+        this.dataSourceUser = new MatTableDataSource(this.dataSourceUser.data.filter(x => x !== user));
+      });
   }
 
   public onOpenAddAchievement() {
@@ -127,9 +127,9 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(result => {
-      this.achievementsData.push(result);
-      this.dataSourceAchievements = new MatTableDataSource(this.achievementsData);
-    });
+        this.achievementsData.push(result);
+        this.dataSourceAchievements = new MatTableDataSource(this.achievementsData);
+      });
   }
 
   public onOpenEditAchievement(achievement: Achievement) {
@@ -142,16 +142,16 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((result: Achievement) => {
-      const achievementToUpdate = this.dataSourceAchievements.data.find(x => x.id === result.id);
-      achievementToUpdate.name = result.name;
-      achievementToUpdate.icon = result.icon;
-      achievementToUpdate.description = result.description;
-      achievementToUpdate.xp = result.xp;
-      this.dataSourceAchievements.data[
-        this.dataSourceAchievements.data.indexOf(
-          this.dataSourceAchievements.data.find(x => x.id === result.id))] = achievementToUpdate;
-      this.dataSourceAchievements = new MatTableDataSource(this.dataSourceAchievements.data);
-    });
+        const achievementToUpdate = this.dataSourceAchievements.data.find(x => x.id === result.id);
+        achievementToUpdate.name = result.name;
+        achievementToUpdate.icon = result.icon;
+        achievementToUpdate.description = result.description;
+        achievementToUpdate.xp = result.xp;
+        this.dataSourceAchievements.data[
+          this.dataSourceAchievements.data.indexOf(
+            this.dataSourceAchievements.data.find(x => x.id === result.id))] = achievementToUpdate;
+        this.dataSourceAchievements = new MatTableDataSource(this.dataSourceAchievements.data);
+      });
   }
 
   public onAchievementDelete(achievement: Achievement) {
@@ -174,16 +174,16 @@ export class AdminPageComponent implements OnInit, OnDestroy {
       this.requestService.approveAchievementRequest(achievementTableRequest.id)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe(res => {
-        this.dataSourceAchievementRequest = new MatTableDataSource(this.dataSourceAchievementRequest.data.
-        filter(x => x !== achievementTableRequest));
-      });
+          this.dataSourceAchievementRequest = new MatTableDataSource(this.dataSourceAchievementRequest.data
+            .filter(x => x !== achievementTableRequest));
+        });
     } else {
       this.requestService.declineAchievementRequest(achievementTableRequest.id)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe(res => {
-        this.dataSourceAchievementRequest = new MatTableDataSource(this.dataSourceAchievementRequest.data.
-        filter(x => x !== achievementTableRequest));
-      });
+          this.dataSourceAchievementRequest = new MatTableDataSource(this.dataSourceAchievementRequest.data
+            .filter(x => x !== achievementTableRequest));
+        });
     }
   }
 
@@ -191,8 +191,8 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     this.userService.getCurrentUserInfo()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(u => {
-      this.currentUser = this.mapperService.getUser(u);
-      this.isInfoLoaded = true;
-    });
+        this.currentUser = this.mapperService.getUser(u);
+        this.isInfoLoaded = true;
+      });
   }
 }

@@ -1,4 +1,4 @@
-@import '../../assets/scss/theme-colors';
+@import '../../../../assets/scss/theme-colors';
 
 .main-container {
   display: flex;
@@ -15,28 +15,32 @@
       .user-table {
         background-color: $secondaryColor;
 
-        .admin-page-actions{
+        .admin-page-actions {
           display: flex;
           height: 48px;
           padding: 7px;
         }
+
         .delete {
           background-color: #68B70C;
           border-radius: 1px;
           margin-left: 10px;
         }
-        .approve{
+
+        .approve {
           background-color: #68B70C;
           border-radius: 1px;
           margin-left: 10px;
         }
-        .decline{
+
+        .decline {
           background-color: #A61111;
           border-radius: 1px;
           margin-left: 10px;
 
         }
-        .invisible{
+
+        .invisible {
           visibility: hidden;
         }
 
