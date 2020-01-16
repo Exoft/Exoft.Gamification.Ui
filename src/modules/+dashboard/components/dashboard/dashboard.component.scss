@@ -1,0 +1,100 @@
+.dashboard-container {
+  height: calc(100% - 6vmin);
+  width: 100%;
+  display: flex;
+  padding: 2vmin;
+
+  .components-container {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 2vmin 0 0;
+
+    .app-welcome {
+      height: 15%;
+      width: 100%;
+    }
+
+    .personal-achievements-thank-you-chart-container {
+      height: 40%;
+      display: flex;
+      justify-content: space-between;
+
+      .app-personal-achievements {
+        width: 25%;
+        padding: 0 1vmin 0 0;
+      }
+
+      .app-thank-you {
+        width: 25%;
+        padding: 0 1vmin 0 1vmin;
+      }
+
+      .app-top-charts {
+        width: 50%;
+        padding: 0 0 0 1vmin;
+      }
+    }
+
+    .badges-challenges-container {
+      height: 40%;
+      display: flex;
+      justify-content: space-between;
+
+      .app-badges {
+        width: 25%;
+        padding: 0 1vmin 0 0;
+      }
+
+      .app-challenges {
+        width: 75%;
+        padding: 0 0 0 1vmin;
+      }
+    }
+  }
+
+  .app-exoft-achievements {
+    width: 20%;
+  }
+}
+
+@media (max-width: 767px),
+(orientation: portrait) {
+  .dashboard-container {
+    height: auto;
+    flex-direction: column;
+    padding: 4vmin;
+
+    .components-container {
+      height: auto;
+      width: 100%;
+      padding: 0;
+
+      .app-welcome {
+        padding: 0 0 2vmin 0;
+      }
+
+      .personal-achievements-thank-you-chart-container,
+      .badges-challenges-container {
+        height: auto;
+        flex-direction: column;
+
+        .app-personal-achievements,
+        .app-thank-you,
+        .app-top-charts,
+        .app-badges,
+        .app-challenges {
+          width: 100%;
+          padding: 2vmin 0;
+        }
+      }
+    }
+
+    .app-exoft-achievements {
+      width: 100%;
+      padding: 2vmin 0 0 0;
+    }
+  }
+}

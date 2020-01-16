@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AssignAchievementsComponent } from './assign-achievements.component';
+import {AssignAchievementsComponent} from './assign-achievements.component';
 
 describe('AssignAchievementsComponent', () => {
   let component: AssignAchievementsComponent;
@@ -8,9 +8,9 @@ describe('AssignAchievementsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AssignAchievementsComponent ]
+      declarations: [AssignAchievementsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

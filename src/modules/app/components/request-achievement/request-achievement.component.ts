@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
 
-import { RequestService } from 'src/modules/app/services/dashboardequest.service';
+import {RequestService} from 'src/modules/app/services/request.service';
+
 
 @Component({
   selector: 'app-request-achievement',
@@ -14,7 +15,8 @@ export class RequestAchievementComponent implements OnInit {
   public pageData: any;
   public requestAchievementForm: FormGroup;
 
-  constructor(public dialog: MatDialog, public requestService: RequestService) { }
+  constructor(public dialog: MatDialog, public requestService: RequestService) {
+  }
 
   public ngOnInit(): void {
     this.loadData();

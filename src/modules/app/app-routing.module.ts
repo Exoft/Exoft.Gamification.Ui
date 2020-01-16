@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {AuthGuard} from './services/auth/authguard.service';
-import {IsLoggedGuard} from './services/auth/isloggedguard.service';
+import {AuthGuard} from './helpers/auth.guard';
+import {IsLoggedGuard} from './helpers/is-logged.guard';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 
 const routes: Routes = [
@@ -59,6 +59,7 @@ const routes: Routes = [
     redirectTo: '/page-not-found'
   }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

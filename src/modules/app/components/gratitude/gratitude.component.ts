@@ -1,8 +1,9 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
-import { FormControl, Validators } from '@angular/forms';
+import {Component, Inject} from '@angular/core';
+import {MatDialog, MAT_DIALOG_DATA} from '@angular/material';
+import {FormControl, Validators} from '@angular/forms';
 
-import { ThankYouService } from '../../services/thank-you.service';
+import {ThankYouService} from '../../services/thank-you.service';
+
 
 @Component({
   selector: 'app-gratitude',
@@ -12,11 +13,10 @@ import { ThankYouService } from '../../services/thank-you.service';
 export class GratitudeComponent {
   public message = new FormControl('', Validators.required);
 
-  constructor(
-    public dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) private userId: any,
-    private thankYouService: ThankYouService
-  ) {}
+  constructor(public dialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) private userId: any,
+              private thankYouService: ThankYouService) {
+  }
 
   public closeForm(): void {
     this.dialog.closeAll();

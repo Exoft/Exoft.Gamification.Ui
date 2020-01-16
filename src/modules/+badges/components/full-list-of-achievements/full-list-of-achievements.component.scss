@@ -53,4 +53,33 @@
   }
 }
 
-@import './full-list-of-achievements.component.responsive.scss';
+@media (max-width: 767px),
+(orientation: portrait) {
+  .component-container {
+    padding: 4vmin;
+
+    .component-title {
+      margin-bottom: 3vmin;
+      font-size: 4vmin;
+    }
+
+    .achievements-table {
+      font-size: 3vmin;
+      border-spacing: 1vmin 3vmin;
+
+      tr {
+        th {
+          font-size: 3.5vmin;
+        }
+
+        .achievement-cell {
+          img {
+            height: 10vmin;
+            width: 10vmin;
+            margin: 0 2vmin 0 0;
+          }
+        }
+      }
+    }
+  }
+}

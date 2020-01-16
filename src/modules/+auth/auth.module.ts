@@ -1,13 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AngularMaterialsModule } from '../shared/modules/angular-materials.module';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ReactiveFormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AngularMaterialsModule} from '../shared/modules/angular-materials.module';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {ReactiveFormsModule} from '@angular/forms';
 
-import { AuthRoutingModule } from './auth-routing.module';
-import { AuthComponent } from './auth.component';
-import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import {AuthRoutingModule} from './auth-routing.module';
+import {AuthComponent} from './components/auth/auth.component';
+import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
+import {ChangePasswordComponent} from './components/change-password/change-password.component';
+
 
 @NgModule({
   declarations: [
@@ -23,4 +24,5 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     ReactiveFormsModule
   ]
 })
-export class AuthModule {}
+export class AuthModule {
+}

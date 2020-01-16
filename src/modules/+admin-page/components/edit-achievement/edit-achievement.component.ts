@@ -4,6 +4,7 @@ import {AchievementsService} from '../../../app/services/achievements.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {MapperService} from '../../../app/services/mapper.service';
 
+
 @Component({
   selector: 'app-edit-achievement',
   templateUrl: './edit-achievement.component.html',
@@ -16,7 +17,6 @@ export class EditAchievementComponent implements OnInit {
               public dialog: MatDialogRef<EditAchievementComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
   }
-
 
   public editAchievementFormGroup: FormGroup;
   public iconUrl: string;

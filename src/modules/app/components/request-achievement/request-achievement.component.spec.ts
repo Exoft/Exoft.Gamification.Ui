@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RequestAchievementComponent } from './request-achievement.component';
+import {RequestAchievementComponent} from './request-achievement.component';
 
 describe('RequestAchievementComponent', () => {
   let component: RequestAchievementComponent;
@@ -8,9 +8,9 @@ describe('RequestAchievementComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RequestAchievementComponent ]
+      declarations: [RequestAchievementComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

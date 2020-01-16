@@ -9,7 +9,8 @@
     </div>
 
     <div class="user">
-      <div class="user-image-text" *ngIf="!pageData.avatarId && pageData.firstName else avatarExists" (click)="openUserProfile()">
+      <div class="user-image-text" *ngIf="!pageData.avatarId && pageData.firstName else avatarExists"
+           (click)="openUserProfile()">
         <p>{{ letterAvatar(pageData.firstName, pageData.lastName) }}</p>
       </div>
 

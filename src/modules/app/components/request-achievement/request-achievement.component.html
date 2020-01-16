@@ -3,25 +3,27 @@
     <div class="content-container">
 
       <div class="label">Please, leave a message and your achievement will be assigned soon</div>
-<form [formGroup]="requestAchievementForm">
+      <form [formGroup]="requestAchievementForm">
 
-  <mat-form-field class="select-form">
-    <mat-label>Achievement</mat-label>
-    <mat-select formControlName="achievementId">
-      <mat-option *ngFor="let item of pageData" [value]="item.id">
-        {{item.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+        <mat-form-field class="select-form">
+          <mat-label>Achievement</mat-label>
+          <mat-select formControlName="achievementId">
+            <mat-option *ngFor="let item of pageData" [value]="item.id">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-  <mat-form-field class="input-form">
-    <textarea matInput placeholder="Your message" formControlName="message"></textarea>
-  </mat-form-field>
+        <mat-form-field class="input-form">
+          <textarea matInput placeholder="Your message" formControlName="message"></textarea>
+        </mat-form-field>
 
-  <div class="button">
-    <button mat-button type="submit" (click)="onSubmitRequest(requestAchievementForm)"  [disabled]="requestAchievementForm.invalid"  class="submit-button" >Send</button>
-  </div>
-</form>
+        <div class="button">
+          <button mat-button type="submit" (click)="onSubmitRequest(requestAchievementForm)"
+                  [disabled]="requestAchievementForm.invalid" class="submit-button">Send
+          </button>
+        </div>
+      </form>
     </div>
 
     <div class="close-button" (click)="closeForm()">

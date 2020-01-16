@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TimeStampPipe } from './pipes/time-stamp.pipe';
-import { CustomDatePipe } from './pipes/custom-date.pipe';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {TimeStampPipe} from './pipes/time-stamp.pipe';
+import {CustomDatePipe} from './pipes/custom-date.pipe';
+
 
 @NgModule({
   declarations: [
@@ -16,4 +17,5 @@ import { CustomDatePipe } from './pipes/custom-date.pipe';
     CustomDatePipe
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

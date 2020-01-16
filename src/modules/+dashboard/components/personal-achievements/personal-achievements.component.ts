@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material';
 
-import { RequestService } from 'src/modules/app/services/dashboardequest.service';
-import { DialogService } from 'src/modules/app/services/dialog.service';
+import {RequestService} from 'src/modules/app/services/request.service';
+import {DialogService} from 'src/modules/app/services/dialog.service';
+
 
 @Component({
   selector: 'app-personal-achievements',
@@ -13,11 +14,10 @@ export class PersonalAchievementsComponent implements OnInit {
 
   public pageData: any = [];
 
-  constructor(
-    private requestService: RequestService,
-    private dialog: MatDialog,
-    private dialogService: DialogService
-  ) {}
+  constructor(private requestService: RequestService,
+              private dialog: MatDialog,
+              private dialogService: DialogService) {
+  }
 
   public ngOnInit(): void {
     this.loadData();

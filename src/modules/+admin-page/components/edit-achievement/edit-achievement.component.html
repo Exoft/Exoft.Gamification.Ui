@@ -1,6 +1,5 @@
 <div class="profile-setting-fields-container">
-  <form class="profile-settings-form" (ngSubmit)=" onSaveChanges()"
-        [formGroup]="editAchievementFormGroup">
+  <form class="profile-settings-form" (ngSubmit)=" onSaveChanges()" [formGroup]="editAchievementFormGroup">
     <label class="avatar-container" for="imageInput">
       <img [src]="iconUrl" class="avatar"/>
     </label>
@@ -11,14 +10,15 @@
       <mat-form-field class="input-field">
         <input matInput placeholder="NAME" formControlName="name"/>
       </mat-form-field>
+
       <mat-error *ngIf="editAchievementFormGroup.get('name').invalid && editAchievementFormGroup.get('name').touched">
         Field is required
       </mat-error>
 
-
       <mat-form-field class="input-field">
         <input matInput placeholder="DESCRIPTION" formControlName="description"/>
       </mat-form-field>
+
       <mat-error *ngIf="editAchievementFormGroup.get('description').invalid && editAchievementFormGroup.get('description').touched">
         Field is required
       </mat-error>
@@ -26,6 +26,7 @@
       <mat-form-field class="input-field">
         <input matInput placeholder="XP" formControlName="xp"/>
       </mat-form-field>
+
       <mat-error *ngIf="editAchievementFormGroup.get('xp').invalid && editAchievementFormGroup.get('xp').touched">
         Field is required
       </mat-error>

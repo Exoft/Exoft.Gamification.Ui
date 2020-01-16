@@ -19,8 +19,10 @@
     letter-spacing: 1px;
     font-size: 40px;
     flex-grow: 2;
+
     div {
       padding-top: 0px;
+
       p {
         font-size: 40px;
       }
@@ -38,7 +40,7 @@
     color: $textColor;
     font-size: 30px;
     padding: 15px;
-   width: 100%;
+    width: 100%;
   }
 
   img {
@@ -55,6 +57,7 @@
       padding-top: 50px;
       font-size: 30px;
       flex-grow: 2;
+
       div {
         padding-top: 2%;
 
@@ -87,6 +90,7 @@
   .not-found-page-container {
     div {
       font-size: 20px;
+
       div {
         padding-top: 0px;
 

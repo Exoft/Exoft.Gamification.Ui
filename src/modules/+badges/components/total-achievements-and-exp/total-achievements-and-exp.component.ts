@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UserService } from 'src/modules/app/services/user.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {UserService} from 'src/modules/app/services/user.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-total-achievements-and-exp',
@@ -16,7 +17,8 @@ export class TotalAchievementsAndExpComponent implements OnInit, OnDestroy {
   public averageCount = '21';
   public newBadgesCount = '5';
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) {
+  }
 
   public ngOnInit(): void {
     this.subscribeToUserDataChange();

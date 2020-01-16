@@ -1,11 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Router} from '@angular/router';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
-import { UserService } from 'src/modules/app/services/user.service';
-import { RequestService } from 'src/modules/app/services/dashboardequest.service';
-import { getFirstLettersWithSplit } from '../../../app/utils/letterAvatar';
+import {UserService} from 'src/modules/app/services/user.service';
+import {RequestService} from 'src/modules/app/services/request.service';
+import {getFirstLettersWithSplit} from '../../../app/utils/letterAvatar';
+
 
 @Component({
   selector: 'app-user',
@@ -22,7 +23,8 @@ export class UserComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
               private userService: UserService,
-              private requestService: RequestService) { }
+              private requestService: RequestService) {
+  }
 
   public ngOnInit(): void {
     this.subscribeToUserDataChange();
@@ -42,6 +44,7 @@ export class UserComponent implements OnInit, OnDestroy {
   public onOpenProfileSettings(): void {
     this.router.navigate(['/profile-settings']);
   }
+
   public getAvatarId(avatarId: any): string {
     return this.requestService.getAvatar(avatarId);
   }

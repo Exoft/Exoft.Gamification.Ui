@@ -53,4 +53,41 @@
   }
 }
 
-@import './total-achievements-and-exp.component.responsive.scss';
+@media (max-width: 767px),
+(orientation: portrait) {
+  .component-container {
+    padding: 4vmin;
+
+    .component-title {
+      font-size: 4vmin;
+    }
+
+    .experience-container {
+      padding: 5vmin 0 2vmin 0;
+
+      p {
+        font-size: 6vmin;
+      }
+
+      .experience-count {
+        font-size: 25vmin;
+      }
+    }
+
+    .badges-container {
+      padding: 0 0 4vmin 0;
+
+      p {
+        font-size: 4vmin;
+      }
+
+      .badges-count {
+        font-size: 13vmin;
+      }
+    }
+
+    .additional-info {
+      font-size: 3vmin;
+    }
+  }
+}

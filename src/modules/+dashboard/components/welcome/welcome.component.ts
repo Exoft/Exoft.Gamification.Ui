@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
-import { UserService } from 'src/modules/app/services/user.service';
+import {UserService} from 'src/modules/app/services/user.service';
+
 
 @Component({
   selector: 'app-welcome',
@@ -15,7 +16,8 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   public pageData: any = [];
   public welcomeGreeting = this.getWelcomeGreeting();
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) {
+  }
 
   public ngOnInit(): void {
     this.loadData();

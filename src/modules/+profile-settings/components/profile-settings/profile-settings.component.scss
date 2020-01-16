@@ -1,0 +1,161 @@
+@import '../../../../assets/scss/theme-colors';
+
+.profile-settings-page-container {
+  min-height: calc(100% - 6vmin);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .profile-settings-container {
+    width: 35%;
+    margin: 10vmin;
+
+    .title-button-container {
+      display: flex;
+      align-items: center;
+      color: $textColor;
+      margin: 0 0 3vmin 0;
+
+      .go-back-button {
+        color: #94a3b9;
+        font-size: 4vmin;
+        height: 4vmin;
+        width: 4vmin;
+        transform: rotate(180deg);
+        cursor: pointer;
+      }
+
+      .title {
+        font-size: 3vmin;
+        margin-left: 2vmin;
+      }
+    }
+
+    .profile-settings-form {
+      background-color: $secondaryColor;
+      border-radius: 5%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+
+      .avatar-container {
+        width: 15vmin;
+        height: 15vmin;
+        position: absolute;
+        align-self: flex-end;
+        top: -7.5vmin;
+        right: 5vmin;
+
+        .avatar {
+          width: 15vmin;
+          height: 15vmin;
+          object-fit: cover;
+          border: 0.3vmin solid $mainColor;
+          border-radius: 50%;
+        }
+
+        .avatar-text {
+          border-radius: 50%;
+          width: 15vmin;
+          height: 15vmin;
+          object-fit: cover;
+          border: 0.1vmin solid $textColor;
+          font-size: 7vmin;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #576271;
+          color: $mainColor;
+        }
+      }
+
+      .image-input {
+        display: none;
+      }
+
+      .profile-settings-fields {
+        display: flex;
+        flex-direction: column;
+        padding: 5vmin;
+        margin: 0 0 5vmin;
+
+        .name-input-container {
+
+          .input-field {
+            width: 50%;
+          }
+        }
+
+        .input-field {
+          font-size: 1.3vmin;
+
+        }
+      }
+
+      .save-button {
+        width: 100%;
+        background-color: $mainColor;
+        color: $textColor;
+        border-radius: 0 0 1.5vmin 1.5vmin;
+        font-size: 2vmin;
+        font-weight: 100;
+        padding: 1.5vmin;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px),
+(orientation: portrait) {
+  .profile-settings-page-container {
+    min-height: calc(100% - 12vmin);
+
+    .profile-settings-container {
+      width: 75%;
+
+      .title-button-container {
+
+        .go-back-button {
+          font-size: 8vmin;
+          height: 8vmin;
+          width: 8vmin;
+        }
+
+        .title {
+          font-size: 5vmin;
+        }
+      }
+
+      .profile-settings-form {
+        .avatar-container {
+          width: 20vmin;
+          height: 20vmin;
+          top: -10vmin;
+
+          .avatar {
+            width: 20vmin;
+            height: 20vmin;
+            border: 0.2vmin solid $mainColor;
+          }
+        }
+
+        .profile-settings-fields {
+          margin: 0 0 15vmin;
+
+          .input-field {
+            font-size: 3vmin;
+
+          }
+        }
+
+        .save-button {
+          border-radius: 0 0 3vmin 3vmin;
+          font-size: 4vmin;
+          padding: 1.5vmin;
+        }
+      }
+    }
+  }
+}
+

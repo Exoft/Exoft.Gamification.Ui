@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { User } from '../models/user/user';
-import { Achievement } from '../models/achievement';
-// import {AchievementRequest} from '../models/achievement-request/achievement-request';
+import {Injectable} from '@angular/core';
+import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {User} from '../models/user';
+import {Achievement} from '../models/achievement';
+
 
 @Injectable({
   providedIn: 'root'
@@ -43,15 +43,4 @@ export class MapperService {
     form.patchValue(achievement);
     return form;
   }
-
-  // getAchievementRequest(achievementRequest: AchievementRequest): FormGroup {
-  //   const form = this.formBuilder.group({
-  //     id: new FormControl(''),
-  //     user: this.getUser(achievementRequest.user),
-  //     achievement: this.getAchievement(achievementRequest.achievement),
-  //     message: new FormControl('')
-  //   });
-  //   form.patchValue(achievementRequest);
-  //   return form;
-  // }
 }

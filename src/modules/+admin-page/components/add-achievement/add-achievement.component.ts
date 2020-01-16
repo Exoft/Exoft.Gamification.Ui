@@ -1,7 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AchievementsService} from '../../../app/services/achievements.service';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+
 
 @Component({
   selector: 'app-add-achievement',
@@ -9,7 +10,6 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
   styleUrls: ['./add-achievement.component.scss']
 })
 export class AddAchievementComponent implements OnInit {
-
   public addAchievementFormGroup: FormGroup;
   public iconUrl: string;
 
