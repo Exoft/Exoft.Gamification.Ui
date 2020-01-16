@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileSettingsRoutingModule } from './profile-settings-routing.module';
 import { AngularMaterialsModule } from 'src/modules/shared/modules/angular-materials.module';
 import { SharedModule } from 'src/modules/shared/shared.module';
-import { ProfileSettingsComponent } from './profile-settings.component';
+import { ProfileSettingsComponent } from './components/profile-settings/profile-settings.component';
 
 @NgModule({
   declarations: [ProfileSettingsComponent],

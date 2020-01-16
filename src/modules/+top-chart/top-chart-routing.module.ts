@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TopChartComponent } from './top-chart.component';
+import { TopChartComponent } from './components/top-chart/top-chart.component';
 
 const routes: Routes = [{
   path: '',

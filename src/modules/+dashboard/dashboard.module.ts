@@ -6,7 +6,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { AngularMaterialsModule } from '../shared/modules/angular-materials.module';
 import { SharedModule } from '../shared/shared.module';
 
-import { DashboardComponent } from './dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TopChartComponent } from './components/top-chart/top-chart.component';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';

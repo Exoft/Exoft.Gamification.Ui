@@ -12,7 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { Interceptor } from './services/auth/interceptor';
 
 // Components
-import { AppComponent } from './app.component';
+import { AppComponent } from './components/app/app.component';
 import { MainnavComponent } from './components/mainnav/mainnav.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';

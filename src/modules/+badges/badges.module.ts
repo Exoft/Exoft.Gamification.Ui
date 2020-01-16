@@ -5,7 +5,7 @@ import { DashboardModule } from '../+dashboard/dashboard.module';
 import { AngularMaterialsModule } from '../shared/modules/angular-materials.module';
 import { SharedModule } from 'src/modules/shared/shared.module';
 
-import { BadgesComponent } from './badges.component';
+import { BadgesComponent } from './components/badges/badges.component';
 import { LastAchievementsComponent } from './components/last-achievements/last-achievements.component';
 import { TotalAchievementsAndExpComponent } from './components/total-achievements-and-exp/total-achievements-and-exp.component';
 import { UserComponent } from './components/user/user.component';

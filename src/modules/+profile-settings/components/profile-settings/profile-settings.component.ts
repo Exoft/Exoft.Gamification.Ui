@@ -6,8 +6,8 @@ import { takeUntil } from 'rxjs/operators';
 
 import { UserService } from 'src/modules/app/services/user.service';
 import { environment } from 'src/environments/environment';
-import { RequestService } from '../app/services/dashboardequest.service';
-import { getFirstLettersWithSplit } from '../app/utils/letterAvatar';
+import { RequestService } from '../../../app/services/dashboardequest.service';
+import { getFirstLettersWithSplit } from '../../../app/utils/letterAvatar';
 
 @Component({
   selector: 'app-profile-settings',

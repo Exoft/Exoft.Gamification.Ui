@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AngularMaterialsModule } from '../shared/modules/angular-materials.module';
 
 import { InformationRoutingModule } from './information-routing.module';
-import { InformationComponent } from './information.component';
+import { InformationComponent } from './components/information/information.component';
 
 @NgModule({
   declarations: [InformationComponent],

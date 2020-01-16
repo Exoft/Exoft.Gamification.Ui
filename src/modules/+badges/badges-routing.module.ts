@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { BadgesComponent } from './badges.component';
+import { BadgesComponent } from './components/badges/badges.component';
 
 const routes: Routes = [
   {
