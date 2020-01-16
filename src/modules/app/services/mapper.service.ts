@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { User } from '../models/user/user';
-import { Achievement } from '../models/achievement';
+import {Injectable} from '@angular/core';
+import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {User} from '../models/user';
+import {Achievement} from '../models/achievement';
 // import {AchievementRequest} from '../models/achievement-request/achievement-request';
 
 @Injectable({
