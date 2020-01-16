@@ -20,4 +20,16 @@
   }
 }
 
-@import './welcome.component.responsive.scss';
+@media (max-width: 767px),
+(orientation: portrait) {
+  .welcome-wrapper {
+    .header-text {
+      font-size: 6vmin;
+
+      .subheader-text {
+        font-size: 3vmin;
+      }
+    }
+  }
+}
+

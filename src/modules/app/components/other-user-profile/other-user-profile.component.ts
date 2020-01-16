@@ -1,11 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material';
-import { Observable } from 'rxjs';
+import {Component, OnInit, Inject} from '@angular/core';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material';
+import {Observable} from 'rxjs';
 
-import { RequestService } from 'src/modules/app/services/dashboardequest.service';
-import { GratitudeComponent } from '../gratitude/gratitude.component';
-import { UserService } from '../../services/user.service';
-import { getFirstLetters } from '../../utils/letterAvatar';
+import {RequestService} from 'src/modules/app/services/request.service';
+import {GratitudeComponent} from '../gratitude/gratitude.component';
+import {UserService} from '../../services/user.service';
+import {getFirstLetters} from '../../utils/letterAvatar';
 
 interface CurrentUserInterface {
   avatarId: string;
@@ -18,6 +18,7 @@ interface CurrentUserInterface {
   xp: number;
   roles: [];
 }
+
 
 @Component({
   selector: 'app-other-user-profile',
@@ -41,7 +42,8 @@ export class OtherUserProfileComponent implements OnInit {
     private requestService: RequestService,
     @Inject(MAT_DIALOG_DATA) public userId: number,
     private userService: UserService
-  ) {}
+  ) {
+  }
 
   public ngOnInit(): void {
     this.loadCurrentUser();
@@ -81,6 +83,6 @@ export class OtherUserProfileComponent implements OnInit {
   }
 
   public isThankYouButtonEnabled(): boolean {
-      return !(this.currentUserInfo.id && this.userId === this.currentUserInfo.id);
+    return !(this.currentUserInfo.id && this.userId === this.currentUserInfo.id);
   }
 }

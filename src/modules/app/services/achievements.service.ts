@@ -4,6 +4,7 @@ import {environment} from 'src/environments/environment';
 import {Observable} from 'rxjs';
 import {Achievement} from '../models/achievement';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,10 +12,7 @@ export class AchievementsService {
   constructor(private http: HttpClient) {
   }
 
-  getCurrentUserAchievements(
-    currentPage: any,
-    pageSize?: any
-  ): Observable<any> {
+  getCurrentUserAchievements(currentPage: any, pageSize?: any): Observable<any> {
     let params = new HttpParams().set('currentPage', currentPage);
     if (pageSize) {
       params = params.append('pageSize', pageSize);

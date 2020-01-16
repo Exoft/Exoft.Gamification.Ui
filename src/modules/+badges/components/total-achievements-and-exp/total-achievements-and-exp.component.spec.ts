@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TotalAchievementsAndExpComponent } from './total-achievements-and-exp.component';
+import {TotalAchievementsAndExpComponent} from './total-achievements-and-exp.component';
 
 describe('TotalAchievementsAndExpComponent', () => {
   let component: TotalAchievementsAndExpComponent;
@@ -8,9 +8,9 @@ describe('TotalAchievementsAndExpComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TotalAchievementsAndExpComponent ]
+      declarations: [TotalAchievementsAndExpComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

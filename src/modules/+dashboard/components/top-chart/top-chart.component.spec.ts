@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TopChartComponent } from './top-chart.component';
+import {TopChartComponent} from './top-chart.component';
 
 describe('TopChartComponent', () => {
   let component: TopChartComponent;
@@ -8,9 +8,9 @@ describe('TopChartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TopChartComponent ]
+      declarations: [TopChartComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

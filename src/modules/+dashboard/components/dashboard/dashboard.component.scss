@@ -17,7 +17,7 @@
       width: 100%;
     }
 
-    .personal-achivements-thank-you-chart-container {
+    .personal-achievements-thank-you-chart-container {
       height: 40%;
       display: flex;
       justify-content: space-between;
@@ -38,7 +38,7 @@
       }
     }
 
-    .badges-challlenges-container {
+    .badges-challenges-container {
       height: 40%;
       display: flex;
       justify-content: space-between;
@@ -60,7 +60,8 @@
   }
 }
 
-@media (max-width: 767px), (orientation: portrait) {
+@media (max-width: 767px),
+(orientation: portrait) {
   .dashboard-container {
     height: auto;
     flex-direction: column;
@@ -75,8 +76,8 @@
         padding: 0 0 2vmin 0;
       }
 
-      .personal-achivements-thank-you-chart-container,
-      .badges-challlenges-container {
+      .personal-achievements-thank-you-chart-container,
+      .badges-challenges-container {
         height: auto;
         flex-direction: column;
 

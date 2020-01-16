@@ -37,11 +37,11 @@
 
   <mat-sidenav-content>
     <app-header (openSidenavEmitter)="drawer.toggle()" [avatarSource]="avatarSource" [userName]="userName"
-      *ngIf="isHeaderShown"></app-header>
+                *ngIf="isHeaderShown"></app-header>
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
 
 <ng-template #avatarExists>
-  <img [src]="getAvatarId(avatarSource)" class="avatar" />
+  <img [src]="getAvatarId(avatarSource)" class="avatar"/>
 </ng-template>

@@ -7,15 +7,15 @@
 
   <div class="achievements-container">
     <div class="achievement-container" *ngFor="let item of achievementsList">
-      <img src="../../../../assets/images/star-big-image.png" class="achivement-image" />
+      <img src="../../../../assets/images/star-big-image.png" class="achievement-image"/>
 
-      <div class="achivement-title">
+      <div class="achievement-title">
         <div>{{ item.name }}</div>
 
         <div class="achievement-date">{{ item.addedTime | customDate }}</div>
       </div>
 
-      <div class="achivement-xp-container">
+      <div class="achievement-xp-container">
         <div class="circle"></div>
 
         <div class="xp">+ {{item.xp}} xp</div>

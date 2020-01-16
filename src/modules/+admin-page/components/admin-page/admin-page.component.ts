@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {RequestService} from 'src/modules/app/services/dashboardequest.service';
+import {RequestService} from 'src/modules/app/services/request.service';
 import {MatDialog, MatTableDataSource} from '@angular/material';
 import {DialogService} from 'src/modules/app/services/dialog.service';
 import {EditUserComponent} from '../edit-user/edit-user.component';

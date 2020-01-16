@@ -59,4 +59,42 @@
   }
 }
 
-@import './user.component.responsive.scss';
+@media (max-width: 767px),
+(orientation: portrait) {
+  .user-container {
+    padding: 4vmin;
+
+    .mat-button {
+      padding: 0 6vmin;
+      font-size: 3vmin;
+    }
+
+    .avatar {
+      border-radius: 50%;
+      border: 0.3vmin solid $mainColor;
+      height: 40vmin;
+      width: 40vmin;
+    }
+
+    .avatar-container {
+      border: 0.3vmin solid $mainColor;
+      height: 40vmin;
+      width: 40vmin;
+
+      .avatar-text {
+        font-size: 20vmin;
+      }
+    }
+
+    .username {
+      font-size: 6vmin;
+      padding: 2vmin;
+    }
+
+    .status {
+      font-size: 3vmin;
+      padding: 1vmin;
+    }
+  }
+}
+

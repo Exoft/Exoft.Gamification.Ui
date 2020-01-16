@@ -8,7 +8,7 @@
   <div class="menu-header-container">
     <nav mat-tab-nav-bar>
       <a mat-tab-link *ngFor="let item of menuItems" [routerLink]="item.link" routerLinkActive #rla="routerLinkActive"
-        [active]="rla.isActive" [routerLinkActiveOptions]="{ exact: true }">
+         [active]="rla.isActive" [routerLinkActiveOptions]="{ exact: true }">
         {{ item.name }}
       </a>
     </nav>
@@ -22,11 +22,11 @@
     </div>
 
     <ng-template #avatarExists>
-      <img [src]="getAvatarLink(avatarSource)" class="avatar" />
+      <img [src]="getAvatarLink(avatarSource)" class="avatar"/>
     </ng-template>
-    
+
     <div class="user-name">{{ userName }}</div>
-    
+
     <mat-icon class="open-menu-button" [matMenuTriggerFor]="userMenu">arrow_drop_down</mat-icon>
 
     <mat-menu #userMenu="matMenu">

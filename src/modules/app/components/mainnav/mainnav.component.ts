@@ -1,15 +1,16 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { menuItems } from '../../utils/constants';
-import { Router, NavigationEnd } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { MatDrawer } from '@angular/material';
+import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import {menuItems} from '../../utils/constants';
+import {Router, NavigationEnd} from '@angular/router';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {MatDrawer} from '@angular/material';
 
-import { UserService } from 'src/modules/app/services/user.service';
-import { AuthService } from 'src/modules/app/services/auth/auth.service';
-import { RequestService } from '../../services/dashboardequest.service';
-import { environment } from 'src/environments/environment';
-import { getFirstLettersWithSplit } from '../../utils/letterAvatar';
+import {UserService} from 'src/modules/app/services/user.service';
+import {AuthService} from 'src/modules/app/services/auth.service';
+import {RequestService} from '../../services/request.service';
+import {environment} from 'src/environments/environment';
+import {getFirstLettersWithSplit} from '../../utils/letterAvatar';
+
 
 @Component({
   selector: 'app-mainnav',
@@ -38,7 +39,8 @@ export class MainnavComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private authService: AuthService,
     private requestService: RequestService
-  ) {}
+  ) {
+  }
 
   public ngOnInit(): void {
     this.getUser();
@@ -68,6 +70,7 @@ export class MainnavComponent implements OnInit, OnDestroy {
         }
       });
   }
+
   public logOut(): void {
     this.drawer.close();
     return this.authService.onLogOut();
@@ -89,12 +92,13 @@ export class MainnavComponent implements OnInit, OnDestroy {
 
   public getUser(): void {
     this.userService.getCurrentUserInfo().subscribe(res => {
-      this.userData = { ...res };
+      this.userData = {...res};
       this.userData.avatar =
         environment.apiUrl + '/api/files/' + this.userData.avatarId;
       this.userService.setUserData(this.userData);
     });
   }
+
   public getAvatarId(avatarId: any): string {
     return this.requestService.getAvatar(avatarId);
   }

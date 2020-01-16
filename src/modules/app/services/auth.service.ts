@@ -1,15 +1,18 @@
-import { Injectable, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { MatDrawer } from '@angular/material';
-import { Observable } from 'rxjs';
-import { environment } from '../../../../environments/environment';
+import {Injectable, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {MatDrawer} from '@angular/material';
+import {Observable} from 'rxjs';
+import {environment} from '../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient,
+              private router: Router) {
+  }
 
   private readonly apiUrl = environment.apiUrl;
   @ViewChild('drawer') public drawer: MatDrawer;

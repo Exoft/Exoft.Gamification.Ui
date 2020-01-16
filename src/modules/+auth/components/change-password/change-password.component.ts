@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {Component} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
-import { AuthService } from '../../../app/services/auth/auth.service';
+import {AuthService} from '../../../app/services/auth.service';
+
 
 @Component({
   selector: 'app-change-password',
@@ -13,22 +14,27 @@ import { AuthService } from '../../../app/services/auth/auth.service';
 export class ChangePasswordComponent {
 
   public changePasForm = new FormGroup({
-    password: new FormControl('', [Validators.required,
-                                                           Validators.pattern('^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$')]),
-    confirmPassword: new FormControl('', [Validators.required,
-                                                                  Validators.pattern('^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$')]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$')
+    ]),
+    confirmPassword: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$')
+    ]),
   }, [this.checkPasswords]);
 
   constructor(private authService: AuthService,
               private activeRoute: ActivatedRoute,
               private snackBar: MatSnackBar,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   public checkPasswords(group: FormGroup) { // here we have the 'passwords' group
     const pass = group.get('password').value;
     const confirmPass = group.get('confirmPassword').value;
 
-    return pass === confirmPass ? null : { notSame: true };
+    return pass === confirmPass ? null : {notSame: true};
   }
 
   public onResetPassword(): void {
@@ -37,11 +43,11 @@ export class ChangePasswordComponent {
       secretString: this.activeRoute.snapshot.queryParams.secretString
     };
     this.authService.changePassword(changePasData).subscribe(response => {
-      this.openSnackBar('Now try to sign in with your new password', 'Notification');
-      setTimeout(() => {
-        this.router.navigate(['/signin']);
-      }, 3000);
-    },
+        this.openSnackBar('Now try to sign in with your new password', 'Notification');
+        setTimeout(() => {
+          this.router.navigate(['/signin']);
+        }, 3000);
+      },
       error => {
         const errorPswArray = error.error.Password;
         const errorMsg = errorPswArray.join(' ');

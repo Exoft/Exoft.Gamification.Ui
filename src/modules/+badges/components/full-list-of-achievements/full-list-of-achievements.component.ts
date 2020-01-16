@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { AchievementsService } from 'src/modules/app/services/achievements.service';
+import {AchievementsService} from 'src/modules/app/services/achievements.service';
+
 
 @Component({
   selector: 'app-full-list-of-achievements',
@@ -10,7 +11,8 @@ import { AchievementsService } from 'src/modules/app/services/achievements.servi
 export class FullListOfAchievementsComponent implements OnInit {
   public achievementsList = [{}];
 
-  constructor(private achievementsService: AchievementsService) {}
+  constructor(private achievementsService: AchievementsService) {
+  }
 
   public ngOnInit(): void {
     this.getUserAchievements();

@@ -5,17 +5,17 @@
     <button mat-button class="request-button" (click)="openForm()">Request</button>
   </div>
 
-  <div class="achivement-wrapper">
-    <div class="achivement" *ngFor="let item of pageData">
-      <img class="achivement-image" src="../../../../assets/images/star-small-image.png">
+  <div class="achievement-wrapper">
+    <div class="achievement" *ngFor="let item of pageData">
+      <img class="achievement-image" src="../../../../assets/images/star-small-image.png">
 
-      <div class="achivement-title">
+      <div class="achievement-title">
         <div>{{ item.name }}</div>
 
-        <div class="achivement-date">{{ item.addedTime | customDate }}</div>
+        <div class="achievement-date">{{ item.addedTime | customDate }}</div>
       </div>
 
-      <div class="achivement-xp-container">
+      <div class="achievement-xp-container">
         <div class="circle"></div>
 
         <div class="xp">+ {{ item.xp }} xp</div>

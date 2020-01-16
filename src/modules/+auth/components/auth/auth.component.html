@@ -1,34 +1,27 @@
 <div class="sign-in-page-container">
   <div class="sign-in-fields-container">
-    <form class="sign-in-form" (ngSubmit)="onSignIn()" [formGroup]="signinForm">
+    <form class="sign-in-form" (ngSubmit)="onSignIn()" [formGroup]="signInForm">
       <div class="sign-in-fields">
         <mat-form-field class="input-field">
-          <input matInput placeholder="USERNAME" formControlName="userName" />
+          <input matInput placeholder="USERNAME" formControlName="userName"/>
         </mat-form-field>
 
         <mat-form-field class="input-field">
-          <input
-            matInput
-            type="password"
-            placeholder="PASSWORD"
-            formControlName="password"
-          />
+          <input matInput type="password" placeholder="PASSWORD" formControlName="password"/>
         </mat-form-field>
 
         <a class="text-uppercase" (click)="onForgotPassword()">forgot password ?</a>
       </div>
 
-      <button
-        mat-button
-        type="submit"
-        class="sign-in-button text-uppercase"
-        [disabled]="signinForm.invalid"
-        [ngStyle]="{'opacity': signinForm.invalid ? '0.6' : '1'}"
-      >
+      <button mat-button
+              type="submit"
+              class="sign-in-button text-uppercase"
+              [disabled]="signInForm.invalid"
+              [ngStyle]="{'opacity': signInForm.invalid ? '0.6' : '1'}">
         sign in
       </button>
     </form>
   </div>
 
-  <img src="../../../../assets/images/exoft-logo-image.png" />
+  <img src="../../../../assets/images/exoft-logo-image.png"/>
 </div>

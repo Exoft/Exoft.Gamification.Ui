@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {Component} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
-import { AuthService } from '../../../app/services/auth/auth.service';
+import {AuthService} from '../../../app/services/auth.service';
+
 
 @Component({
   selector: 'app-forgot-password',
@@ -20,7 +21,8 @@ export class ForgotPasswordComponent {
 
   constructor(private authService: AuthService,
               private snackBar: MatSnackBar,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   public onResetPassword(): void {
     if (this.forgotPasForm.invalid) {
@@ -33,11 +35,11 @@ export class ForgotPasswordComponent {
     };
 
     this.authService.sendForgotPasLink(forgotPasData).subscribe(response => {
-      this.openSnackBar('Now check out your email and follow to the link in it.', 'Notification');
-      setTimeout(() => {
-        this.router.navigate(['/signin']);
+        this.openSnackBar('Now check out your email and follow to the link in it.', 'Notification');
+        setTimeout(() => {
+          this.router.navigate(['/signin']);
         }, 3000);
-    },
+      },
       error => {
         this.openSnackBar('This email doesn\'t exist', 'Notification');
       });

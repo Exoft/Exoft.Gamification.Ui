@@ -1,13 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {Location} from '@angular/common';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
-import { UserService } from 'src/modules/app/services/user.service';
-import { environment } from 'src/environments/environment';
-import { RequestService } from '../../../app/services/dashboardequest.service';
-import { getFirstLettersWithSplit } from '../../../app/utils/letterAvatar';
+import {UserService} from 'src/modules/app/services/user.service';
+import {environment} from 'src/environments/environment';
+import {RequestService} from '../../../app/services/request.service';
+import {getFirstLettersWithSplit} from '../../../app/utils/letterAvatar';
+
 
 @Component({
   selector: 'app-profile-settings',
@@ -40,7 +41,8 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private location: Location,
     private requestService: RequestService
-  ) {}
+  ) {
+  }
 
   public ngOnInit(): void {
     this.subscribeToUserDataChange();
@@ -94,7 +96,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
       this.userService.updateUserInfo(formModel).subscribe(
         res => {
           this.timeStamp = Date.now();
-          this.userData = { ...res };
+          this.userData = {...res};
           this.userData.avatar =
             environment.apiUrl +
             '/api/files/' +

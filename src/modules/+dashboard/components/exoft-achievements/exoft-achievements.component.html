@@ -9,7 +9,8 @@
     <mat-step class="achievements" *ngFor="let item of pageData">
       <ng-template matStepLabel>
         <div>
-          <div class="avatar" *ngIf="item.avatarId === null else avatarExists" (click)="openOtherUserInfoDialog(item.userId)">
+          <div class="avatar" *ngIf="item.avatarId === null else avatarExists"
+               (click)="openOtherUserInfoDialog(item.userId)">
             <p>{{letterAvatar(item.firstName, item.lastName)}}</p>
           </div>
 
@@ -19,7 +20,8 @@
         </div>
 
         <div class="achievement-label">
-          <div class="user-name" (click)="openOtherUserInfoDialog(item.userId)">{{item.firstName}} {{item.lastName}}</div>
+          <div class="user-name"
+               (click)="openOtherUserInfoDialog(item.userId)">{{item.firstName}} {{item.lastName}}</div>
 
           <div class="posting-time">{{item.createdTime | customDate}}</div>
         </div>

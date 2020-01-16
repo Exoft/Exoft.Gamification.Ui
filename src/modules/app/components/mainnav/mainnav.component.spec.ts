@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MainnavComponent } from './mainnav.component';
+import {MainnavComponent} from './mainnav.component';
 
 describe('MainnavComponent', () => {
   let component: MainnavComponent;
@@ -8,9 +8,9 @@ describe('MainnavComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MainnavComponent ]
+      declarations: [MainnavComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

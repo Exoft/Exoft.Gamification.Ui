@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
-import { ProfileSettingsComponent } from './components/profile-settings/profile-settings.component';
+import {ProfileSettingsComponent} from './components/profile-settings/profile-settings.component';
 
 const routes: Routes = [
   {
@@ -10,8 +10,10 @@ const routes: Routes = [
   }
 ];
 
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ProfileSettingsRoutingModule {}
+export class ProfileSettingsRoutingModule {
+}

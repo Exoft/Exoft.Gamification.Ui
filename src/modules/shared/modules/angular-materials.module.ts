@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { LayoutModule } from '@angular/cdk/layout';
+import {NgModule} from '@angular/core';
+import {LayoutModule} from '@angular/cdk/layout';
 import {
   MatToolbarModule,
   MatButtonModule,
@@ -12,11 +12,12 @@ import {
   MatProgressBarModule,
   MatCheckboxModule
 } from '@angular/material';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatTableModule } from '@angular/material/table';
-import { MatMenuModule } from '@angular/material/menu';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatTableModule} from '@angular/material/table';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 @NgModule({
   imports: [],
@@ -39,4 +40,5 @@ import { MatMenuModule } from '@angular/material/menu';
     MatMenuModule
   ]
 })
-export class AngularMaterialsModule {}
+export class AngularMaterialsModule {
+}

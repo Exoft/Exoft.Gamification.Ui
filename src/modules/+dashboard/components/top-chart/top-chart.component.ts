@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material';
 
-import { RequestService } from 'src/modules/app/services/dashboardequest.service';
-import { DialogService } from 'src/modules/app/services/dialog.service';
-import { getFirstLetters } from '../../../app/utils/letterAvatar';
+import {RequestService} from 'src/modules/app/services/request.service';
+import {DialogService} from 'src/modules/app/services/dialog.service';
+import {getFirstLetters} from '../../../app/utils/letterAvatar';
+
 
 @Component({
   selector: 'app-top-chart',
@@ -11,11 +12,10 @@ import { getFirstLetters } from '../../../app/utils/letterAvatar';
   styleUrls: ['./top-chart.component.scss']
 })
 export class TopChartComponent implements OnInit {
-  constructor(
-    public dialog: MatDialog,
-    private requestService: RequestService,
-    private dialogService: DialogService
-  ) {}
+  constructor(public dialog: MatDialog,
+              private requestService: RequestService,
+              private dialogService: DialogService) {
+  }
 
   public pageData: any = [];
   public title = 'Gamification';

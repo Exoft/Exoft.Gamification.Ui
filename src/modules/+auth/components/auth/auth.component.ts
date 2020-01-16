@@ -3,8 +3,9 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
-import {AuthService} from 'src/modules/app/services/auth/auth.service';
+import {AuthService} from 'src/modules/app/services/auth.service';
 import {UserService} from 'src/modules/app/services/user.service';
+
 
 @Component({
   selector: 'app-auth',
@@ -13,23 +14,21 @@ import {UserService} from 'src/modules/app/services/user.service';
 })
 export class AuthComponent {
 
-  public signinForm = new FormGroup({
+  public signInForm = new FormGroup({
     userName: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
   public userData: any;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private userService: UserService,
-    private snackBar: MatSnackBar
-  ) {
+  constructor(private authService: AuthService,
+              private router: Router,
+              private userService: UserService,
+              private snackBar: MatSnackBar) {
   }
 
   public onSignIn() {
-    if (this.signinForm.valid) {
-      const {userName, password} = this.signinForm.value;
+    if (this.signInForm.valid) {
+      const {userName, password} = this.signInForm.value;
       const formData = {userName, password};
       this.authService.signIn(formData).subscribe(
         res => {

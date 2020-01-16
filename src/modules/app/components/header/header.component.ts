@@ -1,12 +1,13 @@
-import { Component, Output, EventEmitter, Input, OnInit, OnDestroy } from '@angular/core';
-import { menuItems } from '../../utils/constants';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {Component, Output, EventEmitter, Input, OnInit, OnDestroy} from '@angular/core';
+import {menuItems} from '../../utils/constants';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
-import { UserService } from '../../services/user.service';
-import { AuthService } from '../../services/auth/auth.service';
-import { RequestService } from '../../services/dashboardequest.service';
-import { getFirstLettersWithSplit } from '../../utils/letterAvatar';
+import {UserService} from '../../services/user.service';
+import {AuthService} from '../../services/auth.service';
+import {RequestService} from '../../services/request.service';
+import {getFirstLettersWithSplit} from '../../utils/letterAvatar';
+
 
 @Component({
   selector: 'app-header',
@@ -23,11 +24,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public menuItems = Array.from(menuItems);
   public letterAvatar = getFirstLettersWithSplit;
 
-  constructor(
-    private userService: UserService,
-    private authService: AuthService,
-    private requestService: RequestService
-  ) {}
+  constructor(private userService: UserService,
+              private authService: AuthService,
+              private requestService: RequestService) {
+  }
 
   public ngOnInit(): void {
     this.userService

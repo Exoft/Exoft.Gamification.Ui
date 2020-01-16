@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { AchievementsService } from 'src/modules/app/services/achievements.service';
-import { DialogService } from 'src/modules/app/services/dialog.service';
+import {Component, OnInit} from '@angular/core';
+import {AchievementsService} from 'src/modules/app/services/achievements.service';
+import {DialogService} from 'src/modules/app/services/dialog.service';
+
 
 @Component({
   selector: 'app-last-achievements',
@@ -10,10 +11,9 @@ import { DialogService } from 'src/modules/app/services/dialog.service';
 export class LastAchievementsComponent implements OnInit {
   public achievementsList = [{}];
 
-  constructor(
-    private achievementsService: AchievementsService,
-    private dialogService: DialogService
-  ) {}
+  constructor(private achievementsService: AchievementsService,
+              private dialogService: DialogService) {
+  }
 
   public ngOnInit(): void {
     this.getUserLastAchievements();

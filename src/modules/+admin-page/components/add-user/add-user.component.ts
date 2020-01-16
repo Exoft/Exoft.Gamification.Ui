@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {UserService} from 'src/modules/app/services/user.service';
-import {RequestService} from 'src/modules/app/services/dashboardequest.service';
+import {RequestService} from 'src/modules/app/services/request.service';
 import {passwordContainValidity, passwordEqualityValidator} from '../../functions/add-user-validators';
 
 

@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material';
 import {UserService} from '../../../app/services/user.service';
-import {RequestService} from 'src/modules/app/services/dashboardequest.service';
+import {RequestService} from 'src/modules/app/services/request.service';
 
 
 @Component({

@@ -1,47 +1,49 @@
-  <mat-card class="card" *ngIf="currentUser$ | async as pageData">
-    <div class="main-container">
-      <div class="other-user-container">
-        <div class="avatar-text" *ngIf="!pageData.avatarId else avatarExists">
-          <p>{{ letterAvatar(pageData.firstName, pageData.lastName) }}</p>
-        </div>
-
-        <ng-template #avatarExists>
-          <img [src]="getAvatarId(pageData.avatarId)" class="avatar" />
-        </ng-template>
-
-        <div class="user-info-container">
-          <div class="user-name">{{ pageData.firstName }} {{ pageData.lastName }}</div>
-
-          <div class="user-achivments-info">
-            <div class="user-achivments-elements">
-              <p class="user-achivments-title">Total:</p>
-
-              <p> {{ totalBadgesCount }} Badges</p>
-            </div>
-
-            <div class="user-achivments-elements">
-              <p class="user-achivments-title">EXP:</p>
-
-              <p> {{ pageData.xp }} XP</p>
-            </div>
-
-            <div class="user-achivments-elements" *ngIf="pageData.status">
-              <p class="user-achivments-status">"{{ pageData.status }}"</p>
-            </div>
-          </div>
-        </div>
+<mat-card class="card" *ngIf="currentUser$ | async as pageData">
+  <div class="main-container">
+    <div class="other-user-container">
+      <div class="avatar-text" *ngIf="!pageData.avatarId else avatarExists">
+        <p>{{ letterAvatar(pageData.firstName, pageData.lastName) }}</p>
       </div>
 
-      <div class="achievement-container">
-        <div class="achievement-item" *ngFor="let item of achievementsData.data">
-          <img class="achievement-image" src="../../../../assets/images/star-small-image.png">
+      <ng-template #avatarExists>
+        <img [src]="getAvatarId(pageData.avatarId)" class="avatar"/>
+      </ng-template>
 
-          <div class="image-text">{{ item.name }}</div>
+      <div class="user-info-container">
+        <div class="user-name">{{ pageData.firstName }} {{ pageData.lastName }}</div>
+
+        <div class="user-achivments-info">
+          <div class="user-achivments-elements">
+            <p class="user-achivments-title">Total:</p>
+
+            <p> {{ totalBadgesCount }} Badges</p>
+          </div>
+
+          <div class="user-achivments-elements">
+            <p class="user-achivments-title">EXP:</p>
+
+            <p> {{ pageData.xp }} XP</p>
+          </div>
+
+          <div class="user-achivments-elements" *ngIf="pageData.status">
+            <p class="user-achivments-status">"{{ pageData.status }}"</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <button mat-button class="request-button" (click)="openThankYouForm()" [disabled]="!isThankYouButtonEnabled()"> SAY THANKS</button>
+    <div class="achievement-container">
+      <div class="achievement-item" *ngFor="let item of achievementsData.data">
+        <img class="achievement-image" src="../../../../assets/images/star-small-image.png">
 
-    <mat-icon class="close-button" (click)="closeOtherUser()">close</mat-icon>
-  </mat-card>
+        <div class="image-text">{{ item.name }}</div>
+      </div>
+    </div>
+  </div>
+
+  <button mat-button class="request-button" (click)="openThankYouForm()" [disabled]="!isThankYouButtonEnabled()"> SAY
+    THANKS
+  </button>
+
+  <mat-icon class="close-button" (click)="closeOtherUser()">close</mat-icon>
+</mat-card>

@@ -1,6 +1,5 @@
 @import "../../../../assets/scss/theme-colors";
 
-
 .card {
   background-color: $secondaryColor;
   color: $textColor;
@@ -46,16 +45,17 @@
       }
 
     }
-        .close-button {
-          color: $mainColor;
-          position: absolute;
-          top: 0;
-          right: 0;
-          cursor: pointer;
 
-          .material-icons {
-            font-size: 35px;
-          }
-        }
+    .close-button {
+      color: $mainColor;
+      position: absolute;
+      top: 0;
+      right: 0;
+      cursor: pointer;
+
+      .material-icons {
+        font-size: 35px;
+      }
+    }
   }
 }
