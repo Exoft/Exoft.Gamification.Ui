@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {User} from '../models/user';
-import {Achievement} from '../models/achievement';
+import {User} from '../models/user/user';
+import {Achievement} from '../models/achievement/achievement';
 
 
 @Injectable({
@@ -37,7 +37,7 @@ export class MapperService {
       name: new FormControl(''),
       description: new FormControl(''),
       xp: new FormControl(''),
-      icon: new FormControl()
+      iconId: new FormControl()
     });
 
     form.patchValue(achievement);

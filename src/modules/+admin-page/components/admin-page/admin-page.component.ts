@@ -8,10 +8,10 @@ import {FormGroup} from '@angular/forms';
 import {MapperService} from '../../../app/services/mapper.service';
 import {AddUserComponent} from '../add-user/add-user.component';
 import {AddAchievementComponent} from '../add-achievement/add-achievement.component';
-import {Achievement} from '../../../app/models/achievement';
+import {Achievement} from '../../../app/models/achievement/achievement';
 import {EditAchievementComponent} from '../edit-achievement/edit-achievement.component';
 import {AchievementsService} from '../../../app/services/achievements.service';
-import {User} from '../../../app/models/user';
+import {User} from '../../../app/models/user/user';
 import {AssignAchievementsComponent} from '../assign-achievements/assign-achievements.component';
 import {map, takeUntil} from 'rxjs/operators';
 import {ReadAchievementRequest} from '../../../app/models/achievement-request/read-achievement-request';
@@ -110,6 +110,11 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     this.dialog.open(AddUserComponent, {
       width: '600px'
     });
+    this.dialog.afterAllClosed
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => {
+        this.loadUserData();
+      });
   }
 
   public onUserDelete(user: User) {
@@ -142,14 +147,9 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((result: Achievement) => {
-        const achievementToUpdate = this.dataSourceAchievements.data.find(x => x.id === result.id);
-        achievementToUpdate.name = result.name;
-        achievementToUpdate.icon = result.icon;
-        achievementToUpdate.description = result.description;
-        achievementToUpdate.xp = result.xp;
         this.dataSourceAchievements.data[
           this.dataSourceAchievements.data.indexOf(
-            this.dataSourceAchievements.data.find(x => x.id === result.id))] = achievementToUpdate;
+            this.dataSourceAchievements.data.find(x => x.id === result.id))] = result;
         this.dataSourceAchievements = new MatTableDataSource(this.dataSourceAchievements.data);
       });
   }

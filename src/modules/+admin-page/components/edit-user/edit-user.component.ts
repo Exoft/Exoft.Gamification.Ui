@@ -1,8 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Validators} from '@angular/forms';
+import {Subject} from 'rxjs';
+import {FormControl, FormBuilder, FormGroup} from 'ngx-strongly-typed-forms'
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material';
 import {UserService} from '../../../app/services/user.service';
 import {RequestService} from 'src/modules/app/services/request.service';
+import {UpdateUser} from '../../../app/models/user/update-user';
+import {takeUntil} from 'rxjs/operators';
 
 
 @Component({
@@ -11,25 +15,16 @@ import {RequestService} from 'src/modules/app/services/request.service';
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
-  public profileSettingsForm = new FormGroup({
-    userName: new FormControl('', Validators.required),
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    email: new FormControl(
-      '',
-      Validators.compose([Validators.required, Validators.email])
-    ),
-    role: new FormControl(''),
-    status: new FormControl(''),
-    avatar: new FormControl('')
-  });
+  private unsubscribe$: Subject<void> = new Subject();
+  public profileSettingsForm: FormGroup<UpdateUser>;
   public avatarUrl: string;
 
   constructor(
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private userService: UserService,
-    private requestService: RequestService
+    private requestService: RequestService,
+    private formBuilder: FormBuilder
   ) {
   }
 
@@ -58,33 +53,32 @@ export class EditUserComponent implements OnInit {
     });
   }
 
+  public ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
   public onSaveChanges(): void {
-    const formModel = this.createFormData(this.profileSettingsForm);
-    this.userService
-      .updateUserInfoById(this.data.userId, formModel)
-      .subscribe(u => {
-        this.dialog.closeAll();
-      });
-  }
-
-  public onSelectFile(event: any): void {
-    if (event.target.files && event.target.files[0]) {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(event.target.files[0]);
-
-      fileReader.onload = (imageLoading: Event) => {
-        this.profileSettingsForm.get('avatar').setValue(event.target.files[0]);
-        this.avatarUrl = fileReader.result.toString();
-      };
+    if (this.profileSettingsForm.valid) {
+      this.userService.updateUserInfoById(this.data.userId, this.profileSettingsForm.value)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(() => {
+          this.dialog.closeAll();
+        });
     }
   }
 
-  public createFormData(form: FormGroup): FormData {
-    const formData = new FormData();
-    for (const field of Object.keys(form.controls)) {
-      formData.append(field, form.get(field).value);
-    }
-
-    return formData;
+  public initializeForm() {
+    this.profileSettingsForm = this.formBuilder.group<UpdateUser>({
+      userName: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: [
+        '',
+        Validators.compose([Validators.required, Validators.email])
+      ],
+      role: [[]],
+      status: ['']
+    });
   }
 }

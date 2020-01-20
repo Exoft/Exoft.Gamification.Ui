@@ -1,11 +1,12 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy } from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
+import {Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {UserService} from 'src/modules/app/services/user.service';
-import {RequestService} from 'src/modules/app/services/request.service';
 import {passwordContainValidity, passwordEqualityValidator} from '../../functions/add-user-validators';
-
+import {takeUntil} from 'rxjs/operators';
+import {PostUser} from 'src/modules/app/models/user/post-user';
 
 @Component({
   selector: 'app-add-user',
@@ -18,36 +19,15 @@ export class AddUserComponent implements OnInit, OnDestroy {
   public avatarId: string;
   public userData: any;
   public timeStamp = Date.now();
-
-  public editUserForm = this.formBuilder.group({
-    userName: new FormControl('', Validators.required),
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    role: new FormControl('User'),
-    email: new FormControl(
-      '',
-      Validators.compose([Validators.required, Validators.email])
-    ),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(8),
-      passwordContainValidity
-    ]),
-    confirmPassword: new FormControl('', Validators.required),
-    status: new FormControl(''),
-    avatar: new FormControl(''),
-  }, {
-    validator: passwordEqualityValidator
-  });
-
+  public addUserFormGroup: FormGroup<PostUser>
 
   constructor(public dialog: MatDialog,
-              private userService: UserService,
-              private requestService: RequestService,
-              private formBuilder: FormBuilder) {
+    private userService: UserService,
+    private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
+    this.initializeForm();
   }
 
   public ngOnDestroy() {
@@ -57,51 +37,47 @@ export class AddUserComponent implements OnInit, OnDestroy {
 
   public onSelectFile(event: any) {
     if (event.target.files && event.target.files[0]) {
+      this.addUserFormGroup.controls.avatar.setValue(event.target.files[0]);
+      this.addUserFormGroup.controls.avatar.updateValueAndValidity(); 
+
       const fileReader = new FileReader();
       fileReader.readAsDataURL(event.target.files[0]);
 
-      fileReader.onload = (imageLoading: Event) => {
-        this.editUserForm.get('avatar').setValue(event.target.files[0]);
+      fileReader.onload = () => {
         this.avatarUrl = fileReader.result.toString();
       };
     }
   }
 
   public onSaveChanges() {
-    if (this.editUserForm.valid) {
-      this.userService.createUser(this.editUserForm.value).subscribe(u => {
-
-      });
-    }
-    /*  if (this.editUserForm.valid) {
-        const formModel = this.createFormData(this.editUserForm);
-        this.userService.updateUserInfo(formModel).subscribe(
-          res => {
-            this.timeStamp = Date.now();
-            this.userData = { ...res };
-            this.userData.avatar =
-              environment.apiUrl +
-              '/api/files/' +
-              this.userData.avatarId +
-              '/?timeStamp=' +
-              this.timeStamp;
-            this.userService.setUserData(this.userData);
-          },
-          error => {
-            //
-          }
-        );
-      }*/
+    if (this.addUserFormGroup.valid) {
+      this.userService.createUser(this.addUserFormGroup.value)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(u => {
+          this.dialog.closeAll();
+        });
+    }    
   }
 
-  createFormData(form: FormGroup): FormData {
-    const formData = new FormData();
-
-    for (const field of Object.keys(form.controls)) {
-      formData.append(field, form.get(field).value);
-    }
-
-    return formData;
+  //TODO: Add Functionality For Adding Roles
+  // Also add that in html file
+  private initializeForm() {
+    this.addUserFormGroup = this.formBuilder.group<PostUser>({
+      userName: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      roles: ['User'],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8),
+        passwordContainValidity
+      ]],
+      confirmPassword: ['', Validators.required],
+      status: '',
+      avatar: null
+    }, { 
+      validator: passwordEqualityValidator
+    });
   }
-
 }

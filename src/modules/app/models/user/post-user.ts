@@ -7,5 +7,5 @@ export interface PostUser {
     password: string;
     confirmPassword: string;
     avatar: File;
-    role: [];
+    roles: string[];
 }

@@ -1,5 +1,5 @@
 <div class="profile-setting-fields-container">
-  <form class="profile-settings-form" (ngSubmit)="onSaveChanges()" [formGroup]="editUserForm">
+  <form class="profile-settings-form" (ngSubmit)="onSaveChanges()" [formGroup]="addUserFormGroup">
     <label class="avatar-container" for="imageInput">
       <img [src]="avatarUrl" class="avatar"/>
     </label>
@@ -11,7 +11,7 @@
         <input matInput placeholder="USERNAME" formControlName="userName"/>
       </mat-form-field>
 
-      <mat-error *ngIf="editUserForm.get('userName').invalid && editUserForm.get('userName').touched">
+      <mat-error *ngIf="addUserFormGroup.get('userName').invalid && addUserFormGroup.get('userName').touched">
         Field is required
       </mat-error>
 
@@ -19,7 +19,7 @@
         <input matInput placeholder="FIRST NAME" formControlName="firstName"/>
       </mat-form-field>
 
-      <mat-error *ngIf="editUserForm.get('firstName').invalid && editUserForm.get('firstName').touched">
+      <mat-error *ngIf="addUserFormGroup.get('firstName').invalid && addUserFormGroup.get('firstName').touched">
         Field is required
       </mat-error>
 
@@ -27,7 +27,7 @@
         <input matInput placeholder="LAST NAME" formControlName="lastName"/>
       </mat-form-field>
 
-      <mat-error *ngIf="editUserForm.get('lastName').invalid && editUserForm.get('lastName').touched">
+      <mat-error *ngIf="addUserFormGroup.get('lastName').invalid && addUserFormGroup.get('lastName').touched">
         Field is required
       </mat-error>
 
@@ -35,7 +35,7 @@
         <input matInput placeholder="EMAIL ADDRESS" formControlName="email"/>
       </mat-form-field>
 
-      <mat-error *ngIf="editUserForm.get('email').invalid && editUserForm.get('email').touched">
+      <mat-error *ngIf="addUserFormGroup.get('email').invalid && addUserFormGroup.get('email').touched">
         Please, enter valid email
       </mat-error>
 
@@ -43,7 +43,7 @@
         <input matInput placeholder="PASSWORD" type="password" formControlName="password"/>
       </mat-form-field>
 
-      <mat-error *ngIf="editUserForm.get('password').invalid && editUserForm.get('password').touched">
+      <mat-error *ngIf="addUserFormGroup.get('password').invalid && addUserFormGroup.get('password').touched">
         Password must contain capital latter, digit and to be at least 8 signs long
       </mat-error>
 
@@ -51,7 +51,7 @@
         <input matInput placeholder="CONFIRM PASSWORD" type="password" formControlName="confirmPassword"/>
       </mat-form-field>
 
-      <mat-error *ngIf="editUserForm.get('confirmPassword').invalid && editUserForm.get('confirmPassword').touched">
+      <mat-error *ngIf="addUserFormGroup.get('confirmPassword').invalid && addUserFormGroup.get('confirmPassword').touched">
         Passwords must be equal
       </mat-error>
 

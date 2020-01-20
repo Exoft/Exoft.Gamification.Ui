@@ -3,5 +3,5 @@ export interface Achievement {
   name: string;
   description: string;
   xp: string;
-  icon: any;
+  iconId: string;
 }

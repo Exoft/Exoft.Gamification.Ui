@@ -26,7 +26,7 @@ export class AssignAchievementsComponent implements OnInit {
       availableAchievements: new FormArray([])
     });
     this.achievementsService.getAllAchievements().subscribe(achievements => {
-      achievements.data.forEach(achievement => {
+      achievements.forEach(achievement => {
         this.achievements.push(this.formBuilder.group({
           id: new FormControl(achievement.id),
           isChosen: new FormControl(false),
@@ -57,6 +57,7 @@ export class AssignAchievementsComponent implements OnInit {
       .filter(x => x.isChosen)
       .map(({id}) => id))
       .subscribe(res => {
+        this.dialog.close(res);
       });
   }
 }

@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, BehaviorSubject} from 'rxjs';
 
 import {environment} from '../../../environments/environment';
-import {User} from '../models/user';
-
+import {User} from '../models/user/user';
+import {PostUser} from '../models/user/post-user';
 
 @Injectable({
   providedIn: 'root'
@@ -39,8 +39,14 @@ export class UserService {
     return this.http.put(environment.apiUrl + `/api/users/${userId}`, userInfo);
   }
 
-  public createUser(user: User): Observable<User> {
-    return this.http.post<User>(environment.apiUrl + `/api/users`, user);
+  public createUser(user: PostUser): Observable<User> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    const formData = new FormData();
+    Object.keys(user).forEach(function (key) {
+      formData.append(key, user[key]);
+    });
+    return this.http.post<User>(environment.apiUrl + `/api/users`, formData, {headers: headers});
   }
 
   public deleteUserById(userId: string): Observable<any> {
