@@ -1,12 +1,14 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
-import {FormControl, FormBuilder, FormGroup} from 'ngx-strongly-typed-forms'
-import {MAT_DIALOG_DATA, MatDialog} from '@angular/material';
+import {FormBuilder, FormGroup} from 'ngx-strongly-typed-forms';
+import {environment} from '../../../../environments/environment';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {UserService} from '../../../app/services/user.service';
-import {RequestService} from 'src/modules/app/services/request.service';
 import {UpdateUser} from '../../../app/models/user/update-user';
 import {takeUntil} from 'rxjs/operators';
+import {User} from 'src/modules/app/models/user/user';
+import { Validators } from '@angular/forms';
+import { ReadUser } from 'src/modules/app/models/user/read-user';
 
 
 @Component({
@@ -16,41 +18,27 @@ import {takeUntil} from 'rxjs/operators';
 })
 export class EditUserComponent implements OnInit {
   private unsubscribe$: Subject<void> = new Subject();
-  public profileSettingsForm: FormGroup<UpdateUser>;
+  public editUserForm: FormGroup<UpdateUser> = this.formBuilder.group<UpdateUser>({
+    userName: ['', Validators.required],
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    email: ['', Validators.required],
+    roles: [[]],
+    status: [''],
+    avatar: null
+  });
   public avatarUrl: string;
 
   constructor(
-    public dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    private formBuilder: FormBuilder,
     private userService: UserService,
-    private requestService: RequestService,
-    private formBuilder: FormBuilder
+    public dialog: MatDialogRef<EditUserComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: string
   ) {
   }
 
   ngOnInit() {
-    this.userService.getUserInfoById(this.data.userId).subscribe(res => {
-      const {
-        avatarId,
-        email,
-        firstName,
-        lastName,
-        status,
-        userName,
-        roles
-      } = res;
-      this.avatarUrl = this.requestService.getAvatar(avatarId);
-
-      this.profileSettingsForm.setValue({
-        avatar: avatarId,
-        email,
-        firstName,
-        lastName,
-        status,
-        userName,
-        role: roles[0]
-      });
-    });
+    this.initializeForm();    
   }
 
   public ngOnDestroy() {
@@ -58,27 +46,35 @@ export class EditUserComponent implements OnInit {
     this.unsubscribe$.complete();
   }
 
-  public onSaveChanges(): void {
-    if (this.profileSettingsForm.valid) {
-      this.userService.updateUserInfoById(this.data.userId, this.profileSettingsForm.value)
+  public onSelectFile(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      this.editUserForm.controls.avatar.setValue(event.target.files[0]);
+      this.editUserForm.controls.avatar.updateValueAndValidity();
+
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(event.target.files[0]);
+
+      fileReader.onload = () => {
+        this.avatarUrl = fileReader.result.toString();
+      };
+    }
+  }
+
+  public onSaveChanges() {
+    if (this.editUserForm.valid) {
+      this.userService.updateUserInfoById(this.data, this.editUserForm.value)
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe(() => {
-          this.dialog.closeAll();
+        .subscribe((res) => {
+          this.dialog.close(res as ReadUser);
         });
     }
   }
 
   public initializeForm() {
-    this.profileSettingsForm = this.formBuilder.group<UpdateUser>({
-      userName: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: [
-        '',
-        Validators.compose([Validators.required, Validators.email])
-      ],
-      role: [[]],
-      status: ['']
-    });
+    this.userService.getUserInfoById(this.data).subscribe(
+      user => {
+        this.editUserForm.patchValue(user);
+        this.avatarUrl = `${environment.apiUrl}/api/files/${user.avatarId}`;
+      });    
   }
 }

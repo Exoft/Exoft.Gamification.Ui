@@ -4,5 +4,6 @@ export interface UpdateUser {
     userName: string;
     status: string;
     email: string;
-    role: [];
+    roles: string[];
+    avatar: File;
 }

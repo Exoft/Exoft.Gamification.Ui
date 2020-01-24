@@ -5,6 +5,7 @@ import {Observable, BehaviorSubject} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {User} from '../models/user/user';
 import {PostUser} from '../models/user/post-user';
+import { UpdateUser } from '../models/user/update-user';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +24,8 @@ export class UserService {
     return this.userDataSubject$.asObservable();
   }
 
-  public getUserInfoById(userId: string): Observable<any> {
-    return this.http.get(environment.apiUrl + `/api/users/${userId}`);
+  public getUserInfoById(userId: string): Observable<User> {
+    return this.http.get<User>(environment.apiUrl + `/api/users/${userId}`);
   }
 
   public getCurrentUserInfo(): Observable<any> {
@@ -35,8 +36,8 @@ export class UserService {
     return this.http.put(environment.apiUrl + '/api/users/current-user', formData);
   }
 
-  public updateUserInfoById(userId: string, userInfo: any): Observable<any> {
-    return this.http.put(environment.apiUrl + `/api/users/${userId}`, userInfo);
+  public updateUserInfoById(userId: string, userInfo: UpdateUser): Observable<User> {
+    return this.http.put<User>(environment.apiUrl + `/api/users/${userId}`, userInfo);
   }
 
   public createUser(user: PostUser): Observable<User> {
@@ -46,7 +47,7 @@ export class UserService {
     Object.keys(user).forEach(function (key) {
       formData.append(key, user[key]);
     });
-    return this.http.post<User>(environment.apiUrl + `/api/users`, formData, {headers: headers});
+    return this.http.post<User>(`${environment.apiUrl}/api/users`, formData, {headers: headers});
   }
 
   public deleteUserById(userId: string): Observable<any> {

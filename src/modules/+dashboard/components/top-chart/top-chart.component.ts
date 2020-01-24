@@ -45,7 +45,7 @@ export class TopChartComponent implements OnInit {
   private loadData(): void {
     this.requestService.getAllUsers().subscribe(response => {
       // Take top five users
-      this.pageData = response.data.sort((a, b) => b.xp - a.xp).slice(0, 5);
+      this.pageData = response.sort((a, b) => b.xp - a.xp).slice(0, 5);
       this.getMaxXp(this.pageData[0].xp);
     });
   }
