@@ -4,6 +4,9 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {ReadAchievementRequest} from '../models/achievement-request/read-achievement-request';
+import {User} from '../models/user/user';
+import { ReturningPagingInfo } from '../models/user/return-page-info';
+import { Achievement } from '../models/achievement/achievement';
 
 
 @Injectable({
@@ -26,14 +29,14 @@ export class RequestService {
   }
 
   public getAllUsers(): Observable<any> {
-    return this.httpClient.get(`${this.apiUrl}/api/users/with-short-info`);
+    return this.httpClient.get<any>(`${this.apiUrl}/api/users/with-short-info`);
   }
 
-  public getCurrentUserById(userID: any): Observable<any> {
-    return this.httpClient.get(`${this.apiUrl}/api/users/${userID}`);
+  public getCurrentUserById(userID: string): Observable<User> {
+    return this.httpClient.get<User>(`${this.apiUrl}/api/users/${userID}`);
   }
 
-  public getCurrentUserAchievements(userID: any): Observable<any> {
+  public getCurrentUserAchievements(userID: string): Observable<any> {
     return this.httpClient.get(
       `${this.apiUrl}/api/users/${userID}/achievements`
     );
@@ -43,8 +46,8 @@ export class RequestService {
     return this.httpClient.get(`${this.apiUrl}/api/events`);
   }
 
-  public getAllAchievements(): Observable<any> {
-    return this.httpClient.get(`${this.apiUrl}/api/achievements`);
+  public getAllAchievements(): Observable<ReturningPagingInfo<Achievement>> {
+    return this.httpClient.get<ReturningPagingInfo<Achievement>>(`${this.apiUrl}/api/achievements`);
   }
 
   public requestAchievement(formData: any): Observable<any> {

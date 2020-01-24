@@ -2,11 +2,11 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
 import {AchievementsService} from '../../../app/services/achievements.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {MapperService} from '../../../app/services/mapper.service';
 import {environment} from '../../../../environments/environment';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {PostAchievement} from 'src/modules/app/models/achievement/post-achievement';
+import {Achievement} from 'src/modules/app/models/achievement/achievement';
 
 @Component({
   selector: 'app-edit-achievement',
@@ -15,22 +15,23 @@ import {PostAchievement} from 'src/modules/app/models/achievement/post-achieveme
 })
 export class EditAchievementComponent implements OnInit {
   private unsubscribe$: Subject<void> = new Subject();
-  public environment = environment;
   public editAchievementFormGroup: FormGroup<PostAchievement>;
-  public achievementId: string;
   public iconUrl: string;
-  public iconId: string;
 
   constructor(
     private formBuilder: FormBuilder,
-    private mapperService: MapperService,
     private achievementService: AchievementsService,
     public dialog: MatDialogRef<EditAchievementComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: Achievement) {
   }
 
   ngOnInit() {
     this.initializeForm();
+  }
+
+  public ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   public onSelectFile(event: any) {
@@ -49,7 +50,7 @@ export class EditAchievementComponent implements OnInit {
 
   onSaveChanges() {
     if (this.editAchievementFormGroup.valid) {
-      this.achievementService.updateAchievementById(this.achievementId, this.editAchievementFormGroup.value)
+      this.achievementService.updateAchievementById(this.data.id, this.editAchievementFormGroup.value)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe(res => {
           this.dialog.close(res);
@@ -57,16 +58,13 @@ export class EditAchievementComponent implements OnInit {
     }
   }
 
-  private initializeForm(){
-    let achievement = this.mapperService.getAchievement(this.data.achievement);
-    this.achievementId = achievement.get('id').value;
-    this.iconId = achievement.get('iconId').value;
+  private initializeForm() {
     this.editAchievementFormGroup = this.formBuilder.group<PostAchievement>({
-      name: achievement.controls.name,
-      description: achievement.controls.description,
-      xp: achievement.controls.xp,
-      icon: achievement.controls.iconId
+      name: this.data.name,
+      description: this.data.description,
+      xp: +this.data.xp,
+      icon: null
     });
-    this.iconUrl = `${this.environment.apiUrl}/api/files/${this.iconId}`;
+    this.iconUrl = `${environment.apiUrl}/api/files/${this.data.iconId}`;
   }
 }

@@ -4,6 +4,7 @@ import {environment} from 'src/environments/environment';
 import {Observable} from 'rxjs';
 import {Achievement} from '../models/achievement/achievement';
 import { PostAchievement } from '../models/achievement/post-achievement';
+import { ReturningPagingInfo } from '../models/user/return-page-info';
 
 
 @Injectable({
@@ -50,12 +51,12 @@ export class AchievementsService {
     return this.http.delete(`${environment.apiUrl}/api/achievements/${achievementId}`);
   }
 
-  getAllAchievements(): Observable<Array<Achievement>> {
-    return this.http.get<Array<Achievement>>(`${environment.apiUrl}/api/achievements`);
+  getAllAchievements(): Observable<ReturningPagingInfo<Achievement>> {
+    return this.http.get<ReturningPagingInfo<Achievement>>(`${environment.apiUrl}/api/achievements`);
   }
 
-  getAchievementsByUserId(userId: string): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/api/users/${userId}/achievements`);
+  getAchievementsByUserId(userId: string): Observable<ReturningPagingInfo<Achievement>> {
+    return this.http.get<ReturningPagingInfo<Achievement>>(`${environment.apiUrl}/api/users/${userId}/achievements`);
   }
 
   addOrUpdateUserAchievements(userId: string, achievements: Achievement[]): Observable<any> {

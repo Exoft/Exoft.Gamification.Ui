@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy } from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
 import {Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
@@ -21,7 +21,8 @@ export class AddUserComponent implements OnInit, OnDestroy {
   public timeStamp = Date.now();
   public addUserFormGroup: FormGroup<PostUser>
 
-  constructor(public dialog: MatDialog,
+  constructor(
+    public dialog: MatDialogRef<AddUserComponent>,
     private userService: UserService,
     private formBuilder: FormBuilder) {
   }
@@ -54,7 +55,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
       this.userService.createUser(this.addUserFormGroup.value)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe(u => {
-          this.dialog.closeAll();
+          this.dialog.close(u);
         });
     }    
   }
