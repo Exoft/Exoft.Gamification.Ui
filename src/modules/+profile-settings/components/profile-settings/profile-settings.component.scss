@@ -68,6 +68,11 @@
           background-color: #576271;
           color: $mainColor;
         }
+
+        .avatar, 
+        .avatar-text {
+          cursor: pointer;
+        }
       }
 
       .image-input {
