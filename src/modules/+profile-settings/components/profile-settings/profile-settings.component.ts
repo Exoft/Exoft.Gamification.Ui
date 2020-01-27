@@ -72,7 +72,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
             status,
             avatar: avatarId
           });
-          this.avatarUrl = avatar;
+          this.avatarUrl = !!avatarId ? avatar : null;
           this.avatarId = avatarId;
         }
       });

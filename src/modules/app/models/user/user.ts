@@ -3,8 +3,10 @@ export interface User {
   firstName: string;
   lastName: string;
   userName: string;
+  email: string;
   status: string;
-  xp: string;
-  roles: [];
+  xp: number;
+  avatarId: string;
+  roles: string[];
   achievements: [];
 }

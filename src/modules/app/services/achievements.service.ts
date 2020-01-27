@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {Observable} from 'rxjs';
-import {Achievement} from '../models/achievement';
+import {Achievement} from '../models/achievement/achievement';
+import { PostAchievement } from '../models/achievement/post-achievement';
+import { ReturningPagingInfo } from '../models/user/return-page-info';
 
 
 @Injectable({
@@ -23,24 +25,38 @@ export class AchievementsService {
     );
   }
 
-  addNewAchievement(achievement: Achievement): Observable<Achievement> {
-    return this.http.post<Achievement>(`${environment.apiUrl}/api/achievements`, achievement);
+  addNewAchievement(achievement: PostAchievement): Observable<Achievement> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    const formData = new FormData();
+    Object.keys(achievement).forEach(function (key) {
+      formData.append(key, achievement[key]);
+    });
+
+    return this.http.post<Achievement>(`${environment.apiUrl}/api/achievements`, formData, { headers: headers });
   }
 
-  updateAchievementById(achievementId: string, achievement: Achievement): Observable<Achievement> {
-    return this.http.put<Achievement>(`${environment.apiUrl}/api/achievements/${achievementId}`, achievement);
+  updateAchievementById(achievementId: string, achievement: PostAchievement): Observable<Achievement> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    const formData = new FormData();
+    Object.keys(achievement).forEach(function (key) {
+      formData.append(key, achievement[key]);
+    });
+    
+    return this.http.put<Achievement>(`${environment.apiUrl}/api/achievements/${achievementId}`, formData, { headers: headers });
   }
 
   deleteAchievementById(achievementId: string): Observable<any> {
     return this.http.delete(`${environment.apiUrl}/api/achievements/${achievementId}`);
   }
 
-  getAllAchievements(): Observable<any> {
-    return this.http.get<Array<Achievement>>(`${environment.apiUrl}/api/achievements`);
+  getAllAchievements(): Observable<ReturningPagingInfo<Achievement>> {
+    return this.http.get<ReturningPagingInfo<Achievement>>(`${environment.apiUrl}/api/achievements`);
   }
 
-  getAchievementsByUserId(userId: string): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/api/users/${userId}/achievements`);
+  getAchievementsByUserId(userId: string): Observable<ReturningPagingInfo<Achievement>> {
+    return this.http.get<ReturningPagingInfo<Achievement>>(`${environment.apiUrl}/api/users/${userId}/achievements`);
   }
 
   addOrUpdateUserAchievements(userId: string, achievements: Achievement[]): Observable<any> {

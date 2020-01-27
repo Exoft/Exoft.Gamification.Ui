@@ -6,19 +6,7 @@ import {RequestService} from 'src/modules/app/services/request.service';
 import {GratitudeComponent} from '../gratitude/gratitude.component';
 import {UserService} from '../../services/user.service';
 import {getFirstLetters} from '../../utils/letterAvatar';
-
-interface CurrentUserInterface {
-  avatarId: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  id: string;
-  status: string;
-  userName: string;
-  xp: number;
-  roles: [];
-}
-
+import {User} from '../../models/user/user';
 
 @Component({
   selector: 'app-other-user-profile',
@@ -30,17 +18,17 @@ export class OtherUserProfileComponent implements OnInit {
   public totalBadgesCount = 30;
   public achievementsData: any = [];
   private currentUserInfo;
-  public currentUser$: Observable<CurrentUserInterface>;
+  public currentUser$: Observable<User>;
   public letterAvatar = getFirstLetters;
 
-  public get currentUserId(): number {
+  public get currentUserId(): string {
     return this.userId;
   }
 
   constructor(
     public dialog: MatDialog,
     private requestService: RequestService,
-    @Inject(MAT_DIALOG_DATA) public userId: number,
+    @Inject(MAT_DIALOG_DATA) public userId: string,
     private userService: UserService
   ) {
   }
