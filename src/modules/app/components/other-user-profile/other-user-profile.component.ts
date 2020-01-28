@@ -15,6 +15,7 @@ import {User} from '../../models/user/user';
 })
 
 export class OtherUserProfileComponent implements OnInit {
+  // todo: remove hardcoded total badges count when backend will be fixed
   public totalBadgesCount = 30;
   public achievementsData: any = [];
   private currentUserInfo;
@@ -59,7 +60,7 @@ export class OtherUserProfileComponent implements OnInit {
   }
 
   public getAvatarId(avatarId: string): string {
-    return 'https://game-api.exoft.net/api/files/' + avatarId;
+    return this.userService.getAvatarUrl(avatarId);
   }
 
   public openThankYouForm(): void {

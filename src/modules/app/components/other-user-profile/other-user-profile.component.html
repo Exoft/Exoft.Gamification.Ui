@@ -13,11 +13,12 @@
         <div class="user-name">{{ pageData.firstName }} {{ pageData.lastName }}</div>
 
         <div class="user-achivments-info">
-          <div class="user-achivments-elements">
+          <!-- todo: uncomment when backend will send badges count -->
+          <!--<div class="user-achivments-elements">
             <p class="user-achivments-title">Total:</p>
 
             <p> {{ totalBadgesCount }} Badges</p>
-          </div>
+          </div>-->
 
           <div class="user-achivments-elements">
             <p class="user-achivments-title">EXP:</p>
@@ -33,7 +34,7 @@
     </div>
 
     <div class="achievement-container">
-      <div class="achievement-item" *ngFor="let item of achievementsData.data">
+      <div class="achievement-item" *ngFor="let item of achievementsData">
         <img class="achievement-image" src="../../../../assets/images/star-small-image.png">
 
         <div class="image-text">{{ item.name }}</div>

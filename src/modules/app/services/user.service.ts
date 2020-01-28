@@ -53,4 +53,8 @@ export class UserService {
   public deleteUserById(userId: string): Observable<any> {
     return this.http.delete(environment.apiUrl + `/api/users/${userId}`);
   }
+
+  getAvatarUrl(avatarId: string) {
+    return `${environment.apiUrl}/api/files/${avatarId}`;
+  }
 }
