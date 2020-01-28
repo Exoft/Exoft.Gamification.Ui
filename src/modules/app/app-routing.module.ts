@@ -46,11 +46,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'profile-settings',
-    loadChildren: '../+profile-settings/profile-settings.module#ProfileSettingsModule',
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'page-not-found',
     component: NotFoundComponent
   },

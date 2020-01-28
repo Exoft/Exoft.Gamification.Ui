@@ -19,6 +19,7 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
 import {OtherUserProfileComponent} from './components/other-user-profile/other-user-profile.component';
 import {RequestAchievementComponent} from './components/request-achievement/request-achievement.component';
 import {GratitudeComponent} from './components/gratitude/gratitude.component';
+import { EditUserProfileComponent } from './components/edit-user-profile/edit-user-profile.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {GratitudeComponent} from './components/gratitude/gratitude.component';
     NotFoundComponent,
     OtherUserProfileComponent,
     RequestAchievementComponent,
-    GratitudeComponent
+    GratitudeComponent,
+    EditUserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import {GratitudeComponent} from './components/gratitude/gratitude.component';
   entryComponents: [
     OtherUserProfileComponent,
     RequestAchievementComponent,
-    GratitudeComponent
+    GratitudeComponent,
+    EditUserProfileComponent
   ],
   bootstrap: [AppComponent]
 })

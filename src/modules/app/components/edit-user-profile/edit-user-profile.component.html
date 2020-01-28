@@ -1,0 +1,63 @@
+  <div class="profile-settings-container">
+    <div class="title-button-container">
+      <mat-icon class="go-back-button"
+                (click)="closeDialog()">arrow_forward</mat-icon>
+
+      <p class="title"> Profile settings </p>
+    </div>
+
+    <form class="profile-settings-form"
+          [formGroup]="form">
+      <label class="avatar-container"
+             for="imageInput">
+        <span *ngIf="!avatarId && !avatarUrl else avatarExists"
+              class="avatar-text">{{ letterAvatar() }}</span>
+      </label>
+
+      <ng-template #avatarExists>
+        <img [src]="avatarUrl || getAvatarUrl(avatarId)"
+             class="avatar" />
+      </ng-template>
+
+      <input class="image-input"
+             id="imageInput"
+             type="file"
+             (change)="onSelectFile($event)" />
+
+      <div class="profile-settings-fields">
+        <div class="name-input-container">
+          <mat-form-field class="input-field">
+            <input matInput
+                   placeholder="FIRST NAME"
+                   formControlName="firstName" />
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <input matInput
+                   placeholder="LAST NAME"
+                   formControlName="lastName" />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field class="input-field">
+          <input matInput
+                 placeholder="EMAIL ADDRESS"
+                 formControlName="email" />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <input matInput
+                 placeholder="STATUS"
+                 formControlName="status" />
+        </mat-form-field>
+      </div>
+
+      <button mat-button
+              class="save-button"
+              [ngStyle]="{'opacity': form.invalid ? '0.6' : '1'}"
+              (click)="saveUserData()"
+              [disabled]="form?.invalid">
+        SAVE CHANGES
+      </button>
+    </form>
+  </div>

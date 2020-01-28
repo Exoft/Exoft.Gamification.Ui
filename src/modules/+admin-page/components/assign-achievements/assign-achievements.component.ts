@@ -22,30 +22,30 @@ export class AssignAchievementsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.availableAchievementsFormGroup = this.formBuilder.group({
-      availableAchievements: new FormArray([])
-    });
-    this.achievementsService.getAllAchievements().subscribe(achievements => {
-      achievements.forEach(achievement => {
-        this.achievements.push(this.formBuilder.group({
-          id: new FormControl(achievement.id),
-          isChosen: new FormControl(false),
-          name: new FormControl(achievement.name),
-          count: new FormControl(''),
-          description: new FormControl(''),
-          xp: new FormControl(''),
-          icon: new FormControl('')
-        }));
-      });
-      this.achievementsService.getAchievementsByUserId(this.data.userId).subscribe(userAchievements => {
-        userAchievements.data.forEach(achievement => {
-          const userAch = this.achievements.controls.find(x => x.value.name === achievement.name).value;
-          userAch.isChosen = true;
-          userAch.count = userAch.count + 1;
-          this.achievements.controls.find(x => x.value.name === achievement.name).patchValue(userAch);
-        });
-      });
-    });
+    // this.availableAchievementsFormGroup = this.formBuilder.group({
+    //   availableAchievements: new FormArray([])
+    // });
+    // this.achievementsService.getAllAchievements().subscribe(achievements => {
+    //   achievements.forEach(achievement => {
+    //     this.achievements.push(this.formBuilder.group({
+    //       id: new FormControl(achievement.id),
+    //       isChosen: new FormControl(false),
+    //       name: new FormControl(achievement.name),
+    //       count: new FormControl(''),
+    //       description: new FormControl(''),
+    //       xp: new FormControl(''),
+    //       icon: new FormControl('')
+    //     }));
+    //   });
+    //   this.achievementsService.getAchievementsByUserId(this.data.userId).subscribe(userAchievements => {
+    //     userAchievements.data.forEach(achievement => {
+    //       const userAch = this.achievements.controls.find(x => x.value.name === achievement.name).value;
+    //       userAch.isChosen = true;
+    //       userAch.count = userAch.count + 1;
+    //       this.achievements.controls.find(x => x.value.name === achievement.name).patchValue(userAch);
+    //     });
+    //   });
+    // });
   }
 
   get achievements(): FormArray {

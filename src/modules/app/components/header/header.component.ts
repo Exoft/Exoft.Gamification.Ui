@@ -7,6 +7,7 @@ import {UserService} from '../../services/user.service';
 import {AuthService} from '../../services/auth.service';
 import {RequestService} from '../../services/request.service';
 import {getFirstLettersWithSplit} from '../../utils/letterAvatar';
+import { DialogService } from '../../services/dialog.service';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(private userService: UserService,
               private authService: AuthService,
-              private requestService: RequestService) {
+              private requestService: RequestService,
+              private readonly dialogService: DialogService) {
   }
 
   public ngOnInit(): void {
@@ -56,5 +58,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  openEditProfileDialog() {
+    this.dialogService.openEditUserProfileDialog();
   }
 }

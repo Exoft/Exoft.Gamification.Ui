@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {OtherUserProfileComponent} from '../components/other-user-profile/other-user-profile.component';
 import {RequestAchievementComponent} from '../components/request-achievement/request-achievement.component';
+import { EditUserProfileComponent } from '../components/edit-user-profile/edit-user-profile.component';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
-  constructor(public dialog: MatDialog) {
+  constructor(private dialog: MatDialog) {
   }
 
   public openInfoModal(userId: any) {
@@ -24,5 +25,14 @@ export class DialogService {
     dialogConfig.panelClass = 'request-dialog';
 
     this.dialog.open(RequestAchievementComponent, dialogConfig);
+  }
+
+  openEditUserProfileDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.panelClass = 'edit-user-dialog';
+    dialogConfig.backdropClass = 'edit-user-dialog-backdrop';
+    dialogConfig.autoFocus = false;
+
+    this.dialog.open(EditUserProfileComponent, dialogConfig);
   }
 }
