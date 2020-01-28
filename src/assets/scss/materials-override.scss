@@ -238,6 +238,16 @@ app-user {
   }
 }
 
+.edit-user-dialog {
+  .mat-dialog-container {
+    box-shadow: none;
+  }
+}
+
+.edit-user-dialog-backdrop {
+  background-color: #000000ab;
+}
+
 .thank-you-dialog {
   width:50vmin;
 }

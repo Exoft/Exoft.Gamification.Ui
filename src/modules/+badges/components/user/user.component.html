@@ -1,5 +1,5 @@
 <mat-card class="user-container">
-  <button mat-button class="edit-user-button" (click)="onOpenProfileSettings()">Edit</button>
+  <button mat-button class="edit-user-button" (click)="openEditUserProfileDialog()">Edit</button>
 
   <div class="avatar-container" *ngIf="!avatarSource else avatarExists">
     <div class="avatar-text">

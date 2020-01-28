@@ -6,6 +6,7 @@ import {takeUntil} from 'rxjs/operators';
 import {UserService} from 'src/modules/app/services/user.service';
 import {RequestService} from 'src/modules/app/services/request.service';
 import {getFirstLettersWithSplit} from '../../../app/utils/letterAvatar';
+import { DialogService } from 'src/modules/app/services/dialog.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class UserComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
               private userService: UserService,
-              private requestService: RequestService) {
+              private requestService: RequestService,
+              private readonly dialogService: DialogService) {
   }
 
   public ngOnInit(): void {
@@ -41,10 +43,6 @@ export class UserComponent implements OnInit, OnDestroy {
       });
   }
 
-  public onOpenProfileSettings(): void {
-    this.router.navigate(['/profile-settings']);
-  }
-
   public getAvatarId(avatarId: any): string {
     return this.requestService.getAvatar(avatarId);
   }
@@ -52,5 +50,9 @@ export class UserComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  openEditUserProfileDialog() {
+    this.dialogService.openEditUserProfileDialog();
   }
 }

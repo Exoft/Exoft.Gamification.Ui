@@ -30,7 +30,7 @@
     <mat-icon class="open-menu-button" [matMenuTriggerFor]="userMenu">arrow_drop_down</mat-icon>
 
     <mat-menu #userMenu="matMenu">
-      <button mat-menu-item [routerLink]="'/profile-settings'">Edit profile</button>
+      <button mat-menu-item (click)="openEditProfileDialog()">Edit profile</button>
 
       <mat-divider></mat-divider>
 
