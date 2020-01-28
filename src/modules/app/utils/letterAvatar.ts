@@ -1,4 +1,8 @@
 export function getFirstLetters(name: string, surname: string) {
+  if (!name || !surname) {
+    return '';
+  }
+
   const firstNameLetter = name.charAt(0);
   const firstSurnameLetter = surname.charAt(0);
   return firstNameLetter + firstSurnameLetter;

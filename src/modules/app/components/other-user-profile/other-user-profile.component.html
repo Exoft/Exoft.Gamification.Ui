@@ -1,16 +1,18 @@
-<mat-card class="card" *ngIf="currentUser$ | async as pageData">
+<mat-card class="card">
   <div class="main-container">
     <div class="other-user-container">
-      <div class="avatar-text" *ngIf="!pageData.avatarId else avatarExists">
-        <p>{{ letterAvatar(pageData.firstName, pageData.lastName) }}</p>
+      <div class="avatar-text"
+           *ngIf="!userInfo?.avatarId else avatarExists">
+        <p>{{ letterAvatar(userInfo?.firstName, userInfo?.lastName) }}</p>
       </div>
 
       <ng-template #avatarExists>
-        <img [src]="getAvatarId(pageData.avatarId)" class="avatar"/>
+        <img [src]="getAvatarId(userInfo?.avatarId)"
+             class="avatar" />
       </ng-template>
 
       <div class="user-info-container">
-        <div class="user-name">{{ pageData.firstName }} {{ pageData.lastName }}</div>
+        <div class="user-name">{{ userInfo?.firstName }} {{ userInfo?.lastName }}</div>
 
         <div class="user-achivments-info">
           <!-- todo: uncomment when backend will send badges count -->
@@ -23,28 +25,35 @@
           <div class="user-achivments-elements">
             <p class="user-achivments-title">EXP:</p>
 
-            <p> {{ pageData.xp }} XP</p>
+            <p> {{ userInfo?.xp }} XP</p>
           </div>
 
-          <div class="user-achivments-elements" *ngIf="pageData.status">
-            <p class="user-achivments-status">"{{ pageData.status }}"</p>
+          <div class="user-achivments-elements"
+               *ngIf="userInfo?.status">
+            <p class="user-achivments-status">"{{ userInfo?.status }}"</p>
           </div>
         </div>
       </div>
     </div>
 
     <div class="achievement-container">
-      <div class="achievement-item" *ngFor="let item of achievementsData">
-        <img class="achievement-image" src="../../../../assets/images/star-small-image.png">
+      <div class="achievement-item"
+           *ngFor="let achievement of achievements">
+        <img class="achievement-image"
+             src="../../../../assets/images/star-small-image.png">
 
-        <div class="image-text">{{ item.name }}</div>
+        <div class="image-text">{{ achievement.name }}</div>
       </div>
     </div>
   </div>
 
-  <button mat-button class="request-button" (click)="openThankYouForm()" [disabled]="!isThankYouButtonEnabled()"> SAY
-    THANKS
+  <button mat-button
+          class="request-button"
+          (click)="openThankYouForm()"
+          [disabled]="!isThankYouButtonEnabled()">
+    SAY THANKS
   </button>
 
-  <mat-icon class="close-button" (click)="closeOtherUser()">close</mat-icon>
+  <mat-icon class="close-button"
+            (click)="closeDialog()">close</mat-icon>
 </mat-card>

@@ -10,7 +10,8 @@ import {
   MatStepperModule,
   MatDialogModule,
   MatProgressBarModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatSnackBarModule
 } from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatInputModule} from '@angular/material/input';
@@ -37,7 +38,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatSelectModule,
     MatTableModule,
     MatCheckboxModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSnackBarModule
   ]
 })
 export class AngularMaterialsModule {
