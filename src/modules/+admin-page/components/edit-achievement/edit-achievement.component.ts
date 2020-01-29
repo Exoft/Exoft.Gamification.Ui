@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
 import {AchievementsService} from '../../../app/services/achievements.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
@@ -7,37 +7,49 @@ import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {PostAchievement} from 'src/modules/app/models/achievement/post-achievement';
 import {Achievement} from 'src/modules/app/models/achievement/achievement';
+import {Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-edit-achievement',
   templateUrl: './edit-achievement.component.html',
   styleUrls: ['./edit-achievement.component.scss']
 })
-export class EditAchievementComponent implements OnInit {
+export class EditAchievementComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();
-  public editAchievementFormGroup: FormGroup<PostAchievement>;
-  public iconUrl: string;
+
+  form: FormGroup<PostAchievement>;
+  iconUrl: string;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
     private achievementService: AchievementsService,
     public dialog: MatDialogRef<EditAchievementComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Achievement) {
   }
 
   ngOnInit() {
-    this.initializeForm();
+    this.setForm();
   }
 
-  public ngOnDestroy() {
+  ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
 
+  private setForm() {
+    this.form = this.fb.group<PostAchievement>({
+      name: [this.data.name, Validators.required],
+      description: [this.data.description, Validators.required],
+      xp: [+this.data.xp, [Validators.required, Validators.pattern('^[0-9]+$')]],
+      icon: this.data.iconId
+    });
+    this.iconUrl = `${environment.apiUrl}/api/files/${this.data.iconId}`;
+  }
+
   public onSelectFile(event: any) {
     if (event.target.files && event.target.files[0]) {
-      this.editAchievementFormGroup.controls.icon.setValue(event.target.files[0]);
-      this.editAchievementFormGroup.controls.icon.updateValueAndValidity(); 
+      this.form.controls.icon.setValue(event.target.files[0]);
+      this.form.controls.icon.updateValueAndValidity();
 
       const fileReader = new FileReader();
       fileReader.readAsDataURL(event.target.files[0]);
@@ -49,22 +61,12 @@ export class EditAchievementComponent implements OnInit {
   }
 
   onSaveChanges() {
-    if (this.editAchievementFormGroup.valid) {
-      this.achievementService.updateAchievementById(this.data.id, this.editAchievementFormGroup.value)
+    if (this.form.valid) {
+      this.achievementService.updateAchievementById(this.data.id, this.form.value)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe(res => {
           this.dialog.close(res);
         });
     }
-  }
-
-  private initializeForm() {
-    this.editAchievementFormGroup = this.formBuilder.group<PostAchievement>({
-      name: this.data.name,
-      description: this.data.description,
-      xp: +this.data.xp,
-      icon: null
-    });
-    this.iconUrl = `${environment.apiUrl}/api/files/${this.data.iconId}`;
   }
 }

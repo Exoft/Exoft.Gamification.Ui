@@ -1,8 +1,14 @@
 <div class="profile-setting-fields-container">
   <form class="profile-settings-form" (ngSubmit)="onSaveChanges()"
-        [formGroup]="addAchievementFormGroup">
+        [formGroup]="form">
     <label class="avatar-container" for="imageInput">
-      <img [src]="iconUrl" class="avatar"/>
+      <img *ngIf="!!iconUrl else noIconUploaded" [src]="iconUrl" class="avatar"/>
+
+      <ng-template #noIconUploaded>
+        <div class="avatar-text">
+          <mat-icon class="upload-arrow">arrow_upward</mat-icon>
+        </div>
+      </ng-template>
     </label>
 
     <input class="image-input" id="imageInput" type="file" (change)="onSelectFile($event)"/>
@@ -10,31 +16,33 @@
     <div class="profile-settings-fields">
       <mat-form-field class="input-field">
         <input matInput placeholder="NAME" formControlName="name"/>
+
+        <mat-error>
+          Field is required
+        </mat-error>
       </mat-form-field>
 
-      <mat-error *ngIf="addAchievementFormGroup.get('name').invalid && addAchievementFormGroup.get('name').touched">
-        Field is required
-      </mat-error>
 
       <mat-form-field class="input-field">
         <input matInput placeholder="DESCRIPTION" formControlName="description"/>
+
+        <mat-error>
+          Field is required
+        </mat-error>
       </mat-form-field>
 
-      <mat-error
-        *ngIf="addAchievementFormGroup.get('description').invalid && addAchievementFormGroup.get('description').touched">
-        Field is required
-      </mat-error>
 
       <mat-form-field class="input-field">
         <input matInput placeholder="XP" formControlName="xp"/>
+
+        <mat-error>
+          Enter only digit value
+        </mat-error>
       </mat-form-field>
 
-      <mat-error *ngIf="addAchievementFormGroup.get('xp').invalid && addAchievementFormGroup.get('xp').touched">
-        Field is required
-      </mat-error>
     </div>
 
-    <button [disabled]="addAchievementFormGroup.invalid" mat-button type="submit" class="save-button">
+    <button [disabled]="form.invalid" mat-button type="submit" class="save-button">
       SAVE CHANGES
     </button>
   </form>

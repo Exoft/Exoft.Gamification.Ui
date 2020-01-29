@@ -53,7 +53,7 @@ export class OtherUserProfileComponent implements OnInit {
       },
       error => {
         this.notification.open(
-          'An error occurred while data saving!',
+          'An error occurred while data loading!',
           'Close',
           { duration: 5000 }
         );

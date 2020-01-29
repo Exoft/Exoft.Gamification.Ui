@@ -128,29 +128,39 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   }
 
   public onOpenAddAchievement() {
-    const dialogRef = this.dialog.open(AddAchievementComponent, {
-      width: '600px'
-    });
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = false;
+    dialogConfig.backdropClass = 'edit-user-dialog-backdrop';
+    dialogConfig.panelClass = 'edit-user-dialog';
+
+    const dialogRef = this.dialog.open(AddAchievementComponent, dialogConfig);
     dialogRef.afterClosed()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(result => {
-        this.achievementsData.push(result);
-        this.dataSourceAchievements = new MatTableDataSource(this.achievementsData);
+        if (result) {
+          this.achievementsData.push(result);
+          this.dataSourceAchievements = new MatTableDataSource(this.achievementsData);
+        }
       });
   }
 
   public onOpenEditAchievement(achievement: Achievement) {
-    const dialogRef = this.dialog.open(EditAchievementComponent, {
-      width: '600px',
-      data: achievement
-    });
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = false;
+    dialogConfig.backdropClass = 'edit-user-dialog-backdrop';
+    dialogConfig.panelClass = 'edit-user-dialog';
+    dialogConfig.data = achievement;
+
+    const dialogRef = this.dialog.open(EditAchievementComponent, dialogConfig);
     dialogRef.afterClosed()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((result: Achievement) => {
-        this.dataSourceAchievements.data[
-          this.dataSourceAchievements.data.indexOf(
-            this.dataSourceAchievements.data.find(x => x.id === result.id))] = result;
-        this.dataSourceAchievements = new MatTableDataSource(this.dataSourceAchievements.data);
+        if (result) {
+          this.dataSourceAchievements.data[
+            this.dataSourceAchievements.data.indexOf(
+              this.dataSourceAchievements.data.find(x => x.id === result.id))] = result;
+          this.dataSourceAchievements = new MatTableDataSource(this.dataSourceAchievements.data);
+        }
       });
   }
 
