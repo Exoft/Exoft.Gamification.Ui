@@ -1,7 +1,7 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {RequestService} from 'src/modules/app/services/request.service';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {MatTableDataSource} from '@angular/material/table';
 import {DialogService} from 'src/modules/app/services/dialog.service';
 import {EditUserComponent} from '../edit-user/edit-user.component';
 import {UserService} from '../../../app/services/user.service';
@@ -14,10 +14,11 @@ import {EditAchievementComponent} from '../edit-achievement/edit-achievement.com
 import {AchievementsService} from '../../../app/services/achievements.service';
 import {User} from '../../../app/models/user/user';
 import {AssignAchievementsComponent} from '../assign-achievements/assign-achievements.component';
-import {map, takeUntil} from 'rxjs/operators';
+import {takeUntil} from 'rxjs/operators';
 import {ReadAchievementRequest} from '../../../app/models/achievement-request/read-achievement-request';
 import {Subject} from 'rxjs';
 import {ReadUser} from 'src/modules/app/models/user/read-user';
+import {getFirstLetters} from '../../../app/utils/letterAvatar';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   public currentUser: FormGroup;
   public isInfoLoaded = false;
 
+  public letterAvatar = getFirstLetters;
 
   constructor(private requestService: RequestService,
               private userService: UserService,
@@ -41,8 +43,8 @@ export class AdminPageComponent implements OnInit, OnDestroy {
               private dialog: MatDialog) {
   }
 
-  displayedColumnsUser: string[] = ['firstName', 'lastName', 'xp', 'actions'];
-  displayedColumnsAchievements: string[] = ['name', 'description', 'xp', 'actions'];
+  displayedColumnsUser: string[] = ['avatar', 'firstName', 'lastName', 'xp', 'actions'];
+  displayedColumnsAchievements: string[] = ['icon', 'name', 'description', 'xp', 'actions'];
   displayedColumnsAchievementsRequests: string[] = ['userName', 'achievement', 'comment', 'actions'];
   dataSourceUser = new MatTableDataSource<ReadUser>();
   dataSourceAchievements = new MatTableDataSource<Achievement>();
@@ -205,5 +207,9 @@ export class AdminPageComponent implements OnInit, OnDestroy {
         this.currentUser = this.mapperService.getUser(u);
         this.isInfoLoaded = true;
       });
+  }
+
+  getImageUrl(imageId: string) {
+    return this.requestService.getAvatar(imageId);
   }
 }
