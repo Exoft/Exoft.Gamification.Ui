@@ -12,17 +12,17 @@ const routes: Routes = [
   },
   {
     path: 'sign-in',
-    loadChildren: '../+auth/auth.module#AuthModule',
+    loadChildren: () => import('../+auth/auth.module').then(m => m.AuthModule),
     canActivate: [IsLoggedGuard]
   },
   {
     path: 'dashboard',
-    loadChildren: '../+dashboard/dashboard.module#DashboardModule',
+    loadChildren: () => import('../+dashboard/dashboard.module').then(m => m.DashboardModule),
     canActivate: [AuthGuard]
   },
   {
     path: 'badges',
-    loadChildren: '../+badges/badges.module#BadgesModule',
+    loadChildren: () => import('../+badges/badges.module').then(m => m.BadgesModule),
     canActivate: [AuthGuard]
   },
   // {
@@ -42,7 +42,7 @@ const routes: Routes = [
   // },
   {
     path: 'admin',
-    loadChildren: '../+admin-page/admin-page.module#AdminPageModule',
+    loadChildren: () => import('../+admin-page/admin-page.module').then(m => m.AdminPageModule),
     canActivate: [AuthGuard]
   },
   {

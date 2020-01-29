@@ -15,7 +15,7 @@ export class AuthService {
   }
 
   private readonly apiUrl = environment.apiUrl;
-  @ViewChild('drawer') public drawer: MatDrawer;
+  @ViewChild('drawer', {static: true}) public drawer: MatDrawer;
 
   public signIn(loginData: any): Observable<any> {
     return this.http.post(environment.apiUrl + '/api/authenticate', loginData);

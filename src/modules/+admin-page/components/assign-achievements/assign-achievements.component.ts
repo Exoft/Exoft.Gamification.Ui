@@ -74,7 +74,7 @@ export class AssignAchievementsComponent implements OnInit {
 
     return this.fb.group<UserSelectedAchievement>({
       isSelected: !!isSelectedAchievement,
-      // todo: set achievements count from backend, when data will be send
+      // TODO: set achievements count from backend, when data will be send
       count: !!isSelectedAchievement ? 1 : 0,
       achievement
     });
@@ -173,7 +173,7 @@ export class AssignAchievementsComponent implements OnInit {
       control => control.value.isSelected
     );
 
-    // todo: implement sending achievements count, when endpoint will be done
+    // TODO: implement sending achievements count, when endpoint will be done
     const userId = this.data;
     const selectedAchievementsIds = achievementControls.map(
       control => control.value.achievement.id

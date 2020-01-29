@@ -18,7 +18,7 @@ import {getFirstLettersWithSplit} from '../../utils/letterAvatar';
   styleUrls: ['./mainnav.component.scss']
 })
 export class MainnavComponent implements OnInit, OnDestroy {
-  @ViewChild('drawer') public drawer: MatDrawer;
+  @ViewChild('drawer', { static: true }) public drawer: MatDrawer;
 
   private unsubscribe$: Subject<void> = new Subject();
 
