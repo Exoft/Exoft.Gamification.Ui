@@ -1,7 +1,7 @@
 import {Injectable, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {MatDrawer} from '@angular/material';
+import { MatDrawer } from '@angular/material/sidenav';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 

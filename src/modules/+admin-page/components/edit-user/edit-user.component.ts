@@ -1,7 +1,8 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {FormBuilder, FormGroup} from 'ngx-strongly-typed-forms';
-import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {UserService} from '../../../app/services/user.service';
 import {UpdateUser} from '../../../app/models/user/update-user';
 import {takeUntil} from 'rxjs/operators';

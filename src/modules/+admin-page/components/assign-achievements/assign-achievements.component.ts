@@ -1,11 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AchievementsService } from '../../../app/services/achievements.service';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-  MatCheckboxChange,
-  MatSnackBar
-} from '@angular/material';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Achievement } from 'src/modules/app/models/achievement/achievement';
 import { FormBuilder, FormGroup, FormArray } from 'ngx-strongly-typed-forms';
 import { forkJoin, Observable } from 'rxjs';

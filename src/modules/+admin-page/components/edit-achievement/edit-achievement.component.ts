@@ -1,7 +1,7 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
 import {AchievementsService} from '../../../app/services/achievements.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {environment} from '../../../../environments/environment';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';

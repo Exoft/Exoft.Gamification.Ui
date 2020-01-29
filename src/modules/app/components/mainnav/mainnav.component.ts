@@ -3,7 +3,7 @@ import {menuItems} from '../../utils/constants';
 import {Router, NavigationEnd} from '@angular/router';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {MatDrawer} from '@angular/material';
+import { MatDrawer } from '@angular/material/sidenav';
 
 import {UserService} from 'src/modules/app/services/user.service';
 import {AuthService} from 'src/modules/app/services/auth.service';

@@ -6,7 +6,8 @@ import {UserService} from '../../../app/services/user.service';
 import {takeUntil} from 'rxjs/operators';
 import {getFirstLetters} from '../../../app/utils/letterAvatar';
 import {Validators} from '@angular/forms';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {environment} from 'src/environments/environment';
 
 export interface UserEditData {
