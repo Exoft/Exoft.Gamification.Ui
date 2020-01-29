@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {OtherUserProfileComponent} from '../components/other-user-profile/other-user-profile.component';
 import {RequestAchievementComponent} from '../components/request-achievement/request-achievement.component';
-import { EditUserProfileComponent } from '../components/edit-user-profile/edit-user-profile.component';
+import { EditUserProfileComponent } from '../../shared/components/edit-user-profile/edit-user-profile.component';
 
 
 @Injectable({

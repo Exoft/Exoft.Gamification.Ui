@@ -7,8 +7,13 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
+  },
+  {
+    path: 'sign-in',
+    loadChildren: '../+auth/auth.module#AuthModule',
+    canActivate: [IsLoggedGuard]
   },
   {
     path: 'dashboard',
@@ -16,30 +21,25 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'signin',
-    loadChildren: '../+auth/auth.module#AuthModule',
-    canActivate: [IsLoggedGuard]
-  },
-  {
     path: 'badges',
     loadChildren: '../+badges/badges.module#BadgesModule',
     canActivate: [AuthGuard]
   },
-  {
-    path: 'information',
-    loadChildren: '../+information/information.module#InformationModule',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'challenges',
-    loadChildren: '../+challenges/challenges.module#ChallengesModule',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'topchart',
-    loadChildren: '../+top-chart/top-chart.module#TopChartModule',
-    canActivate: [AuthGuard]
-  },
+  // {
+  //   path: 'information',
+  //   loadChildren: '../+information/information.module#InformationModule',
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'challenges',
+  //   loadChildren: '../+challenges/challenges.module#ChallengesModule',
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'top-chart',
+  //   loadChildren: '../+top-chart/top-chart.module#TopChartModule',
+  //   canActivate: [AuthGuard]
+  // },
   {
     path: 'admin',
     loadChildren: '../+admin-page/admin-page.module#AdminPageModule',
@@ -51,7 +51,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/page-not-found'
+    redirectTo: 'page-not-found'
   }
 ];
 

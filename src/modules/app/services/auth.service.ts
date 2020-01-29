@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   public onLogOut(): void {
-    this.router.navigate(['/signin']);
+    this.router.navigate(['/sign-in']);
     localStorage.clear();
   }
 

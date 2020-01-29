@@ -5,7 +5,7 @@ import {Observable, BehaviorSubject} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {User} from '../models/user/user';
 import {PostUser} from '../models/user/post-user';
-import { UpdateUser } from '../models/user/update-user';
+import {UpdateUser} from '../models/user/update-user';
 
 @Injectable({
   providedIn: 'root'
@@ -44,10 +44,10 @@ export class UserService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
     const formData = new FormData();
-    Object.keys(user).forEach(function (key) {
+    Object.keys(user).forEach((key: any) => {
       formData.append(key, user[key]);
     });
-    return this.http.post<User>(`${environment.apiUrl}/api/users`, formData, {headers: headers});
+    return this.http.post<User>(`${environment.apiUrl}/api/users`, formData, {headers});
   }
 
   public deleteUserById(userId: string): Observable<any> {

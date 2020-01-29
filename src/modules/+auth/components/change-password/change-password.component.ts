@@ -45,7 +45,7 @@ export class ChangePasswordComponent {
     this.authService.changePassword(changePasData).subscribe(response => {
         this.openSnackBar('Now try to sign in with your new password', 'Notification');
         setTimeout(() => {
-          this.router.navigate(['/signin']);
+          this.router.navigate(['/sign-in']);
         }, 3000);
       },
       error => {

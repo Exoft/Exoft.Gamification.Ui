@@ -5,11 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AngularMaterialsModule} from '../shared/modules/angular-materials.module';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
-
-// Interceptor
-import {Interceptor} from './helpers/interceptor';
 
 // Components
 import {AppComponent} from './components/app/app.component';
@@ -19,10 +15,20 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
 import {OtherUserProfileComponent} from './components/other-user-profile/other-user-profile.component';
 import {RequestAchievementComponent} from './components/request-achievement/request-achievement.component';
 import {GratitudeComponent} from './components/gratitude/gratitude.component';
-import { EditUserProfileComponent } from './components/edit-user-profile/edit-user-profile.component';
+
+// Interceptor
+import {Interceptor} from './helpers/interceptor';
 
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    AngularMaterialsModule,
+    HttpClientModule,
+    SharedModule
+  ],
   declarations: [
     AppComponent,
     MainnavComponent,
@@ -30,18 +36,7 @@ import { EditUserProfileComponent } from './components/edit-user-profile/edit-us
     NotFoundComponent,
     OtherUserProfileComponent,
     RequestAchievementComponent,
-    GratitudeComponent,
-    EditUserProfileComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    AngularMaterialsModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SharedModule
+    GratitudeComponent
   ],
   providers: [
     {
@@ -53,8 +48,7 @@ import { EditUserProfileComponent } from './components/edit-user-profile/edit-us
   entryComponents: [
     OtherUserProfileComponent,
     RequestAchievementComponent,
-    GratitudeComponent,
-    EditUserProfileComponent
+    GratitudeComponent
   ],
   bootstrap: [AppComponent]
 })

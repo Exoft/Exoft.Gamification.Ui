@@ -13,7 +13,7 @@ import {AuthService} from '../../../app/services/auth.service';
 })
 export class ForgotPasswordComponent {
 
-  private componentUrl = 'https://game.exoft.net/signin/change-password';
+  private componentUrl = 'https://game.exoft.net/sign-in/change-password';
 
   public forgotPasForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -37,7 +37,7 @@ export class ForgotPasswordComponent {
     this.authService.sendForgotPasLink(forgotPasData).subscribe(response => {
         this.openSnackBar('Now check out your email and follow to the link in it.', 'Notification');
         setTimeout(() => {
-          this.router.navigate(['/signin']);
+          this.router.navigate(['/sign-in']);
         }, 3000);
       },
       error => {
@@ -52,6 +52,6 @@ export class ForgotPasswordComponent {
   }
 
   public onSignInClick(): void {
-    this.router.navigate(['/signin']);
+    this.router.navigate(['/sign-in']);
   }
 }

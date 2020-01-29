@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from 'ngx-strongly-typed-forms';
-import { User } from '../../models/user/user';
+import { User } from '../../../app/models/user/user';
 import { Subject } from 'rxjs';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../../app/services/user.service';
 import { takeUntil } from 'rxjs/operators';
-import { getFirstLettersWithSplit } from '../../utils/letterAvatar';
+import { getFirstLettersWithSplit } from '../../../app/utils/letterAvatar';
 import { Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import {environment} from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 export interface UserEditData {
   userName: string;
@@ -80,7 +80,10 @@ export class EditUserProfileComponent implements OnInit, OnDestroy {
     const formData = new FormData();
 
     for (const field of Object.keys(this.form.controls)) {
-      formData.append(field, !!this.form.controls[field].value ? this.form.controls[field].value : '');
+      formData.append(
+        field,
+        !!this.form.controls[field].value ? this.form.controls[field].value : ''
+      );
     }
 
     return formData;
@@ -108,15 +111,13 @@ export class EditUserProfileComponent implements OnInit, OnDestroy {
       this.userService.updateUserInfo(formData).subscribe(
         res => {
           const timeStamp = Date.now();
-          const newUserData = {...res};
+          const newUserData = { ...res };
           newUserData.avatar = `${environment.apiUrl}/api/files/${newUserData.avatarId}/?timeStamp=${timeStamp}`;
           this.userService.setUserData(newUserData);
 
-          this.notification.open(
-            'Data was successfully saved!',
-            'Close',
-            { duration: 5000 }
-          );
+          this.notification.open('Data was successfully saved!', 'Close', {
+            duration: 5000
+          });
           this.closeDialog();
         },
         error => {

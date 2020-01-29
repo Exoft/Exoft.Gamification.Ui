@@ -249,7 +249,34 @@ app-user {
 }
 
 .thank-you-dialog {
-  width:50vmin;
+  width: 50vmin;
+}
+
+// user-achievement checkbox styles
+app-assign-achievements {
+  .mat-checkbox {
+
+    &.mat-checkbox-checked {
+      .mat-checkbox-inner-container {
+        .mat-checkbox-background {
+          background-color: transparent;
+
+          .mat-checkbox-checkmark-path {
+            stroke: $mainColor !important;
+          }
+        }
+      }
+    }
+
+    .mat-checkbox-inner-container {
+      width: 25px;
+      height: 25px;
+
+      .mat-checkbox-frame {
+        border-color: $textColor;
+      }
+    }
+  }
 }
 
 

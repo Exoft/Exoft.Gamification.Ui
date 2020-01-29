@@ -17,7 +17,7 @@ export const menuItems = [
   // },
   // {
   //   name: 'Top Chart',
-  //   link: '/topchart'
+  //   link: '/top-chart'
   // },
   {
     name: 'Admin Page',

@@ -1,7 +1,7 @@
 export interface ReadUser {
-    id: string;
-    firstName: string;
-    lastName: string;
-    xp: number;
-    avatarId: string;
+  id: string;
+  firstName: string;
+  lastName: string;
+  xp: number;
+  avatarId: string;
 }

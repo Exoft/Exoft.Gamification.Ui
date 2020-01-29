@@ -1,35 +1,34 @@
-import {Component} from '@angular/core';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
-import {AuthService} from 'src/modules/app/services/auth.service';
-import {UserService} from 'src/modules/app/services/user.service';
-
+import { AuthService } from 'src/modules/app/services/auth.service';
+import { UserService } from 'src/modules/app/services/user.service';
 
 @Component({
   selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.scss']
 })
-export class AuthComponent {
-
+export class SignInComponent {
   public signInForm = new FormGroup({
     userName: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
   public userData: any;
 
-  constructor(private authService: AuthService,
-              private router: Router,
-              private userService: UserService,
-              private snackBar: MatSnackBar) {
-  }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private userService: UserService,
+    private snackBar: MatSnackBar
+  ) {}
 
   public onSignIn() {
     if (this.signInForm.valid) {
-      const {userName, password} = this.signInForm.value;
-      const formData = {userName, password};
+      const { userName, password } = this.signInForm.value;
+      const formData = { userName, password };
       this.authService.signIn(formData).subscribe(
         res => {
           const {
@@ -78,6 +77,6 @@ export class AuthComponent {
   }
 
   public onForgotPassword(): void {
-    this.router.navigate(['/signin/forgot-password']);
+    this.router.navigate(['/sign-in/forgot-password']);
   }
 }

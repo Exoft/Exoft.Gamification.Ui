@@ -32,6 +32,7 @@ export class Interceptor implements HttpInterceptor {
         if (this.activeRoute.snapshot.queryParams.secretString) {
           return throwError(error);
         }
+
         if (error.status === 401) {
           this.authService.onLogOut();
         }

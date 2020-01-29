@@ -77,14 +77,14 @@ export class MainnavComponent implements OnInit, OnDestroy {
   }
 
   private subscribeToRouteChange(): void {
-    this.router.events.subscribe((e: any) => {
+    this.router.events.subscribe((res: any) => {
       if (
-        e instanceof NavigationEnd &&
-        (e.urlAfterRedirects.includes('signin') ||
-          e.urlAfterRedirects.includes('page-not-found'))
+        res instanceof NavigationEnd &&
+        (res.urlAfterRedirects.includes('sign-in') ||
+          res.urlAfterRedirects.includes('page-not-found'))
       ) {
         this.isHeaderShown = false;
-      } else if (e instanceof NavigationEnd) {
+      } else if (res instanceof NavigationEnd) {
         this.isHeaderShown = true;
       }
     });
