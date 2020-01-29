@@ -48,12 +48,12 @@
         .mat-tab-label-active {
           color: $mainColor;
         }
+      }
 
-        .mat-ink-bar.mat-ink-bar {
-          background-color: $mainColor;
-          height: 0.5vmin;
-          top: 0;
-        }
+      .mat-ink-bar {
+        background-color: $mainColor;
+        height: 0.5vmin;
+        top: 0;
       }
     }
   }
