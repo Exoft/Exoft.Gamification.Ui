@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
+    "start": "ng serve --o",
+    "build": "ng build --prod",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "pre-commit": "ng build --prod && ng lint"
+    "pre-commit": "ng build --prod && ng lint",
+    "test": "jest --config=jest/config.js",
+    "test-coverage": "jest --config=jest/config-coverage.js",
+    "e2e": "cypress open"
   },
   "private": true,
   "dependencies": {
@@ -32,23 +33,23 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
+    "@angular-builders/jest": "^8.3.2",
     "@angular-devkit/build-angular": "~0.803.21",
     "@angular/cli": "~8.3.21",
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/jest": "^24.0.25",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.1",
+    "cypress": "^3.8.2",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~4.0.0",
-    "karma-chrome-launcher": "~2.2.0",
-    "karma-coverage-istanbul-reporter": "~2.0.1",
-    "karma-jasmine": "~1.1.2",
-    "karma-jasmine-html-reporter": "^0.2.2",
+    "jest": "^24.9.0",
+    "jest-marbles": "^2.5.0",
+    "jest-preset-angular": "^8.0.0",
     "prettier": "^1.18.0",
-    "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
