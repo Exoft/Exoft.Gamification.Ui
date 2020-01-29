@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {RequestService} from 'src/modules/app/services/request.service';
-import {MatDialog, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatTableDataSource} from '@angular/material';
 import {DialogService} from 'src/modules/app/services/dialog.service';
 import {EditUserComponent} from '../edit-user/edit-user.component';
 import {UserService} from '../../../app/services/user.service';
@@ -86,9 +86,12 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   }
 
   public onOpenAddUser() {
-    const dialogRef = this.dialog.open(AddUserComponent, {
-      width: '600px'
-    });
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = false;
+    dialogConfig.backdropClass = 'edit-user-dialog-backdrop';
+    dialogConfig.panelClass = 'edit-user-dialog';
+
+    const dialogRef = this.dialog.open(AddUserComponent, dialogConfig);
     dialogRef.afterClosed()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
@@ -97,19 +100,24 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   }
 
   public onOpenEditUser(id: string) {
-    const dialogRef = this.dialog.open(EditUserComponent, {
-      width: '600px',
-      data: id
-    });
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = false;
+    dialogConfig.backdropClass = 'edit-user-dialog-backdrop';
+    dialogConfig.panelClass = 'edit-user-dialog';
+    dialogConfig.data = id;
+
+    const dialogRef = this.dialog.open(EditUserComponent, dialogConfig);
     dialogRef.afterClosed()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((result: ReadUser) => {
-        this.dataSourceUser.data[
-          this.dataSourceUser.data.indexOf(
-            this.dataSourceUser.data.find(x => x.id === result.id))] = result;
-        this.dataSourceUser = new MatTableDataSource(this.dataSourceUser.data);
+        if (result) {
+          this.dataSourceUser.data[
+            this.dataSourceUser.data.indexOf(
+              this.dataSourceUser.data.find(x => x.id === result.id))] = result;
+          this.dataSourceUser = new MatTableDataSource(this.dataSourceUser.data);
+        }
       });
-  }  
+  }
 
   public onOpenDeleteUser(user: ReadUser) {
     this.userService.deleteUserById(user.id)
@@ -150,8 +158,8 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     this.achievementService.deleteAchievementById(achievement.id)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
-      this.dataSourceAchievements = new MatTableDataSource(this.dataSourceAchievements.data.filter(x => x !== achievement));
-    });
+        this.dataSourceAchievements = new MatTableDataSource(this.dataSourceAchievements.data.filter(x => x !== achievement));
+      });
   }
 
   openAssignAchievementWindow(user: User) {

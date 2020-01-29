@@ -1,5 +1,5 @@
-import {Component, OnInit, OnDestroy } from '@angular/core';
-import {MatDialogRef} from '@angular/material';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {MatDialogRef, MatSnackBar} from '@angular/material';
 import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
 import {Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
@@ -7,6 +7,7 @@ import {UserService} from 'src/modules/app/services/user.service';
 import {passwordContainValidity, passwordEqualityValidator} from '../../functions/add-user-validators';
 import {takeUntil} from 'rxjs/operators';
 import {PostUser} from 'src/modules/app/models/user/post-user';
+import {getFirstLetters} from '../../../app/utils/letterAvatar';
 
 @Component({
   selector: 'app-add-user',
@@ -15,31 +16,52 @@ import {PostUser} from 'src/modules/app/models/user/post-user';
 })
 export class AddUserComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();
-  public avatarUrl: string;
-  public avatarId: string;
-  public userData: any;
-  public timeStamp = Date.now();
-  public addUserFormGroup: FormGroup<PostUser>
+
+  avatarUrl: string;
+  form: FormGroup<PostUser>;
+
+  letterAvatar = getFirstLetters;
 
   constructor(
-    public dialog: MatDialogRef<AddUserComponent>,
+    private dialog: MatDialogRef<AddUserComponent>,
     private userService: UserService,
-    private formBuilder: FormBuilder) {
+    private fb: FormBuilder,
+    private readonly notification: MatSnackBar) {
   }
 
   ngOnInit() {
-    this.initializeForm();
+    this.setForm();
   }
 
-  public ngOnDestroy() {
+  ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
 
-  public onSelectFile(event: any) {
+  private setForm() {
+    this.form = this.fb.group<PostUser>({
+        userName: ['', Validators.required],
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        roles: ['User'],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [
+          Validators.required,
+          Validators.minLength(8),
+          passwordContainValidity
+        ]],
+        confirmPassword: ['', Validators.required],
+        status: '',
+        avatar: null
+      },
+      {validators: passwordEqualityValidator})
+    ;
+  }
+
+  onSelectFile(event: any) {
     if (event.target.files && event.target.files[0]) {
-      this.addUserFormGroup.controls.avatar.setValue(event.target.files[0]);
-      this.addUserFormGroup.controls.avatar.updateValueAndValidity(); 
+      this.form.controls.avatar.setValue(event.target.files[0]);
+      this.form.controls.avatar.updateValueAndValidity();
 
       const fileReader = new FileReader();
       fileReader.readAsDataURL(event.target.files[0]);
@@ -50,35 +72,17 @@ export class AddUserComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onSaveChanges() {
-    if (this.addUserFormGroup.valid) {
-      this.userService.createUser(this.addUserFormGroup.value)
+  onSaveChanges() {
+    if (this.form.valid) {
+      this.userService.createUser(this.form.value)
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe(u => {
-          this.dialog.close(u);
-        });
-    }    
-  }
-
-  //TODO: Add Functionality For Adding Roles
-  // Also add that in html file
-  private initializeForm() {
-    this.addUserFormGroup = this.formBuilder.group<PostUser>({
-      userName: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      roles: ['User'],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [
-        Validators.required,
-        Validators.minLength(8),
-        passwordContainValidity
-      ]],
-      confirmPassword: ['', Validators.required],
-      status: '',
-      avatar: null
-    }, { 
-      validator: passwordEqualityValidator
-    });
+        .subscribe(res => {
+            this.notification.open('Data was successfully saved!', 'Close', {duration: 5000});
+            this.dialog.close(res);
+          },
+          error => {
+            this.notification.open('An error occurred while data saving!', 'Close', {duration: 5000});
+          });
+    }
   }
 }

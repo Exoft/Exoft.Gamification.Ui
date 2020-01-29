@@ -11,7 +11,7 @@
       <label class="avatar-container"
              for="imageInput">
         <span *ngIf="!avatarId && !avatarUrl else avatarExists"
-              class="avatar-text">{{ letterAvatar() }}</span>
+              class="avatar-text">{{ letterAvatar(form?.value?.firstName, form?.value?.lastName) }}</span>
       </label>
 
       <ng-template #avatarExists>

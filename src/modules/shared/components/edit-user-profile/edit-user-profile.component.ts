@@ -1,13 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder } from 'ngx-strongly-typed-forms';
-import { User } from '../../../app/models/user/user';
-import { Subject } from 'rxjs';
-import { UserService } from '../../../app/services/user.service';
-import { takeUntil } from 'rxjs/operators';
-import { getFirstLettersWithSplit } from '../../../app/utils/letterAvatar';
-import { Validators } from '@angular/forms';
-import { MatDialog, MatSnackBar } from '@angular/material';
-import { environment } from 'src/environments/environment';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
+import {User} from '../../../app/models/user/user';
+import {Subject} from 'rxjs';
+import {UserService} from '../../../app/services/user.service';
+import {takeUntil} from 'rxjs/operators';
+import {getFirstLetters} from '../../../app/utils/letterAvatar';
+import {Validators} from '@angular/forms';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {environment} from 'src/environments/environment';
 
 export interface UserEditData {
   userName: string;
@@ -32,14 +32,15 @@ export class EditUserProfileComponent implements OnInit, OnDestroy {
   avatarUrl: string;
   avatarId: string;
 
-  public letterAvatar = getFirstLettersWithSplit;
+  public letterAvatar = getFirstLetters;
 
   constructor(
     private readonly dialog: MatDialog,
     private readonly fb: FormBuilder,
     private userService: UserService,
     private readonly notification: MatSnackBar
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.setForm();
@@ -111,7 +112,7 @@ export class EditUserProfileComponent implements OnInit, OnDestroy {
       this.userService.updateUserInfo(formData).subscribe(
         res => {
           const timeStamp = Date.now();
-          const newUserData = { ...res };
+          const newUserData = {...res};
           newUserData.avatar = `${environment.apiUrl}/api/files/${newUserData.avatarId}/?timeStamp=${timeStamp}`;
           this.userService.setUserData(newUserData);
 
@@ -124,7 +125,7 @@ export class EditUserProfileComponent implements OnInit, OnDestroy {
           this.notification.open(
             'An error occurred while data saving!',
             'Close',
-            { duration: 5000 }
+            {duration: 5000}
           );
         }
       );

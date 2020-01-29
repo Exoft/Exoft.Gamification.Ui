@@ -36,18 +36,16 @@ export class UserService {
     return this.http.put(environment.apiUrl + '/api/users/current-user', formData);
   }
 
-  public updateUserInfoById(userId: string, userInfo: UpdateUser): Observable<User> {
-    return this.http.put<User>(environment.apiUrl + `/api/users/${userId}`, userInfo);
+  public updateUserInfoById(userId: string, formData: FormData): Observable<User> {
+    return this.http.put<User>(environment.apiUrl + `/api/users/${userId}`, formData);
   }
 
   public createUser(user: PostUser): Observable<User> {
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'multipart/form-data');
     const formData = new FormData();
     Object.keys(user).forEach((key: any) => {
-      formData.append(key, user[key]);
+      formData.append(key, !!user[key] ? user[key] : '');
     });
-    return this.http.post<User>(`${environment.apiUrl}/api/users`, formData, {headers});
+    return this.http.post<User>(`${environment.apiUrl}/api/users`, formData);
   }
 
   public deleteUserById(userId: string): Observable<any> {
