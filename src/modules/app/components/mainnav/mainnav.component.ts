@@ -3,7 +3,7 @@ import {menuItems} from '../../utils/constants';
 import {Router, NavigationEnd} from '@angular/router';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import { MatDrawer } from '@angular/material/sidenav';
+import {MatDrawer} from '@angular/material/sidenav';
 
 import {UserService} from 'src/modules/app/services/user.service';
 import {AuthService} from 'src/modules/app/services/auth.service';
@@ -18,7 +18,7 @@ import {getFirstLettersWithSplit} from '../../utils/letterAvatar';
   styleUrls: ['./mainnav.component.scss']
 })
 export class MainnavComponent implements OnInit, OnDestroy {
-  @ViewChild('drawer', { static: true }) public drawer: MatDrawer;
+  @ViewChild('drawer', {static: true}) public drawer: MatDrawer;
 
   private unsubscribe$: Subject<void> = new Subject();
 
@@ -81,7 +81,8 @@ export class MainnavComponent implements OnInit, OnDestroy {
       if (
         res instanceof NavigationEnd &&
         (res.urlAfterRedirects.includes('sign-in') ||
-          res.urlAfterRedirects.includes('page-not-found'))
+          res.urlAfterRedirects.includes('page-not-found') ||
+          res.urlAfterRedirects.includes('forbidden'))
       ) {
         this.isHeaderShown = false;
       } else if (res instanceof NavigationEnd) {

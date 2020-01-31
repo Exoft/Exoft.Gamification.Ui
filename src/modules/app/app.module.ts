@@ -15,6 +15,7 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
 import {OtherUserProfileComponent} from './components/other-user-profile/other-user-profile.component';
 import {RequestAchievementComponent} from './components/request-achievement/request-achievement.component';
 import {GratitudeComponent} from './components/gratitude/gratitude.component';
+import {ForbiddenPageComponent} from './components/forbidden-page/forbidden-page.component';
 
 // Interceptor
 import {Interceptor} from './helpers/interceptor';
@@ -36,7 +37,8 @@ import {Interceptor} from './helpers/interceptor';
     NotFoundComponent,
     OtherUserProfileComponent,
     RequestAchievementComponent,
-    GratitudeComponent
+    GratitudeComponent,
+    ForbiddenPageComponent
   ],
   providers: [
     {

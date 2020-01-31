@@ -3,6 +3,8 @@ import {Routes, RouterModule} from '@angular/router';
 import {AuthGuard} from './helpers/auth.guard';
 import {IsLoggedGuard} from './helpers/is-logged.guard';
 import {NotFoundComponent} from './components/not-found/not-found.component';
+import {ForbiddenPageComponent} from './components/forbidden-page/forbidden-page.component';
+import {RoleGuard} from './helpers/role.guard';
 
 const routes: Routes = [
   {
@@ -43,7 +45,11 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('../+admin-page/admin-page.module').then(m => m.AdminPageModule),
-    canActivate: [AuthGuard]
+    canActivate: [RoleGuard]
+  },
+  {
+    path: 'forbidden',
+    component: ForbiddenPageComponent
   },
   {
     path: 'page-not-found',
