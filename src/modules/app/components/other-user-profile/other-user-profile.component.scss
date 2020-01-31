@@ -51,16 +51,16 @@
           padding: 2vmin 0 0.5vmin 0;
         }
 
-        .user-achivments-info {
+        .user-achievements-info {
           display: flex;
           flex-direction: column;
           align-items: center;
           font-size: 2vmin;
 
-          .user-achivments-elements {
+          .user-achievements-elements {
             display: flex;
 
-            .user-achivments-title {
+            .user-achievements-title {
               color: $mainColor;
               padding: 0 1vmin;
             }
@@ -74,6 +74,7 @@
       display: flex;
       justify-content: flex-start;
       flex-wrap: wrap;
+      max-height: 36vmin;
 
       .achievement-item {
         width: 20%;
@@ -81,16 +82,21 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 2vmin;
+        justify-content: space-between;
+        padding: 1vmin 2vmin;
 
         .achievement-image {
-          width: 100%;
-          height: 70%;
+          width: 10vmin;
+          height: 10vmin;
           object-fit: contain;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 0.2vmin solid $mainColor;
         }
 
         .image-text {
-          font-size: 2vmin;
+          font-size: 1.5vmin;
+          text-align: center;
         }
       }
     }
@@ -141,7 +147,7 @@
           font-size: 4vmin;
         }
 
-        .user-achivments-info {
+        .user-achievements-info {
           font-size: 3vmin;
         }
       }
@@ -149,6 +155,7 @@
       .achievement-container {
         width: 100%;
         height: 45vh;
+        max-height: unset;
 
         .achievement-item {
           padding: 2vmin;

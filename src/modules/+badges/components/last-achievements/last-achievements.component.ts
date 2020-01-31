@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AchievementsService} from 'src/modules/app/services/achievements.service';
 import {DialogService} from 'src/modules/app/services/dialog.service';
+import {RequestService} from '../../../app/services/request.service';
 
 
 @Component({
@@ -9,9 +10,10 @@ import {DialogService} from 'src/modules/app/services/dialog.service';
   styleUrls: ['./last-achievements.component.scss']
 })
 export class LastAchievementsComponent implements OnInit {
-  public achievementsList = [{}];
+  public achievementsList = [];
 
   constructor(private achievementsService: AchievementsService,
+              private requestService: RequestService,
               private dialogService: DialogService) {
   }
 
@@ -27,5 +29,9 @@ export class LastAchievementsComponent implements OnInit {
 
   public openRequestAchievementsDialog(): void {
     this.dialogService.openRequestForm();
+  }
+
+  getAchievementIconUrl(iconId: string) {
+    return this.requestService.getAvatar(iconId);
   }
 }

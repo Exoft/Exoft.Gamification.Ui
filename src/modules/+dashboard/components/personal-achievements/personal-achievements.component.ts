@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 
 import {RequestService} from 'src/modules/app/services/request.service';
 import {DialogService} from 'src/modules/app/services/dialog.service';
+import {UserAchievement} from '../../../app/models/achievement/user-achievement';
 
 
 @Component({
@@ -11,8 +12,7 @@ import {DialogService} from 'src/modules/app/services/dialog.service';
   styleUrls: ['./personal-achievements.component.scss']
 })
 export class PersonalAchievementsComponent implements OnInit {
-
-  public pageData: any = [];
+  public achievements: UserAchievement[] = [];
 
   constructor(private requestService: RequestService,
               private dialog: MatDialog,
@@ -29,7 +29,11 @@ export class PersonalAchievementsComponent implements OnInit {
 
   private loadData(): void {
     this.requestService.getAchievementsInfo(1, 4).subscribe(response => {
-      this.pageData = response.data;
+      this.achievements = response.data;
     });
+  }
+
+  getIconUrl(iconId: string) {
+    return this.requestService.getAvatar(iconId);
   }
 }

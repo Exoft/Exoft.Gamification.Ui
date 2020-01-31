@@ -14,23 +14,23 @@
       <div class="user-info-container">
         <div class="user-name">{{ userInfo?.firstName }} {{ userInfo?.lastName }}</div>
 
-        <div class="user-achivments-info">
+        <div class="user-achievements-info">
           <!-- TODO: uncomment when backend will send badges count -->
-          <!--<div class="user-achivments-elements">
-            <p class="user-achivments-title">Total:</p>
+          <!--<div class="user-achievements-elements">
+            <p class="user-achievements-title">Total:</p>
 
             <p> {{ totalBadgesCount }} Badges</p>
           </div>-->
 
-          <div class="user-achivments-elements">
-            <p class="user-achivments-title">EXP:</p>
+          <div class="user-achievements-elements">
+            <p class="user-achievements-title">EXP:</p>
 
             <p> {{ userInfo?.xp }} XP</p>
           </div>
 
-          <div class="user-achivments-elements"
+          <div class="user-achievements-elements"
                *ngIf="userInfo?.status">
-            <p class="user-achivments-status">"{{ userInfo?.status }}"</p>
+            <p class="user-achievements-status">"{{ userInfo?.status }}"</p>
           </div>
         </div>
       </div>
@@ -39,8 +39,7 @@
     <div class="achievement-container">
       <div class="achievement-item"
            *ngFor="let achievement of achievements">
-        <img class="achievement-image"
-             src="../../../../assets/images/star-small-image.png">
+        <img class="achievement-image" [src]="getAvatarId(achievement.iconId)">
 
         <div class="image-text">{{ achievement.name }}</div>
       </div>
