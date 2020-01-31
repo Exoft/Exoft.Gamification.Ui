@@ -92,12 +92,16 @@ export class MainnavComponent implements OnInit, OnDestroy {
   }
 
   public getUser(): void {
-    this.userService.getCurrentUserInfo().subscribe(res => {
-      this.userData = {...res};
-      this.userData.avatar =
-        environment.apiUrl + '/api/files/' + this.userData.avatarId;
-      this.userService.setUserData(this.userData);
-    });
+    const isAuthenticated = this.authService.isAuthenticated();
+
+    if (isAuthenticated) {
+      this.userService.getCurrentUserInfo().subscribe(res => {
+        this.userData = {...res};
+        this.userData.avatar =
+          environment.apiUrl + '/api/files/' + this.userData.avatarId;
+        this.userService.setUserData(this.userData);
+      });
+    }
   }
 
   public getAvatarId(avatarId: any): string {

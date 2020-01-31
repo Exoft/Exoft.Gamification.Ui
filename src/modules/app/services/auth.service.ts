@@ -1,10 +1,9 @@
 import {Injectable, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import { MatDrawer } from '@angular/material/sidenav';
+import {MatDrawer} from '@angular/material/sidenav';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
-
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +49,4 @@ export class AuthService {
   public changePassword(changePasData: object) {
     return this.http.post(environment.apiUrl + '/api/authenticate/reset-password', changePasData);
   }
-
 }
