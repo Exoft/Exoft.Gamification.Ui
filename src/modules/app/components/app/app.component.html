@@ -1,6 +1,4 @@
-<div class="spinner-container" [class.collapsed]="!(spinnerService.spinnerStatus | async)">
-  <mat-spinner class="spinner"></mat-spinner>
-</div>
+<app-spinner-wrapper></app-spinner-wrapper>
 
 <app-mainnav>
   <router-outlet></router-outlet>

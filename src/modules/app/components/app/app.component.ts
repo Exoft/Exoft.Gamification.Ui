@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {LoadSpinnerService} from '../../services/load-spinner.service';
 
 
 @Component({
@@ -8,6 +7,4 @@ import {LoadSpinnerService} from '../../services/load-spinner.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(readonly spinnerService: LoadSpinnerService) {
-  }
 }

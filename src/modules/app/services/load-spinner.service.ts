@@ -16,4 +16,8 @@ export class LoadSpinnerService {
   hideSpinner() {
     this.isSpinnerShown.next(false);
   }
+
+  getSpinnerStatus() {
+    return this.isSpinnerShown.asObservable();
+  }
 }
