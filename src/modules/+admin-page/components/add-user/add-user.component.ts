@@ -1,14 +1,15 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatDialogRef} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
 import {Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {UserService} from 'src/modules/app/services/user.service';
 import {passwordContainValidity, passwordEqualityValidator} from '../../functions/add-user-validators';
-import {takeUntil} from 'rxjs/operators';
+import {finalize, takeUntil} from 'rxjs/operators';
 import {PostUser} from 'src/modules/app/models/user/post-user';
 import {getFirstLetters} from '../../../app/utils/letterAvatar';
+import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
 
 @Component({
   selector: 'app-add-user',
@@ -27,7 +28,8 @@ export class AddUserComponent implements OnInit, OnDestroy {
     private dialog: MatDialogRef<AddUserComponent>,
     private userService: UserService,
     private fb: FormBuilder,
-    private readonly notification: MatSnackBar) {
+    private readonly notification: MatSnackBar,
+    private readonly loadSpinnerService: LoadSpinnerService) {
   }
 
   ngOnInit() {
@@ -75,8 +77,9 @@ export class AddUserComponent implements OnInit, OnDestroy {
 
   onSaveChanges() {
     if (this.form.valid) {
+      this.loadSpinnerService.showSpinner();
       this.userService.createUser(this.form.value)
-        .pipe(takeUntil(this.unsubscribe$))
+        .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
         .subscribe(res => {
             this.notification.open('Data was successfully saved!', 'Close', {duration: 5000});
             this.dialog.close(res);

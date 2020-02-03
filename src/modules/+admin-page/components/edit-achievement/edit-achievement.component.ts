@@ -3,11 +3,12 @@ import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
 import {AchievementsService} from '../../../app/services/achievements.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {environment} from '../../../../environments/environment';
-import {takeUntil} from 'rxjs/operators';
+import {finalize, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {PostAchievement} from 'src/modules/app/models/achievement/post-achievement';
 import {Achievement} from 'src/modules/app/models/achievement/achievement';
 import {Validators} from '@angular/forms';
+import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
 
 @Component({
   selector: 'app-edit-achievement',
@@ -24,7 +25,8 @@ export class EditAchievementComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private achievementService: AchievementsService,
     public dialog: MatDialogRef<EditAchievementComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Achievement) {
+    @Inject(MAT_DIALOG_DATA) public data: Achievement,
+    private readonly loadSpinnerService: LoadSpinnerService) {
   }
 
   ngOnInit() {
@@ -62,8 +64,9 @@ export class EditAchievementComponent implements OnInit, OnDestroy {
 
   onSaveChanges() {
     if (this.form.valid) {
+      this.loadSpinnerService.showSpinner();
       this.achievementService.updateAchievementById(this.data.id, this.form.value)
-        .pipe(takeUntil(this.unsubscribe$))
+        .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
         .subscribe(res => {
           this.dialog.close(res);
         });

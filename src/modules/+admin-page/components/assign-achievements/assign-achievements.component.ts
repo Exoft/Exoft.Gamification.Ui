@@ -1,13 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { AchievementsService } from '../../../app/services/achievements.service';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Achievement } from 'src/modules/app/models/achievement/achievement';
-import { FormBuilder, FormGroup, FormArray } from 'ngx-strongly-typed-forms';
-import { forkJoin, Observable } from 'rxjs';
-import { ReturningPagingInfo } from 'src/modules/app/models/user/return-page-info';
-import { UserAchievement } from '../../../app/models/achievement/user-achievement';
+import {Component, Inject, OnInit} from '@angular/core';
+import {AchievementsService} from '../../../app/services/achievements.service';
+import {MatCheckboxChange} from '@angular/material/checkbox';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Achievement} from 'src/modules/app/models/achievement/achievement';
+import {FormBuilder, FormGroup, FormArray} from 'ngx-strongly-typed-forms';
+import {forkJoin, Observable} from 'rxjs';
+import {ReturningPagingInfo} from 'src/modules/app/models/user/return-page-info';
+import {UserAchievement} from '../../../app/models/achievement/user-achievement';
+import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
+import {finalize} from 'rxjs/operators';
 
 export class Achievements {
   achievements: UserSelectedAchievement[];
@@ -46,8 +48,10 @@ export class AssignAchievementsComponent implements OnInit {
     private readonly achievementsService: AchievementsService,
     private readonly dialog: MatDialogRef<AssignAchievementsComponent>,
     @Inject(MAT_DIALOG_DATA) private readonly data: any,
-    private readonly notification: MatSnackBar
-  ) {}
+    private readonly notification: MatSnackBar,
+    private readonly loadSpinnerService: LoadSpinnerService
+  ) {
+  }
 
   ngOnInit() {
     this.setForm();
@@ -83,20 +87,23 @@ export class AssignAchievementsComponent implements OnInit {
       this.achievementsService.getAchievementsByUserId(this.data)
     ];
 
-    forkJoin(requests).subscribe(
-      res => {
-        this.allAchievements = res[0].data as Achievement[];
-        this.userAchievements = res[1].data as UserAchievement[];
-        this.setFormData();
-      },
-      error => {
-        this.notification.open(
-          'An error occurred while data saving!',
-          'Close',
-          { duration: 5000 }
-        );
-      }
-    );
+    this.loadSpinnerService.showSpinner();
+    forkJoin(requests)
+      .pipe(finalize(() => this.loadSpinnerService.hideSpinner()))
+      .subscribe(
+        res => {
+          this.allAchievements = res[0].data as Achievement[];
+          this.userAchievements = res[1].data as UserAchievement[];
+          this.setFormData();
+        },
+        error => {
+          this.notification.open(
+            'An error occurred while data saving!',
+            'Close',
+            {duration: 5000}
+          );
+        }
+      );
   }
 
   private setFormData() {
@@ -176,22 +183,24 @@ export class AssignAchievementsComponent implements OnInit {
       control => control.value.achievement.id
     );
 
+    this.loadSpinnerService.showSpinner();
     this.achievementsService
       .addOrUpdateUserAchievements(userId, selectedAchievementsIds)
+      .pipe(finalize(() => this.loadSpinnerService.hideSpinner()))
       .subscribe(
         res => {
           this.dialog.close();
           this.notification.open(
             'Data was successfully saved!',
             'Close',
-            { duration: 5000 }
+            {duration: 5000}
           );
         },
         error => {
           this.notification.open(
             'An error occurred while data saving!',
             'Close',
-            { duration: 5000 }
+            {duration: 5000}
           );
         }
       );

@@ -2,10 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
 import {Validators} from '@angular/forms';
 import {AchievementsService} from '../../../app/services/achievements.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import {MatDialogRef} from '@angular/material/dialog';
 import {Subject} from 'rxjs';
 import {PostAchievement} from 'src/modules/app/models/achievement/post-achievement';
-import {takeUntil} from 'rxjs/operators';
+import {finalize, takeUntil} from 'rxjs/operators';
+import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class AddAchievementComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private achievementService: AchievementsService,
-    private dialog: MatDialogRef<AddAchievementComponent>) {
+    private dialog: MatDialogRef<AddAchievementComponent>,
+    private readonly loadSpinnerService: LoadSpinnerService) {
   }
 
   ngOnInit() {
@@ -59,8 +61,9 @@ export class AddAchievementComponent implements OnInit, OnDestroy {
 
   onSaveChanges() {
     if (this.form.valid) {
+      this.loadSpinnerService.showSpinner();
       this.achievementService.addNewAchievement(this.form.value)
-        .pipe(takeUntil(this.unsubscribe$))
+        .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
         .subscribe(res => {
           this.dialog.close(res);
         });

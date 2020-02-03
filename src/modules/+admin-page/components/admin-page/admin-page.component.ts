@@ -13,12 +13,13 @@ import {EditAchievementComponent} from '../edit-achievement/edit-achievement.com
 import {AchievementsService} from '../../../app/services/achievements.service';
 import {User} from '../../../app/models/user/user';
 import {AssignAchievementsComponent} from '../assign-achievements/assign-achievements.component';
-import {takeUntil} from 'rxjs/operators';
+import {finalize, takeUntil} from 'rxjs/operators';
 import {ReadAchievementRequest} from '../../../app/models/achievement-request/read-achievement-request';
-import {Subject} from 'rxjs';
+import {forkJoin, Subject} from 'rxjs';
 import {ReadUser} from 'src/modules/app/models/user/read-user';
 import {getFirstLetters} from '../../../app/utils/letterAvatar';
 import {MatPaginator} from '@angular/material';
+import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -37,13 +38,6 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   public isInfoLoaded = false;
 
   public letterAvatar = getFirstLetters;
-
-  constructor(private requestService: RequestService,
-              private userService: UserService,
-              private mapperService: MapperService,
-              private achievementService: AchievementsService,
-              private dialog: MatDialog) {
-  }
 
   paginatorPageSizeOptions: number[] = [5, 10, 20, 50];
 
@@ -66,11 +60,17 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   displayedColumnsAchievementsRequests: string[] = ['userName', 'achievement', 'comment', 'actions'];
   dataSourceAchievementRequest = new MatTableDataSource<ReadAchievementRequest>();
 
+  constructor(private requestService: RequestService,
+              private userService: UserService,
+              private mapperService: MapperService,
+              private achievementService: AchievementsService,
+              private dialog: MatDialog,
+              private readonly loadSpinnerService: LoadSpinnerService) {
+  }
+
   ngOnInit() {
-    this.loadUserData();
-    this.loadAchievementsData();
+    this.loadAllData();
     this.initCurrentUser();
-    this.loadAchievementRequests();
   }
 
   ngOnDestroy() {
@@ -78,11 +78,31 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  private loadAchievementRequests() {
-    this.requestService.getAllAchievementRequests()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((res) => {
-        this.dataSourceAchievementRequest = new MatTableDataSource(res);
+  private loadAllData() {
+    const userCurrentPage = this.userFilterForm.get('page').value;
+    const achievementCurrentPage = this.achievementFilterForm.get('page').value;
+    const userPageSize = this.userFilterForm.get('limit').value;
+    const achievementPageSize = this.achievementFilterForm.get('limit').value;
+
+    const requests = [
+      this.requestService.getAllUsers(userCurrentPage, userPageSize),
+      this.requestService.getAllAchievements(achievementCurrentPage, achievementPageSize),
+      this.requestService.getAllAchievementRequests()
+    ];
+
+    this.loadSpinnerService.showSpinner();
+    forkJoin(requests)
+      .pipe(finalize(() => this.loadSpinnerService.hideSpinner()))
+      .subscribe(res => {
+        this.userData = res[0].data;
+        this.dataSourceUser.data = this.userData;
+        this.userPaginatorTotalItems = res[0].totalItems;
+
+        this.achievementsData = res[1].data;
+        this.dataSourceAchievements.data = this.achievementsData;
+        this.achievementPaginatorTotalItems = res[1].totalItems;
+
+        this.dataSourceAchievementRequest = new MatTableDataSource(res[2]);
       });
   }
 
@@ -130,8 +150,9 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   }
 
   public onOpenDeleteUser(user: ReadUser) {
+    this.loadSpinnerService.showSpinner();
     this.userService.deleteUserById(user.id)
-      .pipe(takeUntil(this.unsubscribe$))
+      .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
       .subscribe(() => {
         this.dataSourceUser = new MatTableDataSource(this.dataSourceUser.data.filter(x => x !== user));
       });
@@ -175,8 +196,9 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   }
 
   public onOpenDeleteAchievement(achievement: Achievement) {
+    this.loadSpinnerService.showSpinner();
     this.achievementService.deleteAchievementById(achievement.id)
-      .pipe(takeUntil(this.unsubscribe$))
+      .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
       .subscribe(() => {
         this.dataSourceAchievements = new MatTableDataSource(this.dataSourceAchievements.data.filter(x => x !== achievement));
       });
@@ -186,8 +208,9 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     const currentPage = this.userFilterForm.get('page').value;
     const pageSize = this.userFilterForm.get('limit').value;
 
+    this.loadSpinnerService.showSpinner();
     this.requestService.getAllUsers(currentPage, pageSize)
-      .pipe(takeUntil(this.unsubscribe$))
+      .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
       .subscribe(response => {
         this.userData = response.data;
         this.dataSourceUser.data = this.userData;
@@ -199,8 +222,9 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     const currentPage = this.achievementFilterForm.get('page').value;
     const pageSize = this.achievementFilterForm.get('limit').value;
 
+    this.loadSpinnerService.showSpinner();
     this.requestService.getAllAchievements(currentPage, pageSize)
-      .pipe(takeUntil(this.unsubscribe$))
+      .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
       .subscribe(response => {
         this.achievementsData = response.data;
         this.dataSourceAchievements.data = this.achievementsData;
@@ -216,16 +240,17 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   }
 
   onRequestDecision(achievementTableRequest: ReadAchievementRequest, isApproved: boolean) {
+    this.loadSpinnerService.showSpinner();
     if (isApproved) {
       this.requestService.approveAchievementRequest(achievementTableRequest.id)
-        .pipe(takeUntil(this.unsubscribe$))
+        .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
         .subscribe(res => {
           this.dataSourceAchievementRequest = new MatTableDataSource(this.dataSourceAchievementRequest.data
             .filter(x => x !== achievementTableRequest));
         });
     } else {
       this.requestService.declineAchievementRequest(achievementTableRequest.id)
-        .pipe(takeUntil(this.unsubscribe$))
+        .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
         .subscribe(res => {
           this.dataSourceAchievementRequest = new MatTableDataSource(this.dataSourceAchievementRequest.data
             .filter(x => x !== achievementTableRequest));
