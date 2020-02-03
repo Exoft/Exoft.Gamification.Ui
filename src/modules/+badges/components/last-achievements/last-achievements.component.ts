@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AchievementsService} from 'src/modules/app/services/achievements.service';
 import {DialogService} from 'src/modules/app/services/dialog.service';
 import {RequestService} from '../../../app/services/request.service';
+import {BadgesComponent, BadgesService} from '../../services/badges.service';
+import {finalize} from 'rxjs/operators';
 
 
 @Component({
@@ -14,7 +16,8 @@ export class LastAchievementsComponent implements OnInit {
 
   constructor(private achievementsService: AchievementsService,
               private requestService: RequestService,
-              private dialogService: DialogService) {
+              private dialogService: DialogService,
+              private readonly badgesService: BadgesService) {
   }
 
   public ngOnInit(): void {
@@ -22,9 +25,12 @@ export class LastAchievementsComponent implements OnInit {
   }
 
   public getUserLastAchievements(): void {
-    this.achievementsService.getCurrentUserAchievements(1, 5).subscribe(res => {
-      this.achievementsList = res.data;
-    });
+    this.badgesService.setComponentLoadingStatus(BadgesComponent.lastAchievements, true);
+    this.achievementsService.getCurrentUserAchievements(1, 5)
+      .pipe(finalize(() => this.badgesService.setComponentLoadingStatus(BadgesComponent.lastAchievements, false)))
+      .subscribe(res => {
+        this.achievementsList = res.data;
+      });
   }
 
   public openRequestAchievementsDialog(): void {

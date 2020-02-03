@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 
 import {AchievementsService} from 'src/modules/app/services/achievements.service';
 import {RequestService} from '../../../app/services/request.service';
+import {BadgesComponent, BadgesService} from '../../services/badges.service';
+import {finalize} from 'rxjs/operators';
 
 
 @Component({
@@ -12,7 +14,9 @@ import {RequestService} from '../../../app/services/request.service';
 export class FullListOfAchievementsComponent implements OnInit {
   public achievementsList = [];
 
-  constructor(private achievementsService: AchievementsService, private readonly requestService: RequestService) {
+  constructor(private achievementsService: AchievementsService,
+              private readonly requestService: RequestService,
+              private readonly badgesService: BadgesService) {
   }
 
   public ngOnInit(): void {
@@ -20,9 +24,12 @@ export class FullListOfAchievementsComponent implements OnInit {
   }
 
   public getUserAchievements(): void {
-    this.achievementsService.getCurrentUserAchievements(1).subscribe(res => {
-      this.achievementsList = res.data;
-    });
+    this.badgesService.setComponentLoadingStatus(BadgesComponent.fullListOfAchievements, true);
+    this.achievementsService.getCurrentUserAchievements(1)
+      .pipe(finalize(() => this.badgesService.setComponentLoadingStatus(BadgesComponent.fullListOfAchievements, false)))
+      .subscribe(res => {
+        this.achievementsList = res.data;
+      });
   }
 
   getAchievementIconUrl(iconId: string) {
