@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 
 import {RequestService} from 'src/modules/app/services/request.service';
 import {DialogService} from 'src/modules/app/services/dialog.service';
 import {getFirstLetters} from '../../../app/utils/letterAvatar';
+import {DashboardComponent, DashboardService} from '../../services/dashboard.service';
+import {finalize} from 'rxjs/operators';
 
 
 @Component({
@@ -14,7 +16,8 @@ import {getFirstLetters} from '../../../app/utils/letterAvatar';
 export class TopChartComponent implements OnInit {
   constructor(public dialog: MatDialog,
               private requestService: RequestService,
-              private dialogService: DialogService) {
+              private dialogService: DialogService,
+              private readonly dashboardService: DashboardService) {
   }
 
   public pageData: any = [];
@@ -43,10 +46,13 @@ export class TopChartComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.requestService.getAllUsers().subscribe(response => {
-      // Take top five users
-      this.pageData = response.data.sort((a, b) => b.xp - a.xp).slice(0, 5);
-      this.getMaxXp(this.pageData[0].xp);
-    });
+    this.dashboardService.setComponentLoadingStatus(DashboardComponent.topChart, true);
+    this.requestService.getAllUsers()
+      .pipe(finalize(() => this.dashboardService.setComponentLoadingStatus(DashboardComponent.topChart, false)))
+      .subscribe(response => {
+        // Take top five users
+        this.pageData = response.data.sort((a, b) => b.xp - a.xp).slice(0, 5);
+        this.getMaxXp(this.pageData[0].xp);
+      });
   }
 }

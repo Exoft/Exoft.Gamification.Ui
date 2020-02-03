@@ -4,6 +4,8 @@ import {RequestService} from 'src/modules/app/services/request.service';
 import {ThankYouService} from 'src/modules/app/services/thank-you.service';
 import {DialogService} from 'src/modules/app/services/dialog.service';
 import {getFirstLetters} from '../../../app/utils/letterAvatar';
+import {DashboardComponent, DashboardService} from '../../services/dashboard.service';
+import {finalize} from 'rxjs/operators';
 
 
 @Component({
@@ -17,7 +19,8 @@ export class ThankYouComponent implements OnInit {
 
   constructor(private requestService: RequestService,
               private thankYouService: ThankYouService,
-              private dialogService: DialogService) {
+              private dialogService: DialogService,
+              private readonly dashboardService: DashboardService) {
   }
 
   public ngOnInit(): void {
@@ -33,8 +36,11 @@ export class ThankYouComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.thankYouService.getThankYouMessage().subscribe(res => {
-      this.pageData = res;
-    });
+    this.dashboardService.setComponentLoadingStatus(DashboardComponent.thankYou, true);
+    this.thankYouService.getThankYouMessage()
+      .pipe(finalize(() => this.dashboardService.setComponentLoadingStatus(DashboardComponent.thankYou, false)))
+      .subscribe(res => {
+        this.pageData = res;
+      });
   }
 }

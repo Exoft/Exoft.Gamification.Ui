@@ -3,6 +3,8 @@ import {Component, OnInit} from '@angular/core';
 import {RequestService} from 'src/modules/app/services/request.service';
 import {DialogService} from 'src/modules/app/services/dialog.service';
 import {getFirstLetters} from '../../../app/utils/letterAvatar';
+import {finalize} from 'rxjs/operators';
+import {DashboardComponent, DashboardService} from '../../services/dashboard.service';
 
 
 @Component({
@@ -10,14 +12,14 @@ import {getFirstLetters} from '../../../app/utils/letterAvatar';
   templateUrl: './exoft-achievements.component.html',
   styleUrls: ['./exoft-achievements.component.scss']
 })
-
 export class ExoftAchievementsComponent implements OnInit {
 
   public pageData: any = [];
   public letterAvatar = getFirstLetters;
 
   constructor(private requestService: RequestService,
-              private dialogService: DialogService) {
+              private dialogService: DialogService,
+              private readonly dashboardService: DashboardService) {
   }
 
   public ngOnInit(): void {
@@ -37,8 +39,11 @@ export class ExoftAchievementsComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.requestService.getEvents().subscribe(response => {
-      this.pageData = response.data;
-    });
+    this.dashboardService.setComponentLoadingStatus(DashboardComponent.exoftAchievements, true);
+    this.requestService.getEvents()
+      .pipe(finalize(() => this.dashboardService.setComponentLoadingStatus(DashboardComponent.exoftAchievements, false)))
+      .subscribe(response => {
+        this.pageData = response.data;
+      });
   }
 }
