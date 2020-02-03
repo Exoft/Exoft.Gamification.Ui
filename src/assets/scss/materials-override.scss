@@ -280,4 +280,10 @@ app-assign-achievements {
 }
 
 
+// paginator styles
+.mat-paginator {
+  background-color: $secondaryColor;
+  color: $textColor;
+}
+
 @import './material-override.responsive.scss';

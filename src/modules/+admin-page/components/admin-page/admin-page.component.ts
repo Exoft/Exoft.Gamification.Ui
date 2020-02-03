@@ -1,11 +1,11 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {RequestService} from 'src/modules/app/services/request.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {MatTableDataSource} from '@angular/material/table';
 import {DialogService} from 'src/modules/app/services/dialog.service';
 import {EditUserComponent} from '../edit-user/edit-user.component';
 import {UserService} from '../../../app/services/user.service';
-import {FormGroup} from '@angular/forms';
+import {FormGroup, FormControl} from '@angular/forms';
 import {MapperService} from '../../../app/services/mapper.service';
 import {AddUserComponent} from '../add-user/add-user.component';
 import {AddAchievementComponent} from '../add-achievement/add-achievement.component';
@@ -19,7 +19,7 @@ import {ReadAchievementRequest} from '../../../app/models/achievement-request/re
 import {Subject} from 'rxjs';
 import {ReadUser} from 'src/modules/app/models/user/read-user';
 import {getFirstLetters} from '../../../app/utils/letterAvatar';
-
+import {MatPaginator} from '@angular/material';
 
 @Component({
   selector: 'app-admin-page',
@@ -27,6 +27,9 @@ import {getFirstLetters} from '../../../app/utils/letterAvatar';
   styleUrls: ['./admin-page.component.scss']
 })
 export class AdminPageComponent implements OnInit, OnDestroy {
+  @ViewChild('userPaginator', {static: true}) userPaginator: MatPaginator;
+  @ViewChild('achievementPaginator', {static: true}) achievementPaginator: MatPaginator;
+
   private unsubscribe$: Subject<void> = new Subject();
 
   public userData: ReadUser[] = [];
@@ -43,11 +46,25 @@ export class AdminPageComponent implements OnInit, OnDestroy {
               private dialog: MatDialog) {
   }
 
+  paginatorPageSizeOptions: number[] = [5, 10, 20, 50];
+
   displayedColumnsUser: string[] = ['avatar', 'firstName', 'lastName', 'xp', 'actions'];
-  displayedColumnsAchievements: string[] = ['icon', 'name', 'description', 'xp', 'actions'];
-  displayedColumnsAchievementsRequests: string[] = ['userName', 'achievement', 'comment', 'actions'];
   dataSourceUser = new MatTableDataSource<ReadUser>();
+  userPaginatorTotalItems = 0;
+  userFilterForm = new FormGroup({
+    page: new FormControl(1),
+    limit: new FormControl(20)
+  });
+
+  displayedColumnsAchievements: string[] = ['icon', 'name', 'description', 'xp', 'actions'];
   dataSourceAchievements = new MatTableDataSource<Achievement>();
+  achievementPaginatorTotalItems = 0;
+  achievementFilterForm = new FormGroup({
+    page: new FormControl(1),
+    limit: new FormControl(20)
+  });
+
+  displayedColumnsAchievementsRequests: string[] = ['userName', 'achievement', 'comment', 'actions'];
   dataSourceAchievementRequest = new MatTableDataSource<ReadAchievementRequest>();
 
   ngOnInit() {
@@ -62,29 +79,20 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  private loadUserData() {
-    this.requestService.getAllUsers()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(response => {
-        this.userData = response.data;
-        this.dataSourceUser.data = this.userData;
-      });
-  }
-
-  private loadAchievementsData() {
-    this.requestService.getAllAchievements()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(response => {
-        this.achievementsData = response.data;
-        this.dataSourceAchievements.data = this.achievementsData;
-      });
-  }
-
   private loadAchievementRequests() {
     this.requestService.getAllAchievementRequests()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((res) => {
         this.dataSourceAchievementRequest = new MatTableDataSource(res);
+      });
+  }
+
+  private initCurrentUser() {
+    this.userService.getCurrentUserInfo()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(u => {
+        this.currentUser = this.mapperService.getUser(u);
+        this.isInfoLoaded = true;
       });
   }
 
@@ -175,6 +183,32 @@ export class AdminPageComponent implements OnInit, OnDestroy {
       });
   }
 
+  loadUserData() {
+    const currentPage = this.userFilterForm.get('page').value;
+    const pageSize = this.userFilterForm.get('limit').value;
+
+    this.requestService.getAllUsers(currentPage, pageSize)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(response => {
+        this.userData = response.data;
+        this.dataSourceUser.data = this.userData;
+        this.userPaginatorTotalItems = response.totalItems;
+      });
+  }
+
+  loadAchievementsData() {
+    const currentPage = this.achievementFilterForm.get('page').value;
+    const pageSize = this.achievementFilterForm.get('limit').value;
+
+    this.requestService.getAllAchievements(currentPage, pageSize)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(response => {
+        this.achievementsData = response.data;
+        this.dataSourceAchievements.data = this.achievementsData;
+        this.achievementPaginatorTotalItems = response.totalItems;
+      });
+  }
+
   openAssignAchievementWindow(user: User) {
     this.dialog.open(AssignAchievementsComponent, {
       width: '600px',
@@ -200,16 +234,14 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  private initCurrentUser() {
-    this.userService.getCurrentUserInfo()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(u => {
-        this.currentUser = this.mapperService.getUser(u);
-        this.isInfoLoaded = true;
-      });
-  }
-
   getImageUrl(imageId: string) {
     return this.requestService.getAvatar(imageId);
+  }
+
+  paginatorEvent(event, formGroup) {
+    formGroup.patchValue({
+      page: event.pageIndex + 1,
+      limit: event.pageSize
+    });
   }
 }
