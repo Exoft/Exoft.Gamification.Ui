@@ -1,4 +1,4 @@
-<div class="spinner-container" *ngIf="isDataLoading">
+<div class="spinner-container" [class.collapsed]="!(spinnerService.spinnerStatus | async)">
   <mat-spinner class="spinner"></mat-spinner>
 </div>
 

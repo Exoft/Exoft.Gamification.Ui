@@ -6,6 +6,7 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class LoadSpinnerService {
   private isSpinnerShown = new BehaviorSubject(false);
+  spinnerStatus = this.isSpinnerShown.asObservable();
 
 
   showSpinner() {
@@ -14,9 +15,5 @@ export class LoadSpinnerService {
 
   hideSpinner() {
     this.isSpinnerShown.next(false);
-  }
-
-  getSpinnerStatus() {
-    return this.isSpinnerShown.asObservable();
   }
 }
