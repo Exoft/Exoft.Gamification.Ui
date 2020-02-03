@@ -1,4 +1,5 @@
 @import "./assets/scss/materials-override.scss";
+@import "./assets/scss/theme-colors.scss";
 
 * {
   box-sizing: border-box;
@@ -18,6 +19,25 @@ body {
 
   .text-uppercase {
     text-transform: uppercase;
+  }
+}
+
+.spinner-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  background-color: $backdropColorLight;
+
+  .mat-spinner {
+    circle {
+      stroke: $mainColor;
+    }
   }
 }
 
@@ -41,6 +61,7 @@ body {
 .mat-snack-bar-container {
   background-color: #3A3E46;
   color: #FFFFFF;
+
   .mat-simple-snackbar-action {
     color: greenyellow;
   }

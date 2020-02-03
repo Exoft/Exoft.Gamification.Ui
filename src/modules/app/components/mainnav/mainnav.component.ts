@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
 import {menuItems} from '../../utils/constants';
 import {Router, NavigationEnd} from '@angular/router';
 import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {finalize, takeUntil} from 'rxjs/operators';
 import {MatDrawer} from '@angular/material/sidenav';
 
 import {UserService} from 'src/modules/app/services/user.service';
@@ -10,6 +10,7 @@ import {AuthService} from 'src/modules/app/services/auth.service';
 import {RequestService} from '../../services/request.service';
 import {environment} from 'src/environments/environment';
 import {getFirstLettersWithSplit} from '../../utils/letterAvatar';
+import {LoadSpinnerService} from '../../services/load-spinner.service';
 
 
 @Component({
@@ -38,7 +39,8 @@ export class MainnavComponent implements OnInit, OnDestroy {
     private router: Router,
     private userService: UserService,
     private authService: AuthService,
-    private requestService: RequestService
+    private requestService: RequestService,
+    private readonly loadSpinnerService: LoadSpinnerService
   ) {
   }
 
@@ -95,12 +97,15 @@ export class MainnavComponent implements OnInit, OnDestroy {
     const isAuthenticated = this.authService.isAuthenticated();
 
     if (isAuthenticated) {
-      this.userService.getCurrentUserInfo().subscribe(res => {
-        this.userData = {...res};
-        this.userData.avatar =
-          environment.apiUrl + '/api/files/' + this.userData.avatarId;
-        this.userService.setUserData(this.userData);
-      });
+      this.loadSpinnerService.showSpinner();
+      this.userService.getCurrentUserInfo()
+        .pipe(finalize(() => this.loadSpinnerService.hideSpinner()))
+        .subscribe(res => {
+          this.userData = {...res};
+          this.userData.avatar =
+            environment.apiUrl + '/api/files/' + this.userData.avatarId;
+          this.userService.setUserData(this.userData);
+        });
     }
   }
 

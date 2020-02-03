@@ -4,6 +4,8 @@ import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {AuthService} from '../../../app/services/auth.service';
+import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
+import {finalize} from 'rxjs/operators';
 
 
 @Component({
@@ -21,7 +23,8 @@ export class ForgotPasswordComponent {
 
   constructor(private authService: AuthService,
               private snackBar: MatSnackBar,
-              private router: Router) {
+              private router: Router,
+              private readonly loadSpinnerService: LoadSpinnerService) {
   }
 
   public onResetPassword(): void {
@@ -34,15 +37,18 @@ export class ForgotPasswordComponent {
       resetPasswordPageLink: this.componentUrl
     };
 
-    this.authService.sendForgotPasLink(forgotPasData).subscribe(response => {
-        this.openSnackBar('Now check out your email and follow to the link in it.', 'Notification');
-        setTimeout(() => {
-          this.router.navigate(['/sign-in']);
-        }, 3000);
-      },
-      error => {
-        this.openSnackBar('This email doesn\'t exist', 'Notification');
-      });
+    this.loadSpinnerService.showSpinner();
+    this.authService.sendForgotPasLink(forgotPasData)
+      .pipe(finalize(() => this.loadSpinnerService.hideSpinner()))
+      .subscribe(response => {
+          this.openSnackBar('Now check out your email and follow to the link in it.', 'Notification');
+          setTimeout(() => {
+            this.router.navigate(['/sign-in']);
+          }, 3000);
+        },
+        error => {
+          this.openSnackBar('This email doesn\'t exist', 'Notification');
+        });
   }
 
   public openSnackBar(message: string, action: string): void {

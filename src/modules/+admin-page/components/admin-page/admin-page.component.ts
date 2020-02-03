@@ -2,7 +2,6 @@ import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {RequestService} from 'src/modules/app/services/request.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {MatTableDataSource} from '@angular/material/table';
-import {DialogService} from 'src/modules/app/services/dialog.service';
 import {EditUserComponent} from '../edit-user/edit-user.component';
 import {UserService} from '../../../app/services/user.service';
 import {FormGroup, FormControl} from '@angular/forms';

@@ -3,12 +3,13 @@ import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
 import {User} from '../../../app/models/user/user';
 import {Subject} from 'rxjs';
 import {UserService} from '../../../app/services/user.service';
-import {takeUntil} from 'rxjs/operators';
+import {finalize, takeUntil} from 'rxjs/operators';
 import {getFirstLetters} from '../../../app/utils/letterAvatar';
 import {Validators} from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {environment} from 'src/environments/environment';
+import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
 
 export interface UserEditData {
   userName: string;
@@ -28,7 +29,6 @@ export class EditUserProfileComponent implements OnInit, OnDestroy {
   private unsubscribe: Subject<void> = new Subject();
 
   form: FormGroup<UserEditData>;
-  userData: User;
 
   avatarUrl: string;
   avatarId: string;
@@ -39,7 +39,8 @@ export class EditUserProfileComponent implements OnInit, OnDestroy {
     private readonly dialog: MatDialog,
     private readonly fb: FormBuilder,
     private userService: UserService,
-    private readonly notification: MatSnackBar
+    private readonly notification: MatSnackBar,
+    private readonly loadSpinnerService: LoadSpinnerService
   ) {
   }
 
@@ -110,26 +111,30 @@ export class EditUserProfileComponent implements OnInit, OnDestroy {
   saveUserData() {
     if (this.form.valid) {
       const formData = this.createFormData();
-      this.userService.updateUserInfo(formData).subscribe(
-        res => {
-          const timeStamp = Date.now();
-          const newUserData = {...res};
-          newUserData.avatar = `${environment.apiUrl}/api/files/${newUserData.avatarId}/?timeStamp=${timeStamp}`;
-          this.userService.setUserData(newUserData);
+      this.loadSpinnerService.showSpinner();
 
-          this.notification.open('Data was successfully saved!', 'Close', {
-            duration: 5000
-          });
-          this.closeDialog();
-        },
-        error => {
-          this.notification.open(
-            'An error occurred while data saving!',
-            'Close',
-            {duration: 5000}
-          );
-        }
-      );
+      this.userService.updateUserInfo(formData)
+        .pipe(finalize(() => this.loadSpinnerService.hideSpinner()))
+        .subscribe(
+          res => {
+            const timeStamp = Date.now();
+            const newUserData = {...res};
+            newUserData.avatar = `${environment.apiUrl}/api/files/${newUserData.avatarId}/?timeStamp=${timeStamp}`;
+            this.userService.setUserData(newUserData);
+
+            this.notification.open('Data was successfully saved!', 'Close', {
+              duration: 5000
+            });
+            this.closeDialog();
+          },
+          error => {
+            this.notification.open(
+              'An error occurred while data saving!',
+              'Close',
+              {duration: 5000}
+            );
+          }
+        );
     }
   }
 

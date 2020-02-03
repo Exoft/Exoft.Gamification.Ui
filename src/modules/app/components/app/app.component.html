@@ -1,3 +1,7 @@
+<div class="spinner-container" *ngIf="isDataLoading">
+  <mat-spinner class="spinner"></mat-spinner>
+</div>
+
 <app-mainnav>
   <router-outlet></router-outlet>
 </app-mainnav>

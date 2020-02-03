@@ -1,14 +1,16 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { forkJoin } from 'rxjs';
+import {Component, OnInit, Inject} from '@angular/core';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {forkJoin} from 'rxjs';
 
-import { RequestService } from 'src/modules/app/services/request.service';
-import { GratitudeComponent } from '../gratitude/gratitude.component';
-import { UserService } from '../../services/user.service';
-import { getFirstLetters } from '../../utils/letterAvatar';
-import { User } from '../../models/user/user';
-import { Achievement } from '../../models/achievement/achievement';
+import {RequestService} from 'src/modules/app/services/request.service';
+import {GratitudeComponent} from '../gratitude/gratitude.component';
+import {UserService} from '../../services/user.service';
+import {getFirstLetters} from '../../utils/letterAvatar';
+import {User} from '../../models/user/user';
+import {Achievement} from '../../models/achievement/achievement';
+import {finalize} from 'rxjs/operators';
+import {LoadSpinnerService} from '../../services/load-spinner.service';
 
 @Component({
   selector: 'app-other-user-profile',
@@ -28,8 +30,10 @@ export class OtherUserProfileComponent implements OnInit {
     private requestService: RequestService,
     @Inject(MAT_DIALOG_DATA) public userId: string,
     private userService: UserService,
-    private readonly notification: MatSnackBar
-  ) {}
+    private readonly notification: MatSnackBar,
+    private readonly loadSpinnerService: LoadSpinnerService
+  ) {
+  }
 
   ngOnInit() {
     this.loadData();
@@ -42,19 +46,22 @@ export class OtherUserProfileComponent implements OnInit {
       this.requestService.getCurrentUserAchievements(this.userId)
     ];
 
-    forkJoin(requests).subscribe(
-      res => {
-        this.userInfo = res[0];
-        this.achievements = res[1].data;
-      },
-      error => {
-        this.notification.open(
-          'An error occurred while data loading!',
-          'Close',
-          { duration: 5000 }
-        );
-      }
-    );
+    this.loadSpinnerService.showSpinner();
+    forkJoin(requests)
+      .pipe(finalize(() => this.loadSpinnerService.hideSpinner()))
+      .subscribe(
+        res => {
+          this.userInfo = res[0];
+          this.achievements = res[1].data;
+        },
+        error => {
+          this.notification.open(
+            'An error occurred while data loading!',
+            'Close',
+            {duration: 5000}
+          );
+        }
+      );
   }
 
   private loadCurrentUserData() {

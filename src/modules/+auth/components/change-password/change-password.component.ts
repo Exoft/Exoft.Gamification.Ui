@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {AuthService} from '../../../app/services/auth.service';
+import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
+import {finalize} from 'rxjs/operators';
 
 
 @Component({
@@ -27,7 +29,8 @@ export class ChangePasswordComponent {
   constructor(private authService: AuthService,
               private activeRoute: ActivatedRoute,
               private snackBar: MatSnackBar,
-              private router: Router) {
+              private router: Router,
+              private readonly loadSpinnerService: LoadSpinnerService) {
   }
 
   public checkPasswords(group: FormGroup) { // here we have the 'passwords' group
@@ -42,17 +45,21 @@ export class ChangePasswordComponent {
       password: this.changePasForm.value.password,
       secretString: this.activeRoute.snapshot.queryParams.secretString
     };
-    this.authService.changePassword(changePasData).subscribe(response => {
-        this.openSnackBar('Now try to sign in with your new password', 'Notification');
-        setTimeout(() => {
-          this.router.navigate(['/sign-in']);
-        }, 3000);
-      },
-      error => {
-        const errorPswArray = error.error.Password;
-        const errorMsg = errorPswArray.join(' ');
-        this.openSnackBar(errorMsg, 'Notification');
-      });
+    this.loadSpinnerService.showSpinner();
+
+    this.authService.changePassword(changePasData)
+      .pipe(finalize(() => this.loadSpinnerService.hideSpinner()))
+      .subscribe(response => {
+          this.openSnackBar('Now try to sign in with your new password', 'Notification');
+          setTimeout(() => {
+            this.router.navigate(['/sign-in']);
+          }, 3000);
+        },
+        error => {
+          const errorPswArray = error.error.Password;
+          const errorMsg = errorPswArray.join(' ');
+          this.openSnackBar(errorMsg, 'Notification');
+        });
   }
 
   public openSnackBar(message: string, action: string): void {
