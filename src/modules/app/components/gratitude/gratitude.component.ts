@@ -5,6 +5,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {ThankYouService} from '../../services/thank-you.service';
 import {finalize} from 'rxjs/operators';
 import {LoadSpinnerService} from '../../services/load-spinner.service';
+import {AlertService} from '../../services/alert.service';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class GratitudeComponent {
   constructor(public dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) private userId: any,
               private thankYouService: ThankYouService,
-              private  readonly loadSpinnerService: LoadSpinnerService) {
+              private  readonly loadSpinnerService: LoadSpinnerService,
+              private readonly alertService: AlertService) {
   }
 
   public closeForm(): void {
@@ -33,7 +35,9 @@ export class GratitudeComponent {
         .pipe(finalize(() => this.loadSpinnerService.hideSpinner()))
         .subscribe(res => {
           this.dialog.closeAll();
-        });
+          this.alertService.success('Gratitude was successfully sent!');
+        },
+          error => this.alertService.error());
     }
   }
 }

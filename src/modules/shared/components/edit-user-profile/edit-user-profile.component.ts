@@ -1,15 +1,14 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
-import {User} from '../../../app/models/user/user';
 import {Subject} from 'rxjs';
 import {UserService} from '../../../app/services/user.service';
 import {finalize, takeUntil} from 'rxjs/operators';
 import {getFirstLetters} from '../../../app/utils/letterAvatar';
 import {Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {environment} from 'src/environments/environment';
 import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
+import {AlertService} from '../../../app/services/alert.service';
 
 export interface UserEditData {
   userName: string;
@@ -39,7 +38,7 @@ export class EditUserProfileComponent implements OnInit, OnDestroy {
     private readonly dialog: MatDialog,
     private readonly fb: FormBuilder,
     private userService: UserService,
-    private readonly notification: MatSnackBar,
+    private readonly alertService: AlertService,
     private readonly loadSpinnerService: LoadSpinnerService
   ) {
   }
@@ -122,18 +121,10 @@ export class EditUserProfileComponent implements OnInit, OnDestroy {
             newUserData.avatar = `${environment.apiUrl}/api/files/${newUserData.avatarId}/?timeStamp=${timeStamp}`;
             this.userService.setUserData(newUserData);
 
-            this.notification.open('Data was successfully saved!', 'Close', {
-              duration: 5000
-            });
+            this.alertService.success('Data was successfully saved!');
             this.closeDialog();
           },
-          error => {
-            this.notification.open(
-              'An error occurred while data saving!',
-              'Close',
-              {duration: 5000}
-            );
-          }
+          error => this.alertService.error()
         );
     }
   }

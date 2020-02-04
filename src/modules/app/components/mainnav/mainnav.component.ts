@@ -11,6 +11,7 @@ import {RequestService} from '../../services/request.service';
 import {environment} from 'src/environments/environment';
 import {getFirstLettersWithSplit} from '../../utils/letterAvatar';
 import {LoadSpinnerService} from '../../services/load-spinner.service';
+import {AlertService} from '../../services/alert.service';
 
 
 @Component({
@@ -40,7 +41,8 @@ export class MainnavComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private authService: AuthService,
     private requestService: RequestService,
-    private readonly loadSpinnerService: LoadSpinnerService
+    private readonly loadSpinnerService: LoadSpinnerService,
+    private readonly alertService: AlertService
   ) {
   }
 
@@ -105,7 +107,8 @@ export class MainnavComponent implements OnInit, OnDestroy {
           this.userData.avatar =
             environment.apiUrl + '/api/files/' + this.userData.avatarId;
           this.userService.setUserData(this.userData);
-        });
+        },
+          error => this.alertService.error());
     }
   }
 

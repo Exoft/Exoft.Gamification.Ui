@@ -41,6 +41,25 @@ body {
   }
 }
 
+.mat-snack-bar-container {
+  color: $textColor;
+
+  &.success-notification {
+    background-color: $mainColor;
+  }
+
+  &.error-notification {
+    background-color: $errorColor;
+  }
+
+  .mat-simple-snackbar-action {
+    .mat-button {
+      background-color: $secondaryColor;
+      color: $textColor;
+    }
+  }
+}
+
 // scroll bar style
 ::-webkit-scrollbar {
   width: 0.5vmin;
@@ -61,8 +80,4 @@ body {
 .mat-snack-bar-container {
   background-color: #3A3E46;
   color: #FFFFFF;
-
-  .mat-simple-snackbar-action {
-    color: greenyellow;
-  }
 }

@@ -5,6 +5,7 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {RequestService} from 'src/modules/app/services/request.service';
 import {finalize} from 'rxjs/operators';
 import {LoadSpinnerService} from '../../services/load-spinner.service';
+import {AlertService} from '../../services/alert.service';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class RequestAchievementComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
               public requestService: RequestService,
-              private readonly  loadSpinnerService: LoadSpinnerService) {
+              private readonly  loadSpinnerService: LoadSpinnerService,
+              private readonly alertService: AlertService) {
   }
 
   public ngOnInit(): void {
@@ -36,7 +38,9 @@ export class RequestAchievementComponent implements OnInit {
       .subscribe(
         res => {
           this.dialog.closeAll();
-        }
+          this.alertService.success('Achievement was successfully requested!');
+        },
+        error => this.alertService.error()
       );
   }
 
@@ -46,7 +50,8 @@ export class RequestAchievementComponent implements OnInit {
       .pipe(finalize(() => this.loadSpinnerService.hideSpinner()))
       .subscribe(response => {
         this.pageData = response.data;
-      });
+      },
+        error => this.alertService.error());
   }
 
   public closeForm(): void {

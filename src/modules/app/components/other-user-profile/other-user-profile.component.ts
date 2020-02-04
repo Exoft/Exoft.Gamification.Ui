@@ -1,6 +1,5 @@
 import {Component, OnInit, Inject} from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {forkJoin} from 'rxjs';
 
 import {RequestService} from 'src/modules/app/services/request.service';
@@ -11,6 +10,7 @@ import {User} from '../../models/user/user';
 import {Achievement} from '../../models/achievement/achievement';
 import {finalize} from 'rxjs/operators';
 import {LoadSpinnerService} from '../../services/load-spinner.service';
+import {AlertService} from '../../services/alert.service';
 
 @Component({
   selector: 'app-other-user-profile',
@@ -30,8 +30,8 @@ export class OtherUserProfileComponent implements OnInit {
     private requestService: RequestService,
     @Inject(MAT_DIALOG_DATA) public userId: string,
     private userService: UserService,
-    private readonly notification: MatSnackBar,
-    private readonly loadSpinnerService: LoadSpinnerService
+    private readonly loadSpinnerService: LoadSpinnerService,
+    private readonly alertService: AlertService
   ) {
   }
 
@@ -54,13 +54,7 @@ export class OtherUserProfileComponent implements OnInit {
           this.userInfo = res[0];
           this.achievements = res[1].data;
         },
-        error => {
-          this.notification.open(
-            'An error occurred while data loading!',
-            'Close',
-            {duration: 5000}
-          );
-        }
+        error => this.alertService.error()
       );
   }
 
