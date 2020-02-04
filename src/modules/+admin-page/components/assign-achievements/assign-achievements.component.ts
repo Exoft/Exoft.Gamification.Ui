@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {AchievementsService} from '../../../app/services/achievements.service';
 import {MatCheckboxChange} from '@angular/material/checkbox';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Achievement} from 'src/modules/app/models/achievement/achievement';
 import {FormBuilder, FormGroup, FormArray} from 'ngx-strongly-typed-forms';
 import {forkJoin, Observable} from 'rxjs';
@@ -10,6 +9,7 @@ import {ReturningPagingInfo} from 'src/modules/app/models/user/return-page-info'
 import {UserAchievement} from '../../../app/models/achievement/user-achievement';
 import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
 import {finalize} from 'rxjs/operators';
+import {AlertService} from '../../../app/services/alert.service';
 
 export class Achievements {
   achievements: UserSelectedAchievement[];
@@ -48,8 +48,8 @@ export class AssignAchievementsComponent implements OnInit {
     private readonly achievementsService: AchievementsService,
     private readonly dialog: MatDialogRef<AssignAchievementsComponent>,
     @Inject(MAT_DIALOG_DATA) private readonly data: any,
-    private readonly notification: MatSnackBar,
-    private readonly loadSpinnerService: LoadSpinnerService
+    private readonly loadSpinnerService: LoadSpinnerService,
+    private readonly alertService: AlertService
   ) {
   }
 
@@ -97,11 +97,7 @@ export class AssignAchievementsComponent implements OnInit {
           this.setFormData();
         },
         error => {
-          this.notification.open(
-            'An error occurred while data saving!',
-            'Close',
-            {duration: 5000}
-          );
+          this.alertService.error();
         }
       );
   }
@@ -190,18 +186,10 @@ export class AssignAchievementsComponent implements OnInit {
       .subscribe(
         res => {
           this.dialog.close();
-          this.notification.open(
-            'Data was successfully saved!',
-            'Close',
-            {duration: 5000}
-          );
+          this.alertService.success('Data was successfully saved!');
         },
         error => {
-          this.notification.open(
-            'An error occurred while data saving!',
-            'Close',
-            {duration: 5000}
-          );
+          this.alertService.error();
         }
       );
   }

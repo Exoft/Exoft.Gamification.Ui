@@ -9,6 +9,7 @@ import {PostAchievement} from 'src/modules/app/models/achievement/post-achieveme
 import {Achievement} from 'src/modules/app/models/achievement/achievement';
 import {Validators} from '@angular/forms';
 import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
+import {AlertService} from '../../../app/services/alert.service';
 
 @Component({
   selector: 'app-edit-achievement',
@@ -26,7 +27,8 @@ export class EditAchievementComponent implements OnInit, OnDestroy {
     private achievementService: AchievementsService,
     public dialog: MatDialogRef<EditAchievementComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Achievement,
-    private readonly loadSpinnerService: LoadSpinnerService) {
+    private readonly loadSpinnerService: LoadSpinnerService,
+    private readonly alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -69,7 +71,9 @@ export class EditAchievementComponent implements OnInit, OnDestroy {
         .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
         .subscribe(res => {
           this.dialog.close(res);
-        });
+          this.alertService.success('Achievement data was successfully updated!');
+        },
+          error => this.alertService.error());
     }
   }
 }

@@ -2,13 +2,13 @@ import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {FormBuilder, FormGroup} from 'ngx-strongly-typed-forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {UserService} from '../../../app/services/user.service';
 import {UpdateUser} from '../../../app/models/user/update-user';
 import {finalize, takeUntil} from 'rxjs/operators';
 import {Validators} from '@angular/forms';
 import {getFirstLetters} from '../../../app/utils/letterAvatar';
 import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
+import {AlertService} from '../../../app/services/alert.service';
 
 
 @Component({
@@ -27,9 +27,9 @@ export class EditUserComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
               private userService: UserService,
               private dialog: MatDialogRef<EditUserComponent>,
-              private notification: MatSnackBar,
               @Inject(MAT_DIALOG_DATA) private userId: string,
-              private readonly loadSpinnerService: LoadSpinnerService) {
+              private readonly loadSpinnerService: LoadSpinnerService,
+              private readonly alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -63,7 +63,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
           this.avatarUrl = !!res.avatarId ? this.userService.getAvatarUrl(res.avatarId) : null;
         },
         error => {
-          this.notification.open('An error occurred while data loading!', 'Close', {duration: 5000});
+          this.alertService.error();
         }
       );
   }
@@ -94,11 +94,11 @@ export class EditUserComponent implements OnInit, OnDestroy {
       this.userService.updateUserInfoById(this.userId, formData)
         .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
         .subscribe((res) => {
-            this.notification.open('Data was successfully changed!', 'Close', {duration: 5000});
+            this.alertService.success('User data was successfully saved!');
             this.dialog.close(res);
           },
           error => {
-            this.notification.open('An error occurred while data saving!', 'Close', {duration: 5000});
+            this.alertService.error();
           });
     }
   }

@@ -7,6 +7,7 @@ import {Subject} from 'rxjs';
 import {PostAchievement} from 'src/modules/app/models/achievement/post-achievement';
 import {finalize, takeUntil} from 'rxjs/operators';
 import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
+import {AlertService} from '../../../app/services/alert.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class AddAchievementComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private achievementService: AchievementsService,
     private dialog: MatDialogRef<AddAchievementComponent>,
-    private readonly loadSpinnerService: LoadSpinnerService) {
+    private readonly loadSpinnerService: LoadSpinnerService,
+    private readonly alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -66,7 +68,9 @@ export class AddAchievementComponent implements OnInit, OnDestroy {
         .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
         .subscribe(res => {
           this.dialog.close(res);
-        });
+          this.alertService.success('Achievement was successfully added!');
+        },
+          error => this.alertService.error());
     }
   }
 }

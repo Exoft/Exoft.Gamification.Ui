@@ -20,6 +20,7 @@ import {ReadUser} from 'src/modules/app/models/user/read-user';
 import {getFirstLetters} from '../../../app/utils/letterAvatar';
 import {MatPaginator} from '@angular/material';
 import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
+import {AlertService} from '../../../app/services/alert.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -65,7 +66,8 @@ export class AdminPageComponent implements OnInit, OnDestroy {
               private mapperService: MapperService,
               private achievementService: AchievementsService,
               private dialog: MatDialog,
-              private readonly loadSpinnerService: LoadSpinnerService) {
+              private readonly loadSpinnerService: LoadSpinnerService,
+              private readonly alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -94,16 +96,17 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     forkJoin(requests)
       .pipe(finalize(() => this.loadSpinnerService.hideSpinner()))
       .subscribe(res => {
-        this.userData = res[0].data;
-        this.dataSourceUser.data = this.userData;
-        this.userPaginatorTotalItems = res[0].totalItems;
+          this.userData = res[0].data;
+          this.dataSourceUser.data = this.userData;
+          this.userPaginatorTotalItems = res[0].totalItems;
 
-        this.achievementsData = res[1].data;
-        this.dataSourceAchievements.data = this.achievementsData;
-        this.achievementPaginatorTotalItems = res[1].totalItems;
+          this.achievementsData = res[1].data;
+          this.dataSourceAchievements.data = this.achievementsData;
+          this.achievementPaginatorTotalItems = res[1].totalItems;
 
-        this.dataSourceAchievementRequest = new MatTableDataSource(res[2]);
-      });
+          this.dataSourceAchievementRequest = new MatTableDataSource(res[2]);
+        },
+        error => this.alertService.error());
   }
 
   private initCurrentUser() {
@@ -153,9 +156,11 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     this.loadSpinnerService.showSpinner();
     this.userService.deleteUserById(user.id)
       .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
-      .subscribe(() => {
-        this.dataSourceUser = new MatTableDataSource(this.dataSourceUser.data.filter(x => x !== user));
-      });
+      .subscribe(res => {
+          this.dataSourceUser = new MatTableDataSource(this.dataSourceUser.data.filter(x => x !== user));
+          this.alertService.success('User was successfully deleted!');
+        },
+        error => this.alertService.error());
   }
 
   public onOpenAddAchievement() {
@@ -199,9 +204,11 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     this.loadSpinnerService.showSpinner();
     this.achievementService.deleteAchievementById(achievement.id)
       .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
-      .subscribe(() => {
-        this.dataSourceAchievements = new MatTableDataSource(this.dataSourceAchievements.data.filter(x => x !== achievement));
-      });
+      .subscribe(res => {
+          this.dataSourceAchievements = new MatTableDataSource(this.dataSourceAchievements.data.filter(x => x !== achievement));
+          this.alertService.success('Achievement was successfully deleted!');
+        },
+        error => this.alertService.error());
   }
 
   loadUserData() {
@@ -212,10 +219,11 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     this.requestService.getAllUsers(currentPage, pageSize)
       .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
       .subscribe(response => {
-        this.userData = response.data;
-        this.dataSourceUser.data = this.userData;
-        this.userPaginatorTotalItems = response.totalItems;
-      });
+          this.userData = response.data;
+          this.dataSourceUser.data = this.userData;
+          this.userPaginatorTotalItems = response.totalItems;
+        },
+        error => this.alertService.error());
   }
 
   loadAchievementsData() {
@@ -226,10 +234,11 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     this.requestService.getAllAchievements(currentPage, pageSize)
       .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
       .subscribe(response => {
-        this.achievementsData = response.data;
-        this.dataSourceAchievements.data = this.achievementsData;
-        this.achievementPaginatorTotalItems = response.totalItems;
-      });
+          this.achievementsData = response.data;
+          this.dataSourceAchievements.data = this.achievementsData;
+          this.achievementPaginatorTotalItems = response.totalItems;
+        },
+        error => this.alertService.error());
   }
 
   openAssignAchievementWindow(user: User) {
@@ -245,16 +254,20 @@ export class AdminPageComponent implements OnInit, OnDestroy {
       this.requestService.approveAchievementRequest(achievementTableRequest.id)
         .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
         .subscribe(res => {
-          this.dataSourceAchievementRequest = new MatTableDataSource(this.dataSourceAchievementRequest.data
-            .filter(x => x !== achievementTableRequest));
-        });
+            this.dataSourceAchievementRequest = new MatTableDataSource(this.dataSourceAchievementRequest.data
+              .filter(x => x !== achievementTableRequest));
+            this.alertService.success('Achievement request was approved!');
+          },
+          error => this.alertService.error());
     } else {
       this.requestService.declineAchievementRequest(achievementTableRequest.id)
         .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
         .subscribe(res => {
-          this.dataSourceAchievementRequest = new MatTableDataSource(this.dataSourceAchievementRequest.data
-            .filter(x => x !== achievementTableRequest));
-        });
+            this.dataSourceAchievementRequest = new MatTableDataSource(this.dataSourceAchievementRequest.data
+              .filter(x => x !== achievementTableRequest));
+            this.alertService.success('Achievement request was declined!');
+          },
+          error => this.alertService.error());
     }
   }
 

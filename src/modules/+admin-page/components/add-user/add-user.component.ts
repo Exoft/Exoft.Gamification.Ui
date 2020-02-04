@@ -1,6 +1,5 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
 import {Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
@@ -10,6 +9,7 @@ import {finalize, takeUntil} from 'rxjs/operators';
 import {PostUser} from 'src/modules/app/models/user/post-user';
 import {getFirstLetters} from '../../../app/utils/letterAvatar';
 import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
+import {AlertService} from '../../../app/services/alert.service';
 
 @Component({
   selector: 'app-add-user',
@@ -28,8 +28,8 @@ export class AddUserComponent implements OnInit, OnDestroy {
     private dialog: MatDialogRef<AddUserComponent>,
     private userService: UserService,
     private fb: FormBuilder,
-    private readonly notification: MatSnackBar,
-    private readonly loadSpinnerService: LoadSpinnerService) {
+    private readonly loadSpinnerService: LoadSpinnerService,
+    private readonly alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -81,11 +81,11 @@ export class AddUserComponent implements OnInit, OnDestroy {
       this.userService.createUser(this.form.value)
         .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
         .subscribe(res => {
-            this.notification.open('Data was successfully saved!', 'Close', {duration: 5000});
+            this.alertService.success('User was successfully added!');
             this.dialog.close(res);
           },
           error => {
-            this.notification.open('An error occurred while data saving!', 'Close', {duration: 5000});
+            this.alertService.error();
           });
     }
   }
