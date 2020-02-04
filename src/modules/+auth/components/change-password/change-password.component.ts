@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {AuthService} from '../../../app/services/auth.service';
 import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
 import {finalize} from 'rxjs/operators';
+import {AlertService} from '../../../app/services/alert.service';
 
 
 @Component({
@@ -28,9 +28,9 @@ export class ChangePasswordComponent {
 
   constructor(private authService: AuthService,
               private activeRoute: ActivatedRoute,
-              private snackBar: MatSnackBar,
               private router: Router,
-              private readonly loadSpinnerService: LoadSpinnerService) {
+              private readonly loadSpinnerService: LoadSpinnerService,
+              private readonly alertService: AlertService) {
   }
 
   public checkPasswords(group: FormGroup) { // here we have the 'passwords' group
@@ -50,21 +50,13 @@ export class ChangePasswordComponent {
     this.authService.changePassword(changePasData)
       .pipe(finalize(() => this.loadSpinnerService.hideSpinner()))
       .subscribe(response => {
-          this.openSnackBar('Now try to sign in with your new password', 'Notification');
+          this.alertService.success('Password successfully reset. You can now log in with your new password.');
           setTimeout(() => {
             this.router.navigate(['/sign-in']);
           }, 3000);
         },
         error => {
-          const errorPswArray = error.error.Password;
-          const errorMsg = errorPswArray.join(' ');
-          this.openSnackBar(errorMsg, 'Notification');
+          this.alertService.error();
         });
-  }
-
-  public openSnackBar(message: string, action: string): void {
-    this.snackBar.open(message, action, {
-      duration: 3000,
-    });
   }
 }

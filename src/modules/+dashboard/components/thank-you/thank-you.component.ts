@@ -7,6 +7,7 @@ import {getFirstLetters} from '../../../app/utils/letterAvatar';
 import {DashboardComponent, DashboardService} from '../../services/dashboard.service';
 import {finalize} from 'rxjs/operators';
 import {BadgesComponent, BadgesService} from '../../../+badges/services/badges.service';
+import {AlertService} from '../../../app/services/alert.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class ThankYouComponent implements OnInit {
               private thankYouService: ThankYouService,
               private dialogService: DialogService,
               private readonly dashboardService: DashboardService,
-              private readonly badgesService: BadgesService) {
+              private readonly badgesService: BadgesService,
+              private readonly alertService: AlertService) {
   }
 
   public ngOnInit(): void {
@@ -48,7 +50,8 @@ export class ThankYouComponent implements OnInit {
       .pipe(finalize(() => this.hideSpinner()))
       .subscribe(res => {
         this.pageData = res;
-      });
+      },
+        error => this.alertService.error());
   }
 
   private hideSpinner() {

@@ -5,6 +5,7 @@ import {DialogService} from 'src/modules/app/services/dialog.service';
 import {getFirstLetters} from '../../../app/utils/letterAvatar';
 import {finalize} from 'rxjs/operators';
 import {DashboardComponent, DashboardService} from '../../services/dashboard.service';
+import {AlertService} from '../../../app/services/alert.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class ExoftAchievementsComponent implements OnInit {
 
   constructor(private requestService: RequestService,
               private dialogService: DialogService,
-              private readonly dashboardService: DashboardService) {
+              private readonly dashboardService: DashboardService,
+              private readonly alertService: AlertService) {
   }
 
   public ngOnInit(): void {
@@ -44,6 +46,7 @@ export class ExoftAchievementsComponent implements OnInit {
       .pipe(finalize(() => this.dashboardService.setComponentLoadingStatus(DashboardComponent.exoftAchievements, false)))
       .subscribe(response => {
         this.pageData = response.data;
-      });
+      },
+        error => this.alertService.error());
   }
 }

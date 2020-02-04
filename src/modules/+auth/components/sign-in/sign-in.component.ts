@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {AuthService} from 'src/modules/app/services/auth.service';
 import {UserService} from 'src/modules/app/services/user.service';
 import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
 import {finalize} from 'rxjs/operators';
+import {AlertService} from '../../../app/services/alert.service';
 
 @Component({
   selector: 'app-auth',
@@ -24,8 +24,8 @@ export class SignInComponent {
     private authService: AuthService,
     private router: Router,
     private userService: UserService,
-    private snackBar: MatSnackBar,
-    private readonly loadSpinnerService: LoadSpinnerService
+    private readonly loadSpinnerService: LoadSpinnerService,
+    private readonly alertService: AlertService
   ) {
   }
 
@@ -67,20 +67,9 @@ export class SignInComponent {
             this.router.navigate(['/dashboard']);
             this.userService.setUserData(this.userData);
           },
-          error => {
-            this.openSnackBar(
-              'Sorry but your email or password are incorrect, please try again',
-              'Notification'
-            );
-          }
+          error => this.alertService.error('Login failed. Please check your e-mail address and password and try again.')
         );
     }
-  }
-
-  public openSnackBar(message: string, action: string): void {
-    this.snackBar.open(message, action, {
-      duration: 10000
-    });
   }
 
   public onForgotPassword(): void {

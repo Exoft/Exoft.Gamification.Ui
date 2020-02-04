@@ -6,6 +6,7 @@ import {DialogService} from 'src/modules/app/services/dialog.service';
 import {getFirstLetters} from '../../../app/utils/letterAvatar';
 import {DashboardComponent, DashboardService} from '../../services/dashboard.service';
 import {finalize} from 'rxjs/operators';
+import {AlertService} from '../../../app/services/alert.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class TopChartComponent implements OnInit {
   constructor(public dialog: MatDialog,
               private requestService: RequestService,
               private dialogService: DialogService,
-              private readonly dashboardService: DashboardService) {
+              private readonly dashboardService: DashboardService,
+              private readonly alertService: AlertService) {
   }
 
   public pageData: any = [];
@@ -53,6 +55,7 @@ export class TopChartComponent implements OnInit {
         // Take top five users
         this.pageData = response.data.sort((a, b) => b.xp - a.xp).slice(0, 5);
         this.getMaxXp(this.pageData[0].xp);
-      });
+      },
+        error => this.alertService.error());
   }
 }
