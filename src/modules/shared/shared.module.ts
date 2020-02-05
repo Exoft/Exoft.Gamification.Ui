@@ -7,6 +7,7 @@ import {TimeStampPipe} from './pipes/time-stamp.pipe';
 import {CustomDatePipe} from './pipes/custom-date.pipe';
 
 import {EditUserProfileComponent} from './components/edit-user-profile/edit-user-profile.component';
+import {EditPasswordComponent} from './components/edit-password/edit-password.component';
 
 
 @NgModule({
@@ -18,16 +19,19 @@ import {EditUserProfileComponent} from './components/edit-user-profile/edit-user
   declarations: [
     TimeStampPipe,
     CustomDatePipe,
-    EditUserProfileComponent
+    EditUserProfileComponent,
+    EditPasswordComponent
   ],
   exports: [
     ReactiveFormsModule,
     TimeStampPipe,
     CustomDatePipe,
-    EditUserProfileComponent
+    EditUserProfileComponent,
+    EditPasswordComponent
   ],
   entryComponents: [
-    EditUserProfileComponent
+    EditUserProfileComponent,
+    EditPasswordComponent
   ]
 })
 export class SharedModule {

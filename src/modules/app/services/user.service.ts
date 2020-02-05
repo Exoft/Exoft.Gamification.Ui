@@ -6,6 +6,7 @@ import {environment} from '../../../environments/environment';
 import {User} from '../models/user/user';
 import {PostUser} from '../models/user/post-user';
 import {UpdateUser} from '../models/user/update-user';
+import {ChangePassword} from '../models/password/change-password';
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +55,9 @@ export class UserService {
 
   getAvatarUrl(avatarId: string) {
     return `${environment.apiUrl}/api/files/${avatarId}`;
+  }
+
+  changePassword(passwordData: ChangePassword) {
+    return this.http.post(`${environment.apiUrl}/api/users/change-password`, passwordData);
   }
 }

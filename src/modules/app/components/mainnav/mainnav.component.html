@@ -12,21 +12,29 @@
       </div>
     </div>
 
-    <div class="user-name">{{ userName }}</div>
+    <div class="user-name">
+      {{ userName }}
+    </div>
 
-    <button mat-button class="log-out-button" (click)="logOut()">log out</button>
+    <div class="buttons-container">
+      <button mat-button class="manage-profile-button" (click)="openEditProfileDialog()">Edit profile</button>
 
-    <div class="user-achivments-info">
-      <div class="user-achivments-elements">
-        <p class="user-achivments-title"> Total: </p>
+      <button mat-button class="manage-profile-button" (click)="openChangePasswordDialog()">Change password</button>
 
-        <p class="user-achivments-text">{{ totalBadgesCount }} Badges</p>
+      <button mat-button class="manage-profile-button" (click)="logOut()">Log out</button>
+    </div>
+
+    <div class="user-achievements-info">
+      <div class="user-achievements-elements">
+        <p class="user-achievements-title"> Total: </p>
+
+        <p class="user-achievements-text">{{ totalBadgesCount }} Badges</p>
       </div>
 
-      <div class="user-achivments-elements">
-        <p class="user-achivments-title"> EXP: </p>
+      <div class="user-achievements-elements">
+        <p class="user-achievements-title"> EXP: </p>
 
-        <p class="user-achivments-text">{{ xpCount }} XP</p>
+        <p class="user-achievements-text">{{ xpCount }} XP</p>
       </div>
     </div>
 

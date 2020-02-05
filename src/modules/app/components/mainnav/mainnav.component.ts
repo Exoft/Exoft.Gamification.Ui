@@ -12,6 +12,7 @@ import {environment} from 'src/environments/environment';
 import {getFirstLettersWithSplit} from '../../utils/letterAvatar';
 import {LoadSpinnerService} from '../../services/load-spinner.service';
 import {AlertService} from '../../services/alert.service';
+import {DialogService} from '../../services/dialog.service';
 
 
 @Component({
@@ -36,13 +37,16 @@ export class MainnavComponent implements OnInit, OnDestroy {
   public letterAvatar = getFirstLettersWithSplit;
   public userRoles: any = [];
 
+  public isManageProfileButtonsExpanded = false;
+
   constructor(
     private router: Router,
     private userService: UserService,
     private authService: AuthService,
     private requestService: RequestService,
     private readonly loadSpinnerService: LoadSpinnerService,
-    private readonly alertService: AlertService
+    private readonly alertService: AlertService,
+    private readonly dialogService: DialogService
   ) {
   }
 
@@ -103,11 +107,11 @@ export class MainnavComponent implements OnInit, OnDestroy {
       this.userService.getCurrentUserInfo()
         .pipe(finalize(() => this.loadSpinnerService.hideSpinner()))
         .subscribe(res => {
-          this.userData = {...res};
-          this.userData.avatar =
-            environment.apiUrl + '/api/files/' + this.userData.avatarId;
-          this.userService.setUserData(this.userData);
-        },
+            this.userData = {...res};
+            this.userData.avatar =
+              environment.apiUrl + '/api/files/' + this.userData.avatarId;
+            this.userService.setUserData(this.userData);
+          },
           error => this.alertService.error());
     }
   }
@@ -119,5 +123,13 @@ export class MainnavComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  openEditProfileDialog() {
+    this.dialogService.openEditUserProfileDialog();
+  }
+
+  openChangePasswordDialog() {
+    this.dialogService.openEditPasswordDialog();
   }
 }

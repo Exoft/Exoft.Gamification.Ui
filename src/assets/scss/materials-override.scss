@@ -238,13 +238,13 @@ app-user {
   }
 }
 
-.edit-user-dialog {
+.edit-user-dialog, .edit-password-dialog {
   .mat-dialog-container {
     box-shadow: none;
   }
 }
 
-.edit-user-dialog-backdrop {
+.edit-user-dialog-backdrop, .edit-password-dialog-backdrop {
   background-color: $backdropColorDark;
 }
 
