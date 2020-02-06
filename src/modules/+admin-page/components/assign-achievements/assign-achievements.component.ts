@@ -10,6 +10,7 @@ import {UserAchievement} from '../../../app/models/achievement/user-achievement'
 import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
 import {finalize} from 'rxjs/operators';
 import {AlertService} from '../../../app/services/alert.service';
+import {AssignUserAchievement} from '../../../app/models/achievement/assign-user-achievement';
 
 export class Achievements {
   achievements: UserSelectedAchievement[];
@@ -173,15 +174,14 @@ export class AssignAchievementsComponent implements OnInit {
       control => control.value.isSelected
     );
 
-    // TODO: implement sending achievements count, when endpoint will be done
     const userId = this.data;
-    const selectedAchievementsIds = achievementControls.map(
-      control => control.value.achievement.id
-    );
+    const userAchievements: AssignUserAchievement = {
+      achievements: achievementControls.map(control => ({achievementId: control.value.achievement.id, count: control.value.count}))
+    };
 
     this.loadSpinnerService.showSpinner();
     this.achievementsService
-      .addOrUpdateUserAchievements(userId, selectedAchievementsIds)
+      .updateUserAchievements(userId, userAchievements)
       .pipe(finalize(() => this.loadSpinnerService.hideSpinner()))
       .subscribe(
         res => {

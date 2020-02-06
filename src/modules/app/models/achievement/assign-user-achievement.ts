@@ -1,4 +1,5 @@
+import {AchievementWithCount} from './achievement-with-count';
+
 export interface AssignUserAchievement {
-  achievementId: string;
-  // achievementCount
+  achievements: AchievementWithCount[];
 }

@@ -50,7 +50,11 @@ export class RequestService {
   }
 
   public getEvents(): Observable<any> {
-    return this.httpClient.get(`${this.apiUrl}/api/events`);
+    let params = new HttpParams();
+    params = params.append('currentPage', '1');
+    params = params.append('pageSize', '0');
+
+    return this.httpClient.get(`${this.apiUrl}/api/events`, {params});
   }
 
   public getAllAchievements(currentPage: number = null, pageSize: number = null): Observable<ReturningPagingInfo<Achievement>> {

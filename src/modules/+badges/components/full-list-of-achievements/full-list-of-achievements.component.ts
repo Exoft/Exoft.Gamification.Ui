@@ -27,7 +27,7 @@ export class FullListOfAchievementsComponent implements OnInit {
 
   public getUserAchievements(): void {
     this.badgesService.setComponentLoadingStatus(BadgesComponent.fullListOfAchievements, true);
-    this.achievementsService.getCurrentUserAchievements(1)
+    this.achievementsService.getCurrentUserAchievements(1, 0)
       .pipe(finalize(() => this.badgesService.setComponentLoadingStatus(BadgesComponent.fullListOfAchievements, false)))
       .subscribe(res => {
         this.achievementsList = res.data;

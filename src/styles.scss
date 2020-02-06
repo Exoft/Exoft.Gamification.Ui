@@ -53,6 +53,8 @@ body {
   }
 
   .mat-simple-snackbar-action {
+    margin: -8px -8px -8px 28px;
+
     .mat-button {
       background-color: $secondaryColor;
       color: $textColor;
