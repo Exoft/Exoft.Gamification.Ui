@@ -52,12 +52,20 @@ export class AchievementsService {
     return this.http.delete(`${environment.apiUrl}/api/achievements/${achievementId}`);
   }
 
-  getAllAchievements(): Observable<ReturningPagingInfo<Achievement>> {
-    return this.http.get<ReturningPagingInfo<Achievement>>(`${environment.apiUrl}/api/achievements`);
+  getAllAchievements(currentPage: number = 1, pageSize: number = 0): Observable<ReturningPagingInfo<Achievement>> {
+    let params = new HttpParams();
+    params = params.append('currentPage', currentPage.toString());
+    params = params.append('pageSize', pageSize.toString());
+
+    return this.http.get<ReturningPagingInfo<Achievement>>(`${environment.apiUrl}/api/achievements`, {params});
   }
 
-  getAchievementsByUserId(userId: string): Observable<ReturningPagingInfo<UserAchievement>> {
-    return this.http.get<ReturningPagingInfo<UserAchievement>>(`${environment.apiUrl}/api/users/${userId}/achievements`);
+  getAchievementsByUserId(userId: string, currentPage: number = 1, pageSize: number = 0): Observable<ReturningPagingInfo<UserAchievement>> {
+    let params = new HttpParams();
+    params = params.append('currentPage', currentPage.toString());
+    params = params.append('pageSize', pageSize.toString());
+
+    return this.http.get<ReturningPagingInfo<UserAchievement>>(`${environment.apiUrl}/api/users/${userId}/achievements`, {params});
   }
 
   addOrUpdateUserAchievements(userId: string, achievementsIds: string[]): Observable<any> {

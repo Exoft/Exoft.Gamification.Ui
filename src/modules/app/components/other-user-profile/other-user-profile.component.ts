@@ -11,6 +11,15 @@ import {Achievement} from '../../models/achievement/achievement';
 import {finalize} from 'rxjs/operators';
 import {LoadSpinnerService} from '../../services/load-spinner.service';
 import {AlertService} from '../../services/alert.service';
+import {ReadAchievementRequest} from '../../models/achievement-request/read-achievement-request';
+import {UserAchievement} from '../../models/achievement/user-achievement';
+
+export interface AchievementWithShortInfo {
+  achievementId: string;
+  iconId: string;
+  name: string;
+  count: number;
+}
 
 @Component({
   selector: 'app-other-user-profile',
@@ -23,7 +32,7 @@ export class OtherUserProfileComponent implements OnInit {
   letterAvatar = getFirstLetters;
 
   userInfo: User;
-  achievements: Achievement[] = [];
+  achievements: AchievementWithShortInfo[] = [];
 
   constructor(
     public dialog: MatDialog,
@@ -52,7 +61,7 @@ export class OtherUserProfileComponent implements OnInit {
       .subscribe(
         res => {
           this.userInfo = res[0];
-          this.achievements = res[1].data;
+          this.setAchievementsWithShortInfoArray(res[1].data);
         },
         error => this.alertService.error()
       );
@@ -61,6 +70,26 @@ export class OtherUserProfileComponent implements OnInit {
   private loadCurrentUserData() {
     this.userService.getUserData().subscribe(res => {
       this.currentUserId = res.id;
+    });
+  }
+
+  private setAchievementsWithShortInfoArray(achievements: UserAchievement[]) {
+    achievements.forEach(inputAchievement => {
+      const achievementIndex = this.achievements.findIndex(
+        achievement => achievement.achievementId === inputAchievement.achievementId
+      );
+
+      if (achievementIndex !== -1) {
+        this.achievements[achievementIndex].count++;
+      } else {
+        const achievementToPush: AchievementWithShortInfo = {
+          achievementId: inputAchievement.achievementId,
+          iconId: inputAchievement.iconId,
+          name: inputAchievement.name,
+          count: 1
+        };
+        this.achievements.push(achievementToPush);
+      }
     });
   }
 

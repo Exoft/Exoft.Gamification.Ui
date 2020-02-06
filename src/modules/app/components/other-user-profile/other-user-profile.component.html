@@ -39,7 +39,9 @@
     <div class="achievement-container">
       <div class="achievement-item"
            *ngFor="let achievement of achievements">
-        <img class="achievement-image" [src]="getAvatarId(achievement.iconId)">
+        <div class="achievement-image"
+             [ngStyle]="{'background-image' : 'url(' + getAvatarId(achievement.iconId)+ ')'}"
+             [matBadge]="achievement.count"></div>
 
         <div class="image-text">{{ achievement.name }}</div>
       </div>
