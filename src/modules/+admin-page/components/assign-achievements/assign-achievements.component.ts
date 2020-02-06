@@ -73,11 +73,13 @@ export class AssignAchievementsComponent implements OnInit {
     const isSelectedAchievement = this.userAchievements.find(
       userAchievement => userAchievement.achievementId === achievement.id
     );
+    const achievementsCount = this.userAchievements.filter(
+      userAchievement => userAchievement.achievementId === achievement.id
+    ).length;
 
     return this.fb.group<UserSelectedAchievement>({
       isSelected: !!isSelectedAchievement,
-      // TODO: set achievements count from backend, when data will be send
-      count: !!isSelectedAchievement ? 1 : 0,
+      count: achievementsCount,
       achievement
     });
   }
