@@ -6,7 +6,7 @@ import {getFirstLetters} from '../../../app/utils/letterAvatar';
 import {finalize} from 'rxjs/operators';
 import {DashboardComponent, DashboardService} from '../../services/dashboard.service';
 import {AlertService} from '../../../app/services/alert.service';
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-exoft-achievements',
@@ -46,6 +46,11 @@ export class ExoftAchievementsComponent implements OnInit {
       .pipe(finalize(() => this.dashboardService.setComponentLoadingStatus(DashboardComponent.exoftAchievements, false)))
       .subscribe(response => {
         this.pageData = response.data;
+        this.pageData.sort((firstElem, secondElem) => {
+          const firstDate = moment(firstElem.createdTime);
+          const secondDate = moment(secondElem.createdTime);
+          return secondDate.valueOf() - firstDate.valueOf();
+        });
       },
         error => this.alertService.error());
   }
