@@ -172,13 +172,13 @@ export class AssignAchievementsComponent implements OnInit {
 
   saveUserAchievements() {
     const formArray = this.achievementsFormArray;
-    const achievementControls = formArray.controls.filter(
-      control => control.value.isSelected
-    );
 
     const userId = this.data;
     const userAchievements: AssignUserAchievement = {
-      achievements: achievementControls.map(control => ({achievementId: control.value.achievement.id, count: control.value.count}))
+      achievements: formArray.controls.map(control => ({
+        achievementId: control.value.achievement.id,
+        count: control.value.isSelected ? control.value.count : 0
+      }))
     };
 
     this.loadSpinnerService.showSpinner();

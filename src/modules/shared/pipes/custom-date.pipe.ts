@@ -10,7 +10,6 @@ export class CustomDatePipe implements PipeTransform {
     const minutesDiff = moment().diff(date, 'minutes');
     const hoursDiff = Math.round(minutesDiff / 60);
     if (daysDiff === 0 && minutesDiff < 60) {
-      // return `Today, ${date.zone("+06:00").format('hh:mm A')}`;
       return `${minutesDiff} mins ago`;
     } else if (daysDiff === 0 && minutesDiff >= 60) {
       return `${hoursDiff} hours ago`;
@@ -19,6 +18,6 @@ export class CustomDatePipe implements PipeTransform {
     } else if (daysDiff < 6) {
       return `${daysDiff} days ago`;
     }
-    return `${moment(inputDate).format('MMM D, YYYY')}`;
+    return `${date.format('MMM D, YYYY')}`;
   }
 }
