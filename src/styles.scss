@@ -41,6 +41,12 @@ body {
   }
 }
 
+.events-load-spinner {
+  circle {
+    stroke: $mainColor;
+  }
+}
+
 .mat-snack-bar-container {
   color: $textColor;
 

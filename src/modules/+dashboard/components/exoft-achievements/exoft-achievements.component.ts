@@ -6,7 +6,7 @@ import {getFirstLetters} from '../../../app/utils/letterAvatar';
 import {finalize} from 'rxjs/operators';
 import {DashboardComponent, DashboardService} from '../../services/dashboard.service';
 import {AlertService} from '../../../app/services/alert.service';
-import * as moment from 'moment';
+import {Scroll} from '@angular/router';
 
 @Component({
   selector: 'app-exoft-achievements',
@@ -14,9 +14,13 @@ import * as moment from 'moment';
   styleUrls: ['./exoft-achievements.component.scss']
 })
 export class ExoftAchievementsComponent implements OnInit {
+  private eventsCurrentPage = 0;
 
-  public pageData: any = [];
+  public eventsCount = 0;
+  public pageData: any[] = [];
   public letterAvatar = getFirstLetters;
+
+  public isDataLoading = false;
 
   constructor(private requestService: RequestService,
               private dialogService: DialogService,
@@ -25,33 +29,44 @@ export class ExoftAchievementsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.loadData();
+    this.loadInitialData();
   }
 
   public getAvatarId(avatarId: any): string {
     return this.requestService.getAvatar(avatarId);
   }
 
-  public calculateEvents(arr: any): number {
-    return arr.length;
-  }
-
   public openOtherUserInfoDialog(userId: string): void {
     this.dialogService.openInfoModal(userId);
   }
 
-  private loadData(): void {
+  private loadInitialData(): void {
     this.dashboardService.setComponentLoadingStatus(DashboardComponent.exoftAchievements, true);
-    this.requestService.getEvents()
+    this.requestService.getEvents(++this.eventsCurrentPage)
       .pipe(finalize(() => this.dashboardService.setComponentLoadingStatus(DashboardComponent.exoftAchievements, false)))
       .subscribe(response => {
-        this.pageData = response.data;
-        this.pageData.sort((firstElem, secondElem) => {
-          const firstDate = moment(firstElem.createdTime);
-          const secondDate = moment(secondElem.createdTime);
-          return secondDate.valueOf() - firstDate.valueOf();
-        });
-      },
+          this.pageData = response.data;
+          this.eventsCount = response.totalItems;
+        },
         error => this.alertService.error());
+  }
+
+  onScroll(scrollEvent) {
+    const isEventsCountDiff: boolean = this.eventsCount - this.pageData.length > 0;
+    const isScrollDiff: boolean = scrollEvent.target.scrollHeight - scrollEvent.target.scrollTop === scrollEvent.target.offsetHeight;
+
+    if (isEventsCountDiff && !this.isDataLoading && isScrollDiff) {
+      this.isDataLoading = true;
+      this.requestService.getEvents(++this.eventsCurrentPage)
+        .pipe(finalize(() => this.isDataLoading = false))
+        .subscribe(
+          res => {
+            this.pageData = this.pageData.concat(res.data);
+          },
+          error => {
+            this.alertService.error();
+          }
+        );
+    }
   }
 }

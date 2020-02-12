@@ -1,3 +1,5 @@
+@import '../../../../styles.scss';
+
 .component-wrapper {
   height: 100%;
   width: 100%;
@@ -95,10 +97,16 @@
   }
 }
 
+.events-load-spinner-container {
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 767px),
 (orientation: portrait) {
   .component-wrapper {
     padding: 4vmin;
+    height: 80vh;
 
     .component-title {
       font-size: 4vmin;
@@ -116,7 +124,7 @@
       .avatar {
         height: 6vmin;
         width: 6vmin;
-        border: 0.3vmin solid #68B70C;
+        border-width: 0.3vmin;
         font-size: 3vmin;
         margin: 0 1vmin 0 0;
       }

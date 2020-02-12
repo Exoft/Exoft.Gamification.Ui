@@ -51,10 +51,10 @@ export class RequestService {
     return this.httpClient.get(`${this.apiUrl}/api/users/${userID}/achievements`, {params});
   }
 
-  public getEvents(): Observable<any> {
+  public getEvents(currentPage: number = 0): Observable<any> {
     let params = new HttpParams();
-    params = params.append('currentPage', '1');
-    params = params.append('pageSize', '0');
+    params = params.append('currentPage', currentPage.toString());
+    params = params.append('pageSize', '10');
 
     return this.httpClient.get(`${this.apiUrl}/api/events`, {params});
   }
