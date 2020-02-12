@@ -48,7 +48,8 @@ export class SignInComponent {
               status,
               id,
               roles,
-              avatarId
+              avatarId,
+              badgesCount
             } = res;
             this.userData = {
               userName,
@@ -59,7 +60,8 @@ export class SignInComponent {
               id,
               status,
               avatarId,
-              roles
+              roles,
+              badgesCount
             };
             localStorage.setItem('token', res.token);
             localStorage.setItem('refreshToken', res.refreshToken);

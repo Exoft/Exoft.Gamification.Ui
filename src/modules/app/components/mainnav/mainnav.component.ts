@@ -30,7 +30,7 @@ export class MainnavComponent implements OnInit, OnDestroy {
   public avatarSource: string;
   public userName: string;
   public xpCount: number;
-  public totalBadgesCount = 30;
+  public totalBadgesCount: number;
   public userData: any;
   public firstName: any;
   public lastName: any;
@@ -71,6 +71,7 @@ export class MainnavComponent implements OnInit, OnDestroy {
         this.userName = res.firstName + ' ' + res.lastName;
         this.xpCount = res.xp;
         this.userRoles = res.roles;
+        this.totalBadgesCount = res.badgesCount;
 
         this.menuItems = Array.from(menuItems);
         if (res.roles && !res.roles.includes('Admin')) {

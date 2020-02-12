@@ -6,7 +6,6 @@ import {getFirstLetters} from '../../../app/utils/letterAvatar';
 import {finalize} from 'rxjs/operators';
 import {DashboardComponent, DashboardService} from '../../services/dashboard.service';
 import {AlertService} from '../../../app/services/alert.service';
-import {Scroll} from '@angular/router';
 
 @Component({
   selector: 'app-exoft-achievements',
