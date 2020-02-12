@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 import {RequestService} from 'src/modules/app/services/request.service';
 import {DialogService} from 'src/modules/app/services/dialog.service';
@@ -14,7 +14,13 @@ import {AlertService} from '../../../app/services/alert.service';
   templateUrl: './top-chart.component.html',
   styleUrls: ['./top-chart.component.scss']
 })
-export class TopChartComponent implements OnInit {
+export class TopChartComponent implements OnInit, OnDestroy {
+  private dialogRef: MatDialogRef<any>;
+
+  public pageData: any = [];
+  public maxXp: number;
+  public letterAvatar = getFirstLetters;
+
   constructor(public dialog: MatDialog,
               private requestService: RequestService,
               private dialogService: DialogService,
@@ -22,13 +28,14 @@ export class TopChartComponent implements OnInit {
               private readonly alertService: AlertService) {
   }
 
-  public pageData: any = [];
-  public title = 'Gamification';
-  public maxXp: number;
-  public letterAvatar = getFirstLetters;
-
   public ngOnInit(): void {
     this.loadData();
+  }
+
+  public ngOnDestroy(): void {
+    if (!!this.dialogRef) {
+      this.dialogRef.close();
+    }
   }
 
   public getMaxXp(xp: number): void {
@@ -40,7 +47,7 @@ export class TopChartComponent implements OnInit {
   }
 
   public openUserDetails(userId: any): void {
-    this.dialogService.openInfoModal(userId);
+    this.dialogRef = this.dialogService.openInfoModal(userId);
   }
 
   public getAvatarId(avatarId: any): string {
@@ -52,10 +59,10 @@ export class TopChartComponent implements OnInit {
     this.requestService.getAllUsers()
       .pipe(finalize(() => this.dashboardService.setComponentLoadingStatus(DashboardComponent.topChart, false)))
       .subscribe(response => {
-        // Take top five users
-        this.pageData = response.data.sort((a, b) => b.xp - a.xp).slice(0, 5);
-        this.getMaxXp(this.pageData[0].xp);
-      },
+          // Take top five users
+          this.pageData = response.data.sort((a, b) => b.xp - a.xp).slice(0, 5);
+          this.getMaxXp(this.pageData[0].xp);
+        },
         error => this.alertService.error());
   }
 }

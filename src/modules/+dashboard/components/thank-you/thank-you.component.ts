@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 
 import {RequestService} from 'src/modules/app/services/request.service';
 import {ThankYouService} from 'src/modules/app/services/thank-you.service';
@@ -8,6 +8,7 @@ import {DashboardComponent, DashboardService} from '../../services/dashboard.ser
 import {finalize} from 'rxjs/operators';
 import {BadgesComponent, BadgesService} from '../../../+badges/services/badges.service';
 import {AlertService} from '../../../app/services/alert.service';
+import {MatDialogRef} from '@angular/material';
 
 
 @Component({
@@ -15,8 +16,10 @@ import {AlertService} from '../../../app/services/alert.service';
   templateUrl: './thank-you.component.html',
   styleUrls: ['./thank-you.component.scss']
 })
-export class ThankYouComponent implements OnInit {
+export class ThankYouComponent implements OnInit, OnDestroy {
   @Input() isDashboardComponent = true;
+
+  private dialogRef: MatDialogRef<any>;
 
   public pageData: any;
   public letterAvatar = getFirstLetters;
@@ -33,12 +36,18 @@ export class ThankYouComponent implements OnInit {
     this.loadData();
   }
 
+  public ngOnDestroy(): void {
+    if (!!this.dialogRef) {
+      this.dialogRef.close();
+    }
+  }
+
   public getAvatarId(avatarId: any): string {
     return this.requestService.getAvatar(avatarId);
   }
 
   public openUserProfile(): void {
-    this.dialogService.openInfoModal(this.pageData.userId);
+    this.dialogRef = this.dialogService.openInfoModal(this.pageData.userId);
   }
 
   private loadData(): void {
@@ -49,8 +58,8 @@ export class ThankYouComponent implements OnInit {
     this.thankYouService.getThankYouMessage()
       .pipe(finalize(() => this.hideSpinner()))
       .subscribe(res => {
-        this.pageData = res;
-      },
+          this.pageData = res;
+        },
         error => this.alertService.error());
   }
 

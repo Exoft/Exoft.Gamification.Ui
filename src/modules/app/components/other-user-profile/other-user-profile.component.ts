@@ -1,5 +1,5 @@
-import {Component, OnInit, Inject} from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material/dialog';
+import {Component, OnInit, Inject, OnDestroy} from '@angular/core';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {forkJoin} from 'rxjs';
 
 import {RequestService} from 'src/modules/app/services/request.service';
@@ -26,7 +26,8 @@ export interface AchievementWithShortInfo {
   templateUrl: './other-user-profile.component.html',
   styleUrls: ['./other-user-profile.component.scss']
 })
-export class OtherUserProfileComponent implements OnInit {
+export class OtherUserProfileComponent implements OnInit, OnDestroy {
+  private dialogRef: MatDialogRef<any>;
   private currentUserId: string;
 
   letterAvatar = getFirstLetters;
@@ -47,6 +48,12 @@ export class OtherUserProfileComponent implements OnInit {
   ngOnInit() {
     this.loadData();
     this.loadCurrentUserData();
+  }
+
+  ngOnDestroy() {
+    if (!!this.dialogRef) {
+      this.dialogRef.close();
+    }
   }
 
   private loadData() {
@@ -102,7 +109,7 @@ export class OtherUserProfileComponent implements OnInit {
     dialogConfig.panelClass = 'thank-you-dialog';
     dialogConfig.data = this.userId;
 
-    this.dialog.open(GratitudeComponent, dialogConfig);
+    this.dialogRef = this.dialog.open(GratitudeComponent, dialogConfig);
   }
 
   isThankYouButtonEnabled(): boolean {

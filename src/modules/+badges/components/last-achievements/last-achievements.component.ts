@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AchievementsService} from 'src/modules/app/services/achievements.service';
 import {DialogService} from 'src/modules/app/services/dialog.service';
 import {RequestService} from '../../../app/services/request.service';
 import {BadgesComponent, BadgesService} from '../../services/badges.service';
 import {finalize} from 'rxjs/operators';
 import {AlertService} from '../../../app/services/alert.service';
+import {MatDialogRef} from '@angular/material';
 
 
 @Component({
@@ -12,7 +13,8 @@ import {AlertService} from '../../../app/services/alert.service';
   templateUrl: './last-achievements.component.html',
   styleUrls: ['./last-achievements.component.scss']
 })
-export class LastAchievementsComponent implements OnInit {
+export class LastAchievementsComponent implements OnInit, OnDestroy {
+  private dialogRef: MatDialogRef<any>;
   public achievementsList = [];
 
   constructor(private achievementsService: AchievementsService,
@@ -26,6 +28,12 @@ export class LastAchievementsComponent implements OnInit {
     this.getUserLastAchievements();
   }
 
+  ngOnDestroy() {
+    if (!!this.dialogRef) {
+      this.dialogRef.close();
+    }
+  }
+
   public getUserLastAchievements(): void {
     this.badgesService.setComponentLoadingStatus(BadgesComponent.lastAchievements, true);
     this.achievementsService.getCurrentUserAchievements(1, 5)
@@ -37,7 +45,7 @@ export class LastAchievementsComponent implements OnInit {
   }
 
   public openRequestAchievementsDialog(): void {
-    this.dialogService.openRequestForm();
+    this.dialogRef = this.dialogService.openRequestForm();
   }
 
   getAchievementIconUrl(iconId: string) {

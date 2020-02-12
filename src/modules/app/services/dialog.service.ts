@@ -18,14 +18,14 @@ export class DialogService {
     dialogConfig.panelClass = 'other-user-dialog';
     dialogConfig.data = userId;
 
-    this.dialog.open(OtherUserProfileComponent, dialogConfig);
+    return this.dialog.open(OtherUserProfileComponent, dialogConfig);
   }
 
   public openRequestForm() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.panelClass = 'request-dialog';
 
-    this.dialog.open(RequestAchievementComponent, dialogConfig);
+    return this.dialog.open(RequestAchievementComponent, dialogConfig);
   }
 
   openEditUserProfileDialog() {
@@ -34,7 +34,7 @@ export class DialogService {
     dialogConfig.backdropClass = 'edit-user-dialog-backdrop';
     dialogConfig.autoFocus = false;
 
-    this.dialog.open(EditUserProfileComponent, dialogConfig);
+    return this.dialog.open(EditUserProfileComponent, dialogConfig);
   }
 
   openEditPasswordDialog() {
@@ -43,6 +43,6 @@ export class DialogService {
     dialogConfig.backdropClass = 'edit-password-dialog-backdrop';
     dialogConfig.autoFocus = false;
 
-    this.dialog.open(EditPasswordComponent, dialogConfig);
+    return this.dialog.open(EditPasswordComponent, dialogConfig);
   }
 }

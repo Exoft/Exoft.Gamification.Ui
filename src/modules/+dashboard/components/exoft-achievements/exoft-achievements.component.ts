@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {RequestService} from 'src/modules/app/services/request.service';
 import {DialogService} from 'src/modules/app/services/dialog.service';
@@ -6,13 +6,15 @@ import {getFirstLetters} from '../../../app/utils/letterAvatar';
 import {finalize} from 'rxjs/operators';
 import {DashboardComponent, DashboardService} from '../../services/dashboard.service';
 import {AlertService} from '../../../app/services/alert.service';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-exoft-achievements',
   templateUrl: './exoft-achievements.component.html',
   styleUrls: ['./exoft-achievements.component.scss']
 })
-export class ExoftAchievementsComponent implements OnInit {
+export class ExoftAchievementsComponent implements OnInit, OnDestroy {
+  private dialogRef: MatDialogRef<any>;
   private eventsCurrentPage = 0;
 
   public eventsCount = 0;
@@ -31,12 +33,18 @@ export class ExoftAchievementsComponent implements OnInit {
     this.loadInitialData();
   }
 
+  public ngOnDestroy(): void {
+    if (!!this.dialogRef) {
+      this.dialogRef.close();
+    }
+  }
+
   public getAvatarId(avatarId: any): string {
     return this.requestService.getAvatar(avatarId);
   }
 
   public openOtherUserInfoDialog(userId: string): void {
-    this.dialogService.openInfoModal(userId);
+    this.dialogRef = this.dialogService.openInfoModal(userId);
   }
 
   private loadInitialData(): void {

@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {RequestService} from 'src/modules/app/services/request.service';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {MatTableDataSource} from '@angular/material/table';
 import {EditUserComponent} from '../edit-user/edit-user.component';
 import {UserService} from '../../../app/services/user.service';
@@ -32,6 +32,7 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   @ViewChild('achievementPaginator', {static: true}) achievementPaginator: MatPaginator;
 
   private unsubscribe$: Subject<void> = new Subject();
+  private dialogRef: MatDialogRef<any>;
 
   public userData: ReadUser[] = [];
   public achievementsData: Achievement[] = [];
@@ -78,6 +79,9 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    if (!!this.dialogRef) {
+      this.dialogRef.close();
+    }
   }
 
   private initCurrentUser() {
@@ -144,8 +148,8 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     dialogConfig.backdropClass = 'edit-user-dialog-backdrop';
     dialogConfig.panelClass = 'edit-user-dialog';
 
-    const dialogRef = this.dialog.open(AddUserComponent, dialogConfig);
-    dialogRef.afterClosed()
+    this.dialogRef = this.dialog.open(AddUserComponent, dialogConfig);
+    this.dialogRef.afterClosed()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
         this.loadUserData();
@@ -159,8 +163,8 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     dialogConfig.panelClass = 'edit-user-dialog';
     dialogConfig.data = id;
 
-    const dialogRef = this.dialog.open(EditUserComponent, dialogConfig);
-    dialogRef.afterClosed()
+    this.dialogRef = this.dialog.open(EditUserComponent, dialogConfig);
+    this.dialogRef.afterClosed()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((result: ReadUser) => {
         if (result) {
@@ -189,8 +193,8 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     dialogConfig.backdropClass = 'edit-user-dialog-backdrop';
     dialogConfig.panelClass = 'edit-user-dialog';
 
-    const dialogRef = this.dialog.open(AddAchievementComponent, dialogConfig);
-    dialogRef.afterClosed()
+    this.dialogRef = this.dialog.open(AddAchievementComponent, dialogConfig);
+    this.dialogRef.afterClosed()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(result => {
         if (result) {
@@ -207,8 +211,8 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     dialogConfig.panelClass = 'edit-user-dialog';
     dialogConfig.data = achievement;
 
-    const dialogRef = this.dialog.open(EditAchievementComponent, dialogConfig);
-    dialogRef.afterClosed()
+    this.dialogRef = this.dialog.open(EditAchievementComponent, dialogConfig);
+    this.dialogRef.afterClosed()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((result: Achievement) => {
         if (result) {
@@ -232,7 +236,7 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   }
 
   openAssignAchievementWindow(user: User) {
-    this.dialog.open(AssignAchievementsComponent, {
+    this.dialogRef = this.dialog.open(AssignAchievementsComponent, {
       width: '600px',
       data: user.id
     });
