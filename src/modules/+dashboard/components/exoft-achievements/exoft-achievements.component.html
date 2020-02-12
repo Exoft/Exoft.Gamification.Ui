@@ -2,10 +2,10 @@
   <mat-card-title class="component-title">
     <div>EXOFT ACHIEVEMENTS</div>
 
-    <div class="achievements-count">{{calculateEvents(pageData)}}</div>
+    <div class="achievements-count">{{eventsCount}}</div>
   </mat-card-title>
 
-  <mat-vertical-stepper class="achievement-content-wrapper" [@.disabled]="true">
+  <mat-vertical-stepper class="achievement-content-wrapper" [@.disabled]="true" (scroll)="onScroll($event)">
     <mat-step class="achievements" *ngFor="let item of pageData">
       <ng-template matStepLabel>
         <div>
@@ -31,6 +31,12 @@
         <div class="achievement-type-text">{{item.description}}</div>
 
         <div class="achievement-type">{{item.type}}</div>
+      </div>
+    </mat-step>
+
+    <mat-step *ngIf="isDataLoading">
+      <div class="events-load-spinner-container">
+        <mat-spinner class="events-load-spinner" [diameter]="40"></mat-spinner>
       </div>
     </mat-step>
   </mat-vertical-stepper>

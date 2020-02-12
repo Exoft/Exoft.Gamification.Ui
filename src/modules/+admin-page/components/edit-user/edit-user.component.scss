@@ -1,7 +1,7 @@
 @import '../../../../assets/scss/theme-colors';
 
 .profile-setting-fields-container {
-  height: 100%;
+  width: 600px;
   background-color: $secondaryColor;
   border-radius: 25px;
 
@@ -11,22 +11,35 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 60px 0 0;
+    position: relative;
 
     .avatar-container {
       border-radius: 50%;
       width: 126px;
       height: 126px;
-      margin-top: -50px;
-      margin-right: 61px;
-      align-self: flex-end;
-      cursor: pointer;
+      position: absolute;
+      right: 40px;
+      top: -50px;
 
-      .avatar {
+      .avatar, .avatar-text {
         border-radius: 50%;
         width: 126px;
         height: 126px;
         object-fit: cover;
         border: 3px solid $mainColor;
+        cursor: pointer;
+      }
+
+      .avatar-text {
+        color: $mainColor;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 45px;
+        background-color: $secondaryColor;
+        border: 1px solid $textColor;
+        background-color: #576271;
       }
     }
 
@@ -36,144 +49,36 @@
 
     .profile-settings-fields {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: -20px;
+      flex-wrap: wrap;
+      justify-content: space-between;
       width: 100%;
+      padding: 40px 30px;
 
       .input-field {
-        width: 70%;
+        width: 100%;
+
+        &.small-input {
+          width: 45%;
+        }
       }
 
       .mat-form-field {
-        margin-top: 20px;
-      }
-
-      .name-input-container {
-        width: 70%;
-        display: flex;
-
-        .input-field {
-          width: 50%;
-        }
+        margin-top: 10px;
       }
     }
 
     .save-button {
       background-color: $mainColor;
       width: 100%;
-      height: 70.54px;
+      height: 60px;
       border-radius: 0 0 15px 15px;
       font-size: 17px;
       color: $textColor;
       font-weight: 300;
       margin-top: auto;
-    }
-  }
-}
 
-@media (max-width: 1920px) {
-  .profile-setting-fields-container {
-    .profile-settings-form {
-      .avatar-container {
-        width: 110px;
-        height: 110px;
-
-        .avatar {
-          width: 110px;
-          height: 110px;
-        }
-      }
-
-      .profile-settings-fields {
-        margin-top: -30px;
-
-        .mat-form-field {
-          margin-top: 15px;
-
-          .mat-input-element {
-            font-size: 20px;
-          }
-        }
-      }
-
-      .save-button {
-        height: 10%;
-      }
-    }
-  }
-}
-
-@media (max-width: 1440px) {
-  .profile-settings-page-container {
-    .profile-settings-container {
-      margin: -70px 0px 0px 0px;
-      width: 40%;
-
-      .profile-setting-fields-container {
-        .profile-settings-form {
-          .avatar-container {
-            width: 90px;
-            height: 90px;
-
-            .avatar {
-              width: 90px;
-              height: 90px;
-            }
-          }
-
-          .profile-settings-fields {
-            margin-top: -20px;
-
-            .mat-form-field {
-              margin-top: 5px;
-
-              .mat-input-element {
-                font-size: 15px;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 991px) {
-  .profile-settings-page-container {
-    .profile-settings-container {
-      margin: -70px 0px 0px 0px;
-      width: 80%;
-
-      .title-button-container {
-        padding-bottom: 30px;
-      }
-
-      .profile-setting-fields-container {
-        .profile-settings-form {
-          .avatar-container {
-            width: 70px;
-            height: 70px;
-            margin: -30px 15px 0px 0px;
-
-            .avatar {
-              width: 70px;
-              height: 70px;
-            }
-          }
-
-          .profile-settings-fields {
-            margin-top: -20px;
-
-            .input-field {
-              width: 90%;
-            }
-
-            .name-input-container {
-              width: 90%;
-            }
-          }
-        }
+      &[disabled] {
+        opacity: 0.6;
       }
     }
   }

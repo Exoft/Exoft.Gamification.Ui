@@ -1,11 +1,13 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
 import {Validators} from '@angular/forms';
 import {AchievementsService} from '../../../app/services/achievements.service';
-import {MatDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material/dialog';
 import {Subject} from 'rxjs';
 import {PostAchievement} from 'src/modules/app/models/achievement/post-achievement';
-import {takeUntil} from 'rxjs/operators';
+import {finalize, takeUntil} from 'rxjs/operators';
+import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
+import {AlertService} from '../../../app/services/alert.service';
 
 
 @Component({
@@ -13,30 +15,42 @@ import {takeUntil} from 'rxjs/operators';
   templateUrl: './add-achievement.component.html',
   styleUrls: ['./add-achievement.component.scss']
 })
-export class AddAchievementComponent implements OnInit {
+export class AddAchievementComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();
-  public addAchievementFormGroup: FormGroup<PostAchievement>;
-  public iconUrl: string;
+
+  form: FormGroup<PostAchievement>;
+  iconUrl: string;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
     private achievementService: AchievementsService,
-    public dialog: MatDialogRef<AddAchievementComponent>) {
+    private dialog: MatDialogRef<AddAchievementComponent>,
+    private readonly loadSpinnerService: LoadSpinnerService,
+    private readonly alertService: AlertService) {
   }
 
   ngOnInit() {
-    this.initializeForm();
+    this.setForm();
   }
 
-  public ngOnDestroy() {
+  ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
 
-  public onSelectFile(event: any) {
+  private setForm() {
+    this.form = this.fb.group<PostAchievement>({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      xp: [null, [Validators.required, Validators.pattern('^[0-9]+$')]],
+      icon: [null, Validators.required]
+    });
+  }
+
+  onSelectFile(event: any) {
     if (event.target.files && event.target.files[0]) {
-      this.addAchievementFormGroup.controls.icon.setValue(event.target.files[0]);
-      this.addAchievementFormGroup.controls.icon.updateValueAndValidity(); 
+      this.form.controls.icon.setValue(event.target.files[0]);
+      this.form.controls.icon.updateValueAndValidity();
 
       const fileReader = new FileReader();
       fileReader.readAsDataURL(event.target.files[0]);
@@ -47,22 +61,16 @@ export class AddAchievementComponent implements OnInit {
     }
   }
 
-  public onSaveChanges() {    
-    if (this.addAchievementFormGroup.valid) {
-      this.achievementService.addNewAchievement(this.addAchievementFormGroup.value)
-        .pipe(takeUntil(this.unsubscribe$))
+  onSaveChanges() {
+    if (this.form.valid) {
+      this.loadSpinnerService.showSpinner();
+      this.achievementService.addNewAchievement(this.form.value)
+        .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
         .subscribe(res => {
-        this.dialog.close(res);
-      });
+          this.dialog.close(res);
+          this.alertService.success('Achievement was successfully added!');
+        },
+          error => this.alertService.error());
     }
-  }
-
-  private initializeForm() {
-    this.addAchievementFormGroup = this.formBuilder.group<PostAchievement>({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      xp: [0, Validators.required],
-      icon: null
-    });
   }
 }

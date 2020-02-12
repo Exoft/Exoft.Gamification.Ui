@@ -1,8 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 
 import {RequestService} from 'src/modules/app/services/request.service';
 import {DialogService} from 'src/modules/app/services/dialog.service';
+import {UserAchievement} from '../../../app/models/achievement/user-achievement';
+import {DashboardComponent, DashboardService} from '../../services/dashboard.service';
+import {finalize} from 'rxjs/operators';
+import {AlertService} from '../../../app/services/alert.service';
 
 
 @Component({
@@ -11,12 +15,13 @@ import {DialogService} from 'src/modules/app/services/dialog.service';
   styleUrls: ['./personal-achievements.component.scss']
 })
 export class PersonalAchievementsComponent implements OnInit {
-
-  public pageData: any = [];
+  public achievements: UserAchievement[] = [];
 
   constructor(private requestService: RequestService,
               private dialog: MatDialog,
-              private dialogService: DialogService) {
+              private dialogService: DialogService,
+              private readonly dashboardService: DashboardService,
+              private readonly alertService: AlertService) {
   }
 
   public ngOnInit(): void {
@@ -28,8 +33,16 @@ export class PersonalAchievementsComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.requestService.getAchievementsInfo(1, 4).subscribe(response => {
-      this.pageData = response.data;
-    });
+    this.dashboardService.setComponentLoadingStatus(DashboardComponent.personalAchievements, true);
+    this.requestService.getAchievementsInfo(1, 4)
+      .pipe(finalize(() => this.dashboardService.setComponentLoadingStatus(DashboardComponent.personalAchievements, false)))
+      .subscribe(response => {
+          this.achievements = response.data;
+        },
+        error => this.alertService.error());
+  }
+
+  getIconUrl(iconId: string) {
+    return this.requestService.getAvatar(iconId);
   }
 }

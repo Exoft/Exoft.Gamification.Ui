@@ -1,9 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 import {RequestService} from 'src/modules/app/services/request.service';
 import {DialogService} from 'src/modules/app/services/dialog.service';
 import {getFirstLetters} from '../../../app/utils/letterAvatar';
+import {DashboardComponent, DashboardService} from '../../services/dashboard.service';
+import {finalize} from 'rxjs/operators';
+import {AlertService} from '../../../app/services/alert.service';
 
 
 @Component({
@@ -11,19 +14,28 @@ import {getFirstLetters} from '../../../app/utils/letterAvatar';
   templateUrl: './top-chart.component.html',
   styleUrls: ['./top-chart.component.scss']
 })
-export class TopChartComponent implements OnInit {
-  constructor(public dialog: MatDialog,
-              private requestService: RequestService,
-              private dialogService: DialogService) {
-  }
+export class TopChartComponent implements OnInit, OnDestroy {
+  private dialogRef: MatDialogRef<any>;
 
   public pageData: any = [];
-  public title = 'Gamification';
   public maxXp: number;
   public letterAvatar = getFirstLetters;
 
+  constructor(public dialog: MatDialog,
+              private requestService: RequestService,
+              private dialogService: DialogService,
+              private readonly dashboardService: DashboardService,
+              private readonly alertService: AlertService) {
+  }
+
   public ngOnInit(): void {
     this.loadData();
+  }
+
+  public ngOnDestroy(): void {
+    if (!!this.dialogRef) {
+      this.dialogRef.close();
+    }
   }
 
   public getMaxXp(xp: number): void {
@@ -35,7 +47,7 @@ export class TopChartComponent implements OnInit {
   }
 
   public openUserDetails(userId: any): void {
-    this.dialogService.openInfoModal(userId);
+    this.dialogRef = this.dialogService.openInfoModal(userId);
   }
 
   public getAvatarId(avatarId: any): string {
@@ -43,10 +55,14 @@ export class TopChartComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.requestService.getAllUsers().subscribe(response => {
-      // Take top five users
-      this.pageData = response.data.sort((a, b) => b.xp - a.xp).slice(0, 5);
-      this.getMaxXp(this.pageData[0].xp);
-    });
+    this.dashboardService.setComponentLoadingStatus(DashboardComponent.topChart, true);
+    this.requestService.getAllUsers()
+      .pipe(finalize(() => this.dashboardService.setComponentLoadingStatus(DashboardComponent.topChart, false)))
+      .subscribe(response => {
+          // Take top five users
+          this.pageData = response.data.sort((a, b) => b.xp - a.xp).slice(0, 5);
+          this.getMaxXp(this.pageData[0].xp);
+        },
+        error => this.alertService.error());
   }
 }

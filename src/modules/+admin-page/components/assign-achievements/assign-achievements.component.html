@@ -1,26 +1,41 @@
-<div class="assign-achievements-container">
-  <form class="assign-achievements-form" (ngSubmit)=" onSaveChanges()">
-    <div class="assign-achievements-achieves" [formGroup]="availableAchievementsFormGroup">
-      <div class="assign-achievements-achieves-container" formArrayName="availableAchievements">
-        <div *ngFor="let achievement of achievements.controls; let i = index" formGroupName="{{i}}">
-          <div class="assign-achievements-achievement">
-            <mat-checkbox #isChosen class="assign-achievements-achievement-is-chosen" formControlName="isChosen">
-            </mat-checkbox>
+<div class="dialog-wrapper"
+     [formGroup]="form">
+  <div class="dialog-title">
+    user achievements
+  </div>
 
-            <mat-label class="assign-achievements-achievement-name">{{achievement.get('name').value}}</mat-label>
+  <div formArrayName="achievements"
+       class="achievements-container">
+    <div [formGroupName]="i"
+         class="achievement-container"
+         *ngFor="let achievement of allAchievements; let i = index;">
+      <mat-checkbox formControlName="isSelected"
+                    (change)="onAchievementSelect(achievement, $event)"
+                    class="achievement-checkbox">{{achievement.name}}</mat-checkbox>
 
-            <mat-form-field [ngClass]="isChosen.checked?'':'invisible'" class="assign-achievements-achievement-count">
-              <input type="number" min="1" value="1" max="1" matInput formControlName="count">
-            </mat-form-field>
-          </div>
+      <div class="achievement-count"
+           [ngClass]="!isAchievementSelected(achievement) && 'disabled-count'">
+        {{getAchievementCount(achievement)}}
 
-          <div class="horizontal-line"></div>
+        <div class="scroll-arrows-container">
+          <mat-icon class="scroll-arrow"
+                    (click)="changeAchivementCount(scrollDirection.forward, achievement)">
+            arrow_drop_up
+          </mat-icon>
+
+          <mat-icon class="scroll-arrow"
+                    [ngClass]="!isScrollDownEnabled(achievement) && 'disabled-arrow'"
+                    (click)="changeAchivementCount(scrollDirection.backward, achievement)">
+            arrow_drop_down
+          </mat-icon>
         </div>
       </div>
-
-      <button mat-button type="submit" class="assign-achievements-save-changes">
-        SAVE CHANGES
-      </button>
     </div>
-  </form>
+  </div>
+
+  <button mat-button
+          (click)="saveUserAchievements()"
+          class="submit-button">
+    save changes
+  </button>
 </div>

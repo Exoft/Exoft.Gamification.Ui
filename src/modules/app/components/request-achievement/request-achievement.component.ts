@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 
 import {RequestService} from 'src/modules/app/services/request.service';
+import {finalize} from 'rxjs/operators';
+import {LoadSpinnerService} from '../../services/load-spinner.service';
+import {AlertService} from '../../services/alert.service';
 
 
 @Component({
@@ -11,11 +14,13 @@ import {RequestService} from 'src/modules/app/services/request.service';
   styleUrls: ['./request-achievement.component.scss']
 })
 export class RequestAchievementComponent implements OnInit {
-
   public pageData: any;
   public requestAchievementForm: FormGroup;
 
-  constructor(public dialog: MatDialog, public requestService: RequestService) {
+  constructor(public dialog: MatDialog,
+              public requestService: RequestService,
+              private readonly  loadSpinnerService: LoadSpinnerService,
+              private readonly alertService: AlertService) {
   }
 
   public ngOnInit(): void {
@@ -27,15 +32,26 @@ export class RequestAchievementComponent implements OnInit {
   }
 
   public onSubmitRequest(formData: FormGroup): void {
-    this.requestService.requestAchievement(formData.value).subscribe(
-    );
-    this.dialog.closeAll();
+    this.loadSpinnerService.showSpinner();
+    this.requestService.requestAchievement(formData.value)
+      .pipe(finalize(() => this.loadSpinnerService.hideSpinner()))
+      .subscribe(
+        res => {
+          this.dialog.closeAll();
+          this.alertService.success('Achievement was successfully requested!');
+        },
+        error => this.alertService.error()
+      );
   }
 
   private loadData(): void {
-    this.requestService.getAllAchievements().subscribe(response => {
-      this.pageData = response.data;
-    });
+    this.loadSpinnerService.showSpinner();
+    this.requestService.getAllAchievements()
+      .pipe(finalize(() => this.loadSpinnerService.hideSpinner()))
+      .subscribe(response => {
+        this.pageData = response.data;
+      },
+        error => this.alertService.error());
   }
 
   public closeForm(): void {

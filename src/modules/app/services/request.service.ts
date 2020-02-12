@@ -5,8 +5,8 @@ import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {ReadAchievementRequest} from '../models/achievement-request/read-achievement-request';
 import {User} from '../models/user/user';
-import { ReturningPagingInfo } from '../models/user/return-page-info';
-import { Achievement } from '../models/achievement/achievement';
+import {ReturningPagingInfo} from '../models/user/return-page-info';
+import {Achievement} from '../models/achievement/achievement';
 
 
 @Injectable({
@@ -28,26 +28,43 @@ export class RequestService {
     );
   }
 
-  public getAllUsers(): Observable<any> {
-    return this.httpClient.get<any>(`${this.apiUrl}/api/users/with-short-info`);
+  public getAllUsers(currentPage: number = null, pageSize: number = null): Observable<any> {
+    let params = new HttpParams();
+    if (!!currentPage) {
+      params = params.append('currentPage', currentPage.toString());
+    }
+    if (!!pageSize) {
+      params = params.append('pageSize', pageSize.toString());
+    }
+    return this.httpClient.get<any>(`${this.apiUrl}/api/users/with-short-info`, {params});
   }
 
   public getCurrentUserById(userID: string): Observable<User> {
     return this.httpClient.get<User>(`${this.apiUrl}/api/users/${userID}`);
   }
 
-  public getCurrentUserAchievements(userID: string): Observable<any> {
-    return this.httpClient.get(
-      `${this.apiUrl}/api/users/${userID}/achievements`
-    );
+  public getCurrentUserAchievements(userID: string, currentPage: number = 1, pageSize: number = 0): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('currentPage', currentPage.toString());
+    params = params.append('pageSize', pageSize.toString());
+
+    return this.httpClient.get(`${this.apiUrl}/api/users/${userID}/achievements`, {params});
   }
 
-  public getEvents(): Observable<any> {
-    return this.httpClient.get(`${this.apiUrl}/api/events`);
+  public getEvents(currentPage: number = 0): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('currentPage', currentPage.toString());
+    params = params.append('pageSize', '10');
+
+    return this.httpClient.get(`${this.apiUrl}/api/events`, {params});
   }
 
-  public getAllAchievements(): Observable<ReturningPagingInfo<Achievement>> {
-    return this.httpClient.get<ReturningPagingInfo<Achievement>>(`${this.apiUrl}/api/achievements`);
+  public getAllAchievements(currentPage: number = 1, pageSize: number = 0): Observable<ReturningPagingInfo<Achievement>> {
+    let params = new HttpParams();
+    params = params.append('currentPage', currentPage.toString());
+    params = params.append('pageSize', pageSize.toString());
+
+    return this.httpClient.get<ReturningPagingInfo<Achievement>>(`${this.apiUrl}/api/achievements`, {params});
   }
 
   public requestAchievement(formData: any): Observable<any> {

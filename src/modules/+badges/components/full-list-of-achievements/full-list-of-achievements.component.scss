@@ -47,6 +47,9 @@
           height: 6vmin;
           width: 6vmin;
           margin: 0 2vmin 0 0;
+          object-fit: cover;
+          border-radius: 50%;
+          border: 0.2vmin solid $mainColor;
         }
       }
     }

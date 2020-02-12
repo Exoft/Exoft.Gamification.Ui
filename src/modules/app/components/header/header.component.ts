@@ -63,4 +63,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   openEditProfileDialog() {
     this.dialogService.openEditUserProfileDialog();
   }
+
+  openChangePasswordDialog() {
+    this.dialogService.openEditPasswordDialog();
+  }
 }

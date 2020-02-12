@@ -60,36 +60,42 @@
     .user-name {
       font-size: 3vmin;
       font-weight: 400;
-      margin-top: 1vmin;
       color: $textColor;
     }
 
-    .log-out-button {
-      background-color: $mainColor;
-      color: $textColor;
-      font-size: 1.5vmin;
-      line-height: 2.5vmin;
-      margin-top: 0.5vmin;
-      padding: 0 2vmin;
-      border-radius: 0;
+    .buttons-container {
+      display: flex;
+      flex-direction: column;
+      margin: 1vmin 0;
+
+      .manage-profile-button {
+        background-color: $mainColor;
+        color: $textColor;
+        font-size: 1.5vmin;
+        line-height: 2.5vmin;
+        margin: 0.5vmin 0;
+        padding: 0.5vmin 2vmin;
+        border-radius: 0.5vmin;
+        height: 3.3vmin;
+      }
     }
 
-    .user-achivments-info {
+    .user-achievements-info {
       margin: 1vmin 0 1.5vmin 0;
       display: flex;
       flex-direction: column;
       align-items: center;
 
-      .user-achivments-elements {
+      .user-achievements-elements {
         display: flex;
 
-        .user-achivments-title {
+        .user-achievements-title {
           color: $mainColor;
           font-size: 2vmin;
           margin: 0 0.5vmin 0 0;
         }
 
-        .user-achivments-text {
+        .user-achievements-text {
           color: $textColor;
           font-size: 2vmin;
           font-weight: 300;
@@ -152,23 +158,26 @@
         font-size: 6vmin;
       }
 
-      .log-out-button {
-        font-size: 3vmin;
-        line-height: 5vmin;
-        margin-top: 1vmin;
-        padding: 0 3vmin;
+      .buttons-container {
+        .manage-profile-button {
+          font-size: 3.5vmin;
+          line-height: 3.5vmin;
+          padding: 0 3vmin;
+          height: 7vmin;
+          margin: 1vmin 0;
+        }
       }
 
-      .user-achivments-info {
+      .user-achievements-info {
         margin: 3vmin 0 3vmin 0;
 
-        .user-achivments-elements {
-          .user-achivments-title {
+        .user-achievements-elements {
+          .user-achievements-title {
             font-size: 4vmin;
             margin: 0 1vmin 0 0;
           }
 
-          .user-achivments-text {
+          .user-achievements-text {
             font-size: 4vmin;
           }
         }

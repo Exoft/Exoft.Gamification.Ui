@@ -1,7 +1,13 @@
 <div class="profile-setting-fields-container">
-  <form class="profile-settings-form" (ngSubmit)="onSaveChanges()" [formGroup]="addUserFormGroup">
+  <form class="profile-settings-form" (ngSubmit)="onSaveChanges()" [formGroup]="form">
     <label class="avatar-container" for="imageInput">
-      <img [src]="avatarUrl" class="avatar"/>
+      <img *ngIf="!!avatarUrl else avatarText" [src]="avatarUrl" class="avatar"/>
+
+      <ng-template #avatarText>
+        <div class="avatar-text">
+          {{letterAvatar(form?.value?.firstName, form?.value?.lastName)}}
+        </div>
+      </ng-template>
     </label>
 
     <input class="image-input" id="imageInput" type="file" (change)="onSelectFile($event)"/>
@@ -9,58 +15,63 @@
     <div class="profile-settings-fields">
       <mat-form-field class="input-field">
         <input matInput placeholder="USERNAME" formControlName="userName"/>
+
+        <mat-error>
+          Field is required
+        </mat-error>
       </mat-form-field>
 
-      <mat-error *ngIf="addUserFormGroup.get('userName').invalid && addUserFormGroup.get('userName').touched">
-        Field is required
-      </mat-error>
-
-      <mat-form-field class="input-field">
+      <mat-form-field class="input-field small-input">
         <input matInput placeholder="FIRST NAME" formControlName="firstName"/>
+
+        <mat-error>
+          Field is required
+        </mat-error>
       </mat-form-field>
 
-      <mat-error *ngIf="addUserFormGroup.get('firstName').invalid && addUserFormGroup.get('firstName').touched">
-        Field is required
-      </mat-error>
 
-      <mat-form-field class="input-field">
+      <mat-form-field class="input-field small-input">
         <input matInput placeholder="LAST NAME" formControlName="lastName"/>
+
+        <mat-error>
+          Field is required
+        </mat-error>
       </mat-form-field>
 
-      <mat-error *ngIf="addUserFormGroup.get('lastName').invalid && addUserFormGroup.get('lastName').touched">
-        Field is required
-      </mat-error>
 
       <mat-form-field class="input-field">
         <input matInput placeholder="EMAIL ADDRESS" formControlName="email"/>
+
+        <mat-error>
+          Please, enter valid email
+        </mat-error>
       </mat-form-field>
 
-      <mat-error *ngIf="addUserFormGroup.get('email').invalid && addUserFormGroup.get('email').touched">
-        Please, enter valid email
-      </mat-error>
 
-      <mat-form-field class="input-field">
+      <mat-form-field class="input-field small-input">
         <input matInput placeholder="PASSWORD" type="password" formControlName="password"/>
+
+        <mat-error>
+          Password must contain capital latter, digit and to be at least 8 signs long
+        </mat-error>
       </mat-form-field>
 
-      <mat-error *ngIf="addUserFormGroup.get('password').invalid && addUserFormGroup.get('password').touched">
-        Password must contain capital latter, digit and to be at least 8 signs long
-      </mat-error>
 
-      <mat-form-field class="input-field">
+      <mat-form-field class="input-field small-input">
         <input matInput placeholder="CONFIRM PASSWORD" type="password" formControlName="confirmPassword"/>
+
+        <mat-error>
+          Passwords must be equal
+        </mat-error>
       </mat-form-field>
 
-      <mat-error *ngIf="addUserFormGroup.get('confirmPassword').invalid && addUserFormGroup.get('confirmPassword').touched">
-        Passwords must be equal
-      </mat-error>
 
       <mat-form-field class="input-field">
         <input matInput placeholder="STATUS" formControlName="status"/>
       </mat-form-field>
     </div>
 
-    <button mat-button type="submit" class="save-button">
+    <button mat-button type="submit" class="save-button" [disabled]="form.invalid">
       SAVE CHANGES
     </button>
   </form>

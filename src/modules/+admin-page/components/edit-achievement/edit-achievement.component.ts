@@ -1,43 +1,59 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
 import {AchievementsService} from '../../../app/services/achievements.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {environment} from '../../../../environments/environment';
-import {takeUntil} from 'rxjs/operators';
+import {finalize, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {PostAchievement} from 'src/modules/app/models/achievement/post-achievement';
 import {Achievement} from 'src/modules/app/models/achievement/achievement';
+import {Validators} from '@angular/forms';
+import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
+import {AlertService} from '../../../app/services/alert.service';
 
 @Component({
   selector: 'app-edit-achievement',
   templateUrl: './edit-achievement.component.html',
   styleUrls: ['./edit-achievement.component.scss']
 })
-export class EditAchievementComponent implements OnInit {
+export class EditAchievementComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();
-  public editAchievementFormGroup: FormGroup<PostAchievement>;
-  public iconUrl: string;
+
+  form: FormGroup<PostAchievement>;
+  iconUrl: string;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
     private achievementService: AchievementsService,
     public dialog: MatDialogRef<EditAchievementComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Achievement) {
+    @Inject(MAT_DIALOG_DATA) public data: Achievement,
+    private readonly loadSpinnerService: LoadSpinnerService,
+    private readonly alertService: AlertService) {
   }
 
   ngOnInit() {
-    this.initializeForm();
+    this.setForm();
   }
 
-  public ngOnDestroy() {
+  ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
 
+  private setForm() {
+    this.form = this.fb.group<PostAchievement>({
+      name: [this.data.name, Validators.required],
+      description: [this.data.description, Validators.required],
+      xp: [+this.data.xp, [Validators.required, Validators.pattern('^[0-9]+$')]],
+      icon: this.data.iconId
+    });
+    this.iconUrl = `${environment.apiUrl}/api/files/${this.data.iconId}`;
+  }
+
   public onSelectFile(event: any) {
     if (event.target.files && event.target.files[0]) {
-      this.editAchievementFormGroup.controls.icon.setValue(event.target.files[0]);
-      this.editAchievementFormGroup.controls.icon.updateValueAndValidity(); 
+      this.form.controls.icon.setValue(event.target.files[0]);
+      this.form.controls.icon.updateValueAndValidity();
 
       const fileReader = new FileReader();
       fileReader.readAsDataURL(event.target.files[0]);
@@ -49,22 +65,15 @@ export class EditAchievementComponent implements OnInit {
   }
 
   onSaveChanges() {
-    if (this.editAchievementFormGroup.valid) {
-      this.achievementService.updateAchievementById(this.data.id, this.editAchievementFormGroup.value)
-        .pipe(takeUntil(this.unsubscribe$))
+    if (this.form.valid) {
+      this.loadSpinnerService.showSpinner();
+      this.achievementService.updateAchievementById(this.data.id, this.form.value)
+        .pipe(finalize(() => this.loadSpinnerService.hideSpinner()), takeUntil(this.unsubscribe$))
         .subscribe(res => {
           this.dialog.close(res);
-        });
+          this.alertService.success('Achievement data was successfully updated!');
+        },
+          error => this.alertService.error());
     }
-  }
-
-  private initializeForm() {
-    this.editAchievementFormGroup = this.formBuilder.group<PostAchievement>({
-      name: this.data.name,
-      description: this.data.description,
-      xp: +this.data.xp,
-      icon: null
-    });
-    this.iconUrl = `${environment.apiUrl}/api/files/${this.data.iconId}`;
   }
 }

@@ -12,7 +12,7 @@ import {takeUntil} from 'rxjs/operators';
 export class TotalAchievementsAndExpComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();
 
-  public badgesCount = '50';
+  public badgesCount: number;
   public experienceCount: number;
   public averageCount = '21';
   public newBadgesCount = '5';
@@ -30,6 +30,7 @@ export class TotalAchievementsAndExpComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(res => {
         this.experienceCount = res.xp;
+        this.badgesCount = res.badgesCount;
       });
   }
 

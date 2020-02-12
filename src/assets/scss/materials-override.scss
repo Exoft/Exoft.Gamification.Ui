@@ -48,12 +48,12 @@
         .mat-tab-label-active {
           color: $mainColor;
         }
+      }
 
-        .mat-ink-bar.mat-ink-bar {
-          background-color: $mainColor;
-          height: 0.5vmin;
-          top: 0;
-        }
+      .mat-ink-bar {
+        background-color: $mainColor;
+        height: 0.5vmin;
+        top: 0;
       }
     }
   }
@@ -238,19 +238,52 @@ app-user {
   }
 }
 
-.edit-user-dialog {
+.edit-user-dialog, .edit-password-dialog {
   .mat-dialog-container {
     box-shadow: none;
   }
 }
 
-.edit-user-dialog-backdrop {
-  background-color: #000000ab;
+.edit-user-dialog-backdrop, .edit-password-dialog-backdrop {
+  background-color: $backdropColorDark;
 }
 
 .thank-you-dialog {
-  width:50vmin;
+  width: 50vmin;
 }
 
+// user-achievement checkbox styles
+app-assign-achievements {
+  .mat-checkbox {
+
+    &.mat-checkbox-checked {
+      .mat-checkbox-inner-container {
+        .mat-checkbox-background {
+          background-color: transparent;
+
+          .mat-checkbox-checkmark-path {
+            stroke: $mainColor !important;
+          }
+        }
+      }
+    }
+
+    .mat-checkbox-inner-container {
+      width: 25px;
+      height: 25px;
+
+      .mat-checkbox-frame {
+        border-color: $textColor;
+      }
+    }
+  }
+}
+
+
+// paginator styles
+.mat-paginator {
+  background-color: $secondaryColor;
+  color: $textColor;
+}
 
 @import './material-override.responsive.scss';

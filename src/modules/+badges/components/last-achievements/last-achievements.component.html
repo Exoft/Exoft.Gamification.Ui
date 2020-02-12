@@ -7,7 +7,7 @@
 
   <div class="achievements-container">
     <div class="achievement-container" *ngFor="let item of achievementsList">
-      <img src="../../../../assets/images/star-big-image.png" class="achievement-image"/>
+      <img [src]="getAchievementIconUrl(item.iconId)" class="achievement-image"/>
 
       <div class="achievement-title">
         <div>{{ item.name }}</div>

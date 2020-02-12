@@ -1,7 +1,13 @@
 <div class="profile-setting-fields-container">
-  <form class="profile-settings-form" (ngSubmit)="onSaveChanges()" [formGroup]="editUserForm">
+  <form class="profile-settings-form" (ngSubmit)="onSaveChanges()" [formGroup]="form">
     <label class="avatar-container" for="imageInput">
-      <img [src]="avatarUrl" class="avatar"/>
+      <img *ngIf="!!avatarUrl else avatarText" [src]="avatarUrl" class="avatar"/>
+
+      <ng-template #avatarText>
+        <div class="avatar-text">
+          {{letterAvatar(form?.value?.firstName, form?.value?.lastName)}}
+        </div>
+      </ng-template>
     </label>
 
     <input class="image-input" id="imageInput" type="file" (change)="onSelectFile($event)"/>
@@ -9,20 +15,34 @@
     <div class="profile-settings-fields">
       <mat-form-field class="input-field">
         <input matInput placeholder="USERNAME" formControlName="userName"/>
+
+        <mat-error>
+          Field is required
+        </mat-error>
       </mat-form-field>
 
-      <div class="name-input-container">
-        <mat-form-field class="input-field">
-          <input matInput placeholder="FIRST NAME" formControlName="firstName"/>
-        </mat-form-field>
+      <mat-form-field class="input-field small-input">
+        <input matInput placeholder="FIRST NAME" formControlName="firstName"/>
 
-        <mat-form-field class="input-field">
-          <input matInput placeholder="LAST NAME" formControlName="lastName"/>
-        </mat-form-field>
-      </div>
+        <mat-error>
+          Field is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input-field small-input">
+        <input matInput placeholder="LAST NAME" formControlName="lastName"/>
+
+        <mat-error>
+          Field is required
+        </mat-error>
+      </mat-form-field>
 
       <mat-form-field class="input-field">
         <input matInput placeholder="EMAIL ADDRESS" formControlName="email"/>
+
+        <mat-error>
+          Please, enter valid email
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field class="input-field">
@@ -30,7 +50,7 @@
       </mat-form-field>
     </div>
 
-    <button mat-button type="submit" class="save-button">
+    <button mat-button type="submit" class="save-button" [disabled]="form.invalid">
       SAVE CHANGES
     </button>
   </form>

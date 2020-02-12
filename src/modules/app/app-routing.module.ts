@@ -3,47 +3,53 @@ import {Routes, RouterModule} from '@angular/router';
 import {AuthGuard} from './helpers/auth.guard';
 import {IsLoggedGuard} from './helpers/is-logged.guard';
 import {NotFoundComponent} from './components/not-found/not-found.component';
+import {ForbiddenPageComponent} from './components/forbidden-page/forbidden-page.component';
+import {RoleGuard} from './helpers/role.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   },
   {
-    path: 'dashboard',
-    loadChildren: '../+dashboard/dashboard.module#DashboardModule',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'signin',
-    loadChildren: '../+auth/auth.module#AuthModule',
+    path: 'sign-in',
+    loadChildren: () => import('../+auth/auth.module').then(m => m.AuthModule),
     canActivate: [IsLoggedGuard]
   },
   {
+    path: 'dashboard',
+    loadChildren: () => import('../+dashboard/dashboard.module').then(m => m.DashboardModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'badges',
-    loadChildren: '../+badges/badges.module#BadgesModule',
+    loadChildren: () => import('../+badges/badges.module').then(m => m.BadgesModule),
     canActivate: [AuthGuard]
   },
-  {
-    path: 'information',
-    loadChildren: '../+information/information.module#InformationModule',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'challenges',
-    loadChildren: '../+challenges/challenges.module#ChallengesModule',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'topchart',
-    loadChildren: '../+top-chart/top-chart.module#TopChartModule',
-    canActivate: [AuthGuard]
-  },
+  // {
+  //   path: 'information',
+  //   loadChildren: '../+information/information.module#InformationModule',
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'challenges',
+  //   loadChildren: '../+challenges/challenges.module#ChallengesModule',
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'top-chart',
+  //   loadChildren: '../+top-chart/top-chart.module#TopChartModule',
+  //   canActivate: [AuthGuard]
+  // },
   {
     path: 'admin',
-    loadChildren: '../+admin-page/admin-page.module#AdminPageModule',
-    canActivate: [AuthGuard]
+    loadChildren: () => import('../+admin-page/admin-page.module').then(m => m.AdminPageModule),
+    canActivate: [RoleGuard]
+  },
+  {
+    path: 'forbidden',
+    component: ForbiddenPageComponent
   },
   {
     path: 'page-not-found',
@@ -51,7 +57,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/page-not-found'
+    redirectTo: 'page-not-found'
   }
 ];
 

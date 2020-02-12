@@ -3,8 +3,10 @@ import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {Observable} from 'rxjs';
 import {Achievement} from '../models/achievement/achievement';
-import { PostAchievement } from '../models/achievement/post-achievement';
-import { ReturningPagingInfo } from '../models/user/return-page-info';
+import {PostAchievement} from '../models/achievement/post-achievement';
+import {ReturningPagingInfo} from '../models/user/return-page-info';
+import {UserAchievement} from '../models/achievement/user-achievement';
+import {AssignUserAchievement} from '../models/achievement/assign-user-achievement';
 
 
 @Injectable({
@@ -14,11 +16,10 @@ export class AchievementsService {
   constructor(private http: HttpClient) {
   }
 
-  getCurrentUserAchievements(currentPage: any, pageSize?: any): Observable<any> {
-    let params = new HttpParams().set('currentPage', currentPage);
-    if (pageSize) {
-      params = params.append('pageSize', pageSize);
-    }
+  getCurrentUserAchievements(currentPage: number, pageSize: number = 0): Observable<any> {
+    let params = new HttpParams().set('currentPage', currentPage.toString());
+    params = params.append('pageSize', pageSize.toString());
+
     return this.http.get(
       `${environment.apiUrl}/api/users/current-user/achievements`,
       {params}
@@ -29,37 +30,49 @@ export class AchievementsService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
     const formData = new FormData();
-    Object.keys(achievement).forEach(function (key) {
+    Object.keys(achievement).forEach(key => {
       formData.append(key, achievement[key]);
     });
 
-    return this.http.post<Achievement>(`${environment.apiUrl}/api/achievements`, formData, { headers: headers });
+    return this.http.post<Achievement>(`${environment.apiUrl}/api/achievements`, formData, {headers});
   }
 
   updateAchievementById(achievementId: string, achievement: PostAchievement): Observable<Achievement> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
     const formData = new FormData();
-    Object.keys(achievement).forEach(function (key) {
+    Object.keys(achievement).forEach(key => {
       formData.append(key, achievement[key]);
     });
-    
-    return this.http.put<Achievement>(`${environment.apiUrl}/api/achievements/${achievementId}`, formData, { headers: headers });
+
+    return this.http.put<Achievement>(`${environment.apiUrl}/api/achievements/${achievementId}`, formData, {headers});
   }
 
   deleteAchievementById(achievementId: string): Observable<any> {
     return this.http.delete(`${environment.apiUrl}/api/achievements/${achievementId}`);
   }
 
-  getAllAchievements(): Observable<ReturningPagingInfo<Achievement>> {
-    return this.http.get<ReturningPagingInfo<Achievement>>(`${environment.apiUrl}/api/achievements`);
+  getAllAchievements(currentPage: number = 1, pageSize: number = 0): Observable<ReturningPagingInfo<Achievement>> {
+    let params = new HttpParams();
+    params = params.append('currentPage', currentPage.toString());
+    params = params.append('pageSize', pageSize.toString());
+
+    return this.http.get<ReturningPagingInfo<Achievement>>(`${environment.apiUrl}/api/achievements`, {params});
   }
 
-  getAchievementsByUserId(userId: string): Observable<ReturningPagingInfo<Achievement>> {
-    return this.http.get<ReturningPagingInfo<Achievement>>(`${environment.apiUrl}/api/users/${userId}/achievements`);
+  getAchievementsByUserId(userId: string, currentPage: number = 1, pageSize: number = 0): Observable<ReturningPagingInfo<UserAchievement>> {
+    let params = new HttpParams();
+    params = params.append('currentPage', currentPage.toString());
+    params = params.append('pageSize', pageSize.toString());
+
+    return this.http.get<ReturningPagingInfo<UserAchievement>>(`${environment.apiUrl}/api/users/${userId}/achievements`, {params});
   }
 
-  addOrUpdateUserAchievements(userId: string, achievements: Achievement[]): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/api/users/${userId}/achievements`, achievements);
+  addOrUpdateUserAchievements(userId: string, achievementsIds: string[]): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/api/users/${userId}/achievements`, achievementsIds);
+  }
+
+  updateUserAchievements(userId: string, achievements: AssignUserAchievement) {
+    return this.http.post(`${environment.apiUrl}/api/users/${userId}/achievements`, achievements);
   }
 }
