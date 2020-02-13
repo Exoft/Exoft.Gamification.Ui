@@ -8,44 +8,29 @@ import {RoleGuard} from './helpers/role.guard';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
-  },
-  {
     path: 'sign-in',
     loadChildren: () => import('../+auth/auth.module').then(m => m.AuthModule),
     canActivate: [IsLoggedGuard]
   },
   {
-    path: 'dashboard',
-    loadChildren: () => import('../+dashboard/dashboard.module').then(m => m.DashboardModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'badges',
-    loadChildren: () => import('../+badges/badges.module').then(m => m.BadgesModule),
+    path: 'customer',
+    loadChildren: () => import('../+customer-services/customer-services.module').then(m => m.CustomerServicesModule),
     canActivate: [AuthGuard]
   },
   // {
-  //   path: 'information',
-  //   loadChildren: '../+information/information.module#InformationModule',
-  //   canActivate: [AuthGuard]
-  // },
-  // {
-  //   path: 'challenges',
-  //   loadChildren: '../+challenges/challenges.module#ChallengesModule',
-  //   canActivate: [AuthGuard]
-  // },
-  // {
-  //   path: 'top-chart',
-  //   loadChildren: '../+top-chart/top-chart.module#TopChartModule',
-  //   canActivate: [AuthGuard]
+  //  path: 'admin',
+  // loadChildren: () => import('../+admin-services/admin-services.module').then(m => m.AdminServicesModule),
+  //  canActivate: [RoleGuard]
   // },
   {
-    path: 'admin',
+     path: 'admin',
     loadChildren: () => import('../+admin-page/admin-page.module').then(m => m.AdminPageModule),
     canActivate: [RoleGuard]
+  },
+  {
+    path: '',
+    redirectTo: 'customer',
+    pathMatch: 'full'
   },
   {
     path: 'forbidden',

@@ -66,7 +66,7 @@ export class SignInComponent {
             localStorage.setItem('token', res.token);
             localStorage.setItem('refreshToken', res.refreshToken);
             localStorage.setItem('tokenExpiration', res.tokenExpiration);
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/customer']);
             this.userService.setUserData(this.userData);
           },
           error => this.alertService.error('Login failed. Please check your e-mail address and password and try again.')

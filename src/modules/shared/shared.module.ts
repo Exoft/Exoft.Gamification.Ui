@@ -8,6 +8,7 @@ import {CustomDatePipe} from './pipes/custom-date.pipe';
 
 import {EditUserProfileComponent} from './components/edit-user-profile/edit-user-profile.component';
 import {EditPasswordComponent} from './components/edit-password/edit-password.component';
+import {ThankYouComponent} from './components/thank-you/thank-you.component';
 
 
 @NgModule({
@@ -20,14 +21,17 @@ import {EditPasswordComponent} from './components/edit-password/edit-password.co
     TimeStampPipe,
     CustomDatePipe,
     EditUserProfileComponent,
-    EditPasswordComponent
+    EditPasswordComponent,
+    ThankYouComponent
   ],
   exports: [
     ReactiveFormsModule,
+    AngularMaterialsModule,
     TimeStampPipe,
     CustomDatePipe,
     EditUserProfileComponent,
-    EditPasswordComponent
+    EditPasswordComponent,
+    ThankYouComponent
   ],
   entryComponents: [
     EditUserProfileComponent,

@@ -1,24 +1,12 @@
 export const menuItems = [
   {
     name: 'Dashboard',
-    link: '/dashboard'
+    link: '/customer/dashboard'
   },
   {
     name: 'Badges',
-    link: '/badges'
+    link: '/customer/badges'
   },
-  // {
-  //   name: 'Information',
-  //   link: '/information'
-  // },
-  // {
-  //   name: 'Challenges',
-  //   link: '/challenges'
-  // },
-  // {
-  //   name: 'Top Chart',
-  //   link: '/top-chart'
-  // },
   {
     name: 'Admin Page',
     link: '/admin'

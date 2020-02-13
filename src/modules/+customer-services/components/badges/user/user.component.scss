@@ -1,0 +1,100 @@
+@import '../../../../../styles.scss';
+
+.user-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #3A3E46;
+  color: #FFFFFF;
+  padding: 2vmin;
+
+  .mat-button {
+    background-color: #68B70C;
+    border-radius: 0;
+    padding: 0 3vmin;
+    font-size: 1.5vmin;
+    align-self: flex-end;
+  }
+
+  .avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    border: 0.2vmin solid $mainColor;
+    height: 20vmin;
+    width: 20vmin;
+    margin: auto 0 0;
+  }
+
+  .avatar-container {
+    border: 0.2vmin solid $mainColor;
+    height: 20vmin;
+    width: 20vmin;
+    margin: auto 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #576271;
+
+    .avatar-text {
+      color: $mainColor;
+      font-size: 10vmin;
+    }
+  }
+
+  .username {
+    font-size: 3vmin;
+    padding: 0.5vmin;
+    text-align: center;
+  }
+
+  .status {
+    font-size: 1.3vmin;
+    padding: 0.5vmin;
+    text-align: center;
+    margin: 0 0 auto;
+  }
+}
+
+@media (max-width: 767px),
+(orientation: portrait) {
+  .user-container {
+    padding: 4vmin;
+
+    .mat-button {
+      padding: 0 6vmin;
+      font-size: 3vmin;
+    }
+
+    .avatar {
+      border-radius: 50%;
+      border: 0.3vmin solid $mainColor;
+      height: 40vmin;
+      width: 40vmin;
+    }
+
+    .avatar-container {
+      border: 0.3vmin solid $mainColor;
+      height: 40vmin;
+      width: 40vmin;
+
+      .avatar-text {
+        font-size: 20vmin;
+      }
+    }
+
+    .username {
+      font-size: 6vmin;
+      padding: 2vmin;
+    }
+
+    .status {
+      font-size: 3vmin;
+      padding: 1vmin;
+    }
+  }
+}
+
