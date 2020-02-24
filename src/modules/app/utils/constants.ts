@@ -8,7 +8,15 @@ export const menuItems = [
     link: '/customer/badges'
   },
   {
-    name: 'Admin Page',
-    link: '/admin'
+    name: 'Users',
+    link: '/admin/users'
+  },
+  {
+    name: 'Achievements',
+    link: '/admin/achievements'
+  },
+  {
+    name: 'Achievements requests',
+    link: '/admin/achievements-requests'
   }
 ];

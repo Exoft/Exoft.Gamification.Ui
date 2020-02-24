@@ -17,14 +17,9 @@ const routes: Routes = [
     loadChildren: () => import('../+customer-services/customer-services.module').then(m => m.CustomerServicesModule),
     canActivate: [AuthGuard]
   },
-  // {
-  //  path: 'admin',
-  // loadChildren: () => import('../+admin-services/admin-services.module').then(m => m.AdminServicesModule),
-  //  canActivate: [RoleGuard]
-  // },
   {
-     path: 'admin',
-    loadChildren: () => import('../+admin-page/admin-page.module').then(m => m.AdminPageModule),
+    path: 'admin',
+    loadChildren: () => import('../+admin-services/admin-services.module').then(m => m.AdminServicesModule),
     canActivate: [RoleGuard]
   },
   {

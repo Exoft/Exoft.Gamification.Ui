@@ -4,12 +4,12 @@ import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
 import {Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {UserService} from 'src/modules/app/services/user.service';
-import {passwordContainValidity, passwordEqualityValidator} from '../../functions/add-user-validators';
 import {finalize, takeUntil} from 'rxjs/operators';
 import {PostUser} from 'src/modules/app/models/user/post-user';
 import {getFirstLetters} from '../../../app/utils/letterAvatar';
 import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
 import {AlertService} from '../../../app/services/alert.service';
+import {passwordContainValidity, passwordEqualityValidator} from '../../functions/add-user-validators';
 
 @Component({
   selector: 'app-add-user',

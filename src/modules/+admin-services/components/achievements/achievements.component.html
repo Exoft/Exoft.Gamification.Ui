@@ -1,0 +1,51 @@
+<table mat-table [dataSource]="dataSourceAchievements" class="admin-page-table">
+  <ng-container matColumnDef="icon">
+    <th mat-header-cell *matHeaderCellDef>Icon</th>
+
+    <td mat-cell *matCellDef="let element">
+      <img *ngIf="element.iconId" class="avatar" [src]="getImageUrl(element.iconId)">
+    </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name</th>
+
+    <td mat-cell *matCellDef="let achievement"> {{achievement.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Description</th>
+
+    <td mat-cell *matCellDef="let achievement"> {{achievement.description}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="xp">
+    <th mat-header-cell *matHeaderCellDef> XP</th>
+
+    <td mat-cell *matCellDef="let achievement"> {{achievement.xp}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>
+      <button mat-button class="manage-button" (click)="addAchievement()">Add</button>
+    </th>
+
+    <td mat-cell *matCellDef="let achievement; let i=index;">
+      <button mat-button class="manage-button" (click)="editAchievement(achievement)">Edit</button>
+
+      <button mat-button class="manage-button" (click)="deleteAchievement(achievement)">Delete</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsAchievements"></tr>
+
+  <tr mat-row *matRowDef="let row; columns: displayedColumnsAchievements;"></tr>
+</table>
+
+<mat-paginator #achievementPaginator
+               [length]="achievementPaginatorTotalItems"
+               [pageSize]="achievementFilterForm?.get('limit')?.value"
+               [pageSizeOptions]="paginatorPageSizeOptions"
+               (page)="paginatorEvent($event); "
+               [pageIndex]="+achievementFilterForm?.get('page')?.value - 1"></mat-paginator>

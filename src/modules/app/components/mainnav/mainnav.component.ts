@@ -75,7 +75,9 @@ export class MainnavComponent implements OnInit, OnDestroy {
 
         this.menuItems = Array.from(menuItems);
         if (res.roles && !res.roles.includes('Admin')) {
-          this.menuItems.pop();
+          this.menuItems.splice(2, 3);
+        } else {
+          this.menuItems.splice(0, 2);
         }
       });
   }
