@@ -37,7 +37,7 @@ export class MainnavComponent implements OnInit, OnDestroy {
   public letterAvatar = getFirstLettersWithSplit;
   public userRoles: any = [];
 
-  public isManageProfileButtonsExpanded = false;
+  public isUserAdmin = false;
 
   constructor(
     private router: Router,
@@ -76,8 +76,10 @@ export class MainnavComponent implements OnInit, OnDestroy {
         this.menuItems = Array.from(menuItems);
         if (res.roles && !res.roles.includes('Admin')) {
           this.menuItems.splice(2, 3);
+          this.isUserAdmin = false;
         } else {
           this.menuItems.splice(0, 2);
+          this.isUserAdmin = true;
         }
       });
   }

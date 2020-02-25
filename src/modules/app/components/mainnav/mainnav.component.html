@@ -17,14 +17,14 @@
     </div>
 
     <div class="buttons-container">
-      <button mat-button class="manage-profile-button" (click)="openEditProfileDialog()">Edit profile</button>
+      <button mat-button class="manage-profile-button" *ngIf="!isUserAdmin" (click)="openEditProfileDialog()">Edit profile</button>
 
-      <button mat-button class="manage-profile-button" (click)="openChangePasswordDialog()">Change password</button>
+      <button mat-button class="manage-profile-button" *ngIf="!isUserAdmin" (click)="openChangePasswordDialog()">Change password</button>
 
       <button mat-button class="manage-profile-button" (click)="logOut()">Log out</button>
     </div>
 
-    <div class="user-achievements-info">
+    <div class="user-achievements-info" *ngIf="!isUserAdmin">
       <div class="user-achievements-elements">
         <p class="user-achievements-title"> Total: </p>
 

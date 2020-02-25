@@ -20,7 +20,7 @@ export class RoleGuard implements CanActivate {
 
     return this.userService.getUserData().pipe(
       take(1),
-      map(res => isAuthorized && res.roles.some(role => role === 'Admin')),
+      map(res => isAuthorized && !!res.roles && res.roles.some(role => role === 'Admin')),
       tap(res => {
         if (!res) {
           this.router.navigate(['forbidden']);

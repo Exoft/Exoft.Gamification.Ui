@@ -286,4 +286,11 @@ app-assign-achievements {
   color: $textColor;
 }
 
+// user menu styles
+.cdk-overlay-pane {
+  .mat-menu-panel {
+    min-height: unset;
+  }
+}
+
 @import './material-override.responsive.scss';

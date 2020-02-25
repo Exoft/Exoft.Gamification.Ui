@@ -7,7 +7,7 @@ import {UserService} from '../../services/user.service';
 import {AuthService} from '../../services/auth.service';
 import {RequestService} from '../../services/request.service';
 import {getFirstLettersWithSplit} from '../../utils/letterAvatar';
-import { DialogService } from '../../services/dialog.service';
+import {DialogService} from '../../services/dialog.service';
 
 
 @Component({
@@ -25,6 +25,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public menuItems = Array.from(menuItems);
   public letterAvatar = getFirstLettersWithSplit;
 
+  public isUserAdmin = false;
+
   constructor(private userService: UserService,
               private authService: AuthService,
               private requestService: RequestService,
@@ -39,8 +41,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.menuItems = Array.from(menuItems);
         if (res.roles && !res.roles.includes('Admin')) {
           this.menuItems.splice(2, 3);
+          this.isUserAdmin = false;
         } else {
           this.menuItems.splice(0, 2);
+          this.isUserAdmin = true;
         }
       });
   }

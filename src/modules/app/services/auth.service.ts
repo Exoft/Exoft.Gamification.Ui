@@ -33,13 +33,8 @@ export class AuthService {
   public refreshToken() {
     const url = `${this.apiUrl}/api/authenticate/refresh`;
     const refreshToken = localStorage.getItem('refreshToken');
-    this.http.post(url, {refreshToken: String(refreshToken)}).subscribe((res: any) => {
-      const token = res.token;
-      const newRefreshToken = res.refreshToken;
-      localStorage.setItem('refreshToken', newRefreshToken);
-      localStorage.setItem('token', token);
-      localStorage.setItem('tokenExpiration', res.tokenExpiration);
-    });
+
+    return this.http.post(url, {refreshToken: String(refreshToken)});
   }
 
   public sendForgotPasLink(forgotPasData: object) {
