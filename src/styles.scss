@@ -78,6 +78,9 @@ body {
     background-color: $mainColor;
     border-radius: 1px;
     margin-left: 10px;
+    width: 25%;
+    font-size: 1.5vmin;
+    padding: 0;
 
     &.decline {
       background-color: $errorColor;
