@@ -65,7 +65,6 @@ export class SignInComponent {
             };
             localStorage.setItem('token', res.token);
             localStorage.setItem('refreshToken', res.refreshToken);
-            localStorage.setItem('tokenExpiration', res.tokenExpiration);
 
             if (res.roles.includes('Admin')) {
               this.router.navigate(['/admin']);

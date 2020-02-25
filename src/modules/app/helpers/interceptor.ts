@@ -1,14 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse} from '@angular/common/http';
-import {BehaviorSubject, Observable, throwError} from 'rxjs';
+import {BehaviorSubject, throwError} from 'rxjs';
 import {catchError, filter, finalize, switchMap, take} from 'rxjs/operators';
 import {AuthService} from '../services/auth.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
+
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
-  isRefreshingToken = false;
-  tokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  private isRefreshingToken = false;
+  private tokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   constructor(private authService: AuthService,
               private router: Router) {
@@ -23,18 +24,18 @@ export class Interceptor implements HttpInterceptor {
 
     return next.handle(this.addTokenToRequest(request, userToken))
       .pipe(
-        catchError(err => {
-          if (err instanceof HttpErrorResponse) {
-            switch ((err as HttpErrorResponse).status) {
+        catchError(error => {
+          if (error instanceof HttpErrorResponse) {
+            switch ((error as HttpErrorResponse).status) {
               case 401:
                 return this.handleUnauthorizedError(request, next);
               case 403:
                 return this.handleForbiddenError();
               default:
-                return throwError(err);
+                return throwError(error);
             }
           } else {
-            return throwError(err);
+            return throwError(error);
           }
         }));
   }
@@ -51,11 +52,10 @@ export class Interceptor implements HttpInterceptor {
       return this.authService.refreshToken()
         .pipe(
           switchMap((res: any) => {
-            const {token, refreshToken, tokenExpiration} = res;
+            const {token, refreshToken} = res;
 
             localStorage.setItem('refreshToken', refreshToken);
             localStorage.setItem('token', token);
-            localStorage.setItem('tokenExpiration', tokenExpiration);
 
             this.tokenSubject.next(token);
             return next.handle(this.addTokenToRequest(request, token));
@@ -68,9 +68,9 @@ export class Interceptor implements HttpInterceptor {
                 return this.handleForbiddenError();
               }
 
-              return this.logoutUser();
+              return this.logoutUser(error);
             } else {
-              return this.logoutUser();
+              return this.logoutUser(error);
             }
           }),
           finalize(() => this.isRefreshingToken = false)
@@ -89,13 +89,13 @@ export class Interceptor implements HttpInterceptor {
   private handleForbiddenError() {
     this.router.navigate(['forbidden']);
 
-    return Observable.throw('');
+    return throwError('');
   }
 
-  private logoutUser() {
+  private logoutUser(error) {
     this.authService.onLogOut();
 
-    return Observable.throw('');
+    return throwError(error);
   }
 }
 

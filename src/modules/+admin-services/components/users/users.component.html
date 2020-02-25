@@ -47,7 +47,7 @@
 
       <button mat-button
               class="manage-button"
-              [ngClass]="currentUser.id ===user.id?'invisible':''"
+              [ngClass]="currentUser?.id === user.id?'invisible':''"
               (click)="deleteUser(user)">
         Delete
       </button>
