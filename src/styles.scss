@@ -95,7 +95,7 @@ body {
     border-radius: 50%;
     border: 1px solid $mainColor;
     user-select: none;
-    margin: 5px 0 0 0;
+    margin: 5px 0;
     background-size: cover;
   }
 
@@ -114,8 +114,13 @@ body {
     width: 7%;
   }
 
-  .mat-column-firstName, .mat-column-lastName, .mat-column-xp, .mat-column-actions {
+  .mat-column-firstName, .mat-column-lastName, .mat-column-xp {
     width: 20%;
+  }
+
+  .mat-column-actions {
+    width: 30%;
+    text-align: center;
   }
 }
 
