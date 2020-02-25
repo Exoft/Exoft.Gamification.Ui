@@ -19,9 +19,7 @@ export class UserComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();
   private dialogRef: MatDialogRef<any>;
 
-  public avatarSource: string;
-  public userName: string;
-  public status: string;
+  public userData;
   public letterAvatar = getFirstLetters;
 
   constructor(private router: Router,
@@ -47,9 +45,7 @@ export class UserComponent implements OnInit, OnDestroy {
       .getUserData()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(res => {
-        this.avatarSource = res.avatarId;
-        this.userName = res.firstName + ' ' + res.lastName;
-        this.status = res.status;
+        this.userData = res;
       });
   }
 

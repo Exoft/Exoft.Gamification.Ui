@@ -1,18 +1,18 @@
 <mat-card class="user-container">
   <button mat-button class="edit-user-button" (click)="openEditUserProfileDialog()">Edit</button>
 
-  <div class="avatar-container" *ngIf="!avatarSource else avatarExists">
+  <div class="avatar-container" *ngIf="!userData?.avatarId else avatarExists">
     <div class="avatar-text">
-      <p>{{letterAvatar()}}</p>
+      <p>{{letterAvatar(userData?.firstName, userData?.lastName)}}</p>
     </div>
   </div>
 
   <ng-template #avatarExists>
-    <img [src]="getAvatarId(avatarSource)" class="avatar"/>
+    <img [src]="getAvatarId(userData?.avatarId)" class="avatar"/>
   </ng-template>
 
-  <div class="username">{{ userName }}</div>
+  <div class="username">{{ userData?.firstName + " " + userData?.lastName }}</div>
   <div class="status">
-    <p *ngIf="status">My status: {{ status }}</p>
+    <p *ngIf="userData?.status">My status: {{ userData?.status }}</p>
   </div>
 </mat-card>
