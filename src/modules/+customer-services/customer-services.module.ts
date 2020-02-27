@@ -15,6 +15,8 @@ import {FullListOfAchievementsComponent} from './components/badges/full-list-of-
 import {LastAchievementsComponent} from './components/badges/last-achievements/last-achievements.component';
 import {TotalAchievementsAndExpComponent} from './components/badges/total-achievements-and-exp/total-achievements-and-exp.component';
 import {UserComponent} from './components/badges/user/user.component';
+import {OrdersComponent} from './components/orders/orders/orders.component';
+import {OrderDetailsModalComponent} from './components/orders/order-details-modal/order-details-modal.component';
 
 @NgModule({
   declarations: [
@@ -29,14 +31,18 @@ import {UserComponent} from './components/badges/user/user.component';
     FullListOfAchievementsComponent,
     LastAchievementsComponent,
     TotalAchievementsAndExpComponent,
-    UserComponent
+    UserComponent,
+    OrdersComponent,
+    OrderDetailsModalComponent
   ],
   imports: [
     CommonModule,
     CustomerServicesRoutingModule,
     SharedModule
   ],
-  entryComponents: []
+  entryComponents: [
+    OrderDetailsModalComponent
+  ]
 })
 export class CustomerServicesModule {
 }

@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
-import {menuItems} from '../../utils/constants';
+import {adminMenuItems, customerMenuItems} from '../../utils/constants';
 import {Router, NavigationEnd} from '@angular/router';
 import {Subject} from 'rxjs';
 import {finalize, takeUntil} from 'rxjs/operators';
@@ -25,7 +25,7 @@ export class MainnavComponent implements OnInit, OnDestroy {
 
   private unsubscribe$: Subject<void> = new Subject();
 
-  public menuItems = Array.from(menuItems);
+  public menuItems = [];
   public isHeaderShown = true;
   public avatarSource: string;
   public userName: string;
@@ -73,12 +73,11 @@ export class MainnavComponent implements OnInit, OnDestroy {
         this.userRoles = res.roles;
         this.totalBadgesCount = res.badgesCount;
 
-        this.menuItems = Array.from(menuItems);
         if (res.roles && !res.roles.includes('Admin')) {
-          this.menuItems.splice(2, 3);
+          this.menuItems = customerMenuItems;
           this.isUserAdmin = false;
         } else {
-          this.menuItems.splice(0, 2);
+          this.menuItems = adminMenuItems;
           this.isUserAdmin = true;
         }
       });

@@ -1,4 +1,4 @@
-export const menuItems = [
+export const customerMenuItems = [
   {
     name: 'Dashboard',
     link: '/customer/dashboard'
@@ -7,6 +7,13 @@ export const menuItems = [
     name: 'Badges',
     link: '/customer/badges'
   },
+  {
+    name: 'Orders',
+    link: '/customer/orders'
+  }
+];
+
+export const adminMenuItems = [
   {
     name: 'Users',
     link: '/admin/users'
