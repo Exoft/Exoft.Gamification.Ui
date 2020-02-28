@@ -298,21 +298,38 @@ app-assign-achievements {
   &.mat-form-field {
     margin: 0;
 
+    .mat-form-field-wrapper {
+      margin: 0;
+      padding: 0;
+
+      .mat-form-field-outline {
+        color: $textColor;
+        top: 0;
+      }
+
+      .mat-form-field-infix {
+        padding: 1vmin 0;
+        border: 0;
+      }
+    }
+
     .mat-input-element {
       font-size: 1.5vmin;
     }
 
-    .mat-form-field-label {
-      font-size: 1.4vmin;
+    .mat-form-field-label-wrapper {
+      top: -1vmin;
+      .mat-form-field-label {
+        font-size: 1.4vmin;
+      }
     }
 
-    &.mat-focused {
-      .mat-form-field-label {
-        color: $mainColor;
-      }
-
-      .mat-form-field-ripple {
-        background-color: $mainColor;
+    &.mat-form-field-should-float {
+      .mat-form-field-label-wrapper {
+        top: -0.4vmin;
+        .mat-form-field-label {
+          color: $mainColor;
+        }
       }
     }
   }
@@ -323,18 +340,19 @@ app-assign-achievements {
   &.mat-radio-button {
     .mat-radio-outer-circle {
       border-color: $textColor;
+      height: 2vmin;
+      width: 2vmin;
+      border-width: 0.2vmin;
     }
 
     .mat-radio-inner-circle {
       background-color: $mainColor;
+      height: 2vmin;
+      width: 2vmin;
     }
 
-    &.cdk-focused {
-      .mat-radio-ripple {
-        .mat-ripple-element {
-          background-color: $mainColor;
-        }
-      }
+    .mat-radio-ripple {
+      display: none;
     }
 
     &.mat-radio-checked {
@@ -344,12 +362,6 @@ app-assign-achievements {
 
       .mat-radio-inner-circle {
         background-color: $mainColor;
-      }
-
-      .mat-radio-ripple {
-        .mat-ripple-element {
-          background-color: $mainColor;
-        }
       }
     }
   }
@@ -406,7 +418,8 @@ app-assign-achievements {
       }
 
       &.ng5-slider-active {
-          outline: none;
+        outline: none;
+
         &::after {
           background-color: $mainColor;
         }
