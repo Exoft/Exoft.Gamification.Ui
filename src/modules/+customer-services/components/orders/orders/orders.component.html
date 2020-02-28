@@ -1,11 +1,86 @@
 <div class="orders-page-wrapper">
-  <mat-card class="filter card-container"></mat-card>
+  <mat-card class="filter card-container">
+    <div class="filter-section">
+      <div class="filter-name">SEARCH</div>
+
+      <mat-form-field class="filter-input">
+        <input matInput placeholder="SEARCH">
+      </mat-form-field>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-name">SORT</div>
+
+      <mat-radio-group class="sort-container">
+        <mat-radio-button class="sort-option" value="1">Recommended</mat-radio-button>
+        <mat-radio-button class="sort-option" value="2">From cheap to expensive</mat-radio-button>
+        <mat-radio-button class="sort-option" value="3">From expensive to cheap</mat-radio-button>
+        <mat-radio-button class="sort-option" value="4">Novelty</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-name">FILTER</div>
+
+      <div class="product-types-container">
+        <img class="product-type-image"
+             *ngFor="let productType of productsTypes"
+             src="../../../../../assets/images/star-small-image.png"
+             [matTooltip]="productType.title">
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-name">COST</div>
+
+      <div class="from-to-container">
+        <mat-form-field class="filter-input">
+          <input matInput placeholder="FROM">
+        </mat-form-field>
+
+        <span class="from-to-text">-</span>
+
+        <mat-form-field class="filter-input">
+          <input matInput placeholder="TO">
+        </mat-form-field>
+
+        <span class="from-to-text">XP</span>
+      </div>
+
+      <ng5-slider value="50" highValue="900" [options]="costSliderOptions" class="cost-slider"></ng5-slider>
+    </div>
+  </mat-card>
 
   <div class="message-products-container">
-    <div class="message-text"></div>
+    <div class="message-text">
+      <div class="big-text">
+        Hey, <b>{{userData?.firstName}}</b>!
+      </div>
+      Here you can take a look at proposed products and spend your {{userData?.xp}} XP.
+    </div>
 
     <div class="products-container">
-      <mat-card class="card-container product" *ngFor="let product of products"></mat-card>
+      <div class="product-column"
+           *ngFor="let columnIndex of columnsCountArray">
+        <mat-card class="product card-container"
+                  *ngFor="let product of getProductsByColumn(columnIndex)"
+                  [ngClass]="product.size">
+          <img class="product-image"
+               [src]="product.image">
+
+          <div class="product-info-container">
+            <div class="title">{{product.title}}</div>
+
+            <div class="price-details-button-container">
+              <div class="price">{{product.price}} XP</div>
+
+              <button mat-button
+                      class="details-button">Details
+              </button>
+            </div>
+          </div>
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>

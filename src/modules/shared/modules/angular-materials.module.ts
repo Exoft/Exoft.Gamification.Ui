@@ -19,6 +19,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatPaginatorModule} from '@angular/material';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -43,7 +45,9 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatSnackBarModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatRadioModule,
+    MatTooltipModule
   ]
 })
 export class AngularMaterialsModule {
