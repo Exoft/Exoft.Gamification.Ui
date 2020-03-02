@@ -10,6 +10,9 @@ import {EditAchievementComponent} from './components/edit-achievement/edit-achie
 import {EditUserComponent} from './components/edit-user/edit-user.component';
 import {CommonModule} from '@angular/common';
 import {AdminServicesRoutingModule} from './admin-services-routing.module';
+import {OrdersComponent} from './components/orders/orders.component';
+import {EditOrderComponent} from './components/modals/edit-order/edit-order.component';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import {AdminServicesRoutingModule} from './admin-services-routing.module';
     AddUserComponent,
     AssignAchievementsComponent,
     EditAchievementComponent,
-    EditUserComponent
+    EditUserComponent,
+    OrdersComponent,
+    EditOrderComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +37,8 @@ import {AdminServicesRoutingModule} from './admin-services-routing.module';
     AddUserComponent,
     AssignAchievementsComponent,
     EditAchievementComponent,
-    EditUserComponent
+    EditUserComponent,
+    EditOrderComponent
   ]
 })
 export class AdminServicesModule {

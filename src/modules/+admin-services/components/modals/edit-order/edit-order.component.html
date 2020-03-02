@@ -1,0 +1,45 @@
+<div class="modal-fields-container">
+  <form class="modal-form" (ngSubmit)="onSaveChanges()" [formGroup]="form">
+    <label class="image-container" for="imageInput">
+      <img *ngIf="!!iconUrl else noIconUploaded" [src]="iconUrl" class="image"/>
+
+      <ng-template #noIconUploaded>
+        <div class="image-text">
+          <mat-icon class="upload-arrow">arrow_upward</mat-icon>
+        </div>
+      </ng-template>
+    </label>
+
+    <input class="image-input" id="imageInput" type="file" (change)="onSelectFile($event)"/>
+
+    <div class="modal-fields">
+      <mat-form-field class="input-field">
+        <input matInput placeholder="TITLE" formControlName="title"/>
+
+        <mat-error>
+          Field is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input-field">
+        <input matInput placeholder="DESCRIPTION" formControlName="description"/>
+
+        <mat-error>
+          Field is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input-field">
+        <input matInput placeholder="PRICE" formControlName="price"/>
+
+        <mat-error>
+          Field is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <button mat-button type="submit" class="save-button" [disabled]="form.invalid">
+      SAVE CHANGES
+    </button>
+  </form>
+</div>

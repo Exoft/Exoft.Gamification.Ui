@@ -355,6 +355,10 @@ app-assign-achievements {
       display: none;
     }
 
+    .mat-radio-label-content {
+      padding-left: 1vmin;
+    }
+
     &.mat-radio-checked {
       .mat-radio-outer-circle {
         border-color: $textColor;

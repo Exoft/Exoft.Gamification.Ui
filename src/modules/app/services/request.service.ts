@@ -7,6 +7,8 @@ import {ReadAchievementRequest} from '../models/achievement-request/read-achieve
 import {User} from '../models/user/user';
 import {ReturningPagingInfo} from '../models/user/return-page-info';
 import {Achievement} from '../models/achievement/achievement';
+import {OrderCreate} from '../models/orders/order-create';
+import {Order} from '../models/orders/order';
 
 
 @Injectable({
@@ -104,5 +106,22 @@ export class RequestService {
   // File Requests
   public getAvatar(avatarId: any) {
     return environment.apiUrl + '/api/files/' + avatarId;
+  }
+
+  // Orders Requests
+  getOrders(currentPage: number = 1, pageSize: number = 0): Observable<ReturningPagingInfo<OrderCreate>> {
+    let params = new HttpParams();
+    params = params.append('currentPage', currentPage.toString());
+    params = params.append('pageSize', pageSize.toString());
+
+    return this.httpClient.get<ReturningPagingInfo<OrderCreate>>(`${this.apiUrl}/api/orders`, {params});
+  }
+
+  createOrder(orderFormData: FormData): Observable<Order> {
+    return this.httpClient.post<Order>(`${this.apiUrl}/api/orders`, orderFormData);
+  }
+
+  deleteOrder(orderId: string) {
+    return this.httpClient.delete(`${this.apiUrl}/api/orders/${orderId}`);
   }
 }

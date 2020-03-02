@@ -92,8 +92,10 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.dialogRef = this.dialog.open(AddUserComponent, dialogConfig);
     this.dialogRef.afterClosed()
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => {
-        this.loadUserData();
+      .subscribe(res => {
+        if (!!res) {
+          this.loadUserData();
+        }
       });
   }
 

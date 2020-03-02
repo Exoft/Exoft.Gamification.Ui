@@ -25,5 +25,9 @@ export const adminMenuItems = [
   {
     name: 'Achievements requests',
     link: '/admin/achievements-requests'
+  },
+  {
+    name: 'Orders',
+    link: '/admin/orders'
   }
 ];

@@ -1,7 +1,14 @@
-<div class="orders-page-wrapper">
-  <mat-card class="filter card-container">
-    <div class="filter-section">
-      <div class="filter-name">SEARCH</div>
+<div class="orders-page-wrapper" >
+  <div class="message-text mobile">
+    <div class="big-text">
+      Hey, <b>{{userData?.firstName}}</b>!
+    </div>
+    Here you can take a look at proposed products and spend your {{userData?.xp}} XP.
+  </div>
+
+  <div class="filter card-container" #filtersContainer>
+    <div class="filter-section" >
+      <div class="filter-name name-before-input">SEARCH</div>
 
       <mat-form-field class="filter-input" appearance="outline">
         <mat-label>SEARCH</mat-label>
@@ -33,7 +40,7 @@
     </div>
 
     <div class="filter-section">
-      <div class="filter-name">COST</div>
+      <div class="filter-name name-before-input">COST</div>
 
       <div class="from-to-container">
         <mat-form-field class="filter-input" appearance="outline">
@@ -53,10 +60,17 @@
 
       <ng5-slider value="50" highValue="900" [options]="costSliderOptions" class="cost-slider"></ng5-slider>
     </div>
-  </mat-card>
+
+  </div>
+
+  <div class="hidden-filter">
+    <mat-card class="card-container hidden-filter-text" (click)="scrollToTop()">
+      FILTERS
+    </mat-card>
+  </div>
 
   <div class="message-products-container">
-    <div class="message-text">
+    <div class="message-text desktop">
       <div class="big-text">
         Hey, <b>{{userData?.firstName}}</b>!
       </div>

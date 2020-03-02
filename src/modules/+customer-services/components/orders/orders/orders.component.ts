@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../../../../app/services/user.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -9,6 +9,8 @@ import {takeUntil} from 'rxjs/operators';
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit, OnDestroy {
+  @ViewChild('filtersContainer', {static: true}) filtersContainer: ElementRef;
+
   private unsubscribe: Subject<void> = new Subject();
 
   products = [
@@ -177,5 +179,9 @@ export class OrdersComponent implements OnInit, OnDestroy {
     }
 
     return 'small';
+  }
+
+  scrollToTop() {
+    this.filtersContainer.nativeElement.scrollIntoView({ top: -200, behavior: 'smooth' });
   }
 }
