@@ -7,7 +7,7 @@ import {RequestService} from '../../../app/services/request.service';
 import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
 import {AlertService} from '../../../app/services/alert.service';
 import {finalize, takeUntil} from 'rxjs/operators';
-import {AddUserComponent} from '../add-user/add-user.component';
+import {AddUserComponent} from '../modals/add-user/add-user.component';
 import {EditOrderComponent} from '../modals/edit-order/edit-order.component';
 
 @Component({

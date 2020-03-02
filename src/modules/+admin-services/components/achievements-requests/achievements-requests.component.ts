@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
-import {ReadAchievementRequest} from '../../../app/models/achievement-request/read-achievement-request';
+import {AchievementRequestWithDetails} from '../../../app/models/achievement-request/achievement-request-with-details';
 import {finalize} from 'rxjs/operators';
 import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
 import {AlertService} from '../../../app/services/alert.service';
@@ -13,7 +13,7 @@ import {RequestService} from '../../../app/services/request.service';
 })
 export class AchievementsRequestsComponent implements OnInit {
   displayedColumnsAchievementsRequests: string[] = ['userName', 'achievement', 'comment', 'actions'];
-  dataSourceAchievementRequest = new MatTableDataSource<ReadAchievementRequest>();
+  dataSourceAchievementRequest = new MatTableDataSource<AchievementRequestWithDetails>();
 
   constructor(private readonly spinnerService: LoadSpinnerService,
               private readonly alertService: AlertService,
@@ -34,7 +34,7 @@ export class AchievementsRequestsComponent implements OnInit {
         error => this.alertService.error());
   }
 
-  onRequestDecision(achievementTableRequest: ReadAchievementRequest, isApproved: boolean) {
+  onRequestDecision(achievementTableRequest: AchievementRequestWithDetails, isApproved: boolean) {
     this.spinnerService.showSpinner();
     if (isApproved) {
       this.requestService.approveAchievementRequest(achievementTableRequest.id)

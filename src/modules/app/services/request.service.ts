@@ -3,9 +3,9 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
-import {ReadAchievementRequest} from '../models/achievement-request/read-achievement-request';
+import {AchievementRequestWithDetails} from '../models/achievement-request/achievement-request-with-details';
 import {User} from '../models/user/user';
-import {ReturningPagingInfo} from '../models/user/return-page-info';
+import {PaginatedData} from '../models/paginated-data';
 import {Achievement} from '../models/achievement/achievement';
 import {OrderCreate} from '../models/orders/order-create';
 import {Order} from '../models/orders/order';
@@ -48,12 +48,12 @@ export class RequestService {
     );
   }
 
-  public getAllAchievements(currentPage: number = 1, pageSize: number = 0): Observable<ReturningPagingInfo<Achievement>> {
+  public getAllAchievements(currentPage: number = 1, pageSize: number = 0): Observable<PaginatedData<Achievement>> {
     let params = new HttpParams();
     params = params.append('currentPage', currentPage.toString());
     params = params.append('pageSize', pageSize.toString());
 
-    return this.httpClient.get<ReturningPagingInfo<Achievement>>(`${this.apiUrl}/api/achievements`, {params});
+    return this.httpClient.get<PaginatedData<Achievement>>(`${this.apiUrl}/api/achievements`, {params});
   }
 
 
@@ -73,8 +73,8 @@ export class RequestService {
     );
   }
 
-  public getAllAchievementRequests(): Observable<ReadAchievementRequest[]> {
-    return this.httpClient.get<ReadAchievementRequest[]>(
+  public getAllAchievementRequests(): Observable<AchievementRequestWithDetails[]> {
+    return this.httpClient.get<AchievementRequestWithDetails[]>(
       environment.apiUrl + '/api/request-achievement'
     );
   }
@@ -109,12 +109,12 @@ export class RequestService {
   }
 
   // Orders Requests
-  getOrders(currentPage: number = 1, pageSize: number = 0): Observable<ReturningPagingInfo<OrderCreate>> {
+  getOrders(currentPage: number = 1, pageSize: number = 0): Observable<PaginatedData<OrderCreate>> {
     let params = new HttpParams();
     params = params.append('currentPage', currentPage.toString());
     params = params.append('pageSize', pageSize.toString());
 
-    return this.httpClient.get<ReturningPagingInfo<OrderCreate>>(`${this.apiUrl}/api/orders`, {params});
+    return this.httpClient.get<PaginatedData<OrderCreate>>(`${this.apiUrl}/api/orders`, {params});
   }
 
   createOrder(orderFormData: FormData): Observable<Order> {

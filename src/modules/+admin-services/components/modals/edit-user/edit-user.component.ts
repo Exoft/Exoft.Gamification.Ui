@@ -2,13 +2,13 @@ import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {FormBuilder, FormGroup} from 'ngx-strongly-typed-forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {UserService} from '../../../app/services/user.service';
-import {UpdateUser} from '../../../app/models/user/update-user';
+import {UserService} from '../../../../app/services/user.service';
+import {UserEdit} from '../../../../app/models/user/user-edit';
 import {finalize, takeUntil} from 'rxjs/operators';
 import {Validators} from '@angular/forms';
-import {getFirstLetters} from '../../../app/utils/letterAvatar';
-import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
-import {AlertService} from '../../../app/services/alert.service';
+import {getFirstLetters} from '../../../../app/utils/letterAvatar';
+import {LoadSpinnerService} from '../../../../app/services/load-spinner.service';
+import {AlertService} from '../../../../app/services/alert.service';
 
 
 @Component({
@@ -19,7 +19,7 @@ import {AlertService} from '../../../app/services/alert.service';
 export class EditUserComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();
 
-  form: FormGroup<UpdateUser>;
+  form: FormGroup<UserEdit>;
   avatarUrl: string;
 
   letterAvatar = getFirstLetters;
@@ -43,7 +43,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   private setForm() {
-    this.form = this.fb.group<UpdateUser>({
+    this.form = this.fb.group<UserEdit>({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       userName: ['', Validators.required],

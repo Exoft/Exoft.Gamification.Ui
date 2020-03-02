@@ -1,4 +1,4 @@
-export interface PostUser {
+export interface UserCreate {
   firstName: string;
   lastName: string;
   userName: string;

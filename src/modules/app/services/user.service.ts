@@ -4,8 +4,8 @@ import {Observable, BehaviorSubject} from 'rxjs';
 
 import {environment} from '../../../environments/environment';
 import {User} from '../models/user/user';
-import {PostUser} from '../models/user/post-user';
-import {UpdateUser} from '../models/user/update-user';
+import {UserCreate} from '../models/user/user-create';
+import {UserEdit} from '../models/user/user-edit';
 import {ChangePassword} from '../models/password/change-password';
 
 @Injectable({
@@ -41,7 +41,7 @@ export class UserService {
     return this.http.put<User>(environment.apiUrl + `/api/users/${userId}`, formData);
   }
 
-  public createUser(user: PostUser): Observable<User> {
+  public createUser(user: UserCreate): Observable<User> {
     const formData = new FormData();
     Object.keys(user).forEach((key: any) => {
       formData.append(key, !!user[key] ? user[key] : '');

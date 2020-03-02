@@ -1,4 +1,4 @@
-@import '../../../../assets/scss/theme-colors';
+@import '../../../../../assets/scss/theme-colors';
 
 .profile-setting-fields-container {
   width: 600px;
@@ -22,24 +22,13 @@
       right: 40px;
       top: -50px;
 
-      .avatar, .avatar-text {
+      .avatar{
         border-radius: 50%;
         width: 126px;
         height: 126px;
         object-fit: cover;
         border: 3px solid $mainColor;
         cursor: pointer;
-      }
-
-      .avatar-text {
-        color: $mainColor;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 45px;
-        background-color: $secondaryColor;
-        border: 1px solid $textColor;
-        background-color: #576271;
       }
     }
 
@@ -56,10 +45,6 @@
 
       .input-field {
         width: 100%;
-
-        &.small-input {
-          width: 45%;
-        }
       }
 
       .mat-form-field {

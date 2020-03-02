@@ -1,4 +1,4 @@
-export interface ReadUser {
+export interface UserWithShortInfo {
   id: string;
   firstName: string;
   lastName: string;

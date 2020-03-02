@@ -1,4 +1,4 @@
-export class ReturningPagingInfo<T> {
+export interface PaginatedData<T> {
   currentPage: number;
   pageSize: number;
   totalItems: number;

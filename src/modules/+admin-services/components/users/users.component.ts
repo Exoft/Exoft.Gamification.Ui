@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatDialogConfig, MatDialogRef, MatPaginator, MatTableDataSource} from '@angular/material';
 import {Subject} from 'rxjs';
-import {ReadUser} from '../../../app/models/user/read-user';
+import {UserWithShortInfo} from '../../../app/models/user/user-with-short-info';
 import {FormControl, FormGroup} from '@angular/forms';
 import {getFirstLetters} from '../../../app/utils/letterAvatar';
 import {RequestService} from '../../../app/services/request.service';
@@ -10,9 +10,9 @@ import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
 import {AlertService} from '../../../app/services/alert.service';
 import {UserService} from '../../../app/services/user.service';
 import {User} from '../../../app/models/user/user';
-import {AddUserComponent} from '../add-user/add-user.component';
-import {EditUserComponent} from '../edit-user/edit-user.component';
-import {AssignAchievementsComponent} from '../assign-achievements/assign-achievements.component';
+import {AddUserComponent} from '../modals/add-user/add-user.component';
+import {EditUserComponent} from '../modals/edit-user/edit-user.component';
+import {AssignAchievementsComponent} from '../modals/assign-achievements/assign-achievements.component';
 
 @Component({
   selector: 'app-users',
@@ -25,7 +25,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();
   private dialogRef: MatDialogRef<any>;
 
-  userData: ReadUser[] = [];
+  userData: UserWithShortInfo[] = [];
   currentUser: FormGroup;
 
   letterAvatar = getFirstLetters;
@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   paginatorPageSizeOptions: number[] = [5, 10, 20, 50];
 
   displayedColumnsUser: string[] = ['avatar', 'firstName', 'lastName', 'xp', 'actions'];
-  dataSourceUser = new MatTableDataSource<ReadUser>();
+  dataSourceUser = new MatTableDataSource<UserWithShortInfo>();
   userPaginatorTotalItems = 0;
   userFilterForm = new FormGroup({
     page: new FormControl(1),
@@ -109,7 +109,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.dialogRef = this.dialog.open(EditUserComponent, dialogConfig);
     this.dialogRef.afterClosed()
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((result: ReadUser) => {
+      .subscribe((result: UserWithShortInfo) => {
         if (result) {
           this.dataSourceUser.data[
             this.dataSourceUser.data.indexOf(
@@ -119,7 +119,7 @@ export class UsersComponent implements OnInit, OnDestroy {
       });
   }
 
-  deleteUser(user: ReadUser) {
+  deleteUser(user: UserWithShortInfo) {
     this.spinnerService.showSpinner();
     this.userService.deleteUserById(user.id)
       .pipe(finalize(() => this.spinnerService.hideSpinner()), takeUntil(this.unsubscribe$))

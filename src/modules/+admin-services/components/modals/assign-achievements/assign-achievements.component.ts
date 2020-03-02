@@ -1,16 +1,16 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {AchievementsService} from '../../../app/services/achievements.service';
+import {AchievementsService} from '../../../../app/services/achievements.service';
 import {MatCheckboxChange} from '@angular/material/checkbox';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Achievement} from 'src/modules/app/models/achievement/achievement';
 import {FormBuilder, FormGroup, FormArray} from 'ngx-strongly-typed-forms';
 import {forkJoin, Observable} from 'rxjs';
-import {ReturningPagingInfo} from 'src/modules/app/models/user/return-page-info';
-import {UserAchievement} from '../../../app/models/achievement/user-achievement';
-import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
+import {PaginatedData} from 'src/modules/app/models/paginated-data';
+import {UserAchievement} from '../../../../app/models/achievement/user-achievement';
+import {LoadSpinnerService} from '../../../../app/services/load-spinner.service';
 import {finalize} from 'rxjs/operators';
-import {AlertService} from '../../../app/services/alert.service';
-import {AssignUserAchievement} from '../../../app/models/achievement/assign-user-achievement';
+import {AlertService} from '../../../../app/services/alert.service';
+import {AssignUserAchievement} from '../../../../app/models/achievement/assign-user-achievement';
 
 export class Achievements {
   achievements: UserSelectedAchievement[];
@@ -85,7 +85,7 @@ export class AssignAchievementsComponent implements OnInit {
   }
 
   private loadData() {
-    const requests: Observable<ReturningPagingInfo<Achievement | UserAchievement>>[] = [
+    const requests: Observable<PaginatedData<Achievement | UserAchievement>>[] = [
       this.achievementsService.getAllAchievements(),
       this.achievementsService.getAchievementsByUserId(this.data)
     ];

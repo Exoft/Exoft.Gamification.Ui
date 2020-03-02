@@ -1,15 +1,15 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
-import {AchievementsService} from '../../../app/services/achievements.service';
+import {AchievementsService} from '../../../../app/services/achievements.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {environment} from '../../../../environments/environment';
+import {environment} from '../../../../../environments/environment';
 import {finalize, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
-import {PostAchievement} from 'src/modules/app/models/achievement/post-achievement';
+import {AchievementCreate} from 'src/modules/app/models/achievement/achievement-create';
 import {Achievement} from 'src/modules/app/models/achievement/achievement';
 import {Validators} from '@angular/forms';
-import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
-import {AlertService} from '../../../app/services/alert.service';
+import {LoadSpinnerService} from '../../../../app/services/load-spinner.service';
+import {AlertService} from '../../../../app/services/alert.service';
 
 @Component({
   selector: 'app-edit-achievement',
@@ -19,7 +19,7 @@ import {AlertService} from '../../../app/services/alert.service';
 export class EditAchievementComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();
 
-  form: FormGroup<PostAchievement>;
+  form: FormGroup<AchievementCreate>;
   iconUrl: string;
 
   constructor(
@@ -41,7 +41,7 @@ export class EditAchievementComponent implements OnInit, OnDestroy {
   }
 
   private setForm() {
-    this.form = this.fb.group<PostAchievement>({
+    this.form = this.fb.group<AchievementCreate>({
       name: [this.data.name, Validators.required],
       description: [this.data.description, Validators.required],
       xp: [+this.data.xp, [Validators.required, Validators.pattern('^[0-9]+$')]],

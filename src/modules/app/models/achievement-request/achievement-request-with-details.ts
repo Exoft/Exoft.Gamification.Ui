@@ -1,4 +1,4 @@
-export interface ReadAchievementRequest {
+export interface AchievementRequestWithDetails {
   id: string;
   userId: string;
   achievementId: string;

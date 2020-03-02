@@ -1,4 +1,4 @@
-export interface PostAchievement {
+export interface AchievementCreate {
   name: string;
   description: string;
   xp: number;

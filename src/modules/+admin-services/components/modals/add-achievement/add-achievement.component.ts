@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder} from 'ngx-strongly-typed-forms';
 import {Validators} from '@angular/forms';
-import {AchievementsService} from '../../../app/services/achievements.service';
+import {AchievementsService} from '../../../../app/services/achievements.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {Subject} from 'rxjs';
-import {PostAchievement} from 'src/modules/app/models/achievement/post-achievement';
+import {AchievementCreate} from 'src/modules/app/models/achievement/achievement-create';
 import {finalize, takeUntil} from 'rxjs/operators';
-import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
-import {AlertService} from '../../../app/services/alert.service';
+import {LoadSpinnerService} from '../../../../app/services/load-spinner.service';
+import {AlertService} from '../../../../app/services/alert.service';
 
 
 @Component({
@@ -18,7 +18,7 @@ import {AlertService} from '../../../app/services/alert.service';
 export class AddAchievementComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();
 
-  form: FormGroup<PostAchievement>;
+  form: FormGroup<AchievementCreate>;
   iconUrl: string;
 
   constructor(
@@ -39,7 +39,7 @@ export class AddAchievementComponent implements OnInit, OnDestroy {
   }
 
   private setForm() {
-    this.form = this.fb.group<PostAchievement>({
+    this.form = this.fb.group<AchievementCreate>({
       name: ['', Validators.required],
       description: ['', Validators.required],
       xp: [null, [Validators.required, Validators.pattern('^[0-9]+$')]],
