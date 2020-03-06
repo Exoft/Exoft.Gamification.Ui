@@ -1,7 +1,11 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../../../../app/services/user.service';
 import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {finalize, takeUntil} from 'rxjs/operators';
+import {RequestService} from '../../../../app/services/request.service';
+import {LoadSpinnerService} from '../../../../app/services/load-spinner.service';
+import {AlertService} from '../../../../app/services/alert.service';
+import {Order} from '../../../../app/models/orders/order';
 
 @Component({
   selector: 'app-orders',
@@ -13,83 +17,6 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
   private unsubscribe: Subject<void> = new Subject();
 
-  products = [
-    {
-      image: 'http://unsplash.it/600/400?image=1054',
-      title: 'Product title',
-      price: '250'
-    },
-    {
-      image: 'http://unsplash.it/1024/768?image=1071',
-      title: 'Product title',
-      price: '537'
-    },
-    {
-      image: 'http://unsplash.it/500/760?image=1076',
-      title: 'Product title',
-      price: '378'
-    },
-    {
-      image: 'http://unsplash.it/600/400?image=1080',
-      title: 'Product title',
-      price: '1000'
-    },
-    {
-      image: 'http://unsplash.it/600/400?image=1054',
-      title: 'Product title',
-      price: '250'
-    },
-    {
-      image: 'http://unsplash.it/1024/768?image=1077',
-      title: 'Product title',
-      price: '537'
-    },
-    {
-      image: 'http://unsplash.it/500/760?image=1076',
-      title: 'Product title',
-      price: '378'
-    },
-    {
-      image: 'http://unsplash.it/600/400?image=1016',
-      title: 'Product title',
-      price: '1000'
-    },
-    {
-      image: 'http://unsplash.it/600/400?image=981',
-      title: 'Product title',
-      price: '250'
-    },
-    {
-      image: 'http://unsplash.it/1024/768?image=1071',
-      title: 'Product title',
-      price: '537'
-    },
-    {
-      image: 'http://unsplash.it/500/760?image=1069',
-      title: 'Product title',
-      price: '378'
-    },
-    {
-      image: 'http://unsplash.it/600/400?image=1016',
-      title: 'Product title',
-      price: '1000'
-    },
-    {
-      image: 'http://unsplash.it/600/400?image=1054',
-      title: 'Product title',
-      price: '250'
-    },
-    {
-      image: 'http://unsplash.it/1024/768?image=1071',
-      title: 'Product title',
-      price: '537'
-    },
-    {
-      image: 'http://unsplash.it/500/760?image=1079',
-      title: 'Product title',
-      price: '378'
-    }
-  ];
   productsTypes = [
     {
       title: 'Apple'
@@ -123,6 +50,8 @@ export class OrdersComponent implements OnInit, OnDestroy {
     }
   ];
 
+  products: Order[] = [];
+
   userData;
 
   costSliderOptions = {
@@ -134,15 +63,17 @@ export class OrdersComponent implements OnInit, OnDestroy {
     return window.innerHeight > window.innerWidth || window.innerWidth < 768 ? [0, 1] : [0, 1, 2, 3];
   }
 
-  constructor(private readonly userService: UserService) {
+  constructor(private readonly userService: UserService,
+              private readonly requestService: RequestService,
+              private readonly spinnerService: LoadSpinnerService,
+              private readonly alertService: AlertService) {
   }
 
   ngOnInit() {
-    this.products.forEach(product => {
-      product['size'] = this.getProductCardSize();
-    });
+
 
     this.getUserData();
+    this.loadProducts();
   }
 
   ngOnDestroy() {
@@ -154,6 +85,24 @@ export class OrdersComponent implements OnInit, OnDestroy {
     this.userService.getUserData()
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(res => this.userData = res);
+  }
+
+  private loadProducts() {
+    this.spinnerService.showSpinner();
+
+    this.requestService.getOrders()
+      .pipe(finalize(() => this.spinnerService.hideSpinner()))
+      .subscribe(res => {
+          this.products = res.data;
+          this.setProductsSize();
+        },
+        error => this.alertService.error());
+  }
+
+  private setProductsSize() {
+    this.products.forEach(product => {
+      product.size = this.getProductCardSize();
+    });
   }
 
   getProductsByColumn(columnIndex: number) {
@@ -182,6 +131,10 @@ export class OrdersComponent implements OnInit, OnDestroy {
   }
 
   scrollToTop() {
-    this.filtersContainer.nativeElement.scrollIntoView({ top: -200, behavior: 'smooth' });
+    this.filtersContainer.nativeElement.scrollIntoView({top: -200, behavior: 'smooth'});
+  }
+
+  getImage(imageId: string) {
+    return this.requestService.getAvatar(imageId);
   }
 }

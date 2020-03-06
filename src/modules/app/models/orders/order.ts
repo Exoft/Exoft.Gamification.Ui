@@ -6,6 +6,8 @@ export interface Order {
   description: string;
   price: number;
   popularity: 0;
-  icon: string;
+  iconId: string;
   categories: Category[];
+
+  size: string;
 }

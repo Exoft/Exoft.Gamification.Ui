@@ -9,6 +9,7 @@ import {AlertService} from '../../../app/services/alert.service';
 import {finalize, takeUntil} from 'rxjs/operators';
 import {AddUserComponent} from '../modals/add-user/add-user.component';
 import {EditOrderComponent} from '../modals/edit-order/edit-order.component';
+import {Order} from '../../../app/models/orders/order';
 
 @Component({
   selector: 'app-orders',
@@ -21,12 +22,12 @@ export class OrdersComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();
   private dialogRef: MatDialogRef<any>;
 
-  ordersData: OrderCreate[];
+  ordersData: Order[] = [];
 
   paginatorPageSizeOptions: number[] = [5, 10, 20, 50];
 
   displayedColumns: string[] = ['icon', 'title', 'description', 'price', 'actions'];
-  dataSource = new MatTableDataSource<OrderCreate>();
+  dataSource = new MatTableDataSource<Order>();
   paginatorTotalItems = 0;
   filterForm = new FormGroup({
     page: new FormControl(1),
@@ -91,6 +92,20 @@ export class OrdersComponent implements OnInit, OnDestroy {
   }
 
   editOrder(order: OrderCreate) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = false;
+    dialogConfig.backdropClass = 'edit-user-dialog-backdrop';
+    dialogConfig.panelClass = 'edit-user-dialog';
+    dialogConfig.data = order;
+
+    this.dialogRef = this.dialog.open(EditOrderComponent, dialogConfig);
+    this.dialogRef.afterClosed()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(res => {
+        if (!!res) {
+          this.loadData();
+        }
+      });
   }
 
   paginatorEvent(event) {

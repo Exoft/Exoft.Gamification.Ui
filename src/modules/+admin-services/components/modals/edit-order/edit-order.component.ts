@@ -29,7 +29,7 @@ export class EditOrderComponent implements OnInit {
 
   ngOnInit() {
     this.setForm();
-    this.iconUrl = !!this.order ? this.getImageUrl(this.order.icon as string) : null;
+    this.iconUrl = !!this.order ? this.getImageUrl(this.order.iconId as string) : null;
   }
 
   setForm() {
@@ -39,7 +39,7 @@ export class EditOrderComponent implements OnInit {
       title: [!!orderDataToSet ? orderDataToSet.title : null, Validators.required],
       description: [!!orderDataToSet ? orderDataToSet.description : null, Validators.required],
       price: [!!orderDataToSet ? orderDataToSet.price : null, Validators.required],
-      icon: [!!orderDataToSet ? orderDataToSet.icon : null, Validators.required],
+      icon: [!!orderDataToSet ? orderDataToSet.iconId : null, Validators.required],
       // TODO: set user chosen product types
       categoryIds: ['C4BE6A02-2BF8-4BB6-B7E7-2A4A77EDD377']
     });
@@ -70,9 +70,12 @@ export class EditOrderComponent implements OnInit {
       formData.append(key, order[key]);
     });
 
+    const request = !!this.order
+      ? this.requestService.updateOrder(formData, order.id)
+      : this.requestService.createOrder(formData);
+
     this.spinnerService.showSpinner();
-    this.requestService.createOrder(formData)
-      .pipe(finalize(() => this.spinnerService.hideSpinner()))
+    request.pipe(finalize(() => this.spinnerService.hideSpinner()))
       .subscribe(res => {
           this.alertService.success('Data was successfully saved!');
           this.dialog.close(true);

@@ -84,7 +84,7 @@
                   *ngFor="let product of getProductsByColumn(columnIndex)"
                   [ngClass]="product.size">
           <img class="product-image"
-               [src]="product.image">
+               [src]="getImage(product.iconId)">
 
           <div class="product-info-container">
             <div class="title">{{product.title}}</div>

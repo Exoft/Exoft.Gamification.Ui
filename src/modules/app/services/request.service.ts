@@ -109,16 +109,20 @@ export class RequestService {
   }
 
   // Orders Requests
-  getOrders(currentPage: number = 1, pageSize: number = 0): Observable<PaginatedData<OrderCreate>> {
+  getOrders(currentPage: number = 1, pageSize: number = 0): Observable<PaginatedData<Order>> {
     let params = new HttpParams();
     params = params.append('currentPage', currentPage.toString());
     params = params.append('pageSize', pageSize.toString());
 
-    return this.httpClient.get<PaginatedData<OrderCreate>>(`${this.apiUrl}/api/orders`, {params});
+    return this.httpClient.get<PaginatedData<Order>>(`${this.apiUrl}/api/orders`, {params});
   }
 
-  createOrder(orderFormData: FormData): Observable<Order> {
-    return this.httpClient.post<Order>(`${this.apiUrl}/api/orders`, orderFormData);
+  createOrder(orderFormData: FormData): Observable<OrderCreate> {
+    return this.httpClient.post<OrderCreate>(`${this.apiUrl}/api/orders`, orderFormData);
+  }
+
+  updateOrder(orderFormData: FormData, orderId: string) {
+    return this.httpClient.put(`${this.apiUrl}/api/orders/${orderId}`, orderFormData);
   }
 
   deleteOrder(orderId: string) {
