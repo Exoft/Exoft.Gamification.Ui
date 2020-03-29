@@ -36,6 +36,20 @@
           Field is required
         </mat-error>
       </mat-form-field>
+
+      <div class="categories-chapter-title">CATEGORIES</div>
+
+      <div class="categories-container">
+        <div class="category"
+             *ngFor="let category of categories"
+             [ngClass]="!isCategorySelected(category) && 'not-selected'"
+             (click)="onCategoryClick(category)">
+          <img class="category-icon"
+               [src]="getImageUrl(category.iconId)">
+
+          <div class="category-title">{{category.name}}</div>
+        </div>
+      </div>
     </div>
 
     <button mat-button type="submit" class="save-button" [disabled]="form.invalid">

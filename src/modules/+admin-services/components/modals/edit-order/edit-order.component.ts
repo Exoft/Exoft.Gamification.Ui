@@ -8,6 +8,8 @@ import {OrderCreate} from '../../../../app/models/orders/order-create';
 import {Validators} from '@angular/forms';
 import {finalize} from 'rxjs/operators';
 import {Order} from '../../../../app/models/orders/order';
+import {Category} from '../../../../app/models/categories/category';
+import {CategoriesComponent} from '../../categories/categories.component';
 
 @Component({
   selector: 'app-edit-order',
@@ -15,9 +17,10 @@ import {Order} from '../../../../app/models/orders/order';
   styleUrls: ['./edit-order.component.scss']
 })
 export class EditOrderComponent implements OnInit {
-
   form: FormGroup<OrderCreate>;
   iconUrl: string;
+
+  categories: Category[];
 
   constructor(private readonly requestService: RequestService,
               private readonly alertService: AlertService,
@@ -28,21 +31,36 @@ export class EditOrderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadCategories();
     this.setForm();
     this.iconUrl = !!this.order ? this.getImageUrl(this.order.iconId as string) : null;
   }
 
-  setForm() {
+  private loadCategories() {
+    this.spinnerService.showSpinner();
+    this.requestService.getCategories()
+      .pipe(finalize(() => this.spinnerService.hideSpinner()))
+      .subscribe(res => {
+        this.categories = res.data;
+      });
+  }
+
+  private setForm() {
     const orderDataToSet = !!this.order ? this.order : null;
+
     this.form = this.fb.group<OrderCreate>({
       id: !!orderDataToSet ? orderDataToSet.id : null,
       title: [!!orderDataToSet ? orderDataToSet.title : null, Validators.required],
       description: [!!orderDataToSet ? orderDataToSet.description : null, Validators.required],
       price: [!!orderDataToSet ? orderDataToSet.price : null, Validators.required],
       icon: [!!orderDataToSet ? orderDataToSet.iconId : null, Validators.required],
-      // TODO: set user chosen product types
-      categoryIds: ['C4BE6A02-2BF8-4BB6-B7E7-2A4A77EDD377']
+      categoryIds: !!orderDataToSet ? [] : null
     });
+
+    const categoriesIds = !!orderDataToSet && !!orderDataToSet.categories ? orderDataToSet.categories.map(c => c.id) : [];
+    this.form.controls.categoryIds.setValue(categoriesIds);
+
+    debugger
   }
 
   private getImageUrl(imageId: string) {
@@ -81,5 +99,27 @@ export class EditOrderComponent implements OnInit {
           this.dialog.close(true);
         },
         error => this.alertService.error());
+  }
+
+  isCategorySelected(category: Category) {
+    const selectedCategories = this.form.value.categoryIds;
+    return !!selectedCategories ? selectedCategories.some(selectedCategory => selectedCategory === category.id) : false;
+  }
+
+  onCategoryClick(category: Category) {
+    if (!this.form.value.categoryIds) {
+      this.form.controls.categoryIds.setValue([]);
+    }
+
+    const selectedCategories = this.form.value.categoryIds;
+
+    if (this.isCategorySelected(category)) {
+      const categoryIndex = selectedCategories.findIndex(selectedCategory => selectedCategory === category.id);
+      selectedCategories.splice(categoryIndex, 1);
+    } else {
+      selectedCategories.push(category.id);
+    }
+
+    this.form.controls.categoryIds.setValue(selectedCategories);
   }
 }

@@ -1,0 +1,53 @@
+@import "../../../../../styles";
+
+.categories-chapter-title {
+  color: $textColor;
+  font-size: 1.8vmin;
+  margin: 1vmin 0 1.7vmin;
+}
+
+.categories-container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  max-height: 18vmin;
+  overflow: auto;
+
+  .category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: $textColor;
+    margin: 0 0 2vmin 1.4vmin;
+    width: 8vmin;
+    user-select: none;
+
+    &.not-selected {
+      opacity: 0.5;
+    }
+
+    &:nth-child(6n-5) {
+      margin-left: 0;
+    }
+
+    &:nth-last-child(-n + 6) {
+      margin-bottom: 0;
+    }
+
+    .category-icon {
+      border: 0.2vmin solid $mainColor;
+      border-radius: 50%;
+      height: 5vmin;
+      width: 5vmin;
+      margin: 0 0 0.5vmin;
+      object-fit: cover;
+      cursor: pointer;
+
+    }
+
+    .category-title {
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+}
