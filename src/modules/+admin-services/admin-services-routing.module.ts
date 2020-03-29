@@ -4,6 +4,7 @@ import {UsersComponent} from './components/users/users.component';
 import {AchievementsComponent} from './components/achievements/achievements.component';
 import {AchievementsRequestsComponent} from './components/achievements-requests/achievements-requests.component';
 import {OrdersComponent} from './components/orders/orders.component';
+import {CategoriesComponent} from './components/categories/categories.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'orders',
     component: OrdersComponent
+  },
+  {
+    path: 'categories',
+    component: CategoriesComponent
   },
   {
     path: '',

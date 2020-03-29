@@ -12,6 +12,8 @@ import {CommonModule} from '@angular/common';
 import {AdminServicesRoutingModule} from './admin-services-routing.module';
 import {OrdersComponent} from './components/orders/orders.component';
 import {EditOrderComponent} from './components/modals/edit-order/edit-order.component';
+import {CategoriesComponent} from './components/categories/categories.component';
+import {EditCategoryComponent} from './components/modals/edit-category/edit-category.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import {EditOrderComponent} from './components/modals/edit-order/edit-order.comp
     EditAchievementComponent,
     EditUserComponent,
     OrdersComponent,
-    EditOrderComponent
+    EditOrderComponent,
+    CategoriesComponent,
+    EditCategoryComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +42,8 @@ import {EditOrderComponent} from './components/modals/edit-order/edit-order.comp
     AssignAchievementsComponent,
     EditAchievementComponent,
     EditUserComponent,
-    EditOrderComponent
+    EditOrderComponent,
+    EditCategoryComponent
   ]
 })
 export class AdminServicesModule {

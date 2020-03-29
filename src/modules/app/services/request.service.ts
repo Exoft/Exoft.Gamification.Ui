@@ -9,6 +9,7 @@ import {PaginatedData} from '../models/paginated-data';
 import {Achievement} from '../models/achievement/achievement';
 import {OrderCreate} from '../models/orders/order-create';
 import {Order} from '../models/orders/order';
+import {Category} from '../models/categories/category';
 
 
 @Injectable({
@@ -127,5 +128,26 @@ export class RequestService {
 
   deleteOrder(orderId: string) {
     return this.httpClient.delete(`${this.apiUrl}/api/orders/${orderId}`);
+  }
+
+  // Categories Requests
+  getCategories(currentPage: number = 1, pageSize: number = 0): Observable<PaginatedData<Category>> {
+    let params = new HttpParams();
+    params = params.append('currentPage', currentPage.toString());
+    params = params.append('pageSize', pageSize.toString());
+
+    return this.httpClient.get<PaginatedData<Category>>(`${this.apiUrl}/api/categories`, {params});
+  }
+
+  createCategory(categoryFormData: FormData): Observable<Category> {
+    return this.httpClient.post<Category>(`${this.apiUrl}/api/categories`, categoryFormData);
+  }
+
+  updateCategory(categoryFormData: FormData, categoryId: string) {
+    return this.httpClient.put(`${this.apiUrl}/api/categories/${categoryId}`, categoryFormData);
+  }
+
+  deleteCategory(orderId: string) {
+    return this.httpClient.delete(`${this.apiUrl}/api/categories/${orderId}`);
   }
 }

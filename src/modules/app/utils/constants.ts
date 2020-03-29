@@ -29,5 +29,9 @@ export const adminMenuItems = [
   {
     name: 'Orders',
     link: '/admin/orders'
+  },
+  {
+    name: 'Categories',
+    link: '/admin/categories'
   }
 ];

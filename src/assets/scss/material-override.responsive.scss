@@ -77,8 +77,14 @@
         }
       }
 
+      .mat-input-element {
+        font-size: 2.5vmin;
+      }
+
       .mat-form-field-infix {
-       height: 8vmin;
+        height: 8vmin;
+        display: flex;
+
         .mat-input-element {
           font-size: 3vmin;
         }

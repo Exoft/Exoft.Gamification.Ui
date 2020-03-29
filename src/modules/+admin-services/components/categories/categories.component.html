@@ -3,43 +3,32 @@
     <th mat-header-cell *matHeaderCellDef>Icon</th>
 
     <td mat-cell *matCellDef="let element">
-     <img [src]="getImageUrl(element.iconId)"  class="avatar">
+      <img [src]="getImageUrl(element.iconId)"  class="avatar">
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef> Title</th>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name</th>
 
-    <td mat-cell *matCellDef="let element"> {{element.title}}</td>
+    <td mat-cell *matCellDef="let element"> {{element.name}}</td>
   </ng-container>
 
-  <ng-container matColumnDef="description">
-    <th mat-header-cell *matHeaderCellDef> Description</th>
-
-    <td mat-cell *matCellDef="let element"> {{element.description}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef> Price</th>
-
-    <td mat-cell *matCellDef="let element"> {{element.price}} XP</td>
-  </ng-container>
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>
-      <button mat-button class="manage-button" (click)="addOrder()">Add</button>
+      <button mat-button class="manage-button" (click)="addCategory()">Add</button>
     </th>
 
     <td mat-cell class="admin-page-actions" *matCellDef="let element">
       <button mat-button
               class="manage-button"
-              (click)="editOrder(element)">
+              (click)="editCategory(element)">
         Edit
       </button>
 
       <button mat-button
               class="manage-button"
-              (click)="deleteOrder(element)">
+              (click)="deleteCategory(element)">
         Delete
       </button>
     </td>
@@ -49,7 +38,7 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<mat-paginator #ordersPaginator
+<mat-paginator #categoriesPaginator
                class="admin-table-paginator"
                [length]="paginatorTotalItems"
                [pageSize]="filterForm?.value.limit"
