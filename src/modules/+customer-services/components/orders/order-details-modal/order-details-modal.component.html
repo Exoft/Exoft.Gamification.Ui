@@ -1,1 +1,25 @@
-<p>order-details-modal works!</p>
+<div class="modal-fields-container">
+  <div class="modal-form">
+    <label class="image-container">
+      <img [src]="getImageUrl(data.order.iconId)" class="image"/>
+    </label>
+
+    <div class="order-title">{{data.order.title}}</div>
+
+    <div class="order-categories-list container-with-padding">
+      <img [src]="this.getImageUrl(category.iconId)" *ngFor="let category of data.order.categories" class="avatar">
+    </div>
+
+    <div class="order-description container-with-padding">
+      {{data.order.description}}
+    </div>
+
+    <div class="order-price container-with-padding">
+      Price: {{data.order.price}} XP
+    </div>
+
+    <button mat-button type="submit" class="save-button" [disabled]="data.order.price > data.availableXp">
+      REQUEST
+    </button>
+  </div>
+</div>

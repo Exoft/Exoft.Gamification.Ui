@@ -7,6 +7,9 @@ import {LoadSpinnerService} from '../../../../app/services/load-spinner.service'
 import {AlertService} from '../../../../app/services/alert.service';
 import {Order} from '../../../../app/models/orders/order';
 import {Category} from '../../../../app/models/categories/category';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {EditOrderComponent} from '../../../../+admin-services/components/modals/edit-order/edit-order.component';
+import {OrderDetailsModalComponent} from '../order-details-modal/order-details-modal.component';
 
 @Component({
   selector: 'app-orders',
@@ -17,6 +20,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
   @ViewChild('filtersContainer', {static: true}) filtersContainer: ElementRef;
 
   private unsubscribe: Subject<void> = new Subject();
+  private dialogRef: MatDialogRef<any>;
 
   productsTypes: Category[] = [];
 
@@ -36,7 +40,8 @@ export class OrdersComponent implements OnInit, OnDestroy {
   constructor(private readonly userService: UserService,
               private readonly requestService: RequestService,
               private readonly spinnerService: LoadSpinnerService,
-              private readonly alertService: AlertService) {
+              private readonly alertService: AlertService,
+              private readonly dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -49,6 +54,10 @@ export class OrdersComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();
+
+    if (!!this.dialogRef) {
+      this.dialogRef.close();
+    }
   }
 
   private getUserData() {
@@ -111,5 +120,22 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
   getImage(imageId: string) {
     return this.requestService.getAvatar(imageId);
+  }
+
+  openOrderDetails(order: Order) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = false;
+    dialogConfig.backdropClass = 'edit-user-dialog-backdrop';
+    dialogConfig.panelClass = 'edit-user-dialog';
+    dialogConfig.data = {order, availableXp: this.userData.xp};
+
+    this.dialogRef = this.dialog.open(OrderDetailsModalComponent, dialogConfig);
+    this.dialogRef.afterClosed()
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(res => {
+        // if (!!res) {
+        //   this.loadData();
+        // }
+      });
   }
 }

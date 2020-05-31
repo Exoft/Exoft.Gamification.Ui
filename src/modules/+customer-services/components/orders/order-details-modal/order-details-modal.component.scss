@@ -1,0 +1,47 @@
+@import "../../../../../assets/scss/theme-colors";
+
+.order-title {
+  width: 100%;
+  color: #FFFFFF;
+  font-size: 4vmin;
+  padding: 3vmin 3vmin 0;
+}
+
+.order-categories-list {
+  display: flex;
+  width: 100%;
+  margin: 3vmin 0;
+
+  .avatar {
+    margin: 0 1vmin 0 0;
+    height: 5vmin;
+    width: 5vmin;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 0.1vmin solid $mainColor;
+    user-select: none;
+    background-size: cover;
+  }
+}
+
+.order-description {
+  color: $textColor;
+  width: 100%;
+  font-size: 2vmin;
+  text-align: justify;
+  font-weight: 300;
+}
+
+.order-price {
+  color: $textColor;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 2vmin 0 3vmin;
+  font-size: 1.7vmin;
+}
+
+
+.container-with-padding {
+  padding: 0 3vmin;
+}

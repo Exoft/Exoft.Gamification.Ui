@@ -1,4 +1,4 @@
-<div class="orders-page-wrapper" >
+<div class="orders-page-wrapper">
   <div class="message-text mobile">
     <div class="big-text">
       Hey, <b>{{userData?.firstName}}</b>!
@@ -7,7 +7,7 @@
   </div>
 
   <div class="filter card-container" #filtersContainer>
-    <div class="filter-section" >
+    <div class="filter-section">
       <div class="filter-name name-before-input">SEARCH</div>
 
       <mat-form-field class="filter-input" appearance="outline">
@@ -92,7 +92,8 @@
               <div class="price">{{product.price}} XP</div>
 
               <button mat-button
-                      class="details-button">Details
+                      class="details-button"
+                      (click)="openOrderDetails(product)">Details
               </button>
             </div>
           </div>
