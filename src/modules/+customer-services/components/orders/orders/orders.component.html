@@ -34,8 +34,8 @@
       <div class="product-types-container">
         <img class="product-type-image"
              *ngFor="let productType of productsTypes"
-             src="../../../../../assets/images/star-small-image.png"
-             [matTooltip]="productType.title">
+             [src]="getImage(productType.iconId)"
+             [matTooltip]="productType.name">
       </div>
     </div>
 
@@ -58,9 +58,8 @@
         <span class="from-to-text">XP</span>
       </div>
 
-      <ng5-slider value="50" highValue="900" [options]="costSliderOptions" class="cost-slider"></ng5-slider>
+      <ng5-slider value="0" highValue="1200" [options]="costSliderOptions" class="cost-slider"></ng5-slider>
     </div>
-
   </div>
 
   <div class="hidden-filter">

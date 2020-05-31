@@ -1,11 +1,12 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../../../../app/services/user.service';
-import {Subject} from 'rxjs';
+import {forkJoin, Subject} from 'rxjs';
 import {finalize, takeUntil} from 'rxjs/operators';
 import {RequestService} from '../../../../app/services/request.service';
 import {LoadSpinnerService} from '../../../../app/services/load-spinner.service';
 import {AlertService} from '../../../../app/services/alert.service';
 import {Order} from '../../../../app/models/orders/order';
+import {Category} from '../../../../app/models/categories/category';
 
 @Component({
   selector: 'app-orders',
@@ -17,38 +18,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
   private unsubscribe: Subject<void> = new Subject();
 
-  productsTypes = [
-    {
-      title: 'Apple'
-    },
-    {
-      title: 'Xiaomi'
-    },
-    {
-      title: 'Android'
-    },
-    {
-      title: 'Health'
-    },
-    {
-      title: 'Android'
-    },
-    {
-      title: 'Xiaomi'
-    },
-    {
-      title: 'Health'
-    },
-    {
-      title: 'Apple'
-    },
-    {
-      title: 'Xiaomi'
-    },
-    {
-      title: 'Apple'
-    }
-  ];
+  productsTypes: Category[] = [];
 
   products: Order[] = [];
 
@@ -90,13 +60,18 @@ export class OrdersComponent implements OnInit, OnDestroy {
   private loadProducts() {
     this.spinnerService.showSpinner();
 
-    this.requestService.getOrders()
-      .pipe(finalize(() => this.spinnerService.hideSpinner()))
+    const requests = [
+      this.requestService.getOrders(),
+      this.requestService.getCategories()
+    ];
+
+    forkJoin(requests).pipe(finalize(() => this.spinnerService.hideSpinner()), takeUntil(this.unsubscribe))
       .subscribe(res => {
-          this.products = res.data;
-          this.setProductsSize();
-        },
-        error => this.alertService.error());
+        this.products = res[0].data as Order[];
+        this.setProductsSize();
+
+        this.productsTypes = res[1].data as Category[];
+      }, error => this.alertService.error());
   }
 
   private setProductsSize() {

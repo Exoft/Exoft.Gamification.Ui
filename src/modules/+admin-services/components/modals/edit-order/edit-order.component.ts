@@ -9,7 +9,6 @@ import {Validators} from '@angular/forms';
 import {finalize} from 'rxjs/operators';
 import {Order} from '../../../../app/models/orders/order';
 import {Category} from '../../../../app/models/categories/category';
-import {CategoriesComponent} from '../../categories/categories.component';
 
 @Component({
   selector: 'app-edit-order',
@@ -59,8 +58,6 @@ export class EditOrderComponent implements OnInit {
 
     const categoriesIds = !!orderDataToSet && !!orderDataToSet.categories ? orderDataToSet.categories.map(c => c.id) : [];
     this.form.controls.categoryIds.setValue(categoriesIds);
-
-    debugger
   }
 
   private getImageUrl(imageId: string) {
