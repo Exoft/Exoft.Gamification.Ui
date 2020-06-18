@@ -18,7 +18,7 @@
       Price: {{data.order.price}} XP
     </div>
 
-    <button mat-button type="submit" class="save-button" [disabled]="data.order.price > data.availableXp">
+    <button mat-button type="submit" class="save-button" [disabled]="data.order.price > data.availableXp" (click)="requestOrder()">
       REQUEST
     </button>
   </div>

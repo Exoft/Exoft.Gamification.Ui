@@ -17,6 +17,7 @@ import {TotalAchievementsAndExpComponent} from './components/badges/total-achiev
 import {UserComponent} from './components/badges/user/user.component';
 import {OrdersComponent} from './components/orders/orders/orders.component';
 import {OrderDetailsModalComponent} from './components/orders/order-details-modal/order-details-modal.component';
+import {RequestOrderModalComponent} from './components/orders/request-order-modal/request-order-modal.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {OrderDetailsModalComponent} from './components/orders/order-details-moda
     TotalAchievementsAndExpComponent,
     UserComponent,
     OrdersComponent,
-    OrderDetailsModalComponent
+    OrderDetailsModalComponent,
+    RequestOrderModalComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ import {OrderDetailsModalComponent} from './components/orders/order-details-moda
     SharedModule
   ],
   entryComponents: [
-    OrderDetailsModalComponent
+    OrderDetailsModalComponent,
+    RequestOrderModalComponent
   ]
 })
 export class CustomerServicesModule {

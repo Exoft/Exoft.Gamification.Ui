@@ -1,0 +1,28 @@
+<div class="modal-fields-container order-request-container">
+  <div class="modal-form">
+    <label class="image-container">
+      <img [src]="getImageUrl(order.iconId)" class="image"/>
+    </label>
+
+    <div class="order-title">{{order.title}}</div>
+
+    <div class="order-price">Price: {{order.price}} XP</div>
+
+    <div class="label">Please, leave a message and your order will be assigned soon</div>
+
+    <div class="modal-fields" [formGroup]="orderRequestForm">
+      <mat-form-field class="input-form">
+        <textarea matInput formControlName="message" matTextareaAutosize matAutosizeMinRows=2
+                  matAutosizeMaxRows=5></textarea>
+
+        <mat-error>
+          Message is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <button mat-button type="submit" class="save-button" [disabled]="orderRequestForm.invalid" (click)="requestOrder()">
+      REQUEST
+    </button>
+  </div>
+</div>

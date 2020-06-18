@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
-import {AchievementRequestWithDetails} from '../../../app/models/achievement-request/achievement-request-with-details';
 import {finalize} from 'rxjs/operators';
 import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
 import {AlertService} from '../../../app/services/alert.service';

@@ -10,6 +10,7 @@ import {Category} from '../../../../app/models/categories/category';
 import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
 import {EditOrderComponent} from '../../../../+admin-services/components/modals/edit-order/edit-order.component';
 import {OrderDetailsModalComponent} from '../order-details-modal/order-details-modal.component';
+import {RequestOrderModalComponent} from '../request-order-modal/request-order-modal.component';
 
 @Component({
   selector: 'app-orders',
@@ -133,9 +134,10 @@ export class OrdersComponent implements OnInit, OnDestroy {
     this.dialogRef.afterClosed()
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(res => {
-        // if (!!res) {
-        //   this.loadData();
-        // }
+        if (!!res) {
+          dialogConfig.data = order;
+          this.dialogRef = this.dialog.open(RequestOrderModalComponent, dialogConfig);
+        }
       });
   }
 }

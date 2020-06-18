@@ -11,6 +11,7 @@ import {OrderCreate} from '../models/orders/order-create';
 import {Order} from '../models/orders/order';
 import {Category} from '../models/categories/category';
 import {OrderRequestWithDetails} from '../models/order-request/order-request-with-details';
+import {OrderRequest} from '../models/order-request/order-request';
 
 
 @Injectable({
@@ -156,8 +157,15 @@ export class RequestService {
 
 
   // User-Orders request
-  getAllOrdersRequests(): Observable<OrderRequestWithDetails> {
-    return this.httpClient.get<OrderRequestWithDetails>(
+  requestOrder(formData: OrderRequest) {
+    return this.httpClient.post(
+      environment.apiUrl + '/api/request-order',
+      {message: formData.message, orderId: formData.orderId}
+    );
+  }
+
+  getAllOrdersRequests(): Observable<OrderRequestWithDetails[]> {
+    return this.httpClient.get<OrderRequestWithDetails[]>(
       environment.apiUrl + '/api/request-order'
     );
   }
