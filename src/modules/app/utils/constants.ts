@@ -33,5 +33,9 @@ export const adminMenuItems = [
   {
     name: 'Categories',
     link: '/admin/categories'
-  }
+  },
+  {
+    name: 'Orders requests',
+    link: '/admin/orders-requests'
+  },
 ];

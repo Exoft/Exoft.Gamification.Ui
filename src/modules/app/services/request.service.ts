@@ -10,6 +10,7 @@ import {Achievement} from '../models/achievement/achievement';
 import {OrderCreate} from '../models/orders/order-create';
 import {Order} from '../models/orders/order';
 import {Category} from '../models/categories/category';
+import {OrderRequestWithDetails} from '../models/order-request/order-request-with-details';
 
 
 @Injectable({
@@ -109,6 +110,7 @@ export class RequestService {
     return environment.apiUrl + '/api/files/' + avatarId;
   }
 
+
   // Orders Requests
   getOrders(currentPage: number = 1, pageSize: number = 0): Observable<PaginatedData<Order>> {
     let params = new HttpParams();
@@ -130,6 +132,7 @@ export class RequestService {
     return this.httpClient.delete(`${this.apiUrl}/api/orders/${orderId}`);
   }
 
+
   // Categories Requests
   getCategories(currentPage: number = 1, pageSize: number = 0): Observable<PaginatedData<Category>> {
     let params = new HttpParams();
@@ -150,4 +153,26 @@ export class RequestService {
   deleteCategory(orderId: string) {
     return this.httpClient.delete(`${this.apiUrl}/api/categories/${orderId}`);
   }
+
+
+  // User-Orders request
+  getAllOrdersRequests(): Observable<OrderRequestWithDetails> {
+    return this.httpClient.get<OrderRequestWithDetails>(
+      environment.apiUrl + '/api/request-order'
+    );
+  }
+
+  approveOrderRequest(orderRequestId: string) {
+    return this.httpClient.post(
+      environment.apiUrl + `/api/request-order/${orderRequestId}`,
+      {}
+    );
+  }
+
+  declineOrderRequest(orderRequestId: string) {
+    return this.httpClient.delete(
+      environment.apiUrl + `/api/request-order/${orderRequestId}`
+    );
+  }
+
 }

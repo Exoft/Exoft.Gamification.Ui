@@ -14,6 +14,7 @@ import {OrdersComponent} from './components/orders/orders.component';
 import {EditOrderComponent} from './components/modals/edit-order/edit-order.component';
 import {CategoriesComponent} from './components/categories/categories.component';
 import {EditCategoryComponent} from './components/modals/edit-category/edit-category.component';
+import { OrdersRequestsComponent } from './components/orders-requests/orders-requests.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {EditCategoryComponent} from './components/modals/edit-category/edit-cate
     OrdersComponent,
     EditOrderComponent,
     CategoriesComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    OrdersRequestsComponent
   ],
   imports: [
     CommonModule,

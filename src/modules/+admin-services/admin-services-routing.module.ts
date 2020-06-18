@@ -5,6 +5,7 @@ import {AchievementsComponent} from './components/achievements/achievements.comp
 import {AchievementsRequestsComponent} from './components/achievements-requests/achievements-requests.component';
 import {OrdersComponent} from './components/orders/orders.component';
 import {CategoriesComponent} from './components/categories/categories.component';
+import { OrdersRequestsComponent } from './components/orders-requests/orders-requests.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'categories',
     component: CategoriesComponent
+  },
+  {
+    path: 'orders-requests',
+    component: OrdersRequestsComponent
   },
   {
     path: '',

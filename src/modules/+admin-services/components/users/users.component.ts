@@ -135,6 +135,12 @@ export class UsersComponent implements OnInit, OnDestroy {
       width: '600px',
       data: user.id
     });
+
+    this.dialogRef.afterClosed()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((result: UserWithShortInfo) => {
+        this.loadUserData();
+      });
   }
 
   getImageUrl(imageId: string) {
