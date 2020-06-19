@@ -4,7 +4,8 @@ import {AuthGuard} from './helpers/auth.guard';
 import {IsLoggedGuard} from './helpers/is-logged.guard';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {ForbiddenPageComponent} from './components/forbidden-page/forbidden-page.component';
-import {RoleGuard} from './helpers/role.guard';
+import {AdminRoleGuard} from './helpers/admin-role.guard';
+import {CustomerRoleGuard} from './helpers/customer-role.guard';
 
 const routes: Routes = [
   {
@@ -15,12 +16,12 @@ const routes: Routes = [
   {
     path: 'customer',
     loadChildren: () => import('../+customer-services/customer-services.module').then(m => m.CustomerServicesModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, CustomerRoleGuard]
   },
   {
     path: 'admin',
     loadChildren: () => import('../+admin-services/admin-services.module').then(m => m.AdminServicesModule),
-    canActivate: [RoleGuard]
+    canActivate: [AuthGuard, AdminRoleGuard]
   },
   {
     path: '',

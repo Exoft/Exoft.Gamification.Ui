@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, BehaviorSubject} from 'rxjs';
+import {Observable, BehaviorSubject, ReplaySubject} from 'rxjs';
 
 import {environment} from '../../../environments/environment';
 import {User} from '../models/user/user';
@@ -12,7 +12,7 @@ import {ChangePassword} from '../models/password/change-password';
   providedIn: 'root'
 })
 export class UserService {
-  private userDataSubject$ = new BehaviorSubject({});
+  private userDataSubject$ = new ReplaySubject(1);
 
   constructor(private http: HttpClient) {
   }
