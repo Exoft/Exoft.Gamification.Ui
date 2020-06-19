@@ -8,6 +8,4 @@ export interface Order {
   popularity: 0;
   iconId: string;
   categories: Category[];
-
-  size: string;
 }

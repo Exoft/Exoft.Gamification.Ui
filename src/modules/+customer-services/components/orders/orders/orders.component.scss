@@ -41,6 +41,23 @@
     box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
     border-radius: 4px;
 
+    // TODO: Remove when filters will be available
+    &:after {
+      position: absolute;
+      width: 30vmin;
+      height: calc(100% - 10vmin);
+      content: "Unlocks in DLC for $13.99";
+      left: 2vmin;
+      top: 8vmin;
+      background-color: #3a3e46e3;
+      z-index: 100;
+      border-radius: 0.5vmin;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2vmin;
+    }
+
     .filter-section {
       display: flex;
       flex-direction: column;
@@ -140,22 +157,6 @@
 
           &:last-child {
             margin: 0;
-          }
-
-          &.large {
-            height: 60vmin;
-          }
-
-          &.big {
-            height: 50vmin;
-          }
-
-          &.small {
-            height: 30vmin;
-          }
-
-          &.medium {
-            height: 40vmin;
           }
 
           .product-image {

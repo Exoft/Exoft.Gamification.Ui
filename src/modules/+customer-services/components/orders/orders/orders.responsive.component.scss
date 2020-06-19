@@ -27,16 +27,23 @@
     }
 
     .filter {
-      //height: 60vmin;
       height: 68vmin;
       width: 100%;
       flex-wrap: wrap;
-      //margin: 4vmin 0;
       z-index: 2;
       border-top: 4vmin solid $backgroundColor;
       border-bottom: 4vmin solid $backgroundColor;
       margin: 0;
       box-shadow: none;
+
+      // TODO: Remove when filters will be available
+      &:after {
+        width: calc(100vw - 8vmin);
+        height: 60vmin;
+        left: 4vmin;
+        top: 45vmin;
+        font-size: 5vmin;
+      }
 
       &.card-container {
         padding: 0;
@@ -157,22 +164,6 @@
           .product {
             padding: 4vmin;
             margin: 0 0 4vmin;
-
-            &.large {
-              height: 80vmin;
-            }
-
-            &.big {
-              height: 70vmin;
-            }
-
-            &.small {
-              height: 50vmin;
-            }
-
-            &.medium {
-              height: 60vmin;
-            }
 
             .product-image {
               height: calc(100% - 14vmin);

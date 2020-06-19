@@ -1,7 +1,11 @@
 <div class="modal-fields-container">
-  <form class="modal-form" (ngSubmit)="onSaveChanges()" [formGroup]="form">
-    <label class="image-container" for="imageInput">
-      <img *ngIf="!!iconUrl else noIconUploaded" [src]="iconUrl" class="image"/>
+  <form class="modal-form"
+        (ngSubmit)="onSaveChanges()"
+        [formGroup]="form">
+    <label class="image-container"
+           for="imageInput">
+      <img *ngIf="!!iconUrl else noIconUploaded" [src]="iconUrl"
+           class="image"/>
 
       <ng-template #noIconUploaded>
         <div class="image-text">
@@ -10,11 +14,16 @@
       </ng-template>
     </label>
 
-    <input class="image-input" id="imageInput" type="file" (change)="onSelectFile($event)"/>
+    <input class="image-input"
+           id="imageInput"
+           type="file"
+           (change)="onSelectFile($event)"/>
 
     <div class="modal-fields">
       <mat-form-field class="input-field">
-        <input matInput placeholder="TITLE" formControlName="title"/>
+        <input matInput
+               placeholder="TITLE"
+               formControlName="title"/>
 
         <mat-error>
           Field is required
@@ -22,7 +31,12 @@
       </mat-form-field>
 
       <mat-form-field class="input-field">
-        <input matInput placeholder="DESCRIPTION" formControlName="description"/>
+        <textarea matInput
+                  formControlName="description"
+                  placeholder="DESCRIPTION"
+                  matTextareaAutosize
+                  matAutosizeMinRows=3
+                  matAutosizeMaxRows=3></textarea>
 
         <mat-error>
           Field is required
@@ -30,7 +44,9 @@
       </mat-form-field>
 
       <mat-form-field class="input-field">
-        <input matInput placeholder="PRICE" formControlName="price"/>
+        <input matInput
+               placeholder="PRICE"
+               formControlName="price"/>
 
         <mat-error>
           Field is required
@@ -52,7 +68,10 @@
       </div>
     </div>
 
-    <button mat-button type="submit" class="save-button" [disabled]="form.invalid">
+    <button mat-button
+            type="submit"
+            class="save-button"
+            [disabled]="form.invalid">
       SAVE CHANGES
     </button>
   </form>

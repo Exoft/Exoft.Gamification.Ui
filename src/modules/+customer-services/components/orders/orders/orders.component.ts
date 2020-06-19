@@ -34,8 +34,20 @@ export class OrdersComponent implements OnInit, OnDestroy {
     ceil: 1200
   };
 
+  get isPortrait(): boolean {
+    return window.innerHeight > window.innerWidth;
+  }
+
+  get isMobile(): boolean {
+    return window.innerWidth < 768;
+  }
+
+  get isTabletLandscape(): boolean {
+    return window.innerWidth / window.innerHeight < 9 / 6;
+  }
+
   get columnsCountArray() {
-    return window.innerHeight > window.innerWidth || window.innerWidth < 768 ? [0, 1] : [0, 1, 2, 3];
+    return this.isPortrait || this.isMobile ? [0, 1] : this.isTabletLandscape ? [0, 1, 2, 3] : [0, 1, 2, 3, 4];
   }
 
   constructor(private readonly userService: UserService,
@@ -46,8 +58,6 @@ export class OrdersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
-
     this.getUserData();
     this.loadProducts();
   }
@@ -78,41 +88,19 @@ export class OrdersComponent implements OnInit, OnDestroy {
     forkJoin(requests).pipe(finalize(() => this.spinnerService.hideSpinner()), takeUntil(this.unsubscribe))
       .subscribe(res => {
         this.products = res[0].data as Order[];
-        this.setProductsSize();
-
         this.productsTypes = res[1].data as Category[];
       }, error => this.alertService.error());
   }
 
-  private setProductsSize() {
-    this.products.forEach(product => {
-      product.size = this.getProductCardSize();
-    });
-  }
-
   getProductsByColumn(columnIndex: number) {
     const columnProducts = [];
-    const diff = window.innerHeight > window.innerWidth || window.innerWidth < 768 ? 2 : 4;
+    const diff = this.isPortrait || this.isMobile ? 2 : this.isTabletLandscape ? 4 : 5;
 
     for (let i = columnIndex; i < this.products.length; i = i + diff) {
       columnProducts.push(this.products[i]);
     }
 
     return columnProducts;
-  }
-
-  getProductCardSize() {
-    const index = Math.floor(Math.random() * 4) + 1;
-
-    if (index === 4) {
-      return 'large';
-    } else if (index === 3) {
-      return 'big';
-    } else if (index === 2) {
-      return 'medium';
-    }
-
-    return 'small';
   }
 
   scrollToTop() {

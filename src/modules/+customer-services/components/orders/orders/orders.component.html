@@ -80,8 +80,7 @@
       <div class="product-column"
            *ngFor="let columnIndex of columnsCountArray">
         <mat-card class="product card-container"
-                  *ngFor="let product of getProductsByColumn(columnIndex)"
-                  [ngClass]="product.size">
+                  *ngFor="let product of getProductsByColumn(columnIndex)">
           <img class="product-image"
                [src]="getImage(product.iconId)">
 
