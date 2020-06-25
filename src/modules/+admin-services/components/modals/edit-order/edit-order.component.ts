@@ -82,7 +82,11 @@ export class EditOrderComponent implements OnInit {
     const formData = new FormData();
     const order = this.form.value;
     Object.keys(order).forEach(key => {
-      formData.append(key, order[key]);
+      if (Array.isArray(order[key])) {
+        order[key].forEach(orderItem => formData.append(key, orderItem));
+      } else {
+        formData.append(key, order[key]);
+      }
     });
 
     const request = !!this.order
