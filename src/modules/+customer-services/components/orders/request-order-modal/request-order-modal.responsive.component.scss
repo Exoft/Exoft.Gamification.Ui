@@ -1,0 +1,53 @@
+@media (max-width: 767px),
+(orientation: portrait) {
+  .order-request-container {
+    width: 80vmin;
+    border-radius: 5vmin;
+
+    .modal-form {
+      margin: 10vmin 0 0;
+    }
+
+    .image-container {
+      height: 25vmin;
+      width: 25vmin;
+      top: -10vmin;
+      right: 5vmin;
+
+      .image {
+        height: 25vmin;
+        width: 25vmin;
+        border-width: 0.5vmin;
+      }
+    }
+
+    .order-title {
+      font-size: 5vmin;
+      padding: 5vmin 5vmin 0;
+    }
+
+    .order-price {
+      font-size: 3vmin;
+      padding: 1vmin 5vmin 0;
+    }
+
+    .label {
+      font-size: 3vmin;
+      padding: 5vmin 5vmin 0;
+    }
+
+    .modal-fields {
+      padding: 1vmin 5vmin 2vmin;
+    }
+
+    .container-with-padding {
+      padding: 0 5vmin;
+    }
+
+    .save-button {
+      height: 10vmin;
+      font-size: 4vmin;
+      border-radius: 0 0 5vmin 5vmin;
+    }
+  }
+}

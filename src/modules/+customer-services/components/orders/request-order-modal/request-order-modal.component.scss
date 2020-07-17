@@ -1,6 +1,26 @@
 @import "../../../../../assets/scss/theme-colors";
 
 .order-request-container {
+  width: 70vmin;
+  border-radius: 2vmin;
+
+  .modal-form {
+    margin: 8vmin 0 0;
+  }
+
+  .image-container {
+    width: 15vmin;
+    height: 15vmin;
+    top: -7.5vmin;
+    right: 5vmin;
+
+    .image {
+      width: 15vmin;
+      height: 15vmin;
+      border-width: 0.2vmin;
+    }
+  }
+
   .order-title {
     width: 100%;
     color: #FFFFFF;
@@ -34,4 +54,12 @@
   .container-with-padding {
     padding: 0 3vmin;
   }
+
+  .save-button {
+    height: 6vmin;
+    font-size: 2vmin;
+    border-radius: 0 0 2vmin 2vmin;
+  }
 }
+
+@import 'request-order-modal.responsive.component';
