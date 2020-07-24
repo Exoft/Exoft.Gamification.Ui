@@ -1,0 +1,201 @@
+@media (max-width: 767px),
+(orientation: portrait) {
+  .orders-page-wrapper {
+    flex-direction: column;
+    padding: 4vmin;
+    height: auto;
+
+    .card-container {
+      padding: 4vmin;
+    }
+
+    .message-text {
+      font-size: 3vmin;
+      height: 25vmin;
+
+      &.mobile {
+        display: flex;
+      }
+
+      &.desktop {
+        display: none;
+      }
+
+      .big-text {
+        font-size: 6vmin;
+      }
+    }
+
+    .filter {
+      height: 68vmin;
+      width: 100%;
+      flex-wrap: wrap;
+      z-index: 2;
+      border-top: 4vmin solid $backgroundColor;
+      border-bottom: 4vmin solid $backgroundColor;
+      margin: 0;
+      box-shadow: none;
+
+      // TODO: Remove when filters will be available
+      &:after {
+        width: calc(100vw - 8vmin);
+        height: 60vmin;
+        left: 4vmin;
+        top: 45vmin;
+        font-size: 5vmin;
+      }
+
+      &.card-container {
+        padding: 0;
+        background-color: $backgroundColor;
+        box-shadow: none;
+      }
+
+      .filter-section {
+        width: calc(50% - 2vmin);
+        padding: 4vmin;
+        background-color: $secondaryColor;
+        margin: 0 0 0 2vmin;
+        border-radius: 4px;
+        box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
+        height: 33vmin;
+
+        &:nth-child(2), &:nth-child(1) {
+          margin: 0 2vmin 0 0;
+        }
+
+        &:first-child, &:last-child {
+          padding: 4vmin 4vmin 6vmin;
+          height: 23vmin;
+        }
+
+        .filter-name {
+          font-size: 3vmin;
+          margin: 0 0 1vmin;
+
+          &.name-before-input {
+            margin: 0 0 3vmin;
+          }
+        }
+
+        .sort-container {
+          .sort-option {
+            margin: 0 0 1vmin;
+            font-size: 2.5vmin;
+          }
+        }
+
+        .from-to-container {
+          display: flex;
+          align-items: center;
+
+          .filter-input {
+            width: 41%;
+          }
+
+          .from-to-text {
+            font-size: 2.7vmin;
+            margin: 1vmin;
+          }
+        }
+
+        .cost-slider {
+          display: none;
+        }
+
+        .product-types-container {
+          height: calc(100% - 4vmin);
+          overflow: auto;
+
+          .product-type-image {
+            width: 7vmin;
+            height: 7vmin;
+            margin: 2vmin 1vmin;
+
+            &:nth-child(4n) {
+              margin: 2vmin 0 2vmin 1vmin;
+            }
+
+            &:nth-child(4n - 3) {
+              margin: 2vmin 1vmin 2vmin 0;
+            }
+          }
+        }
+      }
+    }
+
+    .hidden-filter {
+      display: flex;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      margin-top: -22vmin;
+      border-top: 4vmin solid $backgroundColor;
+      border-bottom: 4vmin solid $backgroundColor;
+      background-color: $backgroundColor;
+
+      .hidden-filter-text {
+        width: 100%;
+        font-size: 4vmin;
+      }
+    }
+
+    .message-products-container {
+      height: unset;
+      border: 0;
+      padding: 0;
+      flex: unset;
+      margin: 1vmin 0 0;
+
+      .products-container {
+        padding: 0;
+
+        .product-column {
+          width: 50%;
+
+          &:first-child {
+            margin: 0 2vmin 0 0;
+          }
+
+          &:last-child {
+            margin: 0 0 0 2vmin;
+          }
+
+          .product {
+            padding: 4vmin;
+            margin: 0 0 4vmin;
+
+            .product-image {
+              height: calc(100% - 14vmin);
+            }
+
+            .product-info-container {
+              height: 14vmin;
+
+              .title {
+                font-size: 4vmin;
+              }
+
+              .price-details-button-container {
+                align-items: center;
+                margin: 2vmin 0 0;
+
+                .price {
+                  font-size: 2.5vmin;
+                }
+
+                .details-button {
+                  height: 4.5vmin;
+                  font-size: 2.5vmin;
+                  line-height: 2.5vmin;
+                  min-width: unset;
+                  width: 13vmin;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

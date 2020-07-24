@@ -1,5 +1,5 @@
 import {Component, Output, EventEmitter, Input, OnInit, OnDestroy} from '@angular/core';
-import {menuItems} from '../../utils/constants';
+import {adminMenuItems, customerMenuItems} from '../../utils/constants';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Input() firstName: string;
   @Input() lastName: string;
   private unsubscribe$: Subject<void> = new Subject();
-  public menuItems = Array.from(menuItems);
+  public menuItems = [];
   public letterAvatar = getFirstLettersWithSplit;
 
   public isUserAdmin = false;
@@ -38,12 +38,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .getUserData()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(res => {
-        this.menuItems = Array.from(menuItems);
         if (res.roles && !res.roles.includes('Admin')) {
-          this.menuItems.splice(2, 3);
+          this.menuItems = customerMenuItems;
           this.isUserAdmin = false;
         } else {
-          this.menuItems.splice(0, 2);
+          this.menuItems = adminMenuItems;
           this.isUserAdmin = true;
         }
       });

@@ -1,0 +1,78 @@
+<div class="modal-fields-container">
+  <form class="modal-form"
+        (ngSubmit)="onSaveChanges()"
+        [formGroup]="form">
+    <label class="image-container"
+           for="imageInput">
+      <img *ngIf="!!iconUrl else noIconUploaded" [src]="iconUrl"
+           class="image"/>
+
+      <ng-template #noIconUploaded>
+        <div class="image-text">
+          <mat-icon class="upload-arrow">arrow_upward</mat-icon>
+        </div>
+      </ng-template>
+    </label>
+
+    <input class="image-input"
+           id="imageInput"
+           type="file"
+           (change)="onSelectFile($event)"/>
+
+    <div class="modal-fields">
+      <mat-form-field class="input-field">
+        <input matInput
+               placeholder="TITLE"
+               formControlName="title"/>
+
+        <mat-error>
+          Field is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input-field">
+        <textarea matInput
+                  formControlName="description"
+                  placeholder="DESCRIPTION"
+                  matTextareaAutosize
+                  matAutosizeMinRows=3
+                  matAutosizeMaxRows=3></textarea>
+
+        <mat-error>
+          Field is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input-field">
+        <input matInput
+               placeholder="PRICE"
+               formControlName="price"/>
+
+        <mat-error>
+          Field is required
+        </mat-error>
+      </mat-form-field>
+
+      <div class="categories-chapter-title">CATEGORIES</div>
+
+      <div class="categories-container">
+        <div class="category"
+             *ngFor="let category of categories"
+             [ngClass]="!isCategorySelected(category) && 'not-selected'"
+             (click)="onCategoryClick(category)">
+          <img class="category-icon"
+               [src]="getImageUrl(category.iconId)">
+
+          <div class="category-title">{{category.name}}</div>
+        </div>
+      </div>
+    </div>
+
+    <button mat-button
+            type="submit"
+            class="save-button"
+            [disabled]="form.invalid">
+      SAVE CHANGES
+    </button>
+  </form>
+</div>

@@ -3,6 +3,10 @@ import {Routes, RouterModule} from '@angular/router';
 import {UsersComponent} from './components/users/users.component';
 import {AchievementsComponent} from './components/achievements/achievements.component';
 import {AchievementsRequestsComponent} from './components/achievements-requests/achievements-requests.component';
+import {OrdersComponent} from './components/orders/orders.component';
+import {CategoriesComponent} from './components/categories/categories.component';
+import { OrdersRequestsComponent } from './components/orders-requests/orders-requests.component';
+
 
 const routes: Routes = [
   {
@@ -16,6 +20,18 @@ const routes: Routes = [
   {
     path: 'achievements-requests',
     component: AchievementsRequestsComponent
+  },
+  {
+    path: 'orders',
+    component: OrdersComponent
+  },
+  {
+    path: 'categories',
+    component: CategoriesComponent
+  },
+  {
+    path: 'orders-requests',
+    component: OrdersRequestsComponent
   },
   {
     path: '',

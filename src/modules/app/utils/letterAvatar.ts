@@ -9,6 +9,10 @@ export function getFirstLetters(name: string, surname: string) {
 }
 
 export function getFirstLettersWithSplit() {
+  if (!this.userName) {
+    return '';
+  }
+
   const x = this.userName.split(' ');
   return x[0].charAt(0) + x[1].charAt(0);
 }

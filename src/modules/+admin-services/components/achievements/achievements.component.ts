@@ -8,8 +8,8 @@ import {LoadSpinnerService} from '../../../app/services/load-spinner.service';
 import {AlertService} from '../../../app/services/alert.service';
 import {finalize, takeUntil} from 'rxjs/operators';
 import {AchievementsService} from '../../../app/services/achievements.service';
-import {AddAchievementComponent} from '../add-achievement/add-achievement.component';
-import {EditAchievementComponent} from '../edit-achievement/edit-achievement.component';
+import {AddAchievementComponent} from '../modals/add-achievement/add-achievement.component';
+import {EditAchievementComponent} from '../modals/edit-achievement/edit-achievement.component';
 
 @Component({
   selector: 'app-achievements',

@@ -67,4 +67,68 @@
       line-height: 2.5vh;
     }
   }
+
+  // filter input style
+  .filter-input {
+    &.mat-form-field {
+      .mat-form-field-wrapper {
+        .mat-form-field-outline {
+          height: 8vmin;
+        }
+      }
+
+      .mat-input-element {
+        font-size: 2.5vmin;
+      }
+
+      .mat-form-field-infix {
+        height: 8vmin;
+        display: flex;
+
+        .mat-input-element {
+          font-size: 3vmin;
+        }
+      }
+
+      .mat-form-field-label-wrapper {
+        top: -2.3vmin;
+
+        .mat-form-field-label {
+          font-size: 3vmin;
+        }
+      }
+
+      &.mat-form-field-should-float {
+        .mat-form-field-label-wrapper {
+          top: -1vmin;
+        }
+      }
+    }
+  }
+
+  // filter radio buttons
+  .sort-option {
+    &.mat-radio-button {
+      .mat-radio-outer-circle {
+        height: 3vmin;
+        width: 3vmin;
+        border-width: 0.2vmin;
+      }
+
+      .mat-radio-inner-circle {
+        height: 3vmin;
+        width: 3vmin;
+      }
+
+      .mat-radio-container {
+        height: 3vmin;
+        width: 2vmin;
+      }
+
+      .mat-radio-label-content {
+        padding-left: 3vmin;
+      }
+    }
+  }
 }
+

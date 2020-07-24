@@ -293,4 +293,148 @@ app-assign-achievements {
   }
 }
 
+// filter input style
+.filter-input {
+  &.mat-form-field {
+    margin: 0;
+
+    .mat-form-field-wrapper {
+      margin: 0;
+      padding: 0;
+
+      .mat-form-field-outline {
+        color: $textColor;
+        top: 0;
+      }
+
+      .mat-form-field-infix {
+        padding: 1vmin 0;
+        border: 0;
+      }
+    }
+
+    .mat-input-element {
+      font-size: 1.5vmin;
+    }
+
+    .mat-form-field-label-wrapper {
+      top: -1vmin;
+      .mat-form-field-label {
+        font-size: 1.4vmin;
+      }
+    }
+
+    &.mat-form-field-should-float {
+      .mat-form-field-label-wrapper {
+        top: -0.4vmin;
+        .mat-form-field-label {
+          color: $mainColor;
+        }
+      }
+    }
+  }
+}
+
+// filter radio buttons
+.sort-option {
+  &.mat-radio-button {
+    .mat-radio-outer-circle {
+      border-color: $textColor;
+      height: 2vmin;
+      width: 2vmin;
+      border-width: 0.2vmin;
+    }
+
+    .mat-radio-inner-circle {
+      background-color: $mainColor;
+      height: 2vmin;
+      width: 2vmin;
+    }
+
+    .mat-radio-ripple {
+      display: none;
+    }
+
+    .mat-radio-label-content {
+      padding-left: 1vmin;
+    }
+
+    &.mat-radio-checked {
+      .mat-radio-outer-circle {
+        border-color: $textColor;
+      }
+
+      .mat-radio-inner-circle {
+        background-color: $mainColor;
+      }
+    }
+  }
+}
+
+// slider styles
+.cost-slider {
+  &.ng5-slider {
+    display: flex;
+    align-items: center;
+    margin: 2vmin 0;
+
+    .ng5-slider-bar-wrapper {
+      margin: 0;
+    }
+
+    .ng5-slider-bar {
+      height: 0.2vmin;
+      background-color: $textColor;
+      opacity: 0.5;
+    }
+
+    .ng5-slider-selection {
+      background-color: $mainColor;
+      opacity: 1;
+    }
+
+    .ng5-slider-pointer {
+      background-color: $secondaryColor;
+      height: 2.5vmin;
+      width: 2.5vmin;
+      border-radius: 50%;
+      border: 0.2vmin solid $textColor;
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+      top: unset;
+
+      &:hover {
+        &::after {
+          background-color: $mainColor;
+        }
+      }
+
+      &::after {
+        width: 1.2vmin;
+        height: 1.2vmin;
+        top: 0.5vmin;
+        left: 0.5vmin;
+        border-radius: 50%;
+        background-color: $mainColor;
+        top: unset;
+        left: unset;
+      }
+
+      &.ng5-slider-active {
+        outline: none;
+
+        &::after {
+          background-color: $mainColor;
+        }
+      }
+    }
+
+    .ng5-slider-bubble {
+      display: none;
+    }
+  }
+
+}
+
 @import './material-override.responsive.scss';

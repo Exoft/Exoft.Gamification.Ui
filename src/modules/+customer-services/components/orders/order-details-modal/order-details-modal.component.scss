@@ -1,0 +1,77 @@
+@import "../../../../../assets/scss/theme-colors";
+
+.order-details-container {
+  width: 70vmin;
+  border-radius: 2vmin;
+
+  .modal-form {
+    margin: 7.5vmin 0 0;
+  }
+
+  .order-title {
+    width: 100%;
+    color: #FFFFFF;
+    font-size: 3.5vmin;
+    padding: 3vmin 3vmin 0;
+  }
+
+  .image-container {
+    width: 15vmin;
+    height: 15vmin;
+    top: -7.5vmin;
+    right: 5vmin;
+
+    .image {
+      width: 15vmin;
+      height: 15vmin;
+      border-width: 0.2vmin;
+    }
+  }
+
+  .order-categories-list {
+    display: flex;
+    width: 100%;
+    margin: 3vmin 0;
+
+    .avatar {
+      margin: 0 1vmin 0 0;
+      height: 5vmin;
+      width: 5vmin;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 0.1vmin solid $mainColor;
+      user-select: none;
+      background-size: cover;
+    }
+  }
+
+  .order-description {
+    color: $textColor;
+    width: 100%;
+    font-size: 2vmin;
+    text-align: justify;
+    font-weight: 300;
+  }
+
+  .order-price {
+    color: $textColor;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin: 2vmin 0 3vmin;
+    font-size: 1.7vmin;
+  }
+
+
+  .container-with-padding {
+    padding: 0 3vmin;
+  }
+
+  .save-button {
+    height: 6vmin;
+    font-size: 2vmin;
+    border-radius: 0 0 2vmin 2vmin;
+  }
+}
+
+@import 'order-details-modal.responsive.component';

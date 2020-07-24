@@ -11,7 +11,7 @@ import {Achievement} from '../../models/achievement/achievement';
 import {finalize} from 'rxjs/operators';
 import {LoadSpinnerService} from '../../services/load-spinner.service';
 import {AlertService} from '../../services/alert.service';
-import {ReadAchievementRequest} from '../../models/achievement-request/read-achievement-request';
+import {AchievementRequestWithDetails} from '../../models/achievement-request/achievement-request-with-details';
 import {UserAchievement} from '../../models/achievement/user-achievement';
 
 export interface AchievementWithShortInfo {
